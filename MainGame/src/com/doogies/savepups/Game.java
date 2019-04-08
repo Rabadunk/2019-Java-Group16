@@ -1,7 +1,11 @@
 package com.doogies.savepups;
 
 import com.doogies.savepups.display.Display;
+import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.ImageLoader;
+import com.doogies.savepups.states.GameState;
+import com.doogies.savepups.states.MenuState;
+import com.doogies.savepups.states.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -18,6 +22,10 @@ public class Game implements Runnable {
 
     private BufferStrategy bs;
     private Graphics g;
+
+    //States
+    private State gameState;
+    private State menuState;
     
     public Game(String title, int width, int height) {
         this.title = title;
@@ -27,10 +35,17 @@ public class Game implements Runnable {
 
     private void init() {
         display = new Display(title, width, height);
+        Assets.init();
+
+        gameState = new GameState();
+        menuState = new MenuState();
+        State.setState(gameState);
     }
 
     private void tick() {
-
+        if(State.getState() != null) {
+            State.getState().tick();
+        }
     }
 
     private void render() {
@@ -46,7 +61,10 @@ public class Game implements Runnable {
         g.clearRect(0, 0, width, height);
 
         //Draw resources
-
+        if(State.getState() != null) {
+            State.getState().render(g);
+        }
+        
         //End drawing, show drawings
         bs.show();
         g.dispose();
@@ -55,9 +73,32 @@ public class Game implements Runnable {
     public void run() {
         init();
 
+        int fps = 60;
+        double timePerTick = 1000000000 / fps; // 1 billion ns in 1s
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime(); // returns current time is ns
+        long timer = 0;
+        int ticks = 0;
+
         while(running) {
-            tick();
-            render();
+            now = System.nanoTime();
+            delta += (now - lastTime) / timePerTick;
+            timer += now - lastTime;
+            lastTime = now;
+
+            if(delta >= 1){
+                tick();
+                render();
+                ticks++;
+                delta--;
+            }
+
+            if(timer >= 1000000000) {
+                System.out.println("Ticks and Frames: " + ticks);
+                ticks = 0;
+                timer = 0;
+            }
         }
 
         stop();
