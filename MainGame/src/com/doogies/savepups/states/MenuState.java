@@ -1,13 +1,15 @@
 package com.doogies.savepups.states;
 
+import com.doogies.savepups.Game;
+import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
 
 import java.awt.*;
 
 public class MenuState extends State{
 
-    public MenuState(){
-
+    public MenuState(Handler handler){
+        super(handler);
     }
 
     @Override

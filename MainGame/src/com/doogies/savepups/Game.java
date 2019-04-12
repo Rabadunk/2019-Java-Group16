@@ -2,19 +2,19 @@ package com.doogies.savepups;
 
 import com.doogies.savepups.display.Display;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.ImageLoader;
+import com.doogies.savepups.graphics.GameCamera;
+import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.states.GameState;
 import com.doogies.savepups.states.MenuState;
 import com.doogies.savepups.states.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 public class Game implements Runnable {
 
     private Display display;
-    public int width, height;
+    private int width, height;
     public String title;
 
     private Thread thread;
@@ -26,23 +26,39 @@ public class Game implements Runnable {
     //States
     private State gameState;
     private State menuState;
-    
+
+    // Input
+    private KeyManager keyManager;
+
+    // Camera
+    private GameCamera gameCamera;
+
+    //Handler
+    private Handler handler;
+
     public Game(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
+        this.keyManager = new KeyManager();
     }
 
     private void init() {
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
 
-        gameState = new GameState();
-        menuState = new MenuState();
+        gameCamera = new GameCamera(this, 0, 0);
+        handler = new Handler(this);
+
+        gameState = new GameState(handler);
+        menuState = new MenuState(handler);
         State.setState(gameState);
     }
 
     private void tick() {
+        keyManager.tick();
+
         if(State.getState() != null) {
             State.getState().tick();
         }
@@ -102,6 +118,22 @@ public class Game implements Runnable {
         }
 
         stop();
+    }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
+    }
+
+    public GameCamera getGameCamera() {
+        return gameCamera;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public synchronized void start() {
