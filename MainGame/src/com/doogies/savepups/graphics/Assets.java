@@ -11,6 +11,10 @@ public class Assets {
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
+    private static final int tileHeight = 64;
+    private static final int tileWidth = 64;
+
+
     public static void init() {
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
@@ -26,10 +30,12 @@ public class Assets {
 //        damagedFloor = mapsheet.crop(width * 7, 0, width / 2, height / 2);
 //        door = mapsheet.crop(237, 16, 21, 31);
 
-        pinkFloor = tileSpritesheet.crop((4 * 64) - 64,(1 * 64) - 64, 64, 64);
-        brickWall= tileSpritesheet.crop((2 * 64) - 64,(1 * 64) - 64, 64, 64);
-        doorwayWall= tileSpritesheet.crop((3 * 64) - 64,(1 * 64) - 64, 64, 64);
-        damagedFloor= tileSpritesheet.crop((1 * 64) - 64,(2 * 64) - 64, 64, 64);
+        // Crops the texture from the spritesheet. Tiles are always 64x64 pixels in this sprite sheet
+        // So we can use an row/collumn * 64 to quickly obtain the starting pos of the sprite.
+        pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
+        brickWall= tileSpritesheet.crop((2 - 1)* tileWidth,(1 - 1)* tileHeight, tileWidth, tileHeight);
+        doorwayWall= tileSpritesheet.crop((3 - 1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
+        damagedFloor= tileSpritesheet.crop((1 - 1) * tileWidth,(2 - 1)* tileHeight, tileWidth, tileHeight);
 
         // ENTITIES
         player = playersheet.crop(0, 0, width, height);
