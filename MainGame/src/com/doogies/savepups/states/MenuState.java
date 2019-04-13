@@ -19,7 +19,8 @@ public class MenuState extends State{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.computer, 0, 0, null);
+        //temp code
+        g.drawImage(Assets.damagedFloor, 0, 0, null);
     }
 
 }
