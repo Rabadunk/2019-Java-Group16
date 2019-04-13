@@ -6,7 +6,7 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
-    public static BufferedImage computer, bed, wall, roof, floor, damagedFloor;
+    public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
     public static BufferedImage player;
 
     public static void init() {
@@ -21,6 +21,7 @@ public class Assets {
         bed = mapsheet.crop(width, 0, width, height + 16);
         floor = mapsheet.crop(width * 6, 0, width / 2, height / 2);
         damagedFloor = mapsheet.crop(width * 7, 0, width / 2, height / 2);
+        door = mapsheet.crop(237, 16, 21, 31);
 
         // ENTITIES
         player = playersheet.crop(0, 0, width, height);

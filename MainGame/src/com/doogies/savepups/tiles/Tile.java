@@ -11,6 +11,7 @@ public class Tile {
     public static Tile floorTile = new FloorTile(0);
     public static Tile damagedFloorTile = new DamagedFloorTile(1);
     public static Tile wallTile = new WallTile(2);
+    public static Tile doorTile = new DoorTile(3);
 
 
     // CLASS
@@ -20,10 +21,11 @@ public class Tile {
     protected BufferedImage texture;
     protected final int id;
 
+
+
     public Tile(BufferedImage texture, int id) {
         this.texture = texture;
         this.id = id;
-
         tiles[id] = this;
     }
 
@@ -42,5 +44,6 @@ public class Tile {
     public boolean isSolid() {
         return false;
     }
+
 
 }
