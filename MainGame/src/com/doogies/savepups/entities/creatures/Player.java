@@ -14,7 +14,7 @@ public class Player extends Creature {
         bounds.x = 10;
         bounds.y = 40;
         bounds.width = 42;
-        bounds.height = 32;
+        bounds.height = 23;
     }
 
     @Override
@@ -52,9 +52,10 @@ public class Player extends Creature {
                 (int)(y - handler.getGameCamera().getyOffset()),
                 width, height,null);
 
-        g.setColor(Color.red);
-        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
+        // Red rectangle to represent players collision box
+//        g.setColor(Color.red);
+//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+//                bounds.width, bounds.height);
     }
 }
