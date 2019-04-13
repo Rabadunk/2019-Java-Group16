@@ -22,14 +22,12 @@ public class Assets {
 
 
         // ENVIRONMENT
-//        wall = mapsheet.crop(width * 9, height + 13, width, height + 2);
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);
 //        computer = mapsheet.crop(0, 0, width, height);
 //        bed = mapsheet.crop(width, 0, width, height + 16);
-//        floor = mapsheet.crop(width * 6, 0, width / 2, height / 2);
-//        damagedFloor = mapsheet.crop(width * 7, 0, width / 2, height / 2);
 //        door = mapsheet.crop(237, 16, 21, 31);
 
+        // Tileset Spritesheet
         // Crops the texture from the spritesheet. Tiles are always 64x64 pixels in this sprite sheet
         // So we can use an row/collumn * 64 to quickly obtain the starting pos of the sprite.
         pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
