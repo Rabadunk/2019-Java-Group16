@@ -9,6 +9,8 @@ public class Assets {
 
     //public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
 
+    public static BufferedImage computer, bed;
+
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage playerIdle;
 
@@ -46,8 +48,8 @@ public class Assets {
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);
-//        computer = mapsheet.crop(0, 0, width, height);
-//        bed = mapsheet.crop(width, 0, width, height + 16);
+        computer = mapsheet.crop(0, 0, width, height);
+        bed = mapsheet.crop(width, 0, width, height + 16);
 //        door = mapsheet.crop(237, 16, 21, 31);
 
         // Tileset Spritesheet
