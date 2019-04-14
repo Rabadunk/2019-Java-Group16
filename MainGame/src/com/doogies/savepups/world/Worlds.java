@@ -26,8 +26,8 @@ public class Worlds {
         // player = new Player(handler,(world.getSpawnX()-1) * 64, (world.getSpawnY()-1) * 64);
         entityManager = new EntityManager(handler, new Player(handler, 500,500));
         entityManager.addEntity(new Bed(handler, 100, 150));
-        entityManager.addEntity(new Bed(handler, 100, 250));
-        entityManager.addEntity(new Bed(handler, 100, 350));
+       // entityManager.addEntity(new Bed(handler, 100, 250));
+        //entityManager.addEntity(new Bed(handler, 100, 350));
 
         loadWorld(path);
 
