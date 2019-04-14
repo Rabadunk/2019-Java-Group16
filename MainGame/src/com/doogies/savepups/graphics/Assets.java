@@ -1,6 +1,7 @@
 package com.doogies.savepups.graphics;
 
 import java.awt.image.BufferedImage;
+import com.doogies.savepups.tiles.Tile;
 
 public class Assets {
 
@@ -11,8 +12,9 @@ public class Assets {
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
-    private static final int tileHeight = 64;
-    private static final int tileWidth = 64;
+    // variables to make tileset calcs cleaner
+    private static final int tileHeight = Tile.TILEHEIGHT;
+    private static final int tileWidth = Tile.TILEHEIGHT;
 
 
     public static void init() {
