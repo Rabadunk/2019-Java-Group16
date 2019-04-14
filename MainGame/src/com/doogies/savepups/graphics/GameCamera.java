@@ -1,18 +1,19 @@
 package com.doogies.savepups.graphics;
 
 import com.doogies.savepups.Game;
+import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 
 public class GameCamera {
 
     private float xOffset;
     private float yOffset;
-    private Game game;
+    private Handler handler;
 
-    public GameCamera(Game game, float xOffset, float yOffset) {
+    public GameCamera(Handler handler, float xOffset, float yOffset) {
         this.xOffset = xOffset;
         this.yOffset = yOffset;
-        this.game = game;
+        this.handler = handler;
     }
 
     public void move(float xAmt, float yAmt) {
@@ -21,8 +22,8 @@ public class GameCamera {
     }
 
     public void centerOnEntity(Entity e) {
-        xOffset = e.getX() - game.getWidth() / 2 + e.getWidth() / 2;
-        yOffset = e.getY() - game.getHeight() / 2 + e.getHeight() / 2;
+        xOffset = e.getX() - handler.getWidth() / 2 + e.getWidth() / 2;
+        yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight() / 2;
     }
 
     public float getxOffset() {
