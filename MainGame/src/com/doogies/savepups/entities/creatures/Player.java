@@ -87,8 +87,11 @@ public class Player extends Creature {
         else if(yMove < 0) {
             return animationUp.getCurrentFrame();
         }
-        else{
+        else if(yMove > 0){
             return animationDown.getCurrentFrame();
+        }
+        else{
+            return Assets.playerIdle;
         }
         // Can add idle states in else statement later.
     }
