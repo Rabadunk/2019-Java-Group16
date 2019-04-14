@@ -35,6 +35,8 @@ public class Worlds {
         entityManager.getPlayer().setY(spawnY * Tile.TILEHEIGHT);
     }
 
+
+
     public void tick() {
         entityManager.tick();
     }
@@ -103,5 +105,9 @@ public class Worlds {
 
     public int getSpawnY() {
         return spawnY;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }
