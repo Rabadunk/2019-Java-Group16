@@ -12,7 +12,7 @@ public class Assets {
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
     // ui
-    public static BufferedImage quitButton, quitButtonActivated ;
+    public static BufferedImage[] quitButton;
 
     public static BufferedImage[] playButton;
 
@@ -45,7 +45,9 @@ public class Assets {
         playButton = new BufferedImage[2];
         playButton[0] = button.crop(0, 0, 300, 150);
         playButton[1] = button.crop(300, 0, 300, 150);
-        quitButton = button.crop(1, 0, 25, 17);
-        quitButtonActivated = button.crop(1, 0, 25, 17);
+
+        quitButton = new BufferedImage[2];
+        quitButton[0] = button.crop(0, 150, 300, 150);
+        quitButton[1] = button.crop(300, 150, 300, 150);
     }
 }

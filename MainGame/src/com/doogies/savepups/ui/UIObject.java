@@ -22,6 +22,8 @@ public abstract class UIObject {
 
     public abstract void render(Graphics g);
 
+    public abstract void onEnter();
+
 
     // Getters and setters
 

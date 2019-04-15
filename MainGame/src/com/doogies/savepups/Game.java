@@ -24,7 +24,7 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
-    private State gameState;
+    public State gameState;
     private State menuState;
 
     // Input
@@ -135,6 +135,8 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
+
+    public Display getDisplay() { return display; };
 
     public synchronized void start() {
         if(running) return;
