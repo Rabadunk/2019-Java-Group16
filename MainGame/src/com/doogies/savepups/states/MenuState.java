@@ -2,14 +2,13 @@ package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.ui.ClickListener;
-import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
+import com.doogies.savepups.ui.UIObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 
@@ -64,6 +63,7 @@ public class MenuState extends State{
         uiManager.tick();
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
+        checkInputs();
     }
 
     @Override
@@ -104,6 +104,19 @@ public class MenuState extends State{
             }
 
             hasBeenPressed = false;
+        }
+    }
+
+    public void checkInputs(){
+        if(handler.getKeyManager().up || handler.getKeyManager().down){
+            for(UIObject o : uiManager.getObjects()) {
+                o.setHovering(false);
+            }
+        } else if (handler.getMouseManager().isMoved()) {
+            for(UIObject o : uiManager.getObjects()) {
+                o.setSelected(false);
+            }
+
         }
     }
 

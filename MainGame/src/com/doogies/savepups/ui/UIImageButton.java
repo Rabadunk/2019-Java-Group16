@@ -1,5 +1,6 @@
 package com.doogies.savepups.ui;
 
+import com.doogies.savepups.input.ClickListener;
 import com.doogies.savepups.input.KeyListener;
 
 import java.awt.*;
