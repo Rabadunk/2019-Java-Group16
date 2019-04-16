@@ -17,8 +17,7 @@ public class Assets {
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
     // ui
-    public static BufferedImage[] quitButton;
-    public static BufferedImage[] playButton;
+    public static BufferedImage[] playButton, scoreButton, quitButton;
 
     // variables to make tileset calcs cleaner
     private static final int tileHeight = Tile.TILEHEIGHT;
@@ -71,5 +70,9 @@ public class Assets {
         quitButton = new BufferedImage[2];
         quitButton[0] = button.crop(0, 150, 300, 150); // Not selected
         quitButton[1] = button.crop(300, 150, 300, 150);
+
+        scoreButton = new BufferedImage[2];
+        scoreButton[0] = button.crop(0, 300, 300, 150); // Not selected
+        scoreButton[1] = button.crop(300, 300, 300, 150);
     }
 }
