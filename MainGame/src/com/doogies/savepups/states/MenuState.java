@@ -1,9 +1,7 @@
 package com.doogies.savepups.states;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.input.KeyListener;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
 
@@ -15,26 +13,21 @@ public class MenuState extends State{
 
     private UIManager uiManager;
     private int indexOfActiveButton = 0;
+    private int lastIndex = 0;
 
     public MenuState(Handler handler){
         super(handler);
         uiManager = new UIManager(handler);
 
-        uiManager.addObject( new UIImageButton(100, 100, 300, 150, Assets.playButton, new KeyListener() {
-            @Override
-            public void onEnter() {
-                if(handler.getKeyManager().enter) {
-                    State.setState(handler.getGame().gameState);
-                }
+        uiManager.addObject( new UIImageButton(100, 100, 300, 150, Assets.playButton, () -> {
+            if(handler.getKeyManager().enter) {
+                State.setState(handler.getGame().gameState);
             }
         }));
-        uiManager.addObject( new UIImageButton(100, 300, 300, 150, Assets.quitButton, new KeyListener() {
-            @Override
-            public void onEnter() {
-                if(handler.getKeyManager().enter) {
-                    handler.getGame().getDisplay().getFrame().setVisible(false);
-                    handler.getGame().getDisplay().getFrame().dispose();
-                }
+        uiManager.addObject( new UIImageButton(100, 300, 300, 150, Assets.quitButton, () -> {
+            if(handler.getKeyManager().enter) {
+                JFrame frame = handler.getGame().getDisplay().getFrame();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         }));
     }
@@ -55,12 +48,18 @@ public class MenuState extends State{
     public void getIndexOfActiveButton() {
 
         if(handler.getKeyManager().up) {
-            indexOfActiveButton = 0;
+            indexOfActiveButton--;
         }
 
         else if (handler.getKeyManager().down){
-            indexOfActiveButton = 1;
+            indexOfActiveButton++;
         }
+
+        if(indexOfActiveButton > uiManager.getObjects().size() - 1 || indexOfActiveButton < 0) {
+            indexOfActiveButton = lastIndex;
+        }
+
+        lastIndex = indexOfActiveButton;
 
     }
 

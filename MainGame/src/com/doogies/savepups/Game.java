@@ -13,15 +13,18 @@ import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
 
-    private Display display;
-    private int width, height;
     public String title;
 
-    private Thread thread;
     private boolean running = false;
+    private int width, height;
+    private int fps = 60;
+    private double timePerTick = 1000000000 / fps; // 1 billion ns in 1s
 
+    // Views
     private BufferStrategy bs;
     private Graphics g;
+    private Display display;
+    private Thread thread;
 
     //States
     public State gameState;
@@ -30,7 +33,7 @@ public class Game implements Runnable {
     // Input
     private KeyManager keyManager;
 
-    // Camera
+    // Camera follows player
     private GameCamera gameCamera;
 
     //Handler
@@ -43,15 +46,31 @@ public class Game implements Runnable {
         this.keyManager = new KeyManager();
     }
 
+    public synchronized void start() {
+        if(running) return;
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
     private void init() {
+        DisplayInit();
+        GameInit();
+        StateInit();
+    }
+
+    private void DisplayInit() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
+    }
 
+    private void GameInit() {
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
+    }
 
-
+    private void StateInit() {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         State.setState(menuState);
@@ -59,30 +78,38 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-
         if(State.getState() != null) {
             State.getState().tick();
         }
     }
 
     private void render() {
+        if(isBuffering()) {
+            return;
+        }
+        DrawScreen();
+    }
+
+    private boolean isBuffering() {
         bs = display.getCanvas().getBufferStrategy();
         if(bs == null) {
             display.getCanvas().createBufferStrategy(3);
-            return;
+            return true;
         }
+        return false;
+    }
 
+    private void DrawScreen() {
         g = bs.getDrawGraphics();
 
         // Clear screen
         g.clearRect(0, 0, width, height);
 
-        //Draw resources
         if(State.getState() != null) {
             State.getState().render(g);
         }
-        
-        //End drawing, show drawings
+
+        //show and dispose drawings
         bs.show();
         g.dispose();
     }
@@ -90,8 +117,6 @@ public class Game implements Runnable {
     public void run() {
         init();
 
-        int fps = 60;
-        double timePerTick = 1000000000 / fps; // 1 billion ns in 1s
         double delta = 0;
         long now;
         long lastTime = System.nanoTime(); // returns current time is ns
@@ -100,7 +125,7 @@ public class Game implements Runnable {
 
         while(running) {
             now = System.nanoTime();
-            delta += (now - lastTime) / timePerTick;
+            delta += deltaCalculation(now, lastTime);
             timer += now - lastTime;
             lastTime = now;
 
@@ -121,31 +146,11 @@ public class Game implements Runnable {
         stop();
     }
 
-    public KeyManager getKeyManager() {
-        return keyManager;
+    private double deltaCalculation(long now, long lastTime) {
+        return (now - lastTime) / timePerTick;
     }
 
-    public GameCamera getGameCamera() {
-        return gameCamera;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public Display getDisplay() { return display; };
-
-    public synchronized void start() {
-        if(running) return;
-
-        running = true;
-        thread = new Thread(this);
-        thread.start();
-    }
+    
 
     public synchronized void stop() {
         if(!running) return;
@@ -157,5 +162,17 @@ public class Game implements Runnable {
             e.printStackTrace();
         }
     }
+
+    // Getters and setters
+
+    public KeyManager getKeyManager() { return keyManager; }
+
+    public GameCamera getGameCamera() { return gameCamera; }
+
+    public int getWidth() { return width; }
+
+    public int getHeight() { return height; }
+
+    public Display getDisplay() { return display; };
 
 }
