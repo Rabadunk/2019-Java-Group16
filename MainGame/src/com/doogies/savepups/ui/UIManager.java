@@ -16,7 +16,7 @@ public class UIManager {
 
     public UIManager(Handler handler) {
         this.handler = handler;
-        objects = new ArrayList<UIObject>();
+        objects = new ArrayList<>();
     }
 
     public void tick() {
@@ -39,6 +39,7 @@ public class UIManager {
             o.onMouseRelease(e);
     }
 
+    // getters and setters
     public void addObject(UIObject o) {
         objects.add(o);
     }
@@ -46,9 +47,6 @@ public class UIManager {
     public void removeObject(UIObject o) {
         objects.remove(o);
     }
-
-
-    // getters and setters
 
     public Handler getHandler() {
         return handler;
