@@ -112,10 +112,10 @@ public class MenuState extends State{
             for(UIObject o : uiManager.getObjects()) {
                 o.setHovering(false);
             }
-        } else if (handler.getMouseManager().isMoved()) {
-            for(UIObject o : uiManager.getObjects()) {
-                o.setSelected(false);
-            }
+//        } else if (handler.getMouseManager().isMoved()) {
+//            for(UIObject o : uiManager.getObjects()) {
+//                o.setSelected(false);
+//            }
 
         }
     }
