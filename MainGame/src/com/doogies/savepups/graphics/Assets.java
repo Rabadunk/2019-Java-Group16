@@ -16,15 +16,19 @@ public class Assets {
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
+    // ui
+    public static BufferedImage[] quitButton;
+    public static BufferedImage[] playButton;
+
     // variables to make tileset calcs cleaner
     private static final int tileHeight = Tile.TILEHEIGHT;
     private static final int tileWidth = Tile.TILEHEIGHT;
-
 
     public static void init() {
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
+        SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
 
         //Player animations
         player_down = new BufferedImage[2];
@@ -45,7 +49,6 @@ public class Assets {
 
         playerIdle = playersheet.crop(32, 0, width, height);
 
-
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);
         computer = mapsheet.crop(0, 0, width, height);
@@ -54,13 +57,19 @@ public class Assets {
 
         // Tileset Spritesheet
         // Crops the texture from the spritesheet. Tiles are always 64x64 pixels in this sprite sheet
-        // So we can use an row/collumn * 64 to quickly obtain the starting pos of the sprite.
+        // So we can use an row/column * 64 to quickly obtain the starting position of the sprite.
         pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
         brickWall= tileSpritesheet.crop((2 - 1)* tileWidth,(1 - 1)* tileHeight, tileWidth, tileHeight);
         doorwayWall= tileSpritesheet.crop((3 - 1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
         damagedFloor= tileSpritesheet.crop((1 - 1) * tileWidth,(2 - 1)* tileHeight, tileWidth, tileHeight);
 
-        // ENTITIES
-        //player = playersheet.crop(32, 0, width, height);
+        // UI
+        playButton = new BufferedImage[2];
+        playButton[0] = button.crop(0, 0, 300, 150); // Not selected
+        playButton[1] = button.crop(300, 0, 300, 150);
+
+        quitButton = new BufferedImage[2];
+        quitButton[0] = button.crop(0, 150, 300, 150); // Not selected
+        quitButton[1] = button.crop(300, 150, 300, 150);
     }
 }

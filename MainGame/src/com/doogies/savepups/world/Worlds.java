@@ -42,6 +42,11 @@ public class Worlds {
     }
 
     public void render(Graphics g) {
+        // Render black backdrop
+        g.setColor(Color.black);
+        g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
+
+
         //Render effiency. Sets values so that only tiles that can seen on screen are rendered.
         int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
         int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
