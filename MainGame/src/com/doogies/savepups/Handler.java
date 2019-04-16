@@ -2,6 +2,7 @@ package com.doogies.savepups;
 
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
+import com.doogies.savepups.input.MouseManager;
 import com.doogies.savepups.world.Worlds;
 
 public class Handler {
@@ -20,6 +21,8 @@ public class Handler {
     public KeyManager getKeyManager() {
         return game.getKeyManager();
     }
+
+    public MouseManager getMouseManager() { return  game.getMouseManager(); }
 
     public int getWidth() {
         return game.getWidth();

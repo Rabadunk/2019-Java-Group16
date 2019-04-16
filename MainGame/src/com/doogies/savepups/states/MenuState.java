@@ -34,6 +34,7 @@ public class MenuState extends State{
 
     @Override
     public void tick() {
+        System.out.println(handler.getMouseManager().getMouseX() + "  " + handler.getMouseManager().getMouseY());
         uiManager.tick();
         getIndexOfActiveButton();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
@@ -42,6 +43,8 @@ public class MenuState extends State{
     @Override
     public void render(Graphics g) {
         //temp code
+        g.setColor(Color.RED);
+        g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 20, 20);
         uiManager.render(g);
     }
 
