@@ -32,6 +32,7 @@ public class UIManager {
     public void onMouseMove(MouseEvent e){
         for(UIObject o: objects)
             o.onMouseMove(e);
+        //System.out.println(e.MOUSE_MOVED);
     }
 
     public void onMouseRelease(MouseEvent e){

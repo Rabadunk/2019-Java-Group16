@@ -21,6 +21,7 @@ public abstract class UIObject {
         bounds = new Rectangle((int) x, (int) y, width, height);
     }
 
+
     public abstract void tick();
 
     public abstract void render(Graphics g);
@@ -96,5 +97,11 @@ public abstract class UIObject {
     }
 
 
+    public boolean isHovering() {
+        return hovering;
+    }
 
+    public void setHovering(boolean hovering) {
+        this.hovering = hovering;
+    }
 }
