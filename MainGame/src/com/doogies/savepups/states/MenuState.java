@@ -10,12 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.util.concurrent.TimeUnit;
 
 public class MenuState extends State{
 
     private UIManager uiManager;
     private int indexOfActiveButton = 0;
     private int lastIndex = 0;
+    private boolean hasBeenPressed = false;
 
     public MenuState(Handler handler){
         super(handler);
@@ -58,7 +60,6 @@ public class MenuState extends State{
 
     @Override
     public void tick() {
-        // System.out.println(handler.getMouseManager().getMouseX() + "  " + handler.getMouseManager().getMouseY());
         uiManager.tick();
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
@@ -77,20 +78,33 @@ public class MenuState extends State{
 
     public void getInput() {
 
-        if(handler.getKeyManager().up) {
-            indexOfActiveButton--;
+        if (!hasBeenPressed) {
+            if (handler.getKeyManager().up) {
+                indexOfActiveButton--;
+            } else if (handler.getKeyManager().down) {
+                indexOfActiveButton++;
+            }
+
+            if (indexOfActiveButton > uiManager.getObjects().size() - 1 || indexOfActiveButton < 0) {
+                indexOfActiveButton = lastIndex;
+            }
+
+            if(lastIndex != indexOfActiveButton) {
+                hasBeenPressed = true;
+            }
+
+            lastIndex = indexOfActiveButton;
         }
 
-        else if (handler.getKeyManager().down){
-            indexOfActiveButton++;
+        else {
+            try {
+                TimeUnit.NANOSECONDS.sleep(200000000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            hasBeenPressed = false;
         }
-
-        if(indexOfActiveButton > uiManager.getObjects().size() - 1 || indexOfActiveButton < 0) {
-            indexOfActiveButton = lastIndex;
-        }
-
-        lastIndex = indexOfActiveButton;
-
     }
 
     public void checkInputs(){
