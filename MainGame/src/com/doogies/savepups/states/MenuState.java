@@ -2,6 +2,7 @@ package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.ui.ClickListener;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
@@ -21,29 +22,44 @@ public class MenuState extends State{
         super(handler);
 
         uiManager = new UIManager(handler);
+        handler.getMouseManager().setUiManager(uiManager);
 
         uiManager.addObject( new UIImageButton(100, 100, 300, 150, Assets.playButton, () -> {
-            if(handler.getKeyManager().enter) {
+            if (handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
             }
+        }, () -> {
+            handler.getMouseManager().setUiManager(null);
+            State.setState(handler.getGame().gameState);
+
         }));
 
         uiManager.addObject( new UIImageButton(100, 300, 300, 150, Assets.scoreButton, () -> {
             if(handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
             }
+        }, () -> {
+            handler.getMouseManager().setUiManager(null);
+            State.setState(handler.getGame().gameState);
+
         }));
 
         uiManager.addObject( new UIImageButton(100, 500, 300, 150, Assets.quitButton, () -> {
             if(handler.getKeyManager().enter) {
+
                 JFrame frame = handler.getGame().getDisplay().getFrame();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
-        }));
+            }, () -> {
+                JFrame frame = handler.getGame().getDisplay().getFrame();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+
+            }));
     }
 
     @Override
     public void tick() {
+        System.out.println(handler.getMouseManager().getMouseX() + "  " + handler.getMouseManager().getMouseY());
         uiManager.tick();
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
@@ -54,6 +70,8 @@ public class MenuState extends State{
         g.setColor(Color.pink);
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
         //temp code
+        g.setColor(Color.RED);
+        g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 10, 10);
         uiManager.render(g);
     }
 

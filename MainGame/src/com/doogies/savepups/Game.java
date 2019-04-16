@@ -4,12 +4,15 @@ import com.doogies.savepups.display.Display;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
+import com.doogies.savepups.input.MouseManager;
 import com.doogies.savepups.states.GameState;
 import com.doogies.savepups.states.MenuState;
 import com.doogies.savepups.states.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 public class Game implements Runnable {
 
@@ -31,10 +34,11 @@ public class Game implements Runnable {
 
     //States
     public State gameState;
-    private State menuState;
+    public State menuState;
 
     // Input
     private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     // Camera follows player
     private GameCamera gameCamera;
@@ -47,6 +51,7 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         this.keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
     public synchronized void start() {
@@ -65,6 +70,10 @@ public class Game implements Runnable {
     private void DisplayInit() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
         Assets.init();
     }
 
@@ -173,6 +182,8 @@ public class Game implements Runnable {
     // Getters and setters
 
     public KeyManager getKeyManager() { return keyManager; }
+
+    public MouseManager getMouseManager(){ return mouseManager; }
 
     public GameCamera getGameCamera() { return gameCamera; }
 
