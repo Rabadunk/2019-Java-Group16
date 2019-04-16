@@ -2,6 +2,7 @@ package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.ui.ClickListener;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
 
@@ -18,18 +19,28 @@ public class MenuState extends State{
     public MenuState(Handler handler){
         super(handler);
         uiManager = new UIManager(handler);
+        handler.getMouseManager().setUiManager(uiManager);
 
         uiManager.addObject( new UIImageButton(100, 100, 300, 150, Assets.playButton, () -> {
-            if(handler.getKeyManager().enter) {
+            if (handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
             }
+        }, () -> {
+            handler.getMouseManager().setUiManager(null);
+            State.setState(handler.getGame().gameState);
+
         }));
-        uiManager.addObject( new UIImageButton(100, 300, 300, 150, Assets.quitButton, () -> {
-            if(handler.getKeyManager().enter) {
+
+        uiManager.addObject(new UIImageButton(100, 300, 300, 150, Assets.quitButton, () -> {
+            if (handler.getKeyManager().enter) {
                 JFrame frame = handler.getGame().getDisplay().getFrame();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
-        }));
+            }, () -> {
+                JFrame frame = handler.getGame().getDisplay().getFrame();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+
+            }));
     }
 
     @Override
@@ -44,7 +55,7 @@ public class MenuState extends State{
     public void render(Graphics g) {
         //temp code
         g.setColor(Color.RED);
-        g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 20, 20);
+        g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 10, 10);
         uiManager.render(g);
     }
 

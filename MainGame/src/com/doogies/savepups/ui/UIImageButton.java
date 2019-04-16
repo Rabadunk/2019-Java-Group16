@@ -9,11 +9,13 @@ public class UIImageButton extends UIObject {
 
     private BufferedImage[] images;
     private KeyListener enter;
+    private ClickListener clicker;
 
-    public UIImageButton(float x, float y, int width, int height, BufferedImage[] images, KeyListener enter) {
+    public UIImageButton(float x, float y, int width, int height, BufferedImage[] images, KeyListener enter, ClickListener clicker) {
         super(x, y, width, height);
         this.images = images;
         this.enter = enter;
+        this.clicker = clicker;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class UIImageButton extends UIObject {
 
     @Override
     public void render(Graphics g) {
-        if(selected) {
+        if(selected || hovering ) {
             g.drawImage(images[1], (int) x, (int) y, width, height, null);
         } else {
             g.drawImage(images[0], (int) x, (int) y, width, height, null);
@@ -37,6 +39,11 @@ public class UIImageButton extends UIObject {
     @Override
     public void onEnter() {
         enter.onEnter();
+    }
+
+    @Override
+    public void onClick() {
+        clicker.onClick();
     }
 
 }
