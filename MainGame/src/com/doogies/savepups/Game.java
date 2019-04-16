@@ -22,6 +22,9 @@ public class Game implements Runnable {
     private int width, height;
     private int fps = 60;
     private double timePerTick = 1000000000 / fps; // 1 billion ns in 1s
+    private long timer = 0;
+    private int ticks = 0;
+    private double delta = 0;
 
     // Views
     private BufferStrategy bs;
@@ -125,41 +128,45 @@ public class Game implements Runnable {
 
     public void run() {
         init();
-
-        double delta = 0;
         long now;
         long lastTime = System.nanoTime(); // returns current time is ns
-        long timer = 0;
-        int ticks = 0;
 
         while(running) {
             now = System.nanoTime();
-            delta += deltaCalculation(now, lastTime);
-            timer += now - lastTime;
+            updateDeltaAndTimer(now, lastTime);
             lastTime = now;
 
-            if(delta >= 1){
-                tick();
-                render();
-                ticks++;
-                delta--;
-            }
-
-            if(timer >= 1000000000) {
-                System.out.println("Ticks and Frames: " + ticks);
-                ticks = 0;
-                timer = 0;
-            }
+            stabiliseTicks();
+            resetTimer();
         }
 
         stop();
+    }
+
+    private void updateDeltaAndTimer(long now, long lastTime) {
+        delta += deltaCalculation(now, lastTime);
+        timer += now - lastTime;
     }
 
     private double deltaCalculation(long now, long lastTime) {
         return (now - lastTime) / timePerTick;
     }
 
-    
+    private void stabiliseTicks() {
+        if(delta >= 1){
+            tick();
+            render();
+            ticks++;
+            delta--;
+        }
+    }
+
+    private void resetTimer() {
+        if(timer >= 1000000000) {
+            ticks = 0;
+            timer = 0;
+        }
+    }
 
     public synchronized void stop() {
         if(!running) return;
