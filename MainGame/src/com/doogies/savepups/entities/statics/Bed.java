@@ -23,6 +23,11 @@ public class Bed extends StaticEntity {
     }
 
     @Override
+    public void die() {
+        System.out.println("???");
+    }
+
+    @Override
     public void render(Graphics g) {
         g.drawImage(Assets.bed,
                 (int) (x - handler.getGameCamera().getxOffset()),
@@ -35,4 +40,6 @@ public class Bed extends StaticEntity {
 //                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
 //               bounds.width, bounds.height);
     }
+
+
 }
