@@ -20,22 +20,29 @@ public class Display {
     }
 
     private void createDisplay() {
+        setUpJFrame();
+        setUpCanvas();
+
+        frame.add(canvas);
+        frame.pack();
+
+    }
+
+    private void setUpJFrame() {
         frame = new JFrame(title);
         frame.setSize(width, height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
 
+    private void setUpCanvas() {
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
-
-        frame.add(canvas);
-        frame.pack();
-
     }
 
     public Canvas getCanvas() {

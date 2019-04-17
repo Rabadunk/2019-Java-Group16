@@ -1,6 +1,5 @@
 package com.doogies.savepups.entities;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 
 import java.awt.*;
@@ -45,7 +44,7 @@ public abstract class Entity {
 
 
     public boolean checkEntityCollision(float xOffset, float yOffset){
-        for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+        for(Entity e : handler.getRoom().getEntityManager().getEntities()){
             if(e.equals(this)){
                 continue;
             }

@@ -1,10 +1,8 @@
 package com.doogies.savepups.entities.creatures;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.tiles.Tile;
-import com.doogies.savepups.world.World;
 
 public abstract class Creature extends Entity {
 
@@ -40,10 +38,8 @@ public abstract class Creature extends Entity {
         if(inEntry()) {
             System.out.println("You're on an entry tile!");
             System.out.println((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT) + " " + (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH));
-            System.out.println(getCurrentTileID());
+            System.out.println(getTileWorldID());
         }
-
-        System.out.println(getCurrentTileID());
     }
 
     public void moveX() {
@@ -93,13 +89,13 @@ public abstract class Creature extends Entity {
     }
 
     protected boolean collisionWithTile(int x, int y) {
-        return handler.getWorld().getTile(x, y).isSolid();
+        return handler.getRoom().getTile(x, y).isSolid();
     }
 
-    public boolean inEntry() { return handler.getWorld().getTile(xPos, yPos).isEntry(); }
+    public boolean inEntry() { return handler.getRoom().getTile(xPos, yPos).isEntry(); }
 
-    public int getCurrentTileID() {
-        return handler.getWorld().getTile((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH)).getWorldId();
+    public int getTileWorldID() {
+        return handler.getRoom().getTile((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH)).getWorldId();
     }
 
 
