@@ -4,6 +4,7 @@ import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.world.World;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,9 +13,11 @@ public class Player extends Creature {
 
     //Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
+    private World currentWorld;
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+        this.currentWorld = handler.getWorld();
 
         bounds.x = 24;
         bounds.y = 40;
@@ -95,4 +98,6 @@ public class Player extends Creature {
         }
         // Can add idle states in else statement later.
     }
+
+    public boolean inEntry(int x, int y) { return handler.getWorld().getTile(x, y).isEntry(); }
 }

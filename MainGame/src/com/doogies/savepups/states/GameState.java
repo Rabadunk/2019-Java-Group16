@@ -1,33 +1,32 @@
 package com.doogies.savepups.states;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.entities.creatures.Player;
-import com.doogies.savepups.entities.statics.Bed;
-import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.tiles.Tile;
-import com.doogies.savepups.world.Worlds;
+import com.doogies.savepups.world.World;
 
 import java.awt.*;
 
 public class GameState extends State {
 
-    private Worlds world;
+    private World bedroomWorld;
+    private World hallwayWorld;
+    private World testWorld;
 
     public GameState(Handler handler){
         super(handler);
-        world = new Worlds(handler, "res/worlds/bedroom.txt");
-        handler.setWorld(world);
+        bedroomWorld = new World(handler, "res/worlds/bedroom.txt", 0);
+        hallwayWorld = new World(handler, "res/worlds/hallway.txt", 1);
+        testWorld = new World(handler, "res/worlds/testWorld.txt", 2);
+        handler.setWorld(testWorld);
     }
 
     @Override
     public void tick() {
-        world.tick();
+        handler.getWorld().tick();
     }
 
     @Override
     public void render(Graphics g) {
-        world.render(g);
+        handler.getWorld().render(g);
     }
 
 }

@@ -3,12 +3,12 @@ package com.doogies.savepups;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
-import com.doogies.savepups.world.Worlds;
+import com.doogies.savepups.world.World;
 
 public class Handler {
 
     private Game game;
-    private Worlds world;
+    private World world;
 
     public Handler(Game game) {
         this.game = game;
@@ -38,11 +38,11 @@ public class Handler {
         this.game = game;
     }
 
-    public Worlds getWorld() {
+    public World getWorld() {
         return world;
     }
 
-    public void setWorld(Worlds world) {
+    public void setWorld(World world) {
         this.world = world;
     }
 }

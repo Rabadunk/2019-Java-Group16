@@ -20,6 +20,8 @@ public class Tile {
 
     protected BufferedImage texture;
     protected final int id;
+    protected int worldId;
+    protected boolean entry = false;
 
 
 
@@ -45,5 +47,22 @@ public class Tile {
         return false;
     }
 
+    public boolean isEntry() { return entry; }
 
+    public void setWorldId(int id) {
+        worldId = id;
+    }
+
+    public int getWorldId() {
+        return worldId;
+    }
+
+    public BufferedImage getTexture() {
+        return texture;
+    }
+
+
+    public void setEntry(boolean b) {
+        entry = b;
+    }
 }

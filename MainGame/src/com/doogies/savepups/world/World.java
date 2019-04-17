@@ -10,17 +10,19 @@ import com.doogies.savepups.utils.Utils;
 
 import java.awt.*;
 
-public class Worlds {
+public class World {
 
     private int width, height;
     private int spawnX, spawnY;
-    private int[][] tiles;
+    private int ID;
+    private Tile[][] tiles;
     private Handler handler;
 
     //Entities
     private EntityManager entityManager;
 
-    public Worlds(Handler handler, String path) {
+    public World(Handler handler, String path, int ID) {
+        this.ID = ID;
         this.handler = handler;
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(world.getSpawnX()-1) * 64, (world.getSpawnY()-1) * 64);
@@ -67,15 +69,11 @@ public class Worlds {
     }
 
     public Tile getTile(int x, int y) {
-        if(x < 0 || y < 0 || x >= width || y >= height)
+        try {
+            return tiles[x][y];
+        } catch(Exception e) {
             return Tile.pinkFloorTile;
-
-        Tile t = Tile.tiles[tiles[x][y]];
-        if(t == null) {
-            return Tile.brickWallTile;
         }
-
-        return t;
     }
 
 
@@ -87,14 +85,27 @@ public class Worlds {
         spawnX = Utils.parseInt(tokens[2]);
         spawnY = Utils.parseInt(tokens[3]);
 
-        tiles = new int[width][height];
+        tiles = new Tile[width][height];
+        int tileID;
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
+                tileID = Utils.parseInt(tokens[(x + y * width) + 4]);
+                Tile newTile;
+
+                if(tileID > 99) {
+                    newTile = new Tile(Tile.tiles[3].getTexture(), tileID);
+                    newTile.setWorldId(tileID);
+                    newTile.setEntry(true);
+                } else {
+                    newTile = Tile.tiles[tileID];
+                }
+                tiles[x][y] = newTile;
             }
         }
     }
+
+    public int getID(){return  ID;}
 
     public int getWidth(){
         return width;
