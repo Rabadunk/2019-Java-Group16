@@ -19,6 +19,9 @@ public class MenuState extends State{
     private int lastIndex = 0;
     private boolean hasBeenPressed = false;
 
+    private long lastTime, timer;
+    private int index;
+
     public MenuState(Handler handler){
         super(handler);
 
@@ -47,19 +50,22 @@ public class MenuState extends State{
 
         uiManager.addObject( new UIImageButton(100, 500, 300, 150, Assets.quitButton, () -> {
             if(handler.getKeyManager().enter) {
-
-                JFrame frame = handler.getGame().getDisplay().getFrame();
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                closeGame();
             }
             }, () -> {
-                JFrame frame = handler.getGame().getDisplay().getFrame();
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-
+                closeGame();
             }));
+    }
+
+
+    public void closeGame(){
+        JFrame frame = handler.getGame().getDisplay().getFrame();
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
 
     @Override
     public void tick() {
+
         uiManager.tick();
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
