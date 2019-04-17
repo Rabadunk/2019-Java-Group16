@@ -134,6 +134,7 @@ public class Game implements Runnable {
         while(running) {
             now = System.nanoTime();
             updateDeltaAndTimer(now, lastTime);
+            lastTime = now;
             stabiliseTicks();
             resetTimer();
         }

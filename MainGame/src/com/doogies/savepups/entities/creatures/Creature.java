@@ -7,7 +7,7 @@ import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.world.World;
 
 public abstract class Creature extends Entity {
-    
+
     public static final int DEFAULT_HEALTH = 10;
 
     public static final float DEFAULT_SPEED = 3.0f;
