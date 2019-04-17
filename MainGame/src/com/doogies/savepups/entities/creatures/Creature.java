@@ -16,12 +16,15 @@ public abstract class Creature extends Entity {
 
     protected float speed;
     protected float xMove, yMove;
+    protected int xPos, yPos;
 
     public Creature(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
+        xPos = 0;
+        yPos = 0;
     }
 
     public void move() {
@@ -32,7 +35,9 @@ public abstract class Creature extends Entity {
             moveY();
         }
 
-        if(inEntry((int) ((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH))) {
+        xPos = (int) ((x + bounds.x + bounds.width) / Tile.TILEHEIGHT);
+        yPos = (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH);
+        if(inEntry()) {
             System.out.println("You're on an entry tile!");
             System.out.println((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT) + " " + (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH));
             System.out.println(getCurrentTileID());
@@ -91,9 +96,9 @@ public abstract class Creature extends Entity {
         return handler.getWorld().getTile(x, y).isSolid();
     }
 
-    protected boolean inEntry(int x, int y) { return handler.getWorld().getTile(x, y).isEntry(); }
+    public boolean inEntry() { return handler.getWorld().getTile(xPos, yPos).isEntry(); }
 
-    protected int getCurrentTileID() {
+    public int getCurrentTileID() {
         return handler.getWorld().getTile((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH)).getWorldId();
     }
 
