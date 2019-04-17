@@ -2,6 +2,7 @@ package com.doogies.savepups.entities.creatures;
 
 import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.world.World;
@@ -14,6 +15,9 @@ public class Player extends Creature {
     //Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
     private World currentWorld;
+
+    //Atacck timmer
+    private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
@@ -43,6 +47,61 @@ public class Player extends Creature {
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this);
+
+        //Attack
+        checkAttacks();
+    }
+
+    private void checkAttacks(){
+        attackTimer += System.currentTimeMillis() - lastAttackTimer;
+        lastAttackTimer = System.currentTimeMillis();
+
+        if(attackTimer < attackCooldown){
+            return;
+        }
+
+        Rectangle playerBounds = getCollisionBounds(0,0);
+        Rectangle attackRectangle = new Rectangle();
+        int attackRangeSize = 20;
+        attackRectangle.width = attackRangeSize;
+        attackRectangle.height = attackRangeSize;
+
+        if(handler.getKeyManager().aUp){
+            attackRectangle.x = playerBounds.x + playerBounds.width / 2;
+            attackRectangle.y = playerBounds.y - attackRangeSize;
+        }
+        else if(handler.getKeyManager().aDown){
+            attackRectangle.x = playerBounds.x + playerBounds.width / 2;
+            attackRectangle.y = playerBounds.y + playerBounds.height;
+        }
+        else if(handler.getKeyManager().aLeft){
+            attackRectangle.x = playerBounds.x - attackRangeSize;
+            attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
+        }
+        else if(handler.getKeyManager().aRight){
+            attackRectangle.x = playerBounds.x + playerBounds.width;
+            attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
+        }
+        else{
+            return;
+        }
+
+        attackTimer = 0;
+
+        for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+            if(e.equals(this)){
+                continue;
+            }
+            if(e.getCollisionBounds(0,0).intersects(attackRectangle)){
+                e.damage(1);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void die(){
+        System.out.println("You lose");
     }
 
     private void getInput() {
@@ -72,6 +131,7 @@ public class Player extends Creature {
                 (int)(x - handler.getGameCamera().getxOffset()),
                 (int)(y - handler.getGameCamera().getyOffset()),
                 width, height,null);
+
 
         // Red rectangle to represent players collision box
 //        g.setColor(Color.red);
