@@ -202,8 +202,7 @@ public class Player extends Creature {
             //return Assets.playerIdleRight;
         }
 
-
-
+        //DOesnt work
         // Red rectangle to represent players collision box
 //        g.setColor(Color.red);
 //        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
@@ -242,11 +241,13 @@ public class Player extends Creature {
                 return Assets.playerIdleRight;
             }
             else{
+                // Dunno aye
                 return Assets.bed;
             }
         }
-        // Can add idle states in else statement later.
     }
+
+
 
     public boolean isAttackUp() {
         return attackUp;
