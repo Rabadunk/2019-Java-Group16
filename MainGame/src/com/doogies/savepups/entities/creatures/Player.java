@@ -11,16 +11,28 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
 
+    //bed
+    private boolean bed = false;
+
     //Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
     private Room currentRoom;
+    private boolean attackUp, attackDown, attackLeft, attackRight;
 
     //Atacck timmer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
+
+
+    // Player Direction
+    // 0 = down, 1 = up, 2 = left, 3 = right
+    private int direction = 0;
+
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
         this.currentRoom = handler.getRoom();
+
+        attackUp = attackDown = attackLeft = attackRight = false;
 
         bounds.x = 24;
         bounds.y = 40;
@@ -65,21 +77,33 @@ public class Player extends Creature {
         attackRectangle.width = attackRangeSize;
         attackRectangle.height = attackRangeSize;
 
-        if(handler.getKeyManager().aUp){
+        attackUp = attackDown = attackLeft = attackRight = false;
+
+        // 0 = down, 1 = up, 2 = left, 3 = right
+
+        // Up
+        if(handler.getKeyManager().attack && direction == 1){
             attackRectangle.x = playerBounds.x + playerBounds.width / 2;
             attackRectangle.y = playerBounds.y - attackRangeSize;
+            attackUp = true;
         }
-        else if(handler.getKeyManager().aDown){
+        // Down
+        else if(handler.getKeyManager().attack && direction == 0){
             attackRectangle.x = playerBounds.x + playerBounds.width / 2;
             attackRectangle.y = playerBounds.y + playerBounds.height;
+            attackDown = true;
         }
-        else if(handler.getKeyManager().aLeft){
+        // Left
+        else if(handler.getKeyManager().attack && direction == 2){
             attackRectangle.x = playerBounds.x - attackRangeSize;
             attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
+            attackLeft = true;
         }
-        else if(handler.getKeyManager().aRight){
+        // Right
+        else if(handler.getKeyManager().attack && direction == 3){
             attackRectangle.x = playerBounds.x + playerBounds.width;
             attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
+            attackRight= true;
         }
         else{
             return;
@@ -109,27 +133,75 @@ public class Player extends Creature {
 
         if(handler.getKeyManager().up) {
             yMove = -speed;
+            direction = 1;
         }
 
         if(handler.getKeyManager().down) {
             yMove = speed;
+            direction = 0;
         }
 
         if(handler.getKeyManager().left) {
             xMove = -speed;
+            direction = 2;
         }
 
         if(handler.getKeyManager().right) {
             xMove = speed;
+            direction = 3;
+        }
+        if(handler.getKeyManager().boop) {
+            bed = true;
+        }
+        if(handler.getKeyManager().aww) {
+            bed = false;
         }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(),
-                (int)(x - handler.getGameCamera().getxOffset()),
-                (int)(y - handler.getGameCamera().getyOffset()),
-                width, height,null);
+        if (getCurrentAnimationFrame() == Assets.bed){
+            g.drawImage(getCurrentAnimationFrame(),
+                    (int)(x - handler.getGameCamera().getxOffset()),
+                    (int)(y - handler.getGameCamera().getyOffset() + handler.getGameCamera().getyOffset() / 2),
+                    width, height * 2,null);
+        }
+        else {
+            g.drawImage(getCurrentAnimationFrame(),
+                    (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height, null);
+        }
+
+        if(attackUp) {
+            g.drawImage(Assets.attack,
+                    (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
+                    width, height, null);
+            //return Assets.playerIdleDown;
+        }
+        else if(attackDown) {
+            g.drawImage(Assets.attack,
+                    (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
+                    width, height, null);
+            //return Assets.playerIdleUp;
+        }
+        else if(attackLeft) {
+            g.drawImage(Assets.attack,
+                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
+                    (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height, null);
+            //return Assets.playerIdleLeft;
+        }
+        else if(attackRight) {
+            g.drawImage(Assets.attack,
+                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
+                    (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height, null);
+            //return Assets.playerIdleRight;
+        }
+
 
 
         // Red rectangle to represent players collision box
@@ -152,11 +224,75 @@ public class Player extends Creature {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
+        else if(bed){
+            return Assets.bed;
+        }
         else{
-            return Assets.playerIdle;
+            // 0 = down, 1 = up, 2 = left, 3 = right
+            if(direction == 0) {
+                return Assets.playerIdleDown;
+            }
+            else if(direction == 1) {
+                return Assets.playerIdleUp;
+            }
+            else if(direction == 2) {
+                return Assets.playerIdleLeft;
+            }
+            else if(direction == 3) {
+                return Assets.playerIdleRight;
+            }
+            else{
+                return Assets.bed;
+            }
         }
         // Can add idle states in else statement later.
     }
 
+    public boolean isAttackUp() {
+        return attackUp;
+    }
 
+    public void setAttackUp(boolean attackUp) {
+        this.attackUp = attackUp;
+    }
+
+    public boolean isAttackDown() {
+        return attackDown;
+    }
+
+    public void setAttackDown(boolean attackDown) {
+        this.attackDown = attackDown;
+    }
+
+    public boolean isAttackLeft() {
+        return attackLeft;
+    }
+
+    public void setAttackLeft(boolean attackLeft) {
+        this.attackLeft = attackLeft;
+    }
+
+    public boolean isAttackRight() {
+        return attackRight;
+    }
+
+    public void setAttackRight(boolean attackRight) {
+        this.attackRight = attackRight;
+    }
+
+    public long getAttackCooldown() {
+        return attackCooldown;
+    }
+
+    public void setAttackCooldown(long attackCooldown) {
+        this.attackCooldown = attackCooldown;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
 }
