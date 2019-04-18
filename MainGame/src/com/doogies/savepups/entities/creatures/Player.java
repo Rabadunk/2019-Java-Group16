@@ -11,11 +11,18 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
 
+    //bed
+    private boolean bed = false;
+
     //Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
 
     //Atacck timmer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
+
+    // Player Direction
+    // 0 = down, 1 = up, 2 = left, 3 = right
+    private int direction = 0;
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
@@ -107,18 +114,28 @@ public class Player extends Creature {
 
         if(handler.getKeyManager().up) {
             yMove = -speed;
+            direction = 1;
         }
 
         if(handler.getKeyManager().down) {
             yMove = speed;
+            direction = 0;
         }
 
         if(handler.getKeyManager().left) {
             xMove = -speed;
+            direction = 2;
         }
 
         if(handler.getKeyManager().right) {
             xMove = speed;
+            direction = 3;
+        }
+        if(handler.getKeyManager().boop) {
+            bed = true;
+        }
+        if(handler.getKeyManager().aww) {
+            bed = false;
         }
     }
 
@@ -150,8 +167,26 @@ public class Player extends Creature {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
+        else if(bed){
+            return Assets.bed;
+        }
         else{
-            return Assets.playerIdle;
+            // 0 = down, 1 = up, 2 = left, 3 = right
+            if(direction == 0) {
+                return Assets.playerIdleDown;
+            }
+            else if(direction == 1) {
+                return Assets.playerIdleUp;
+            }
+            else if(direction == 2) {
+                return Assets.playerIdleLeft;
+            }
+            else if(direction == 3) {
+                return Assets.playerIdleRight;
+            }
+            else{
+                return Assets.bed;
+            }
         }
         // Can add idle states in else statement later.
     }

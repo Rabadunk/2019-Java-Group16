@@ -12,7 +12,7 @@ public class Assets {
     public static BufferedImage computer, bed;
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
-    public static BufferedImage playerIdle;
+    public static BufferedImage playerIdleDown, playerIdleUp, playerIdleLeft, playerIdleRight;
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
@@ -46,7 +46,10 @@ public class Assets {
         player_right[0] = playersheet.crop(0,64, width, height);
         player_right[1] = playersheet.crop(64,64, width, height);
 
-        playerIdle = playersheet.crop(32, 0, width, height);
+        playerIdleDown = playersheet.crop(32, 0, width, height);
+        playerIdleUp = playersheet.crop(32, 96, width, height);
+        playerIdleLeft = playersheet.crop(32, 32, width, height);
+        playerIdleRight = playersheet.crop(32, 64, width, height);
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);

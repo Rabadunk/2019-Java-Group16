@@ -9,6 +9,7 @@ public class KeyManager implements KeyListener {
     public boolean up, down, left, right;
     public boolean aUp, aDown, aLeft, aRight;
     public boolean enter;
+    public boolean boop, aww;
 
     public KeyManager() {
         keys = new boolean[256];
@@ -25,6 +26,9 @@ public class KeyManager implements KeyListener {
         aDown = keys[KeyEvent.VK_K];
         aLeft = keys[KeyEvent.VK_J];
         aRight = keys[KeyEvent.VK_L];
+
+        boop = keys[KeyEvent.VK_G];
+        aww = keys[KeyEvent.VK_H];
     }
 
     @Override
