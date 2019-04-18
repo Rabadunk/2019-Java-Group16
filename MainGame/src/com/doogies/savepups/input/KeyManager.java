@@ -7,7 +7,7 @@ public class KeyManager implements KeyListener {
 
     private boolean[] keys;
     public boolean up, down, left, right;
-    public boolean aUp, aDown, aLeft, aRight;
+    public boolean attack;
     public boolean enter;
     public boolean boop, aww;
 
@@ -22,11 +22,9 @@ public class KeyManager implements KeyListener {
         right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
         enter = keys[KeyEvent.VK_ENTER];
 
-        aUp = keys[KeyEvent.VK_I];
-        aDown = keys[KeyEvent.VK_K];
-        aLeft = keys[KeyEvent.VK_J];
-        aRight = keys[KeyEvent.VK_L];
+        attack = keys[KeyEvent.VK_J];
 
+        // HELL YEAH BED
         boop = keys[KeyEvent.VK_G];
         aww = keys[KeyEvent.VK_H];
     }
