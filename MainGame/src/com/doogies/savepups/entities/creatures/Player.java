@@ -141,10 +141,18 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(),
-                (int)(x - handler.getGameCamera().getxOffset()),
-                (int)(y - handler.getGameCamera().getyOffset()),
-                width, height,null);
+        if (getCurrentAnimationFrame() == Assets.bed){
+            g.drawImage(getCurrentAnimationFrame(),
+                    (int)(x - handler.getGameCamera().getxOffset()),
+                    (int)(y - handler.getGameCamera().getyOffset() + handler.getGameCamera().getyOffset() / 2),
+                    width, height * 2,null);
+        }
+        else {
+            g.drawImage(getCurrentAnimationFrame(),
+                    (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height, null);
+        }
 
 
         // Red rectangle to represent players collision box
