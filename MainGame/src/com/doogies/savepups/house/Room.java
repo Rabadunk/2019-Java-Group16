@@ -1,6 +1,5 @@
-package com.doogies.savepups.world;
+package com.doogies.savepups.house;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Player;
@@ -10,20 +9,22 @@ import com.doogies.savepups.utils.Utils;
 
 import java.awt.*;
 
-public class Worlds {
+public class Room {
 
     private int width, height;
     private int spawnX, spawnY;
-    private int[][] tiles;
+    private int ID;
+    private Tile[][] tiles;
     private Handler handler;
 
     //Entities
     private EntityManager entityManager;
 
-    public Worlds(Handler handler, String path) {
+    public Room(Handler handler, String path, int ID) {
+        this.ID = ID;
         this.handler = handler;
         //Code for correct map pos from prev gamestate function
-        // player = new Player(handler,(world.getSpawnX()-1) * 64, (world.getSpawnY()-1) * 64);
+        // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
         entityManager = new EntityManager(handler, new Player(handler, 500,500));
         entityManager.addEntity(new Bed(handler, 100, 150));
        // entityManager.addEntity(new Bed(handler, 100, 250));
@@ -31,8 +32,8 @@ public class Worlds {
 
         loadWorld(path);
 
-        entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
-        entityManager.getPlayer().setY(spawnY * Tile.TILEHEIGHT);
+        entityManager.getPlayer().setX(spawnX);
+        entityManager.getPlayer().setY(spawnY);
     }
 
 
@@ -67,15 +68,11 @@ public class Worlds {
     }
 
     public Tile getTile(int x, int y) {
-        if(x < 0 || y < 0 || x >= width || y >= height)
+        try {
+            return tiles[x][y];
+        } catch(Exception e) {
             return Tile.pinkFloorTile;
-
-        Tile t = Tile.tiles[tiles[x][y]];
-        if(t == null) {
-            return Tile.brickWallTile;
         }
-
-        return t;
     }
 
 
@@ -84,19 +81,32 @@ public class Worlds {
         String[] tokens = file.split(("\\s+"));
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]);
-        spawnY = Utils.parseInt(tokens[3]);
+        spawnX = Utils.parseInt(tokens[2]) * Tile.TILEWIDTH;
+        spawnY = Utils.parseInt(tokens[3]) * Tile.TILEHEIGHT;
 
-        tiles = new int[width][height];
+        tiles = new Tile[width][height];
+        int tileID;
 
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
+                tileID = Utils.parseInt(tokens[(x + y * width) + 4]);
+                Tile newTile;
+
+                if(tileID > 99) {
+                    newTile = new Tile(Tile.tiles[3].getTexture(), tileID);
+                    newTile.setWorldId(tileID % 100);
+                    newTile.setEntry(true);
+                } else {
+                    newTile = Tile.tiles[tileID];
+                }
+                tiles[x][y] = newTile;
             }
         }
 
 
     }
+
+    public int getID(){return  ID;}
 
     public int getWidth(){
         return width;
