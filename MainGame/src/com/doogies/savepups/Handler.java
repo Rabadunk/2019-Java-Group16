@@ -1,14 +1,14 @@
 package com.doogies.savepups;
 
 import com.doogies.savepups.graphics.GameCamera;
+import com.doogies.savepups.house.Room;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
-import com.doogies.savepups.world.Worlds;
 
 public class Handler {
 
     private Game game;
-    private Worlds world;
+    private Room room;
 
     public Handler(Game game) {
         this.game = game;
@@ -38,11 +38,11 @@ public class Handler {
         this.game = game;
     }
 
-    public Worlds getWorld() {
-        return world;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setWorld(Worlds world) {
-        this.world = world;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

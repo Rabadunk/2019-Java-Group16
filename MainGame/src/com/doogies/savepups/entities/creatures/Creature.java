@@ -1,12 +1,12 @@
 package com.doogies.savepups.entities.creatures;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.tiles.Tile;
 
 public abstract class Creature extends Entity {
 
+    public static final int DEFAULT_HEALTH = 10;
 
     public static final float DEFAULT_SPEED = 3.0f;
     public static final int DEFAULT_CREATURE_WIDTH = 64,
@@ -14,12 +14,15 @@ public abstract class Creature extends Entity {
 
     protected float speed;
     protected float xMove, yMove;
+    protected int xPos, yPos;
 
     public Creature(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
+        xPos = 0;
+        yPos = 0;
     }
 
     public void move() {
@@ -28,6 +31,14 @@ public abstract class Creature extends Entity {
         }
         if(!checkEntityCollision(0f,yMove)) {
             moveY();
+        }
+
+        xPos = (int) ((x + bounds.x + bounds.width) / Tile.TILEHEIGHT);
+        yPos = (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH);
+        if(inEntry()) {
+            System.out.println("You're on an entry tile!");
+            System.out.println((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT) + " " + (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH));
+            System.out.println(getTileWorldID());
         }
     }
 
@@ -78,8 +89,16 @@ public abstract class Creature extends Entity {
     }
 
     protected boolean collisionWithTile(int x, int y) {
-        return handler.getWorld().getTile(x, y).isSolid();
+        return handler.getRoom().getTile(x, y).isSolid();
     }
+
+    public boolean inEntry() { return handler.getRoom().getTile(xPos, yPos).isEntry(); }
+
+    public int getTileWorldID() {
+        return handler.getRoom().getTile((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH)).getWorldId();
+    }
+
+
 
     //GETTERS SETTERS
 

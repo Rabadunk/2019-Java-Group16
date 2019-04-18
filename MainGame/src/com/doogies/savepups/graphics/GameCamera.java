@@ -1,6 +1,5 @@
 package com.doogies.savepups.graphics;
 
-import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.tiles.Tile;
@@ -22,15 +21,15 @@ public class GameCamera {
         if(xOffset < 0) {
             xOffset = 0;
         }
-        else if(xOffset > handler.getWorld().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
-            xOffset = handler.getWorld().getWidth() * Tile.TILEWIDTH - handler.getWidth();
+        else if(xOffset > handler.getRoom().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
+            xOffset = handler.getRoom().getWidth() * Tile.TILEWIDTH - handler.getWidth();
         }
 
         if(yOffset < 0) {
             yOffset = 0;
         }
-        else if(yOffset > handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
-            yOffset = handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
+        else if(yOffset > handler.getRoom().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
+            yOffset = handler.getRoom().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
         }
     }
 
