@@ -6,6 +6,7 @@ import com.doogies.savepups.entities.creatures.Player;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 public class EntityManager {
 
@@ -27,11 +28,13 @@ public class EntityManager {
     }
 
     public void tick(){
-        for(int i = 0; i < entities.size(); i++) {
-            Entity e = entities.get(i);
+        Iterator<Entity> iterator = entities.iterator();
+
+        while(iterator.hasNext()) {
+            Entity e = iterator.next();
             e.tick();
             if(!e.isActive()){
-                entities.remove(e);
+                iterator.remove();
             }
         }
         entities.sort(renderSorter);

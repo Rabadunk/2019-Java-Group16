@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.entities.statics.Bed;
+import com.doogies.savepups.items.ItemManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 
@@ -17,15 +18,22 @@ public class Room {
     private Tile[][] tiles;
     private Handler handler;
 
-    //Entities
+    // Entities
     private EntityManager entityManager;
+
+    // Item
+    private ItemManager itemManager;
 
     public Room(Handler handler, String path, int ID) {
         this.ID = ID;
         this.handler = handler;
+
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
         entityManager = new EntityManager(handler, new Player(handler, 500,500));
+        itemManager = new ItemManager(handler);
+
+        // Temp entity spawn
         entityManager.addEntity(new Bed(handler, 100, 150));
        // entityManager.addEntity(new Bed(handler, 100, 250));
         //entityManager.addEntity(new Bed(handler, 100, 350));
@@ -39,6 +47,7 @@ public class Room {
 
 
     public void tick() {
+        itemManager.tick();
         entityManager.tick();
     }
 
@@ -63,7 +72,10 @@ public class Room {
             }
         }
 
-        //Entities
+        // Item
+        itemManager.render(g);
+
+        // Entities
         entityManager.render(g);
     }
 
@@ -104,6 +116,25 @@ public class Room {
         }
 
 
+    }
+
+    // Getters and setters
+
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+
+    public ItemManager getItemManager() {
+        return itemManager;
+    }
+
+    public void setItemManager(ItemManager itemManager) {
+        this.itemManager = itemManager;
     }
 
     public int getID(){return  ID;}

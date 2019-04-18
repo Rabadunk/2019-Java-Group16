@@ -163,8 +163,8 @@ public class Player extends Creature {
         if (getCurrentAnimationFrame() == Assets.bed){
             g.drawImage(getCurrentAnimationFrame(),
                     (int)(x - handler.getGameCamera().getxOffset()),
-                    (int)(y - handler.getGameCamera().getyOffset() + handler.getGameCamera().getyOffset() / 2),
-                    width, height * 2,null);
+                    (int)(y - handler.getGameCamera().getyOffset()),
+                    width, height,null);
         }
         else {
             g.drawImage(getCurrentAnimationFrame(),
