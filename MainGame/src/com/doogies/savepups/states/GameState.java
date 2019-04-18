@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
+import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,10 +31,13 @@ public class GameState extends State {
 
     private void checkForRoomChange() {
         Player player = handler.getRoom().getEntityManager().getPlayer();
+        Room room = house.getRoom(player.getTileWorldID());
 
         if(player.inEntry()) {
-            handler.setRoom(house.getRoom(player.getTileWorldID()));
+            handler.setRoom(room);
             worldChanged = true;
+            handler.getRoom().getEntityManager().getPlayer().setX(room.getSpawnX());
+            handler.getRoom().getEntityManager().getPlayer().setY(room.getSpawnY());
         }
     }
 
@@ -50,11 +54,11 @@ public class GameState extends State {
         g.fillRect(0 ,0, handler.getWidth(), handler.getHeight());
 
         try {
-            TimeUnit.MILLISECONDS.sleep(50);
+            TimeUnit.MILLISECONDS.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
         worldChanged = false;
     }
 

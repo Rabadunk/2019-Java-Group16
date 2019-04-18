@@ -32,8 +32,8 @@ public class Room {
 
         loadWorld(path);
 
-        entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
-        entityManager.getPlayer().setY(spawnY * Tile.TILEHEIGHT);
+        entityManager.getPlayer().setX(spawnX);
+        entityManager.getPlayer().setY(spawnY);
     }
 
 
@@ -81,8 +81,8 @@ public class Room {
         String[] tokens = file.split(("\\s+"));
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]);
-        spawnY = Utils.parseInt(tokens[3]);
+        spawnX = Utils.parseInt(tokens[2]) * Tile.TILEWIDTH;
+        spawnY = Utils.parseInt(tokens[3]) * Tile.TILEHEIGHT;
 
         tiles = new Tile[width][height];
         int tileID;

@@ -158,5 +158,5 @@ public class Player extends Creature {
         // Can add idle states in else statement later.
     }
 
-    public boolean inEntry(int x, int y) { return handler.getRoom().getTile(x, y).isEntry(); }
+
 }
