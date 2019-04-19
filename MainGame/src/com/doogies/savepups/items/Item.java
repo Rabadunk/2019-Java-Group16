@@ -41,8 +41,8 @@ public class Item {
     }
 
     public void tick(){
-        if(handler.getRoom().getEntityManager().getPlayer().getCollisionBounds(0f,0f).intersects(bounds));{
-            //pickedUp = true;
+        if(handler.getRoom().getEntityManager().getPlayer().getCollisionBounds(0f,0f).intersects(bounds)){
+            pickedUp = true;
             handler.getRoom().getEntityManager().getPlayer().getInventory().addItem(this);
         }
     }
@@ -63,6 +63,7 @@ public class Item {
         g.fillRect((int)(x),
                 (int)(y),
                bounds.width, bounds.height);
+
     }
 
     public Item createNew(int x, int y){

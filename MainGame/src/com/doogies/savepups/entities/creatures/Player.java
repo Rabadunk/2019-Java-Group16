@@ -214,10 +214,10 @@ public class Player extends Creature {
 
         //DOesnt work
         // Red rectangle to represent players collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
+        g.setColor(Color.red);
+        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+                bounds.width, bounds.height);
     }
 
     // Getters and setters
@@ -314,4 +314,6 @@ public class Player extends Creature {
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
+
 }
