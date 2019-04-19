@@ -12,13 +12,11 @@ public class Handler {
 
     private Game game;
     private Room room;
-    public EntityManager entityManager;
     public Player player;
 
     public Handler(Game game) {
         this.game = game;
         player = new Player(this, 64, 64);
-        entityManager = new EntityManager(this, player);
     }
 
     public GameCamera getGameCamera() {
@@ -49,10 +47,12 @@ public class Handler {
         return room;
     }
 
+    public Player getPlayer() { return player; }
+
     public void setRoom(Room room) {
         this.room = room;
-        this.room.getEntityManager().getPlayer().setX(room.getSpawnX());
-        this.room.getEntityManager().getPlayer().setY(room.getSpawnY());
+        player.setX(room.getSpawnX());
+        player.setY(room.getSpawnY());
         this.room.loadFurniture();
     }
 }

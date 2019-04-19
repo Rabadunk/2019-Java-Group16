@@ -24,9 +24,8 @@ public class GameState extends State {
         handler.setRoom(house.getRoom(0));
 
         currentRoom = handler.getRoom();
-        handler.entityManager.getPlayer().setX(currentRoom.getSpawnX());
-        handler.entityManager.getPlayer().setY(currentRoom.getSpawnY());
-        handler.getRoom().loadFurniture();
+        handler.getPlayer().setX(currentRoom.getSpawnX());
+        handler.getPlayer().setY(currentRoom.getSpawnY());
     }
 
     @Override
@@ -36,11 +35,10 @@ public class GameState extends State {
     }
 
     private void checkForRoomChange() {
-        Player player = handler.getRoom().getEntityManager().getPlayer();
+        Player player = handler.getPlayer();
         Room room = house.getRoom(player.getTileWorldID());
 
         if(player.inEntry()) {
-            handler.entityManager.clearEntitiesForNewRoom();
             currentRoom = room;
             handler.setRoom(room);
             worldChanged = true;
@@ -60,7 +58,7 @@ public class GameState extends State {
         g.fillRect(0 ,0, handler.getWidth(), handler.getHeight());
 
         try {
-            TimeUnit.MILLISECONDS.sleep(100);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

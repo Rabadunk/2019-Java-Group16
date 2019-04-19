@@ -12,7 +12,6 @@ public class FurnitureManager {
         this.handler = handler;
     }
 
-
     public void insertFurniture(EntityManager entityManager, int ID, int x, int y) {
         switch (ID) {
             case 0:

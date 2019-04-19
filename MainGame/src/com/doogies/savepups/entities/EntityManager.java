@@ -31,13 +31,14 @@ public class EntityManager {
     }
 
     public void tick(){
-        for(int i = 0; i < entities.size(); i++) {
-            Entity e = entities.get(i);
-            e.tick();
-            if(!e.isActive()){
+        for(Entity e : entities) {
+            if(e.isActive()) {
+                e.tick();
+            } else {
                 entities.remove(e);
             }
         }
+
         entities.sort(renderSorter);
     }
 
@@ -48,13 +49,11 @@ public class EntityManager {
 
     }
 
-    public void clearEntitiesForNewRoom() {
-        entities.removeIf(e -> e != getPlayer());
-    }
-
     public void addEntity(Entity e) {
         entities.add(e);
     }
+
+    public void removeEntity(Entity e) { entities.remove(e); }
 
     // Getters and setters
     public Handler getHandler() {

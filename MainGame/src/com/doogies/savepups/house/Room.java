@@ -2,6 +2,7 @@ package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
+import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.entities.furniture.FurnitureManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
@@ -21,6 +22,7 @@ public class Room {
     private Tile[][] tiles;
     private FurnitureManager furniture;
     private Handler handler;
+    private EntityManager entityManager;
 
 
     public Room(Handler handler, String roomPath, String furniturePath, int ID) {
@@ -28,20 +30,22 @@ public class Room {
         this.handler = handler;
         this.furniturePath = furniturePath;
         this.furniture = new FurnitureManager(handler);
+        this.entityManager = new EntityManager(handler, handler.getPlayer());
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
        // entityManager.addEntity(new Bed(handler, 100, 250));
         //entityManager.addEntity(new Bed(handler, 100, 350));
         loadRoom(roomPath);
+        loadFurniture();
 
-        handler.entityManager.getPlayer().setX(spawnX);
-        handler.entityManager.getPlayer().setY(spawnY);
+        entityManager.getPlayer().setX(spawnX);
+        entityManager.getPlayer().setY(spawnY);
     }
 
 
 
     public void tick() {
-        handler.entityManager.tick();
+        entityManager.tick();
     }
 
     public void render(Graphics g) {
@@ -66,7 +70,7 @@ public class Room {
         }
 
         //Entities
-        handler.entityManager.render(g);
+        entityManager.render(g);
     }
 
     public Tile getTile(int x, int y) {
@@ -118,8 +122,12 @@ public class Room {
             furnX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
             furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
 
-            furniture.insertFurniture(getEntityManager(), furnitureId, furnX, furnY);
+            furniture.insertFurniture(entityManager, furnitureId, furnX, furnY);
         }
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
     public int getID(){return  ID; }
@@ -140,7 +148,4 @@ public class Room {
         return spawnY;
     }
 
-    public EntityManager getEntityManager() {
-        return handler.entityManager;
-    }
 }
