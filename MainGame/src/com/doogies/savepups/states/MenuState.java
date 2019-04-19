@@ -1,6 +1,7 @@
 package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.Music;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
 import com.doogies.savepups.house.HouseGraph;
@@ -29,6 +30,10 @@ public class MenuState extends State{
 
     public MenuState(Handler handler){
         super(handler);
+
+        Music player = new Music("song");
+        player.run();
+        
 
         houseGraph = new HouseGraph(handler);
 
