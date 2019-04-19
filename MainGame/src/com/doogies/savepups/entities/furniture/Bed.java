@@ -1,18 +1,19 @@
 package com.doogies.savepups.entities.furniture;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Bed extends FurnitureTiles {
+public class Bed extends Entity {
 
     private BufferedImage bedTexture = Assets.bed;
 
-    public Bed(Handler handler, float x, float y, int ID) {
-        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT * 2, ID);
+    public Bed(Handler handler, float x, float y) {
+        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT * 2);
 
         bounds.x = 0;
         bounds.y = (int) (height - height/ 1.5f);

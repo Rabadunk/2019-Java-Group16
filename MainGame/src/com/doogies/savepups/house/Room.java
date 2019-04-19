@@ -2,9 +2,7 @@ package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
-import com.doogies.savepups.entities.creatures.Player;
-import com.doogies.savepups.entities.furniture.Bed;
-import com.doogies.savepups.entities.furniture.FurnitureTiles;
+import com.doogies.savepups.entities.furniture.FurnitureManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 
@@ -18,8 +16,10 @@ public class Room {
     private int furnitureId;
     private int furnX;
     private int furnY;
+
     private String furniturePath;
     private Tile[][] tiles;
+    private FurnitureManager furniture;
     private Handler handler;
 
 
@@ -27,11 +27,11 @@ public class Room {
         this.ID = ID;
         this.handler = handler;
         this.furniturePath = furniturePath;
+        this.furniture = new FurnitureManager(handler);
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
        // entityManager.addEntity(new Bed(handler, 100, 250));
         //entityManager.addEntity(new Bed(handler, 100, 350));
-
         loadRoom(roomPath);
 
         handler.entityManager.getPlayer().setX(spawnX);
@@ -118,11 +118,7 @@ public class Room {
             furnX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
             furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
 
-            FurnitureTiles furniture = FurnitureTiles.furniture[furnitureId];
-
-            handler.entityManager.addEntity(furniture);
-            FurnitureTiles.furniture[furnitureId].setX(furnX);
-            FurnitureTiles.furniture[furnitureId].setY(furnY);
+            furniture.insertFurniture(getEntityManager(), furnitureId, furnX, furnY);
         }
     }
 

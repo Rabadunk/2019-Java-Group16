@@ -3,7 +3,6 @@ package com.doogies.savepups.entities;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.entities.furniture.Bed;
-import com.doogies.savepups.entities.furniture.FurnitureTiles;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,8 +13,6 @@ public class EntityManager {
     private Handler handler;
     private Player player;
 
-    // Furniture
-    private Bed bed;
 
 
     private ArrayList<Entity> entities;
@@ -30,8 +27,6 @@ public class EntityManager {
         this.handler = handler;
         this.player = player;
         entities = new ArrayList<>();
-
-        makeFurniture();
         addEntity(player);
     }
 
@@ -53,8 +48,8 @@ public class EntityManager {
 
     }
 
-    public void makeFurniture() {
-        bed = new Bed(handler, 0, 0, 0);
+    public void clearEntitiesForNewRoom() {
+        entities.removeIf(e -> e != getPlayer());
     }
 
     public void addEntity(Entity e) {

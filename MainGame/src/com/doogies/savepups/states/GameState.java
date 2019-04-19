@@ -40,6 +40,7 @@ public class GameState extends State {
         Room room = house.getRoom(player.getTileWorldID());
 
         if(player.inEntry()) {
+            handler.entityManager.clearEntitiesForNewRoom();
             currentRoom = room;
             handler.setRoom(room);
             worldChanged = true;
