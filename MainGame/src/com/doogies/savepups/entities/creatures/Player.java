@@ -5,6 +5,7 @@ import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
+import com.doogies.savepups.inventory.Inventory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,7 +23,8 @@ public class Player extends Creature {
     //Atacck timmer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
-
+    //
+    private Inventory inventory;
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -44,6 +46,9 @@ public class Player extends Creature {
         animationUp = new Animation(500, Assets.player_up);
         animationLeft = new Animation(500, Assets.player_left);
         animationRight = new Animation(500, Assets.player_right);
+
+        // Inventory
+        inventory = new Inventory(handler);
     }
 
     @Override
@@ -61,6 +66,9 @@ public class Player extends Creature {
 
         //Attack
         checkAttacks();
+
+        //Inventory
+        inventory.tick();
     }
 
     private void checkAttacks(){
@@ -202,6 +210,8 @@ public class Player extends Creature {
             //return Assets.playerIdleRight;
         }
 
+        inventory.render(g);
+
         //DOesnt work
         // Red rectangle to represent players collision box
 //        g.setColor(Color.red);
@@ -209,6 +219,8 @@ public class Player extends Creature {
 //                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
 //                bounds.width, bounds.height);
     }
+
+    // Getters and setters
 
     private BufferedImage getCurrentAnimationFrame(){
         if(xMove <0){
@@ -247,7 +259,13 @@ public class Player extends Creature {
         }
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     public boolean isAttackUp() {
         return attackUp;

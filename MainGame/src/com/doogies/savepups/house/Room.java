@@ -35,8 +35,8 @@ public class Room {
 
         // Temp entity spawn
         entityManager.addEntity(new Bed(handler, 100, 150));
-       // entityManager.addEntity(new Bed(handler, 100, 250));
-        //entityManager.addEntity(new Bed(handler, 100, 350));
+        entityManager.addEntity(new Bed(handler, 100, 250));
+        entityManager.addEntity(new Bed(handler, 100, 350));
 
         loadWorld(path);
 

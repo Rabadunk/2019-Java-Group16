@@ -2,6 +2,8 @@ package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.house.HouseGraph;
+import com.doogies.savepups.house.Room;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
 import com.doogies.savepups.ui.UIObject;
@@ -22,8 +24,12 @@ public class MenuState extends State{
     private long lastTime, timer;
     private int index;
 
+    private HouseGraph houseGraph;
+
     public MenuState(Handler handler){
         super(handler);
+
+        houseGraph = new HouseGraph(handler);
 
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
@@ -41,10 +47,12 @@ public class MenuState extends State{
         uiManager.addObject( new UIImageButton(100, 300, 300, 150, Assets.scoreButton, () -> {
             if(handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
+                handler.setRoom(houseGraph.getRoom(2));
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
             State.setState(handler.getGame().gameState);
+            handler.setRoom(houseGraph.getRoom(2));
 
         }));
 
