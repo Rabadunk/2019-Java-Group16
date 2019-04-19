@@ -8,6 +8,7 @@ import com.doogies.savepups.house.Room;
 import com.doogies.savepups.inventory.Inventory;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
@@ -69,6 +70,10 @@ public class Player extends Creature {
 
         //Inventory
         inventory.tick();
+
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
+            bed = !bed;
+        }
     }
 
     private void checkAttacks(){
@@ -158,21 +163,21 @@ public class Player extends Creature {
             xMove = speed;
             direction = 3;
         }
-        if(handler.getKeyManager().boop) {
-            bed = true;
-        }
-        if(handler.getKeyManager().aww) {
-            bed = false;
-        }
+//        if(handler.getKeyManager().boop) {
+//            bed = true;
+//        }
+//        if(handler.getKeyManager().aww) {
+//            bed = false;
+//        }
     }
 
     @Override
     public void render(Graphics g) {
         if (getCurrentAnimationFrame() == Assets.bed){
             g.drawImage(getCurrentAnimationFrame(),
-                    (int)(x - handler.getGameCamera().getxOffset()),
+                    (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
                     (int)(y - handler.getGameCamera().getyOffset()),
-                    width, height,null);
+                    width / 2, height,null);
         }
         else {
             g.drawImage(getCurrentAnimationFrame(),
@@ -180,6 +185,19 @@ public class Player extends Creature {
                     (int) (y - handler.getGameCamera().getyOffset()),
                     width, height, null);
         }
+
+
+        //DOesnt work
+        // Red rectangle to represent players collision box
+        g.setColor(Color.red);
+        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+                bounds.width, bounds.height);
+    }
+
+    public void postRender(Graphics g){
+
+        //Attack animations
 
         if(attackUp) {
             g.drawImage(Assets.attack,
@@ -211,13 +229,6 @@ public class Player extends Creature {
         }
 
         inventory.render(g);
-
-        //DOesnt work
-        // Red rectangle to represent players collision box
-        g.setColor(Color.red);
-        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
     }
 
     // Getters and setters

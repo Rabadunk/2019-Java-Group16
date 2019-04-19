@@ -14,7 +14,6 @@ public class Item {
     public static Item bedItem = new Item(Assets.bed, "Bed", 0);
     public static Item attackItem = new Item(Assets.attack, "Attack", 1);
 
-
     // Class
 
     public static final int ITEMWIDTH = 32, ITEMHEIGHT = 32;
@@ -35,7 +34,7 @@ public class Item {
         this.id = id;
         count = 1;
 
-        bounds = new Rectangle(x, y, ITEMWIDTH / 4, ITEMHEIGHT / 4);
+        bounds = new Rectangle(x, y, ITEMWIDTH / 2, ITEMHEIGHT / 2);
 
         items[id] = this;
     }
@@ -66,6 +65,13 @@ public class Item {
 
     }
 
+    public Item createNew(int count){
+        Item i = new Item(texture, name, id);
+        i.setPickedUp(true);
+        i.setCount(count);
+        return i;
+    }
+
     public Item createNew(int x, int y){
         Item i = new Item(texture, name, id);
         i.setPosition(x, y);
@@ -80,6 +86,11 @@ public class Item {
     }
 
     // Getters and setters
+
+
+    public void setPickedUp(boolean pickedUp) {
+        this.pickedUp = pickedUp;
+    }
 
     public boolean isPickedUp() {
         return pickedUp;

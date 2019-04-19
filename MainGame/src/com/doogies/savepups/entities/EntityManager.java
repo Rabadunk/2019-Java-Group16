@@ -14,9 +14,12 @@ public class EntityManager {
     private Player player;
     private ArrayList<Entity> entities;
     private Comparator<Entity> renderSorter = (o1, o2) -> {
-        if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight()) {
+        //o1 has a lesser y pos than o2
+        //Should be above o2 and should be rendered first
+        if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight()) { //Checking bottom of collision box
             return -1;
         }
+        //o1 should be rendered after o2
         return 1;
     };
 
@@ -44,7 +47,7 @@ public class EntityManager {
         for(Entity e : entities) {
             e.render(g);
         }
-
+        player.postRender(g);
     }
 
     public void addEntity(Entity e) {
