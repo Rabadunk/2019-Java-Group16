@@ -3,7 +3,7 @@ package com.doogies.savepups.house;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Player;
-import com.doogies.savepups.entities.statics.Bed;
+import com.doogies.savepups.entities.furniture.FurnitureManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 
@@ -14,23 +14,29 @@ public class Room {
     private int width, height;
     private int spawnX, spawnY;
     private int ID;
-    private Tile[][] tiles;
-    private Handler handler;
+    private int furnitureId;
+    private int furnX;
+    private int furnY;
 
-    //Entities
+    private String furniturePath;
+    private Tile[][] tiles;
+    private FurnitureManager furniture;
+    private Handler handler;
     private EntityManager entityManager;
 
-    public Room(Handler handler, String path, int ID) {
+
+    public Room(Handler handler, String roomPath, String furniturePath, int ID) {
         this.ID = ID;
         this.handler = handler;
+        this.furniturePath = furniturePath;
+        this.furniture = new FurnitureManager(handler);
+        this.entityManager = new EntityManager(handler, handler.getPlayer());
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
-        entityManager = new EntityManager(handler, new Player(handler, 500,500));
-        entityManager.addEntity(new Bed(handler, 100, 150));
        // entityManager.addEntity(new Bed(handler, 100, 250));
         //entityManager.addEntity(new Bed(handler, 100, 350));
-
-        loadWorld(path);
+        loadRoom(roomPath);
+        loadFurniture();
 
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
@@ -48,7 +54,7 @@ public class Room {
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
 
 
-        //Render effiency. Sets values so that only tiles that can seen on screen are rendered.
+        // Set values so that only tiles that can seen on screen are rendered.
         int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
         int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
         int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
@@ -76,7 +82,7 @@ public class Room {
     }
 
 
-    private void loadWorld(String path) {
+    private void loadRoom(String path) {
         String file = Utils.loadFileAsString(path);
         String[] tokens = file.split(("\\s+"));
         width = Utils.parseInt(tokens[0]);
@@ -103,10 +109,29 @@ public class Room {
             }
         }
 
+        System.out.println(spawnX + " " + spawnY);
 
     }
 
-    public int getID(){return  ID;}
+    public void loadFurniture() {
+        String file = Utils.loadFileAsString(furniturePath);
+        String[] tokens = file.split(("\\s+"));
+
+        for(int i = 0; i < tokens.length; i = i + 3) {
+            furnitureId = Utils.parseInt(tokens[i]);
+            furnX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
+            furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
+
+            furniture.insertFurniture(entityManager, furnitureId, furnX, furnY);
+            System.out.println("Furniture inserted");
+        }
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public int getID(){return  ID; }
 
     public int getWidth(){
         return width;
@@ -124,7 +149,4 @@ public class Room {
         return spawnY;
     }
 
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
 }

@@ -2,6 +2,7 @@ package com.doogies.savepups.entities;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Player;
+import com.doogies.savepups.entities.furniture.Bed;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ public class EntityManager {
 
     private Handler handler;
     private Player player;
+
+
+
     private ArrayList<Entity> entities;
     private Comparator<Entity> renderSorter = (o1, o2) -> {
         if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight()) {
@@ -27,13 +31,11 @@ public class EntityManager {
     }
 
     public void tick(){
-        for(int i = 0; i < entities.size(); i++) {
-            Entity e = entities.get(i);
+        entities.removeIf(entity -> entity.isActive() != true);
+        for(Entity e : entities) {
             e.tick();
-            if(!e.isActive()){
-                entities.remove(e);
-            }
         }
+
         entities.sort(renderSorter);
     }
 
@@ -42,11 +44,15 @@ public class EntityManager {
             e.render(g);
         }
 
+        System.out.println(entities.size());
+
     }
 
     public void addEntity(Entity e) {
         entities.add(e);
     }
+
+    public void removeEntity(Entity e) { entities.remove(e); }
 
     // Getters and setters
     public Handler getHandler() {

@@ -1,5 +1,8 @@
 package com.doogies.savepups;
 
+import com.doogies.savepups.entities.Entity;
+import com.doogies.savepups.entities.EntityManager;
+import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.input.KeyManager;
@@ -9,9 +12,11 @@ public class Handler {
 
     private Game game;
     private Room room;
+    public Player player;
 
     public Handler(Game game) {
         this.game = game;
+        player = new Player(this, 64, 64);
     }
 
     public GameCamera getGameCamera() {
@@ -42,7 +47,11 @@ public class Handler {
         return room;
     }
 
+    public Player getPlayer() { return player; }
+
     public void setRoom(Room room) {
         this.room = room;
+        player.setX(room.getSpawnX());
+        player.setY(room.getSpawnY());
     }
 }
