@@ -31,12 +31,9 @@ public class EntityManager {
     }
 
     public void tick(){
+        entities.removeIf(entity -> entity.isActive() != true);
         for(Entity e : entities) {
-            if(e.isActive()) {
-                e.tick();
-            } else {
-                entities.remove(e);
-            }
+            e.tick();
         }
 
         entities.sort(renderSorter);
@@ -46,6 +43,8 @@ public class EntityManager {
         for(Entity e : entities) {
             e.render(g);
         }
+
+        System.out.println(entities.size());
 
     }
 

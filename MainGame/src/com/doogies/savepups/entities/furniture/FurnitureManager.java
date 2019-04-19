@@ -23,6 +23,7 @@ public class FurnitureManager {
     public void insertBed(EntityManager entityManager, int spawnX, int spawnY) {
         Bed bed = new Bed(handler, spawnX, spawnY);
         entityManager.addEntity(bed);
+        System.out.println("Bed inserted");
     }
 
 }

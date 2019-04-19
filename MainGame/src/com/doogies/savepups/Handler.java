@@ -53,6 +53,5 @@ public class Handler {
         this.room = room;
         player.setX(room.getSpawnX());
         player.setY(room.getSpawnY());
-        this.room.loadFurniture();
     }
 }

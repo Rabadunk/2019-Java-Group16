@@ -58,7 +58,7 @@ public class GameState extends State {
         g.fillRect(0 ,0, handler.getWidth(), handler.getHeight());
 
         try {
-            TimeUnit.MILLISECONDS.sleep(500);
+            TimeUnit.MILLISECONDS.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

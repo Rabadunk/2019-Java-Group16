@@ -123,6 +123,7 @@ public class Room {
             furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
 
             furniture.insertFurniture(entityManager, furnitureId, furnX, furnY);
+            System.out.println("Furniture inserted");
         }
     }
 
