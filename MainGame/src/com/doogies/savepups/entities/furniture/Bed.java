@@ -1,15 +1,18 @@
-package com.doogies.savepups.entities.statics;
+package com.doogies.savepups.entities.furniture;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class Bed extends StaticEntity {
+public class Bed extends FurnitureTiles {
 
-    public Bed(Handler handler, float x, float y) {
-        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT * 2);
+    private BufferedImage bedTexture = Assets.bed;
+
+    public Bed(Handler handler, float x, float y, int ID) {
+        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT * 2, ID);
 
         bounds.x = 0;
         bounds.y = (int) (height - height/ 1.5f);
@@ -19,7 +22,6 @@ public class Bed extends StaticEntity {
 
     @Override
     public void tick() {
-
     }
 
     @Override
@@ -29,7 +31,7 @@ public class Bed extends StaticEntity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.bed,
+        g.drawImage(bedTexture,
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);

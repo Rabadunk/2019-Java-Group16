@@ -3,7 +3,8 @@ package com.doogies.savepups.house;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Player;
-import com.doogies.savepups.entities.statics.Bed;
+import com.doogies.savepups.entities.furniture.Bed;
+import com.doogies.savepups.entities.furniture.FurnitureTiles;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 
@@ -14,32 +15,33 @@ public class Room {
     private int width, height;
     private int spawnX, spawnY;
     private int ID;
+    private int furnitureId;
+    private int furnX;
+    private int furnY;
+    private String furniturePath;
     private Tile[][] tiles;
     private Handler handler;
 
-    //Entities
-    private EntityManager entityManager;
 
-    public Room(Handler handler, String path, int ID) {
+    public Room(Handler handler, String roomPath, String furniturePath, int ID) {
         this.ID = ID;
         this.handler = handler;
+        this.furniturePath = furniturePath;
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
-        entityManager = new EntityManager(handler, new Player(handler, 500,500));
-        entityManager.addEntity(new Bed(handler, 100, 150));
        // entityManager.addEntity(new Bed(handler, 100, 250));
         //entityManager.addEntity(new Bed(handler, 100, 350));
 
-        loadWorld(path);
+        loadRoom(roomPath);
 
-        entityManager.getPlayer().setX(spawnX);
-        entityManager.getPlayer().setY(spawnY);
+        handler.entityManager.getPlayer().setX(spawnX);
+        handler.entityManager.getPlayer().setY(spawnY);
     }
 
 
 
     public void tick() {
-        entityManager.tick();
+        handler.entityManager.tick();
     }
 
     public void render(Graphics g) {
@@ -48,7 +50,7 @@ public class Room {
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
 
 
-        //Render effiency. Sets values so that only tiles that can seen on screen are rendered.
+        // Set values so that only tiles that can seen on screen are rendered.
         int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
         int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
         int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
@@ -64,7 +66,7 @@ public class Room {
         }
 
         //Entities
-        entityManager.render(g);
+        handler.entityManager.render(g);
     }
 
     public Tile getTile(int x, int y) {
@@ -76,7 +78,7 @@ public class Room {
     }
 
 
-    private void loadWorld(String path) {
+    private void loadRoom(String path) {
         String file = Utils.loadFileAsString(path);
         String[] tokens = file.split(("\\s+"));
         width = Utils.parseInt(tokens[0]);
@@ -103,10 +105,28 @@ public class Room {
             }
         }
 
+        System.out.println(spawnX + " " + spawnY);
 
     }
 
-    public int getID(){return  ID;}
+    public void loadFurniture() {
+        String file = Utils.loadFileAsString(furniturePath);
+        String[] tokens = file.split(("\\s+"));
+
+        for(int i = 0; i < tokens.length; i = i + 3) {
+            furnitureId = Utils.parseInt(tokens[i]);
+            furnX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
+            furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
+
+            FurnitureTiles furniture = FurnitureTiles.furniture[furnitureId];
+
+            handler.entityManager.addEntity(furniture);
+            FurnitureTiles.furniture[furnitureId].setX(furnX);
+            FurnitureTiles.furniture[furnitureId].setY(furnY);
+        }
+    }
+
+    public int getID(){return  ID; }
 
     public int getWidth(){
         return width;
@@ -125,6 +145,6 @@ public class Room {
     }
 
     public EntityManager getEntityManager() {
-        return entityManager;
+        return handler.entityManager;
     }
 }

@@ -16,11 +16,17 @@ public class GameState extends State {
     private ArrayList<Room> rooms;
 
     private boolean worldChanged = false;
+    private Room currentRoom;
 
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
-        handler.setRoom(house.getRoom(1));
+        handler.setRoom(house.getRoom(0));
+
+        currentRoom = handler.getRoom();
+        handler.entityManager.getPlayer().setX(currentRoom.getSpawnX());
+        handler.entityManager.getPlayer().setY(currentRoom.getSpawnY());
+        handler.getRoom().loadFurniture();
     }
 
     @Override
@@ -34,10 +40,9 @@ public class GameState extends State {
         Room room = house.getRoom(player.getTileWorldID());
 
         if(player.inEntry()) {
+            currentRoom = room;
             handler.setRoom(room);
             worldChanged = true;
-            handler.getRoom().getEntityManager().getPlayer().setX(room.getSpawnX());
-            handler.getRoom().getEntityManager().getPlayer().setY(room.getSpawnY());
         }
     }
 
