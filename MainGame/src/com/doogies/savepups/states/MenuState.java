@@ -31,9 +31,10 @@ public class MenuState extends State{
     public MenuState(Handler handler){
         super(handler);
 
-        Music player = new Music("song");
+        // "Theme Crystalized", "Heaven Sings"
+        Music player = new Music(handler,"Times");
         player.run();
-        
+
 
         houseGraph = new HouseGraph(handler);
 
