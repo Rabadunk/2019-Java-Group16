@@ -53,6 +53,16 @@ public class GameState extends State {
         handler.getRoom().render(g);
     }
 
+    @Override
+    public void startMusic() {
+
+    }
+
+    @Override
+    public void stopMusic() {
+
+    }
+
     private void loadScreen(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0 ,0, handler.getWidth(), handler.getHeight());
