@@ -16,6 +16,9 @@ public class Assets {
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage playerIdleDown, playerIdleUp, playerIdleLeft, playerIdleRight;
+
+    public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right;
+    public static BufferedImage enemyIdleDown, enemyIdleUp, enemyIdleLeft, enemyIdleRight;
     public static BufferedImage attack;
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
@@ -35,6 +38,7 @@ public class Assets {
 
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
+        SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
@@ -64,6 +68,28 @@ public class Assets {
         playerIdleRight = playersheet.crop(32, 64, width, height);
 
         attack = attackSprites.crop(30, 690, 200, 130);
+
+        // Enemy Animations
+        enemy_down = new BufferedImage[2];
+        enemy_down[0] = enemysheet.crop(0,0, width, height);
+        enemy_down[1] = enemysheet.crop(64,0, width, height);
+
+        enemy_up = new BufferedImage[2];
+        enemy_up[0] = enemysheet.crop(0,96, width, height);
+        enemy_up[1] = enemysheet.crop(64,96, width, height);
+
+        enemy_right = new BufferedImage[2];
+        enemy_right[0] = enemysheet.crop(0,32, width, height);
+        enemy_right[1] = enemysheet.crop(64,32, width, height);
+
+        enemy_left = new BufferedImage[2];
+        enemy_left[0] = enemysheet.crop(0,64, width, height);
+        enemy_left[1] = enemysheet.crop(64,64, width, height);
+
+        enemyIdleDown = enemysheet.crop(32, 0, width, height);
+        enemyIdleUp = enemysheet.crop(32, 96, width, height);
+        enemyIdleLeft = enemysheet.crop(32, 32, width, height);
+        enemyIdleRight = enemysheet.crop(32, 64, width, height);
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);

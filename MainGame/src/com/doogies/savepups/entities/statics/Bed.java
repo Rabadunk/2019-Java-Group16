@@ -1,4 +1,4 @@
-package com.doogies.savepups.entities.furniture;
+package com.doogies.savepups.entities.statics;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;

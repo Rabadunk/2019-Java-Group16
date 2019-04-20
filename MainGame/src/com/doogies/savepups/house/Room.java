@@ -2,11 +2,11 @@ package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
-import com.doogies.savepups.entities.creatures.Player;
 
+import com.doogies.savepups.entities.creatures.Enemy;
 import com.doogies.savepups.items.ItemManager;
 
-import com.doogies.savepups.entities.furniture.FurnitureManager;
+import com.doogies.savepups.entities.statics.StaticsManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 import gui.GUI;
@@ -24,7 +24,7 @@ public class Room {
 
     private String furniturePath;
     private Tile[][] tiles;
-    private FurnitureManager furniture;
+    private StaticsManager furniture;
     private Handler handler;
 
     // Entities
@@ -41,7 +41,7 @@ public class Room {
         this.ID = ID;
         this.handler = handler;
         this.furniturePath = furniturePath;
-        this.furniture = new FurnitureManager(handler);
+        this.furniture = new StaticsManager(handler);
         this.entityManager = new EntityManager(handler, handler.getPlayer());
         this.itemManager = new ItemManager(handler);
         this.gui = new GUI(handler);
@@ -53,6 +53,7 @@ public class Room {
         loadFurniture();
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
+        entityManager.addEntity(new Enemy(handler, 128, 128));
     }
 
 
@@ -128,13 +129,9 @@ public class Room {
             }
         }
 
-        System.out.println(spawnX + " " + spawnY);
-
     }
 
     // Getters and setters
-
-
     public Handler getHandler() {
         return handler;
     }
@@ -162,8 +159,7 @@ public class Room {
             furnX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
             furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
 
-            furniture.insertFurniture(entityManager, furnitureId, furnX, furnY);
-            System.out.println("Furniture inserted");
+            furniture.insertStatics(entityManager, furnitureId, furnX, furnY);
         }
     }
 

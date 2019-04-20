@@ -1,18 +1,17 @@
-package com.doogies.savepups.entities.furniture;
+package com.doogies.savepups.entities.statics;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.EntityManager;
 
-public class FurnitureManager {
+public class StaticsManager {
 
     Handler handler;
 
-    public FurnitureManager(Handler handler) {
+    public StaticsManager(Handler handler) {
         this.handler = handler;
     }
 
-    public void insertFurniture(EntityManager entityManager, int ID, int x, int y) {
+    public void insertStatics(EntityManager entityManager, int ID, int x, int y) {
         switch (ID) {
             case 0:
                 insertBed(entityManager, x, y);
@@ -23,7 +22,6 @@ public class FurnitureManager {
     public void insertBed(EntityManager entityManager, int spawnX, int spawnY) {
         Bed bed = new Bed(handler, spawnX, spawnY);
         entityManager.addEntity(bed);
-        System.out.println("Bed inserted");
     }
 
 }

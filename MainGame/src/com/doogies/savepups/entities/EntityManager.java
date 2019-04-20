@@ -47,8 +47,6 @@ public class EntityManager {
             e.render(g);
         }
         player.postRender(g);
-
-        System.out.println(entities.size());
     }
 
     public void addEntity(Entity e) {

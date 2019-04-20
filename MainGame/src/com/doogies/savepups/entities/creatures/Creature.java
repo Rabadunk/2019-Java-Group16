@@ -33,15 +33,10 @@ public abstract class Creature extends Entity {
 
         xPos = (int) ((x + bounds.x + bounds.width) / Tile.TILEHEIGHT);
         yPos = (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH);
-        if(inEntry()) {
-            System.out.println("You're on an entry tile!");
-            System.out.println((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT) + " " + (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH));
-            System.out.println(getTileWorldID());
-        }
     }
 
     public void moveX() {
-        if(xMove > 0) {
+        if(xMove > 0) { // Moving right
             int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
 
             if(!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) &&
