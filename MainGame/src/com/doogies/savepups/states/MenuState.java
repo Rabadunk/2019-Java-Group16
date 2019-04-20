@@ -31,7 +31,7 @@ public class MenuState extends State{
     public MenuState(Handler handler){
         super(handler);
 
-        Music player = new Music("song");
+        Music player = new Music("menu");
         player.run();
         
 
