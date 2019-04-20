@@ -23,8 +23,6 @@ public class Tile {
     protected int worldId;
     protected boolean entry = false;
 
-
-
     public Tile(BufferedImage texture, int id) {
         this.texture = texture;
         this.id = id;
