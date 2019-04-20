@@ -1,5 +1,6 @@
 package com.doogies.savepups;
 
+import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.display.Display;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.GameCamera;
@@ -52,7 +53,9 @@ public class Game implements Runnable {
         this.height = height;
         this.keyManager = new KeyManager();
         mouseManager = new MouseManager();
+
     }
+
 
     public synchronized void start() {
         if(running) return;
