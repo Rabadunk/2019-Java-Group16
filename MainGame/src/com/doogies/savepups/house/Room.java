@@ -7,6 +7,7 @@ import com.doogies.savepups.entities.statics.Bed;
 import com.doogies.savepups.items.ItemManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
+import gui.GUI;
 
 import java.awt.*;
 
@@ -24,6 +25,9 @@ public class Room {
     // Item
     private ItemManager itemManager;
 
+    // GUI
+    private GUI gui;
+
     public Room(Handler handler, String path, int ID) {
         this.ID = ID;
         this.handler = handler;
@@ -32,6 +36,7 @@ public class Room {
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
         entityManager = new EntityManager(handler, new Player(handler, 500,500));
         itemManager = new ItemManager(handler);
+        gui = new GUI(handler);
 
         // Temp entity spawn
         entityManager.addEntity(new Bed(handler, 100, 150));
@@ -49,6 +54,8 @@ public class Room {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
+        //gui.tick();
+
     }
 
     public void render(Graphics g) {
