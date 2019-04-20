@@ -6,12 +6,14 @@ import com.doogies.savepups.entities.creatures.Player;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class EntityManager {
 
     private Handler handler;
     private Player player;
+
+
+
     private ArrayList<Entity> entities;
     private Comparator<Entity> renderSorter = (o1, o2) -> {
         //o1 has a lesser y pos than o2
@@ -31,15 +33,12 @@ public class EntityManager {
     }
 
     public void tick(){
-        Iterator<Entity> iterator = entities.iterator();
 
-        while(iterator.hasNext()) {
-            Entity e = iterator.next();
+        entities.removeIf(entity -> entity.isActive() != true);
+        for(Entity e : entities) {
             e.tick();
-            if(!e.isActive()){
-                iterator.remove();
-            }
         }
+
         entities.sort(renderSorter);
     }
 
@@ -48,11 +47,15 @@ public class EntityManager {
             e.render(g);
         }
         player.postRender(g);
+
+        System.out.println(entities.size());
     }
 
     public void addEntity(Entity e) {
         entities.add(e);
     }
+
+    public void removeEntity(Entity e) { entities.remove(e); }
 
     // Getters and setters
     public Handler getHandler() {
@@ -78,6 +81,4 @@ public class EntityManager {
     public void setEntities(ArrayList<Entity> entities) {
         this.entities = entities;
     }
-
-    //
 }
