@@ -116,6 +116,10 @@ public class Player extends Creature {
             return;
         }
 
+        if(inventory.isActive()){
+            return;
+        }
+
         Rectangle playerBounds = getCollisionBounds(0,0);
 
         attackUp = attackDown = attackLeft = attackRight = false;
@@ -170,6 +174,10 @@ public class Player extends Creature {
     }
 
     private void getInput() {
+        if(inventory.isActive()){
+            return;
+        }
+
         xMove = 0;
         yMove = 0;
 

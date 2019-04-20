@@ -34,7 +34,10 @@ public class Inventory {
         this.handler = handler;
         inventoryItems = new ArrayList<>();
 
-        addItem(Item.bedItem.createNew(5));
+        // TEMP CODE LOL
+//        addItem(Item.bedItem.createNew(10));
+//        addItem(Item.bedItem.createNew(5));
+
     }
 
     public void tick(){
@@ -45,12 +48,25 @@ public class Inventory {
             return;
         }
 
+        // Inventory inputs
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)|| handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+            selectedItem--;
+        }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)|| handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)){
+            selectedItem++;
+        }
+
+        if(selectedItem < 0){
+            selectedItem = inventoryItems.size() - 1;
+        }
+        else if(selectedItem >= inventoryItems.size()){
+            selectedItem = 0;
+        }
 //        System.out.println("Inventory: ");
 //        for(Item i : inventoryItems){
 //            System.out.println(i.getName() + " " + i.getCount());
 //        }
 
-//        System.out.println("Inventory working");
     }
 
     public void render(Graphics g){
@@ -69,11 +85,19 @@ public class Inventory {
             if(selectedItem + i < 0 || selectedItem + i >= len){
                 continue;
             }
-            Text.drawString(g, inventoryItems.get(selectedItem + i).getName(),
-                    invListCenterX, invListCenterY + i * invListSpacing, true, Color.WHITE, Assets.font28);
+            if(i == 0){
+                Text.drawString(g, "> " + inventoryItems.get(selectedItem + i).getName() + " <",
+                        invListCenterX, invListCenterY + i * invListSpacing, true, Color.YELLOW, Assets.font28);
+            }
+            else {
+                Text.drawString(g, inventoryItems.get(selectedItem + i).getName(),
+                        invListCenterX, invListCenterY + i * invListSpacing, true, Color.WHITE, Assets.font28);
+            }
         }
 
-
+        Item item = inventoryItems.get(selectedItem);
+        g.drawImage(item.getTexture(), invImageX, invImageY, invImageWidth, invImageHeight, null);
+        Text.drawString(g, Integer.toString(item.getCount()), invCountX, invCountY, true, Color.WHITE, Assets.font28);
 
     }
 
@@ -92,6 +116,13 @@ public class Inventory {
     // Getters and setters
 
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Handler getHandler() {
         return handler;
