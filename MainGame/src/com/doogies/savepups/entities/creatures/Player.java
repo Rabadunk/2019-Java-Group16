@@ -6,6 +6,7 @@ import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
+import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
 
 import java.awt.*;
@@ -27,6 +28,9 @@ public class Player extends Creature {
 
     //
     private Inventory inventory;
+
+    // Game hud
+    private GameHud gameHud;
 
     // TEMP SOUND CODE
     private AudioPlayer sound;
@@ -55,6 +59,9 @@ public class Player extends Creature {
         // Inventory
         inventory = new Inventory(handler);
 
+        // hud
+        gameHud = new GameHud(handler);
+
         // Temp audio code
         sound = new AudioPlayer();
     }
@@ -78,6 +85,9 @@ public class Player extends Creature {
         //Inventory
         inventory.tick();
 
+        // Hud
+        gameHud.tick();
+
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
             bed = !bed;
             sound.setFile("song");
@@ -87,6 +97,8 @@ public class Player extends Creature {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
             sound.stop();
         }
+
+
     }
 
     private void checkAttacks(){
@@ -242,6 +254,7 @@ public class Player extends Creature {
         }
 
         inventory.render(g);
+        gameHud.render(g);
     }
 
     // Getters and setters

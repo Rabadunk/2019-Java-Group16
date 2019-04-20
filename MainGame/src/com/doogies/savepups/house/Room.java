@@ -2,14 +2,13 @@ package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
-import com.doogies.savepups.entities.creatures.Player;
 
+import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.items.ItemManager;
 
 import com.doogies.savepups.entities.furniture.FurnitureManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
-import gui.GUI;
 
 import java.awt.*;
 
@@ -33,8 +32,8 @@ public class Room {
     // Item
     private ItemManager itemManager;
 
-    // GUI
-    private GUI gui;
+    // GameHud
+    private GameHud gameHud;
 
 
     public Room(Handler handler, String roomPath, String furniturePath, int ID) {
@@ -44,7 +43,7 @@ public class Room {
         this.furniture = new FurnitureManager(handler);
         this.entityManager = new EntityManager(handler, handler.getPlayer());
         this.itemManager = new ItemManager(handler);
-        this.gui = new GUI(handler);
+        this.gameHud = new GameHud(handler);
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
        // entityManager.addEntity(new Bed(handler, 100, 250));
@@ -60,7 +59,7 @@ public class Room {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
-        //gui.tick();
+        //com.doogies.savepups.hud.tick();
 
     }
 

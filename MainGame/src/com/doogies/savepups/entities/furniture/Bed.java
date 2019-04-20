@@ -20,6 +20,8 @@ public class Bed extends Entity {
         bounds.y = (int) (height - height/ 1.5f);
         bounds.width = width + 5;
         bounds.height = (int) (height - height / 2.0f);
+
+        setHealth(3);
     }
 
     @Override

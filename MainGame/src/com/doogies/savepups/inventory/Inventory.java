@@ -45,10 +45,10 @@ public class Inventory {
             return;
         }
 
-        System.out.println("Inventory: ");
-        for(Item i : inventoryItems){
-            System.out.println(i.getName() + " " + i.getCount());
-        }
+//        System.out.println("Inventory: ");
+//        for(Item i : inventoryItems){
+//            System.out.println(i.getName() + " " + i.getCount());
+//        }
 
 //        System.out.println("Inventory working");
     }
@@ -60,7 +60,21 @@ public class Inventory {
 
         g.drawImage(Assets.inventoryScreen, invX, invY, invWidth, invHeight, null);
 
-        Text.drawString(g, "> Bed <", invListCenterX, invListCenterY, true, Color.WHITE, Assets.font28);
+        int len = inventoryItems.size();
+        if(len == 0){
+            return;
+        }
+
+        for(int i = -5; i < 6; i++){
+            if(selectedItem + i < 0 || selectedItem + i >= len){
+                continue;
+            }
+            Text.drawString(g, inventoryItems.get(selectedItem + i).getName(),
+                    invListCenterX, invListCenterY + i * invListSpacing, true, Color.WHITE, Assets.font28);
+        }
+
+
+
     }
 
     // Inventory methods
@@ -76,6 +90,8 @@ public class Inventory {
     }
 
     // Getters and setters
+
+
 
     public Handler getHandler() {
         return handler;

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public abstract class Entity {
 
-    public static final int DEFAULT_HEALTH = 3;
+    public static final int DEFAULT_HEALTH = 10;
 
     protected float x, y;
     protected int width, height;
