@@ -5,38 +5,27 @@ import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
-import com.doogies.savepups.inventory.Inventory;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-public class Player extends Creature {
-
-    // Bed
-    private boolean bed = false;
-
-    private Rectangle attackRectangle;
-    int attackRangeSize = 40;
+public class Enemy extends Creature {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
-    private Room currentRoom;
     private boolean attackUp, attackDown, attackLeft, attackRight;
 
     // Attack timer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
-    //
-    private Inventory inventory;
-
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
     private int direction = 0;
 
-    public Player(Handler handler, float x, float y) {
+    private int radius = 64;
+
+    public Enemy(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
-        this.currentRoom = handler.getRoom();
 
         attackUp = attackDown = attackLeft = attackRight = false;
 
@@ -46,17 +35,12 @@ public class Player extends Creature {
         bounds.height = 23;
 
         //Animations
-        animationDown = new Animation(500, Assets.player_down);
-        animationUp = new Animation(500, Assets.player_up);
-        animationLeft = new Animation(500, Assets.player_left);
-        animationRight = new Animation(500, Assets.player_right);
+        animationDown = new Animation(500, Assets.enemy_down);
+        animationUp = new Animation(500, Assets.enemy_up);
+        animationLeft = new Animation(500, Assets.enemy_left);
+        animationRight = new Animation(500, Assets.enemy_right);
 
-        // Inventory
-        inventory = new Inventory(handler);
-
-        attackRectangle = new Rectangle();
-        attackRectangle.width = attackRangeSize;
-        attackRectangle.height = attackRangeSize;
+        setSpeed(0.5f);
     }
 
     @Override
@@ -68,134 +52,53 @@ public class Player extends Creature {
         animationRight.tick();
 
         //Movement
-        getInput();
+        if( colCircleBox(handler.getPlayer())) {
+            System.out.println("YOU'RE NEAR ME!!");
+        }
         move();
-        handler.getGameCamera().centerOnEntity(this);
-
-        //Attack
-        checkAttacks();
-
-        //Inventory
-        inventory.tick();
-
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
-            bed = !bed;
-        }
     }
 
-    private void checkAttacks(){
-        attackTimer += System.currentTimeMillis() - lastAttackTimer;
-        lastAttackTimer = System.currentTimeMillis();
 
-        if(attackTimer < attackCooldown){
-            return;
-        }
-
-        Rectangle playerBounds = getCollisionBounds(0,0);
-
-        attackUp = attackDown = attackLeft = attackRight = false;
-
-        // 0 = down, 1 = up, 2 = left, 3 = right
-
-        // Up
-        if(handler.getKeyManager().attack && direction == 1){
-            attackRectangle.x = playerBounds.x + playerBounds.width / 2;
-            attackRectangle.y = playerBounds.y - attackRangeSize;
-            attackUp = true;
-        }
-        // Down
-        else if(handler.getKeyManager().attack && direction == 0){
-            attackRectangle.x = playerBounds.x + playerBounds.width / 2;
-            attackRectangle.y = playerBounds.y + playerBounds.height;
-            attackDown = true;
-        }
-        // Left
-        else if(handler.getKeyManager().attack && direction == 2){
-            attackRectangle.x = playerBounds.x - attackRangeSize;
-            attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
-            attackLeft = true;
-        }
-        // Right
-        else if(handler.getKeyManager().attack && direction == 3){
-            attackRectangle.x = playerBounds.x + playerBounds.width;
-            attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
-            attackRight= true;
-        }
-        else{
-            return;
-        }
-
-        attackTimer = 0;
-
-        for(Entity e : handler.getRoom().getEntityManager().getEntities()){
-            if(e.equals(this)){
-                continue;
-            }
-            if(e.getCollisionBounds(0,0).intersects(attackRectangle)){
-                e.damage(1);
-                return;
-            }
-        }
-
-    }
 
     @Override
     public void die(){
-        System.out.println("You lose");
+        System.out.println("Enemy has been slain");
     }
 
-    private void getInput() {
-        xMove = 0;
-        yMove = 0;
+    private void getInput(Player player) {
 
-        if(handler.getKeyManager().up) {
+        if(y > player.getY() + 1) {
             yMove = -speed;
             direction = 1;
         }
 
-        if(handler.getKeyManager().down) {
+        if(y < player.getY() - 1) {
             yMove = speed;
             direction = 0;
         }
 
-        if(handler.getKeyManager().left) {
+        if(x > player.getX() + 1) {
             xMove = -speed;
             direction = 2;
         }
 
-        if(handler.getKeyManager().right) {
+        if(x < player.getX() - 1) {
             xMove = speed;
             direction = 3;
         }
-//        if(handler.getKeyManager().boop) {
-//            bed = true;
-//        }
-//        if(handler.getKeyManager().aww) {
-//            bed = false;
-//        }
     }
 
     @Override
     public void render(Graphics g) {
-        if (getCurrentAnimationFrame() == Assets.bed){
-            g.drawImage(getCurrentAnimationFrame(),
-                    (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
-                    (int)(y - handler.getGameCamera().getyOffset()),
-                    width / 2, height,null);
-        }
-        else {
+
             g.drawImage(getCurrentAnimationFrame(),
                     (int) (x - handler.getGameCamera().getxOffset()),
                     (int) (y - handler.getGameCamera().getyOffset()),
                     width, height, null);
-        }
-
 
         //DOesnt work
         // Red rectangle to represent players collision box
         g.setColor(Color.red);
-        g.fillRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()), attackRangeSize, attackRangeSize);
         g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
                 (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
                 bounds.width, bounds.height);
@@ -233,8 +136,6 @@ public class Player extends Creature {
                     width, height, null);
             //return Assets.playerIdleRight;
         }
-
-        inventory.render(g);
     }
 
     // Getters and setters
@@ -252,37 +153,24 @@ public class Player extends Creature {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
-        else if(bed){
-            return Assets.bed;
-        }
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.playerIdleDown;
+                return Assets.enemyIdleDown;
             }
             else if(direction == 1) {
-                return Assets.playerIdleUp;
+                return Assets.enemyIdleUp;
             }
             else if(direction == 2) {
-                return Assets.playerIdleLeft;
+                return Assets.enemyIdleLeft;
             }
             else if(direction == 3) {
-                return Assets.playerIdleRight;
-            }
-            else{
-                // Dunno aye
-                return Assets.bed;
+                return Assets.enemyIdleRight;
             }
         }
+        return Assets.enemyIdleDown;
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
 
     public boolean isAttackUp() {
         return attackUp;
@@ -332,5 +220,23 @@ public class Player extends Creature {
         this.direction = direction;
     }
 
+
+    public boolean colCircleBox(Player player) {
+
+        float dx = Math.max(player.getX() + handler.getGameCamera().getxOffset()
+                , Math.min(this.x + (radius / 2), player.getX()+ handler.getGameCamera().getxOffset() + player.getWidth()));
+        float dy = Math.max(player.getY() + handler.getGameCamera().getyOffset()
+                , Math.min(this.y + (radius / 2), player.getY()+ handler.getGameCamera().getyOffset() + player.getHeight()));
+
+        dx = this.x + (radius / 2) - dx;
+        dy = this.y + (radius / 2) - dy;
+
+
+        if(Math.sqrt(dx * dx + dy * dy) < radius / 2) {
+            return true;
+        }
+
+        return false;
+    }
 
 }

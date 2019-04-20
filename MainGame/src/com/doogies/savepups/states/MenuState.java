@@ -5,14 +5,12 @@ import com.doogies.savepups.audio.Music;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
 import com.doogies.savepups.house.HouseGraph;
-import com.doogies.savepups.house.Room;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
 import com.doogies.savepups.ui.UIObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 
