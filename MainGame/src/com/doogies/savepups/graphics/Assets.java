@@ -8,7 +8,7 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
-    public static Font font28, fontTitle;
+    public static Font font28, fontTitle, fontHud;
 
     //public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
 
@@ -32,8 +32,9 @@ public class Assets {
     private static final int tileWidth = Tile.TILEHEIGHT;
 
     public static void init() {
-        font28 = FontLoader.loadFont("res/fonts/slkscr.ttf", 28);
-        fontTitle = FontLoader.loadFont("res/fonts/Pacifico.ttf", 76);
+        font28 = FontLoader.loadFont("res/fonts/slkscr/slkscr.ttf", 28);
+        fontTitle = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 76);
+        fontHud = FontLoader.loadFont("res/fonts/ArmWrestler/ArmWrestler.ttf", 28);
 
 
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
