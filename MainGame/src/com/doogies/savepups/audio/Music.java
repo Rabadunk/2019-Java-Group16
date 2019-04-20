@@ -28,7 +28,7 @@ public class Music implements Runnable{
             Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(ais);
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-10);
+            gainControl.setValue(-30);
             clip.start();
         }
         catch (Exception e){

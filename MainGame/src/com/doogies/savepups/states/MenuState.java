@@ -1,6 +1,7 @@
 package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.audio.Music;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
@@ -21,6 +22,8 @@ public class MenuState extends State{
     private int lastIndex = 0;
     private boolean hasBeenPressed = false;
 
+    public AudioPlayer menuMusic;
+
     private long lastTime, timer;
     private int index;
 
@@ -29,9 +32,12 @@ public class MenuState extends State{
     public MenuState(Handler handler){
         super(handler);
 
-        Music player = new Music("menu");
-        player.run();
-        
+//        Music player = new Music("menu");
+//        player.run();
+
+        menuMusic = new AudioPlayer();
+        menuMusic.setFile("menu");
+        //menuMusic.play();
 
         houseGraph = new HouseGraph(handler);
 
@@ -83,6 +89,7 @@ public class MenuState extends State{
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
         checkInputs();
+
     }
 
     @Override
@@ -96,6 +103,16 @@ public class MenuState extends State{
 
         // Title
         Text.drawString(g, "Save the Puppies!", 550, 75, true, Color.WHITE, Assets.fontTitle);
+    }
+
+    @Override
+    public void startMusic() {
+        menuMusic.play();
+    }
+
+    @Override
+    public void stopMusic() {
+        menuMusic.stop();
     }
 
     public void getInput() {
