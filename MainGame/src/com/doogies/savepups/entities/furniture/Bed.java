@@ -3,6 +3,7 @@ package com.doogies.savepups.entities.furniture;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.items.Item;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
@@ -28,6 +29,7 @@ public class Bed extends Entity {
     @Override
     public void die() {
         System.out.println("???");
+        handler.getRoom().getItemManager().addItem(Item.bedItem.createNew((int) x, (int) y));
     }
 
     @Override

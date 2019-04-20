@@ -2,7 +2,6 @@ package com.doogies.savepups.entities;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Player;
-import com.doogies.savepups.entities.furniture.Bed;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,9 +16,12 @@ public class EntityManager {
 
     private ArrayList<Entity> entities;
     private Comparator<Entity> renderSorter = (o1, o2) -> {
-        if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight()) {
+        //o1 has a lesser y pos than o2
+        //Should be above o2 and should be rendered first
+        if(o1.getY() + o1.getHeight() < o2.getY() + o2.getHeight()) { //Checking bottom of collision box
             return -1;
         }
+        //o1 should be rendered after o2
         return 1;
     };
 
@@ -31,6 +33,7 @@ public class EntityManager {
     }
 
     public void tick(){
+
         entities.removeIf(entity -> entity.isActive() != true);
         for(Entity e : entities) {
             e.tick();
@@ -43,9 +46,9 @@ public class EntityManager {
         for(Entity e : entities) {
             e.render(g);
         }
+        player.postRender(g);
 
         System.out.println(entities.size());
-
     }
 
     public void addEntity(Entity e) {
@@ -78,6 +81,4 @@ public class EntityManager {
     public void setEntities(ArrayList<Entity> entities) {
         this.entities = entities;
     }
-
-    //
 }

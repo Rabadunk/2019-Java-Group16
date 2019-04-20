@@ -5,8 +5,10 @@ import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
+import com.doogies.savepups.inventory.Inventory;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
@@ -22,7 +24,8 @@ public class Player extends Creature {
     //Atacck timmer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
-
+    //
+    private Inventory inventory;
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -44,6 +47,9 @@ public class Player extends Creature {
         animationUp = new Animation(500, Assets.player_up);
         animationLeft = new Animation(500, Assets.player_left);
         animationRight = new Animation(500, Assets.player_right);
+
+        // Inventory
+        inventory = new Inventory(handler);
     }
 
     @Override
@@ -61,6 +67,13 @@ public class Player extends Creature {
 
         //Attack
         checkAttacks();
+
+        //Inventory
+        inventory.tick();
+
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
+            bed = !bed;
+        }
     }
 
     private void checkAttacks(){
@@ -150,21 +163,21 @@ public class Player extends Creature {
             xMove = speed;
             direction = 3;
         }
-        if(handler.getKeyManager().boop) {
-            bed = true;
-        }
-        if(handler.getKeyManager().aww) {
-            bed = false;
-        }
+//        if(handler.getKeyManager().boop) {
+//            bed = true;
+//        }
+//        if(handler.getKeyManager().aww) {
+//            bed = false;
+//        }
     }
 
     @Override
     public void render(Graphics g) {
         if (getCurrentAnimationFrame() == Assets.bed){
             g.drawImage(getCurrentAnimationFrame(),
-                    (int)(x - handler.getGameCamera().getxOffset()),
-                    (int)(y - handler.getGameCamera().getyOffset() + handler.getGameCamera().getyOffset() / 2),
-                    width, height * 2,null);
+                    (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
+                    (int)(y - handler.getGameCamera().getyOffset()),
+                    width / 2, height,null);
         }
         else {
             g.drawImage(getCurrentAnimationFrame(),
@@ -172,6 +185,19 @@ public class Player extends Creature {
                     (int) (y - handler.getGameCamera().getyOffset()),
                     width, height, null);
         }
+
+
+        //DOesnt work
+        // Red rectangle to represent players collision box
+        g.setColor(Color.red);
+        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+                bounds.width, bounds.height);
+    }
+
+    public void postRender(Graphics g){
+
+        //Attack animations
 
         if(attackUp) {
             g.drawImage(Assets.attack,
@@ -202,13 +228,10 @@ public class Player extends Creature {
             //return Assets.playerIdleRight;
         }
 
-        //DOesnt work
-        // Red rectangle to represent players collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
+        inventory.render(g);
     }
+
+    // Getters and setters
 
     private BufferedImage getCurrentAnimationFrame(){
         if(xMove <0){
@@ -247,7 +270,13 @@ public class Player extends Creature {
         }
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     public boolean isAttackUp() {
         return attackUp;
@@ -296,4 +325,6 @@ public class Player extends Creature {
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
+
 }

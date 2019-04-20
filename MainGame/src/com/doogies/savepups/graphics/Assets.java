@@ -1,11 +1,14 @@
 package com.doogies.savepups.graphics;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import com.doogies.savepups.tiles.Tile;
 
 public class Assets {
 
     private static final int width = 32, height = 32;
+
+    public static Font font28, fontTitle;
 
     //public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
 
@@ -19,17 +22,24 @@ public class Assets {
 
     // ui
     public static BufferedImage[] playButton, scoreButton, quitButton;
+    public static BufferedImage inventoryScreen;
 
     // variables to make tileset calcs cleaner
     private static final int tileHeight = Tile.TILEHEIGHT;
     private static final int tileWidth = Tile.TILEHEIGHT;
 
     public static void init() {
+        font28 = FontLoader.loadFont("res/fonts/slkscr.ttf", 28);
+        fontTitle = FontLoader.loadFont("res/fonts/Pacifico.ttf", 76);
+
+
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
+
+        inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
         //Player animations
         player_down = new BufferedImage[2];

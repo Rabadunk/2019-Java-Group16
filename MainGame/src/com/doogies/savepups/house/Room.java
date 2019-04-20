@@ -3,9 +3,13 @@ package com.doogies.savepups.house;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Player;
+
+import com.doogies.savepups.items.ItemManager;
+
 import com.doogies.savepups.entities.furniture.FurnitureManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
+import gui.GUI;
 
 import java.awt.*;
 
@@ -22,7 +26,15 @@ public class Room {
     private Tile[][] tiles;
     private FurnitureManager furniture;
     private Handler handler;
+
+    // Entities
     private EntityManager entityManager;
+
+    // Item
+    private ItemManager itemManager;
+
+    // GUI
+    private GUI gui;
 
 
     public Room(Handler handler, String roomPath, String furniturePath, int ID) {
@@ -31,13 +43,14 @@ public class Room {
         this.furniturePath = furniturePath;
         this.furniture = new FurnitureManager(handler);
         this.entityManager = new EntityManager(handler, handler.getPlayer());
+        this.itemManager = new ItemManager(handler);
+        this.gui = new GUI(handler);
         //Code for correct map pos from prev gamestate function
         // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
        // entityManager.addEntity(new Bed(handler, 100, 250));
         //entityManager.addEntity(new Bed(handler, 100, 350));
         loadRoom(roomPath);
         loadFurniture();
-
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
     }
@@ -45,7 +58,10 @@ public class Room {
 
 
     public void tick() {
+        itemManager.tick();
         entityManager.tick();
+        //gui.tick();
+
     }
 
     public void render(Graphics g) {
@@ -69,7 +85,10 @@ public class Room {
             }
         }
 
-        //Entities
+        // Item
+        itemManager.render(g);
+
+        // Entities
         entityManager.render(g);
     }
 
@@ -113,6 +132,27 @@ public class Room {
 
     }
 
+    // Getters and setters
+
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+
+    public ItemManager getItemManager() {
+        return itemManager;
+    }
+
+    public void setItemManager(ItemManager itemManager) {
+        this.itemManager = itemManager;
+    }
+
+    public int getID(){return  ID;}
+
     public void loadFurniture() {
         String file = Utils.loadFileAsString(furniturePath);
         String[] tokens = file.split(("\\s+"));
@@ -131,7 +171,6 @@ public class Room {
         return entityManager;
     }
 
-    public int getID(){return  ID; }
 
     public int getWidth(){
         return width;

@@ -1,7 +1,11 @@
 package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.Music;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.Text;
+import com.doogies.savepups.house.HouseGraph;
+import com.doogies.savepups.house.Room;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
 import com.doogies.savepups.ui.UIObject;
@@ -22,13 +26,22 @@ public class MenuState extends State{
     private long lastTime, timer;
     private int index;
 
+    private HouseGraph houseGraph;
+
     public MenuState(Handler handler){
         super(handler);
+
+        Music player = new Music("menu");
+        player.run();
+        
+
+        houseGraph = new HouseGraph(handler);
 
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-        uiManager.addObject( new UIImageButton(100, 100, 300, 150, Assets.playButton, () -> {
+
+        uiManager.addObject( new UIImageButton(100, 150, 300, 150, Assets.playButton, () -> {
             if (handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
             }
@@ -38,17 +51,19 @@ public class MenuState extends State{
 
         }));
 
-        uiManager.addObject( new UIImageButton(100, 300, 300, 150, Assets.scoreButton, () -> {
+        uiManager.addObject( new UIImageButton(100, 350, 300, 150, Assets.scoreButton, () -> {
             if(handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
+                handler.setRoom(houseGraph.getRoom(2));
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
             State.setState(handler.getGame().gameState);
+            handler.setRoom(houseGraph.getRoom(2));
 
         }));
 
-        uiManager.addObject( new UIImageButton(100, 500, 300, 150, Assets.quitButton, () -> {
+        uiManager.addObject( new UIImageButton(100, 550, 300, 150, Assets.quitButton, () -> {
             if(handler.getKeyManager().enter) {
                 closeGame();
             }
@@ -80,6 +95,9 @@ public class MenuState extends State{
         g.setColor(Color.RED);
         g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 10, 10);
         uiManager.render(g);
+
+        // Title
+        Text.drawString(g, "Save the Puppies!", 550, 75, true, Color.WHITE, Assets.fontTitle);
     }
 
     public void getInput() {
