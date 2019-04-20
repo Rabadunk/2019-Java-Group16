@@ -52,9 +52,9 @@ public class Enemy extends Creature {
         animationRight.tick();
 
         //Movement
-        if( colCircleBox(handler.getPlayer())) {
-            System.out.println("YOU'RE NEAR ME!!");
-        }
+//        if( colCircleBox(handler.getPlayer())) {
+//            System.out.println("YOU'RE NEAR ME!!");
+//        }
         move();
     }
 

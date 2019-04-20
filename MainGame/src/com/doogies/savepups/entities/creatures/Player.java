@@ -68,7 +68,7 @@ public class Player extends Creature {
         attackRectangle = new Rectangle();
         attackRectangle.width = attackRangeSize;
         attackRectangle.height = attackRangeSize;
-        
+
         // Temp audio code
         sound = new AudioPlayer();
     }
