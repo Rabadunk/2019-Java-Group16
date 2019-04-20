@@ -34,7 +34,7 @@ public class Item {
         this.id = id;
         count = 1;
 
-        bounds = new Rectangle(x, y, ITEMWIDTH / 2, ITEMHEIGHT / 2);
+        bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
         items[id] = this;
     }
@@ -58,10 +58,10 @@ public class Item {
         g.drawImage(texture, x, y, ITEMWIDTH, ITEMHEIGHT, null);
 
         // Red rectangle to represent players collision box
-        g.setColor(Color.red);
-        g.fillRect((int)(x),
-                (int)(y),
-               bounds.width, bounds.height);
+//        g.setColor(Color.red);
+//        g.fillRect((int)(x),
+//                (int)(y),
+//               bounds.width, bounds.height);
 
     }
 
