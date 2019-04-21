@@ -97,13 +97,13 @@ public class Player extends Creature {
 
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
             bed = !bed;
-//            sound.setFile("song");
-//            sound.play();
+            sound.setFile("song");
+            sound.play();
         }
 
-//        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
-//            sound.stop();
-//        }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
+            sound.stop();
+        }
 
 
     }
@@ -113,10 +113,6 @@ public class Player extends Creature {
         lastAttackTimer = System.currentTimeMillis();
 
         if(attackTimer < attackCooldown){
-            return;
-        }
-
-        if(inventory.isActive()){
             return;
         }
 
@@ -174,10 +170,6 @@ public class Player extends Creature {
     }
 
     private void getInput() {
-        if(inventory.isActive()){
-            return;
-        }
-
         xMove = 0;
         yMove = 0;
 
@@ -235,41 +227,34 @@ public class Player extends Creature {
     }
 
     public void postRender(Graphics g){
-
         //Attack animations
-
         if(attackUp) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
-                    width, height, null);
+            renderAttack(g,0, -1);
             //return Assets.playerIdleDown;
         }
         else if(attackDown) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
-                    width, height, null);
+            renderAttack(g,0, 1);
             //return Assets.playerIdleUp;
         }
         else if(attackLeft) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
+            renderAttack(g,-1, 0);
             //return Assets.playerIdleLeft;
         }
         else if(attackRight) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
+            renderAttack(g,1, 0);
             //return Assets.playerIdleRight;
-        }
+        }        //Attack animations
 
         inventory.render(g);
         gameHud.render(g);
     }
+
+    private void renderAttack(Graphics g, int dirX, int dirY) {
+        int attackX = (int) (x - handler.getGameCamera().getxOffset()) + (width / 2 + 20) * dirX;
+        int attackY = (int) (y - handler.getGameCamera().getyOffset()) + (height / 2 + 20) * dirY;
+        g.drawImage(Assets.attack, attackX, attackY, width, height, null);
+    }
+
 
     // Getters and setters
 

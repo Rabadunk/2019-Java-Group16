@@ -98,7 +98,7 @@ public class Enemy extends Creature {
 
         float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
 
-        if((Math.sqrt(dx*dx + dy * dy) < 0.5 * Tile.TILEWIDTH)) {
+        if((Math.sqrt(dx*dx + dy * dy) < 40)) {
             dontMove();
         }
 
