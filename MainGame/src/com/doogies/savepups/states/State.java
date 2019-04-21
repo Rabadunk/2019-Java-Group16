@@ -34,6 +34,7 @@ public abstract class State {
             handler.getGame().victoryState.startMusic();
         }
         currentState = state;
+
     }
 
     public static State getState() {

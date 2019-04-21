@@ -7,6 +7,7 @@ import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
 import com.doogies.savepups.states.*;
+import com.doogies.savepups.utils.Timer;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -24,6 +25,8 @@ public class Game implements Runnable {
     private long timer = 0;
     private int ticks = 0;
     private double delta = 0;
+
+    private Timer timeTaken;
 
     // Views
     private BufferStrategy bs;
@@ -68,6 +71,7 @@ public class Game implements Runnable {
         DisplayInit();
         GameInit();
         StateInit();
+        timeTaken = new Timer(handler);
     }
 
     private void DisplayInit() {
