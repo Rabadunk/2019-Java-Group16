@@ -219,8 +219,8 @@ public class Player extends Creature {
         //DOesnt work
         // Red rectangle to represent players collision box
         g.setColor(Color.red);
-        g.fillRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()), attackRangeSize, attackRangeSize);
+//        g.fillRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
+//                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()), attackRangeSize, attackRangeSize);
         g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
                 (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
                 bounds.width, bounds.height);

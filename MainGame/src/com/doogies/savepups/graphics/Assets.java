@@ -88,8 +88,8 @@ public class Assets {
 
         enemyIdleDown = enemysheet.crop(32, 0, width, height);
         enemyIdleUp = enemysheet.crop(32, 96, width, height);
-        enemyIdleLeft = enemysheet.crop(32, 32, width, height);
-        enemyIdleRight = enemysheet.crop(32, 64, width, height);
+        enemyIdleRight = enemysheet.crop(32, 32, width, height);
+        enemyIdleLeft = enemysheet.crop(32, 64, width, height);
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);

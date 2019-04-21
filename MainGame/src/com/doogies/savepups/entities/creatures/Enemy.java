@@ -1,10 +1,9 @@
 package com.doogies.savepups.entities.creatures;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.house.Room;
+import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,7 +21,7 @@ public class Enemy extends Creature {
     // 0 = down, 1 = up, 2 = left, 3 = right
     private int direction = 0;
 
-    private int radius = 64;
+    private int diameter =  150;
 
     public Enemy(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
@@ -41,6 +40,7 @@ public class Enemy extends Creature {
         animationRight = new Animation(500, Assets.enemy_right);
 
         setSpeed(0.5f);
+        setHealth(4);
     }
 
     @Override
@@ -53,9 +53,16 @@ public class Enemy extends Creature {
 
         //Movement
         if( colCircleBox(handler.getPlayer())) {
-            System.out.println("YOU'RE NEAR ME!!");
+            getInput(handler.getPlayer());
+            move();
+        } else {
+            dontMove();
         }
-        move();
+    }
+
+    public void dontMove() {
+        yMove = 0;
+        xMove = 0;
     }
 
 
@@ -86,7 +93,18 @@ public class Enemy extends Creature {
             xMove = speed;
             direction = 3;
         }
+
+        float dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
+
+        float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
+
+        if((Math.sqrt(dx*dx + dy * dy) < 0.5 * Tile.TILEWIDTH)) {
+            dontMove();
+        }
+
     }
+
+
 
     @Override
     public void render(Graphics g) {
@@ -98,10 +116,32 @@ public class Enemy extends Creature {
 
         //DOesnt work
         // Red rectangle to represent players collision box
+//        g.setColor(Color.red);
+//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+//                bounds.width, bounds.height);
+
+        // Oval around enemy
+        g.setColor(Color.blue);
+        g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
+                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
+
+        // Rect around player
         g.setColor(Color.red);
-        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
+        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight());
+    }
+
+    public boolean colCircleBox(Player player) {
+
+        float dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
+
+        float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
+
+        if(Math.sqrt(dx * dx + dy * dy) < (diameter /2 + player.getWidth() /2)) {
+            return true;
+        }
+
+        return false;
     }
 
     public void postRender(Graphics g){
@@ -219,24 +259,4 @@ public class Enemy extends Creature {
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
-
-    public boolean colCircleBox(Player player) {
-
-        float dx = Math.max(player.getX() + handler.getGameCamera().getxOffset()
-                , Math.min(this.x + (radius / 2), player.getX()+ handler.getGameCamera().getxOffset() + player.getWidth()));
-        float dy = Math.max(player.getY() + handler.getGameCamera().getyOffset()
-                , Math.min(this.y + (radius / 2), player.getY()+ handler.getGameCamera().getyOffset() + player.getHeight()));
-
-        dx = this.x + (radius / 2) - dx;
-        dy = this.y + (radius / 2) - dy;
-
-
-        if(Math.sqrt(dx * dx + dy * dy) < radius / 2) {
-            return true;
-        }
-
-        return false;
-    }
-
 }
