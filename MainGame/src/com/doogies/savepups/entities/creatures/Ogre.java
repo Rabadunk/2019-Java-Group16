@@ -8,7 +8,7 @@ import com.doogies.savepups.tiles.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Enemy extends Creature {
+public class Ogre extends Creature {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
@@ -23,7 +23,7 @@ public class Enemy extends Creature {
 
     private int diameter =  200;
 
-    public Enemy(Handler handler, float x, float y) {
+    public Ogre(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
         attackUp = attackDown = attackLeft = attackRight = false;
@@ -71,7 +71,7 @@ public class Enemy extends Creature {
 
     @Override
     public void die(){
-        System.out.println("Enemy has been slain");
+        System.out.println("Ogre has been slain");
     }
 
     private void getInput(Player player) {

@@ -81,7 +81,7 @@ public class Assets {
 
         attack = attackSprites.crop(30, 690, 200, 130);
 
-        // Enemy Animations
+        // Ogre Animations
         enemy_down = new BufferedImage[2];
         enemy_down[0] = enemysheet.crop(0,0, width, height);
         enemy_down[1] = enemysheet.crop(64,0, width, height);

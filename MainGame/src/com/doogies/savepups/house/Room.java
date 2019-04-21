@@ -3,8 +3,8 @@ package com.doogies.savepups.house;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 
+import com.doogies.savepups.entities.creatures.Ogre;
 import com.doogies.savepups.hud.GameHud;
-import com.doogies.savepups.entities.creatures.Enemy;
 import com.doogies.savepups.items.ItemManager;
 
 import com.doogies.savepups.entities.statics.StaticsManager;
@@ -49,7 +49,7 @@ public class Room {
         loadFurniture();
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        entityManager.addEntity(new Enemy(handler, 128, 128));
+        entityManager.addEntity(new Ogre(handler, 128, 128));
     }
 
 
