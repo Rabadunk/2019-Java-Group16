@@ -58,26 +58,34 @@ public class Assets {
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
         // Player animations
-        player_down = new BufferedImage[2];
-        player_down[0] = playersheet.crop(0,0, width, height);
-        player_down[1] = playersheet.crop(64,0, width, height);
+        int halfWidth = width/2;
+        int halfHeight = height;
+        player_right = new BufferedImage[9];
+        player_right[0] = playersheet.crop(0,0, halfWidth, height);
+        player_right[1] = playersheet.crop(halfWidth,0, halfWidth, height);
+        player_right[2] = playersheet.crop(2*halfWidth,0, halfWidth, height);
+        player_right[3] = playersheet.crop(3*halfWidth,0, halfWidth, height);
+        player_right[4] = playersheet.crop(4*halfWidth,0, halfWidth, height);
+        player_right[5] = playersheet.crop(5*halfWidth,0, halfWidth, height);
+        player_right[6] = playersheet.crop(6*halfWidth,0, halfWidth, height);
+        player_right[7] = playersheet.crop(7*halfWidth,0, halfWidth, height);
+        player_right[8] = playersheet.crop(8*halfWidth,0, halfWidth, height);
 
-        player_up = new BufferedImage[2];
-        player_up[0] = playersheet.crop(0,96, width, height);
-        player_up[1] = playersheet.crop(64,96, width, height);
+        player_left = new BufferedImage[9];
+        player_left[0] = playersheet.crop(0,halfHeight, halfWidth, height);
+        player_left[1] = playersheet.crop(halfWidth,halfHeight, halfWidth, height);
+        player_left[2] = playersheet.crop(2*halfWidth,halfHeight, halfWidth, height);
+        player_left[3] = playersheet.crop(3*halfWidth,halfHeight, halfWidth, height);
+        player_left[4] = playersheet.crop(4*halfWidth,halfHeight, halfWidth, height);
+        player_left[5] = playersheet.crop(5*halfWidth,halfHeight, halfWidth, height);
+        player_left[6] = playersheet.crop(6*halfWidth,halfHeight, halfWidth, height);
+        player_left[7] = playersheet.crop(7*halfWidth,halfHeight, halfWidth, height);
+        player_left[8] = playersheet.crop(8*halfWidth,halfHeight, halfWidth, height);
 
-        player_left = new BufferedImage[2];
-        player_left[0] = playersheet.crop(0,32, width, height);
-        player_left[1] = playersheet.crop(64,32, width, height);
 
-        player_right = new BufferedImage[2];
-        player_right[0] = playersheet.crop(0,64, width, height);
-        player_right[1] = playersheet.crop(64,64, width, height);
 
-        playerIdleDown = playersheet.crop(32, 0, width, height);
-        playerIdleUp = playersheet.crop(32, 96, width, height);
-        playerIdleLeft = playersheet.crop(32, 32, width, height);
-        playerIdleRight = playersheet.crop(32, 64, width, height);
+        playerIdleLeft = player_left[8];
+        playerIdleRight = player_right[0];
 
         attack = attackSprites.crop(30, 690, 200, 130);
 

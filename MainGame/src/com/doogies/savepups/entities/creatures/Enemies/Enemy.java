@@ -86,9 +86,9 @@ public abstract class Enemy extends Creature {
 
     protected boolean colCircleBox(Player player) {
 
-        float dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
+        float dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 4);
 
-        float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
+        float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() + 32 - handler.getGameCamera().getyOffset() + player.getHeight() / 4);
 
         if(Math.sqrt(dx * dx + dy * dy) < (diameter /2 + player.getWidth() /2)) {
             return true;

@@ -8,7 +8,7 @@ import com.doogies.savepups.graphics.Assets;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Ogre extends Enemy {
+public class Screamer extends Enemy {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
@@ -21,7 +21,7 @@ public class Ogre extends Enemy {
     // 0 = down, 1 = up, 2 = left, 3 = right
 
 
-    public Ogre(Handler handler, float x, float y) {
+    public Screamer(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
         attackUp = attackDown = attackLeft = attackRight = false;
@@ -60,7 +60,7 @@ public class Ogre extends Enemy {
             move();
         } else {
             count ++;
-            if(count > 50) {
+            if(count > 30) {
                 autoMoveDecider();
             }
             move();
@@ -95,7 +95,7 @@ public class Ogre extends Enemy {
 
         // Rect around player
         g.setColor(Color.red);
-        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() + 32 - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight() / 2);
+        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight());
     }
 
 

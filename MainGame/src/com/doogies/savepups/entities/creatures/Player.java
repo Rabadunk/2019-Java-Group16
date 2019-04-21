@@ -44,7 +44,7 @@ public class Player extends Creature {
     private int direction = 0;
 
     public Player(Handler handler, float x, float y) {
-        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+        super(handler, x, y, 32, 64);
         this.currentRoom = handler.getRoom();
         setupAttack();
         setupBounds();
@@ -60,18 +60,18 @@ public class Player extends Creature {
     }
 
     public void setupBounds() {
-        bounds.x = 24;
-        bounds.y = 40;
-        bounds.width = 16;
-        bounds.height = 23;
+        bounds.x = 0;
+        bounds.y = 32;
+        bounds.width = 32;
+        bounds.height = 32;
     }
 
     public void loadSprites() {
         //Animations
-        animationDown = new Animation(500, Assets.player_down);
-        animationUp = new Animation(500, Assets.player_up);
-        animationLeft = new Animation(500, Assets.player_left);
-        animationRight = new Animation(500, Assets.player_right);
+        animationDown = new Animation(90, Assets.player_left);
+        animationUp = new Animation(90, Assets.player_right);
+        animationLeft = new Animation(80, Assets.player_left);
+        animationRight = new Animation(80, Assets.player_right);
     }
 
     public void loadGameUtils() {
@@ -231,7 +231,7 @@ public class Player extends Creature {
             g.drawImage(getCurrentAnimationFrame(),
                     (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
                     (int)(y - handler.getGameCamera().getyOffset()),
-                    width / 2, height,null);
+                    width / 2, height/2,null);
         }
         else {
             g.drawImage(getCurrentAnimationFrame(),
@@ -246,9 +246,9 @@ public class Player extends Creature {
         g.setColor(Color.red);
 //        g.fillRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
 //                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()), attackRangeSize, attackRangeSize);
-        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
+//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+//                bounds.width, bounds.height);
     }
 
     public void postRender(Graphics g){
@@ -303,10 +303,10 @@ public class Player extends Creature {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.playerIdleDown;
+                return Assets.playerIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.playerIdleUp;
+                return Assets.playerIdleRight;
             }
             else if(direction == 2) {
                 return Assets.playerIdleLeft;
