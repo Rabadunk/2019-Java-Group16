@@ -8,6 +8,7 @@ import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
+import com.doogies.savepups.states.State;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -175,8 +176,18 @@ public class Player extends Creature {
 
     }
 
+    public void testDie(){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)){
+            this.health = 0;
+            die();
+            System.out.println("Test");
+        }
+
+    }
+
     @Override
     public void die(){
+        State.setState(handler.getGame().gameOverState);
         System.out.println("You lose");
     }
 
@@ -256,8 +267,9 @@ public class Player extends Creature {
             //return Assets.playerIdleRight;
         }        //Attack animations
 
-        inventory.render(g);
         gameHud.render(g);
+        inventory.render(g);
+
     }
 
     private void renderAttack(Graphics g, int dirX, int dirY) {

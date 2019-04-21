@@ -21,26 +21,26 @@ public class Enemy extends Creature {
     // 0 = down, 1 = up, 2 = left, 3 = right
     private int direction = 0;
 
-    private int diameter =  150;
+    private int diameter =  200;
 
     public Enemy(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
         attackUp = attackDown = attackLeft = attackRight = false;
 
-        bounds.x = 24;
-        bounds.y = 40;
-        bounds.width = 16;
-        bounds.height = 23;
+        bounds.x = 16;
+        bounds.y = 20;
+        bounds.width = 32;
+        bounds.height = 43;
 
         //Animations
-        animationDown = new Animation(500, Assets.enemy_down);
-        animationUp = new Animation(500, Assets.enemy_up);
-        animationLeft = new Animation(500, Assets.enemy_left);
-        animationRight = new Animation(500, Assets.enemy_right);
+        animationDown = new Animation(64, Assets.ogre_left);
+        animationUp = new Animation(64, Assets.ogre_right);
+        animationLeft = new Animation(64, Assets.ogre_left);
+        animationRight = new Animation(64, Assets.ogre_right);
 
-        setSpeed(0.5f);
-        setHealth(4);
+        setSpeed(1f);
+        setHealth(2);
     }
 
     @Override
@@ -53,9 +53,11 @@ public class Enemy extends Creature {
 
         //Movement
         if( colCircleBox(handler.getPlayer())) {
+            diameter = 250;
             getInput(handler.getPlayer());
             move();
         } else {
+            diameter = 200;
             dontMove();
         }
     }
@@ -196,16 +198,16 @@ public class Enemy extends Creature {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.enemyIdleDown;
+                return Assets.ogreIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.enemyIdleUp;
+                return Assets.ogreIdleRight;
             }
             else if(direction == 2) {
-                return Assets.enemyIdleLeft;
+                return Assets.ogreIdleRight;
             }
             else if(direction == 3) {
-                return Assets.enemyIdleRight;
+                return Assets.ogreIdleLeft;
             }
         }
         return Assets.enemyIdleDown;

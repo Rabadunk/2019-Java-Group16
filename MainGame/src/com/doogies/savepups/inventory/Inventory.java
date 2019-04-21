@@ -113,6 +113,15 @@ public class Inventory {
         inventoryItems.add(item);
     }
 
+    public int getItem(String name){
+        for(Item i: inventoryItems){
+            if(i.getName() == name){
+                return i.getCount();
+            }
+        }
+        return 0;
+    }
+
     // Getters and setters
 
 
