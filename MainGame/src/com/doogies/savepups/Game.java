@@ -6,6 +6,7 @@ import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
+import com.doogies.savepups.states.GameOverState;
 import com.doogies.savepups.states.GameState;
 import com.doogies.savepups.states.MenuState;
 import com.doogies.savepups.states.State;
@@ -36,6 +37,7 @@ public class Game implements Runnable {
     //States
     public State gameState;
     public State menuState;
+    public State gameOverState;
 
     // Input
     private KeyManager keyManager;
@@ -88,6 +90,7 @@ public class Game implements Runnable {
     private void StateInit() {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
+        gameOverState = new GameOverState(handler);
         State.setState(menuState);
     }
 
