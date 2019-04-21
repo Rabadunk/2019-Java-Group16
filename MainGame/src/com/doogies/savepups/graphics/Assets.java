@@ -23,6 +23,8 @@ public class Assets {
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
+    public static BufferedImage sword;
+
     // ui
     public static BufferedImage[] playButton, scoreButton, quitButton;
     public static BufferedImage inventoryScreen;
@@ -30,6 +32,8 @@ public class Assets {
     // variables to make tileset calcs cleaner
     private static final int tileHeight = Tile.TILEHEIGHT;
     private static final int tileWidth = Tile.TILEHEIGHT;
+
+    //
 
     public static void init() {
         font28 = FontLoader.loadFont("res/fonts/slkscr/slkscr.ttf", 28);
@@ -43,6 +47,7 @@ public class Assets {
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
+        SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
@@ -102,9 +107,9 @@ public class Assets {
         // Crops the texture from the spritesheet. Tiles are always 64x64 pixels in this sprite sheet
         // So we can use an row/column * 64 to quickly obtain the starting position of the sprite.
         pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
-        brickWall= tileSpritesheet.crop((2 - 1)* tileWidth,(1 - 1)* tileHeight, tileWidth, tileHeight);
-        doorwayWall= tileSpritesheet.crop((3 - 1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
-        damagedFloor= tileSpritesheet.crop((1 - 1) * tileWidth,(2 - 1)* tileHeight, tileWidth, tileHeight);
+        brickWall = tileSpritesheet.crop((2 - 1)* tileWidth,(1 - 1)* tileHeight, tileWidth, tileHeight);
+        doorwayWall = tileSpritesheet.crop((3 - 1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
+        damagedFloor = tileSpritesheet.crop((1 - 1) * tileWidth,(2 - 1)* tileHeight, tileWidth, tileHeight);
 
         // UI
         playButton = new BufferedImage[2];
@@ -118,5 +123,8 @@ public class Assets {
         scoreButton = new BufferedImage[2];
         scoreButton[0] = button.crop(0, 300, 300, 150); // Not selected
         scoreButton[1] = button.crop(300, 300, 300, 150);
+
+        // Items
+        sword = itemSprites.crop(16, 0, 16, 16);
     }
 }

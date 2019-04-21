@@ -267,8 +267,9 @@ public class Player extends Creature {
             //return Assets.playerIdleRight;
         }
 
-        inventory.render(g);
         gameHud.render(g);
+        inventory.render(g);
+
     }
 
     // Getters and setters
