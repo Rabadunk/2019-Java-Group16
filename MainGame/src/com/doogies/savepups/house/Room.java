@@ -3,7 +3,7 @@ package com.doogies.savepups.house;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 
-import com.doogies.savepups.entities.creatures.Ogre;
+import com.doogies.savepups.entities.creatures.Enemies.Ogre;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.items.ItemManager;
 

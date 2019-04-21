@@ -94,7 +94,7 @@ public class Player extends Creature {
         animationRight.tick();
 
         //Movement
-        getInput();
+        moveToPlayer();
         move();
         handler.getGameCamera().centerOnEntity(this);
 
@@ -190,7 +190,7 @@ public class Player extends Creature {
         System.out.println("You lose");
     }
 
-    private void getInput() {
+    private void moveToPlayer() {
         xMove = 0;
         yMove = 0;
 

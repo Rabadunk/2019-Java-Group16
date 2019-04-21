@@ -63,4 +63,5 @@ public class Tile {
     public void setEntry(boolean b) {
         entry = b;
     }
+
 }
