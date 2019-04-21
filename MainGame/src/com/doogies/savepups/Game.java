@@ -6,10 +6,8 @@ import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
-import com.doogies.savepups.states.GameOverState;
-import com.doogies.savepups.states.GameState;
-import com.doogies.savepups.states.MenuState;
-import com.doogies.savepups.states.State;
+import com.doogies.savepups.states.*;
+import com.doogies.savepups.utils.Timer;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -28,6 +26,8 @@ public class Game implements Runnable {
     private int ticks = 0;
     private double delta = 0;
 
+    private Timer timeTaken;
+
     // Views
     private BufferStrategy bs;
     private Graphics g;
@@ -38,6 +38,7 @@ public class Game implements Runnable {
     public State gameState;
     public State menuState;
     public State gameOverState;
+    public State victoryState;
 
     // Input
     private KeyManager keyManager;
@@ -70,6 +71,7 @@ public class Game implements Runnable {
         DisplayInit();
         GameInit();
         StateInit();
+        timeTaken = new Timer(handler);
     }
 
     private void DisplayInit() {
@@ -91,6 +93,7 @@ public class Game implements Runnable {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         gameOverState = new GameOverState(handler);
+        victoryState = new VictoryState(handler);
         State.setState(menuState);
     }
 

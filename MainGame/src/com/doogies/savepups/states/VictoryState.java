@@ -8,14 +8,14 @@ import com.doogies.savepups.graphics.Text;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class GameOverState extends State {
+public class VictoryState extends State {
 
     public AudioPlayer gameMusic;
 
-    public GameOverState(Handler handler){
+    public VictoryState(Handler handler){
         super(handler);
         gameMusic = new AudioPlayer();
-        gameMusic.setFileMusic("NoHope");
+        gameMusic.setFileMusic("song");
     }
 
 
@@ -31,7 +31,7 @@ public class GameOverState extends State {
     public void render(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0,0, handler.getWidth(), handler.getHeight());
-        Text.drawString(g,"GAME OVER", 500, 200, true, Color.WHITE, Assets.fontTitle);
+        Text.drawString(g,"NICE DUDE!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
         Text.drawString(g,"Press p to exit", 500, 600, true, Color.WHITE, Assets.font28);
 
     }

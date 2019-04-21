@@ -1,5 +1,6 @@
 package com.doogies.savepups.states;
 
+import com.doogies.savepups.Game;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.audio.Music;
