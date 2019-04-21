@@ -36,7 +36,7 @@ public class MenuState extends State{
 //        player.run();
 
         menuMusic = new AudioPlayer();
-        menuMusic.setFile("menu");
+        menuMusic.setFileMusic("Happywalk");
         //menuMusic.play();
 
         houseGraph = new HouseGraph(handler);
@@ -106,9 +106,7 @@ public class MenuState extends State{
     }
 
     @Override
-    public void startMusic() {
-        menuMusic.play();
-    }
+    public void startMusic() { menuMusic.play(); }
 
     @Override
     public void stopMusic() {

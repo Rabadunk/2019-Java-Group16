@@ -45,10 +45,6 @@ public class Room {
         this.entityManager = new EntityManager(handler, handler.getPlayer());
         this.itemManager = new ItemManager(handler);
         this.gameHud = new GameHud(handler);
-        //Code for correct map pos from prev gamestate function
-        // player = new Player(handler,(house.getSpawnX()-1) * 64, (house.getSpawnY()-1) * 64);
-       // entityManager.addEntity(new Bed(handler, 100, 250));
-        //entityManager.addEntity(new Bed(handler, 100, 350));
         loadRoom(roomPath);
         loadFurniture();
         entityManager.getPlayer().setX(spawnX);
@@ -61,8 +57,6 @@ public class Room {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
-        //com.doogies.savepups.hud.tick();
-
     }
 
     public void render(Graphics g) {
@@ -85,7 +79,6 @@ public class Room {
                         (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
-
         // Item
         itemManager.render(g);
 
@@ -128,7 +121,6 @@ public class Room {
                 tiles[x][y] = newTile;
             }
         }
-
     }
 
     // Getters and setters

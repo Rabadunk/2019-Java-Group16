@@ -22,6 +22,13 @@ public class AudioPlayer {
         }
     }
 
+    public void setFileMusic(String soundFileName){
+        setFile(soundFileName);
+        // Might need to remove for sound effects
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+    }
+
     public void play(){
         clip.setFramePosition(0);
         clip.start();
