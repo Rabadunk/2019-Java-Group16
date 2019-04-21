@@ -231,7 +231,7 @@ public class Player extends Creature {
             g.drawImage(getCurrentAnimationFrame(),
                     (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
                     (int)(y - handler.getGameCamera().getyOffset()),
-                    width / 2, height/2,null);
+                    width*2, height*2,null);
         }
         else {
             g.drawImage(getCurrentAnimationFrame(),
@@ -284,7 +284,7 @@ public class Player extends Creature {
 
     // Getters and setters
 
-    private BufferedImage getCurrentAnimationFrame(){
+    public BufferedImage getCurrentAnimationFrame(){
         if(xMove <0){
             return animationLeft.getCurrentFrame();
         }
