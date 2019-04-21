@@ -45,29 +45,40 @@ public class Player extends Creature {
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
         this.currentRoom = handler.getRoom();
+        setupAttack();
+        setupBounds();
+        loadSprites();
+        loadGameUtils();
+    }
 
+    public void setupAttack() {
         attackUp = attackDown = attackLeft = attackRight = false;
+        attackRectangle = new Rectangle();
+        attackRectangle.width = attackRangeSize;
+        attackRectangle.height = attackRangeSize;
+    }
 
+    public void setupBounds() {
         bounds.x = 24;
         bounds.y = 40;
         bounds.width = 16;
         bounds.height = 23;
+    }
 
+    public void loadSprites() {
         //Animations
         animationDown = new Animation(500, Assets.player_down);
         animationUp = new Animation(500, Assets.player_up);
         animationLeft = new Animation(500, Assets.player_left);
         animationRight = new Animation(500, Assets.player_right);
+    }
 
+    public void loadGameUtils() {
         // Inventory
         inventory = new Inventory(handler);
 
         // hud
         gameHud = new GameHud(handler);
-
-        attackRectangle = new Rectangle();
-        attackRectangle.width = attackRangeSize;
-        attackRectangle.height = attackRangeSize;
 
         // Temp audio code
         sound = new AudioPlayer();
