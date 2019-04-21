@@ -17,9 +17,16 @@ public abstract class State {
     public static void setState(State state) {
         if(state != handler.getGame().menuState) {
             handler.getGame().menuState.stopMusic();
+            //handler.getGame().gameOverState.stopMusic();
         }
         else if (state == handler.getGame().menuState){
             handler.getGame().menuState.startMusic();
+            handler.getGame().gameOverState.stopMusic();
+        }
+        if (state == handler.getGame().gameOverState){
+            handler.getGame().gameOverState.startMusic();
+            handler.getGame().menuState.stopMusic();
+            System.out.println("In gameover");
         }
         currentState = state;
     }
