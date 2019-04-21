@@ -22,6 +22,7 @@ public class GameOverState extends State {
     @Override
     public void tick() {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
+            handler.getGame().gameState = new GameState(handler);
             State.setState(handler.getGame().menuState);
         }
     }

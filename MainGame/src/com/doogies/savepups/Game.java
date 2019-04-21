@@ -57,7 +57,7 @@ public class Game implements Runnable {
         mouseManager = new MouseManager();
 
     }
-
+    
 
     public synchronized void start() {
         if(running) return;
