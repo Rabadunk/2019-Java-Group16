@@ -42,10 +42,10 @@ public class KeyManager implements KeyListener {
 //            System.out.println("E JUST PRESSED");
 //        }
 
-        up = keys[KeyEvent.VK_W];
-        down = keys[KeyEvent.VK_S];
-        left = keys[KeyEvent.VK_A];
-        right = keys[KeyEvent.VK_D];
+        up = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
+        down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
+        left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
+        right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
         enter = keys[KeyEvent.VK_ENTER];
 
         attack = keys[KeyEvent.VK_J];

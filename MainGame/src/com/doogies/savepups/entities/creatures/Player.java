@@ -68,7 +68,7 @@ public class Player extends Creature {
         attackRectangle = new Rectangle();
         attackRectangle.width = attackRangeSize;
         attackRectangle.height = attackRangeSize;
-        
+
         // Temp audio code
         sound = new AudioPlayer();
     }
@@ -97,13 +97,13 @@ public class Player extends Creature {
 
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
             bed = !bed;
-            sound.setFile("song");
-            sound.play();
+//            sound.setFile("song");
+//            sound.play();
         }
 
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
-            sound.stop();
-        }
+//        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
+//            sound.stop();
+//        }
 
 
     }
@@ -113,6 +113,10 @@ public class Player extends Creature {
         lastAttackTimer = System.currentTimeMillis();
 
         if(attackTimer < attackCooldown){
+            return;
+        }
+
+        if(inventory.isActive()){
             return;
         }
 
@@ -170,6 +174,10 @@ public class Player extends Creature {
     }
 
     private void getInput() {
+        if(inventory.isActive()){
+            return;
+        }
+
         xMove = 0;
         yMove = 0;
 
