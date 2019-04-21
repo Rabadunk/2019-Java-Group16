@@ -22,11 +22,16 @@ public abstract class State {
         else if (state == handler.getGame().menuState){
             handler.getGame().menuState.startMusic();
             handler.getGame().gameOverState.stopMusic();
+            handler.getGame().victoryState.stopMusic();
         }
         if (state == handler.getGame().gameOverState){
             handler.getGame().gameOverState.startMusic();
             handler.getGame().menuState.stopMusic();
             System.out.println("In gameover");
+        }
+        if(state == handler.getGame().victoryState){
+            handler.getGame().menuState.stopMusic();
+            handler.getGame().victoryState.startMusic();
         }
         currentState = state;
     }

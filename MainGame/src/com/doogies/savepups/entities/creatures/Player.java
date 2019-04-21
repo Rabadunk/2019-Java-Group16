@@ -179,6 +179,10 @@ public class Player extends Creature {
             System.out.println("Test");
         }
 
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_M)){
+            State.setState(handler.getGame().victoryState);
+        }
+
     }
 
     @Override
