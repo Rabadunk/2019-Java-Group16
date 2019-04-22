@@ -49,10 +49,14 @@ public class MenuState extends State{
         uiManager.addObject( new UIImageButton(100, 150, 300, 150, Assets.playButton, () -> {
             if (handler.getKeyManager().enter) {
                 State.setState(handler.getGame().gameState);
+                handler.getPlayer().setX(135);
+                handler.getPlayer().setY(128);
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
             State.setState(handler.getGame().gameState);
+            handler.getPlayer().setX(135);
+            handler.getPlayer().setY(128);
 
         }));
 

@@ -102,8 +102,8 @@ public class Room {
         String[] tokens = file.split(("\\s+"));
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]) * Tile.TILEWIDTH / 4;
-        spawnY = Utils.parseInt(tokens[3]) * Tile.TILEHEIGHT / 2;
+        spawnX = Utils.parseInt(tokens[2]) * Tile.TILEWIDTH;
+        spawnY = Utils.parseInt(tokens[3]) * Tile.TILEHEIGHT;
 
         tiles = new Tile[width][height];
         int tileID;
