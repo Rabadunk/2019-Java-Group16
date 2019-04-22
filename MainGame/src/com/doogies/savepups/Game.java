@@ -1,18 +1,15 @@
 package com.doogies.savepups;
 
-import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.display.Display;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
 import com.doogies.savepups.states.*;
-import com.doogies.savepups.utils.Timer;
+import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 public class Game implements Runnable {
 
@@ -26,7 +23,7 @@ public class Game implements Runnable {
     private int ticks = 0;
     private double delta = 0;
 
-    private Timer timeTaken;
+    private GameTimer timeTaken;
 
     // Views
     private BufferStrategy bs;
@@ -71,7 +68,7 @@ public class Game implements Runnable {
         DisplayInit();
         GameInit();
         StateInit();
-        timeTaken = new Timer(handler);
+        timeTaken = new GameTimer(handler);
     }
 
     private void DisplayInit() {

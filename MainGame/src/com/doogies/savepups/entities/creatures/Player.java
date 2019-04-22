@@ -9,6 +9,7 @@ import com.doogies.savepups.house.Room;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
 import com.doogies.savepups.states.State;
+import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -38,6 +39,17 @@ public class Player extends Creature {
 
     // TEMP SOUND CODE
     private AudioPlayer sound;
+    private boolean playerActive = false;
+
+    private GameTimer gameTimer;
+
+    // Game Timer
+    private boolean timerStart = false;
+    private boolean timerSet = false;
+
+    private int timeTakenMinutes, timeTakenSeconds = 0;
+    private long initalTime;
+
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -83,6 +95,8 @@ public class Player extends Creature {
 
         // Temp audio code
         sound = new AudioPlayer();
+
+        gameTimer = new GameTimer(handler);
     }
 
     @Override
@@ -116,6 +130,21 @@ public class Player extends Creature {
 
         testDie();
 
+        // Timer stuff
+        if(playerActive && !timerSet){
+            initalTime = System.currentTimeMillis();
+            timerSet = true;
+        }
+
+        if(!playerActive) {
+            timeTakenMinutes = 0;
+            timeTakenSeconds = 0;
+        }
+        else {
+            //timeTaken = (int) initalTime;
+            timeTakenMinutes = (int) (System.currentTimeMillis() - initalTime) / 1000 / 60;
+            timeTakenSeconds = (int) ((System.currentTimeMillis() - initalTime) / 1000) % 60;
+        }
 
     }
 
@@ -138,24 +167,28 @@ public class Player extends Creature {
             attackRectangle.x = playerBounds.x + playerBounds.width / 2;
             attackRectangle.y = playerBounds.y - attackRangeSize;
             attackUp = true;
+            playerActive = true;
         }
         // Down
         else if(handler.getKeyManager().attack && direction == 0){
             attackRectangle.x = playerBounds.x + playerBounds.width / 2;
             attackRectangle.y = playerBounds.y + playerBounds.height;
             attackDown = true;
+            playerActive = true;
         }
         // Left
         else if(handler.getKeyManager().attack && direction == 2){
             attackRectangle.x = playerBounds.x - attackRangeSize;
             attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
             attackLeft = true;
+            playerActive = true;
         }
         // Right
         else if(handler.getKeyManager().attack && direction == 3){
             attackRectangle.x = playerBounds.x + playerBounds.width;
             attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
             attackRight= true;
+            playerActive = true;
         }
         else{
             return;
@@ -201,21 +234,25 @@ public class Player extends Creature {
         if(handler.getKeyManager().up) {
             yMove = -speed;
             direction = 1;
+            playerActive = true;
         }
 
         if(handler.getKeyManager().down) {
             yMove = speed;
             direction = 0;
+            playerActive = true;
         }
 
         if(handler.getKeyManager().left) {
             xMove = -speed;
             direction = 2;
+            playerActive = true;
         }
 
         if(handler.getKeyManager().right) {
             xMove = speed;
             direction = 3;
+            playerActive = true;
         }
 //        if(handler.getKeyManager().boop) {
 //            bed = true;
@@ -377,5 +414,27 @@ public class Player extends Creature {
         this.direction = direction;
     }
 
+    public boolean isPlayerActive() {
+        return playerActive;
+    }
 
+    public void setPlayerActive(boolean playerActive) {
+        this.playerActive = playerActive;
+    }
+
+    public int getTimeTakenMinutes() {
+        return timeTakenMinutes;
+    }
+
+    public void setTimeTakenMinutes(int timeTakenMinutes) {
+        this.timeTakenMinutes = timeTakenMinutes;
+    }
+
+    public int getTimeTakenSeconds() {
+        return timeTakenSeconds;
+    }
+
+    public void setTimeTakenSeconds(int timeTakenSeconds) {
+        this.timeTakenSeconds = timeTakenSeconds;
+    }
 }

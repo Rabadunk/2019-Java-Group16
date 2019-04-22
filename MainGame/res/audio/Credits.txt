@@ -1,3 +1,5 @@
 menu - https://opengameart.org/content/happy-tune
 happywalk - https://opengameart.org/content/happy-walk
 NoHope- https://opengameart.org/content/game-over-theme
+Vicotry - https://opengameart.org/content/lively-meadow-victory-fanfare-and-song
+song - https://opengameart.org/content/oves-essential-game-audio-pack-collection-160-files-updated

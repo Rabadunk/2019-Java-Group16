@@ -3,6 +3,8 @@ package com.doogies.savepups.hud;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
+import com.doogies.savepups.states.State;
+import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 
@@ -26,8 +28,15 @@ public class GameHud {
         Text.drawString(g, ": Heaps!  jk  its:  " + handler.getPlayer().getInventory().getItem("Bed"), 50,85, false, Color.WHITE, Assets.fontHud);
 
         // Score and time
-        Text.drawString(g, "Score:  ", handler.getWidth() / 2, 20, true, Color.WHITE, Assets.fontHud);
-        Text.drawString(g, "Time:  ", handler.getWidth() / 2, 730, true, Color.WHITE, Assets.fontHud);
+        if(handler.getPlayer().getTimeTakenSeconds() < 10){
+            Text.drawString(g, "Time:  " + handler.getPlayer().getTimeTakenMinutes() + " : 0" + handler.getPlayer().getTimeTakenSeconds(),
+                    handler.getWidth() / 2, 20, true, Color.WHITE, Assets.fontHud);
+        }
+        else {
+            Text.drawString(g, "Time:  " + handler.getPlayer().getTimeTakenMinutes() + " : " + handler.getPlayer().getTimeTakenSeconds(),
+                    handler.getWidth() / 2, 20, true, Color.WHITE, Assets.fontHud);
+        }
+        Text.drawString(g, "Score:  ", handler.getWidth() / 2, 730, true, Color.WHITE, Assets.fontHud);
 
         // Equiped items
         g.drawImage(Assets.sword, 20, 680, 64, 64, null);
