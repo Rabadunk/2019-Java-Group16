@@ -1,14 +1,14 @@
-package com.doogies.savepups.entities.creatures;
+package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Enemy extends Creature {
+public class Screamer extends Enemy {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
@@ -19,29 +19,31 @@ public class Enemy extends Creature {
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
-    private int direction = 0;
 
-    private int diameter =  150;
 
-    public Enemy(Handler handler, float x, float y) {
+    public Screamer(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
         attackUp = attackDown = attackLeft = attackRight = false;
 
-        bounds.x = 24;
-        bounds.y = 40;
-        bounds.width = 16;
-        bounds.height = 23;
+        bounds.x = 16;
+        bounds.y = 20;
+        bounds.width = 32;
+        bounds.height = 43;
 
-        //Animations
-        animationDown = new Animation(500, Assets.enemy_down);
-        animationUp = new Animation(500, Assets.enemy_up);
-        animationLeft = new Animation(500, Assets.enemy_left);
-        animationRight = new Animation(500, Assets.enemy_right);
-
-        setSpeed(0.5f);
-        setHealth(4);
+        loadSprites();
+        setSpeed(1f);
+        setHealth(2);
     }
+
+    private void loadSprites() {
+        //Animations
+        animationDown = new Animation(64, Assets.screamer_left);
+        animationUp = new Animation(64, Assets.screamer_right);
+        animationLeft = new Animation(64, Assets.screamer_left);
+        animationRight = new Animation(64, Assets.screamer_right);
+    }
+
 
     @Override
     public void tick() {
@@ -52,67 +54,33 @@ public class Enemy extends Creature {
         animationRight.tick();
 
         //Movement
-        if( colCircleBox(handler.getPlayer())) {
-            getInput(handler.getPlayer());
+        if(colCircleBox(handler.getPlayer())) {
+            diameter = 250;
+            moveToPlayer(handler.getPlayer());
             move();
         } else {
-            dontMove();
+            count ++;
+            if(count > 30) {
+                autoMoveDecider();
+            }
+            move();
+
+            diameter = 200;
         }
     }
-
-    public void dontMove() {
-        yMove = 0;
-        xMove = 0;
-    }
-
-
 
     @Override
     public void die(){
-        System.out.println("Enemy has been slain");
+        System.out.println("Ogre has been slain");
     }
-
-    private void getInput(Player player) {
-
-        if(y > player.getY() + 1) {
-            yMove = -speed;
-            direction = 1;
-        }
-
-        if(y < player.getY() - 1) {
-            yMove = speed;
-            direction = 0;
-        }
-
-        if(x > player.getX() + 1) {
-            xMove = -speed;
-            direction = 2;
-        }
-
-        if(x < player.getX() - 1) {
-            xMove = speed;
-            direction = 3;
-        }
-
-        float dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
-
-        float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
-
-        if((Math.sqrt(dx*dx + dy * dy) < 0.5 * Tile.TILEWIDTH)) {
-            dontMove();
-        }
-
-    }
-
-
 
     @Override
     public void render(Graphics g) {
 
-            g.drawImage(getCurrentAnimationFrame(),
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
+        g.drawImage(getCurrentAnimationFrame(),
+                (int) (x - handler.getGameCamera().getxOffset()),
+                (int) (y - handler.getGameCamera().getyOffset()),
+                width, height, null);
 
         //DOesnt work
         // Red rectangle to represent players collision box
@@ -120,7 +88,6 @@ public class Enemy extends Creature {
 //        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
 //                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
 //                bounds.width, bounds.height);
-
         // Oval around enemy
         g.setColor(Color.blue);
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
@@ -131,18 +98,6 @@ public class Enemy extends Creature {
         g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight());
     }
 
-    public boolean colCircleBox(Player player) {
-
-        float dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
-
-        float dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
-
-        if(Math.sqrt(dx * dx + dy * dy) < (diameter /2 + player.getWidth() /2)) {
-            return true;
-        }
-
-        return false;
-    }
 
     public void postRender(Graphics g){
 
@@ -196,16 +151,16 @@ public class Enemy extends Creature {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.enemyIdleDown;
+                return Assets.screamerIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.enemyIdleUp;
+                return Assets.screamerIdleRight;
             }
             else if(direction == 2) {
-                return Assets.enemyIdleLeft;
+                return Assets.screamerIdleRight;
             }
             else if(direction == 3) {
-                return Assets.enemyIdleRight;
+                return Assets.screamerIdleLeft;
             }
         }
         return Assets.enemyIdleDown;

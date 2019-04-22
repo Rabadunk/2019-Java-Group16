@@ -21,7 +21,7 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
-        handler.setRoom(house.getRoom(0));
+        handler.setRoom(house.getRoom(2));
 
         currentRoom = handler.getRoom();
         handler.getPlayer().setX(currentRoom.getSpawnX());
