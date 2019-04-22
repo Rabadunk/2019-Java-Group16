@@ -104,6 +104,9 @@ public class MenuState extends State{
 
         // Title
         Text.drawString(g, "Save the Puppies!", 550, 75, true, Color.WHITE, Assets.fontTitle);
+
+        // Draw doogie
+        g.drawImage(Assets.doogie,500, 300, null);
     }
 
     @Override

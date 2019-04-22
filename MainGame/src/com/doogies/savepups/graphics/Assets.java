@@ -14,6 +14,8 @@ public class Assets {
 
     public static BufferedImage computer, bed;
 
+    public static BufferedImage doogie;
+
     public static BufferedImage barrel1, barrel2;
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
@@ -53,6 +55,8 @@ public class Assets {
         SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
+
+        doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
 
         //Player animations
         player_down = new BufferedImage[2];
