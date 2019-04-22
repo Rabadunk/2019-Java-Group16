@@ -14,6 +14,8 @@ public class Assets {
 
     public static BufferedImage computer, bed;
 
+    public static BufferedImage doogie;
+
     public static BufferedImage barrel1, barrel2;
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
@@ -92,6 +94,8 @@ public class Assets {
 
         playerIdleLeft = player_left[8];
         playerIdleRight = player_right[0];
+        doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
+
 
         attack = attackSprites.crop(30, 690, 200, 130);
 

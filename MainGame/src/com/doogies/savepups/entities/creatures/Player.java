@@ -218,7 +218,7 @@ public class Player extends Creature {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_M)){
             State.setState(handler.getGame().victoryState);
         }
-
+        
     }
 
     @Override
@@ -357,6 +357,8 @@ public class Player extends Creature {
             }
         }
     }
+
+    // Getters and setters
 
     public Inventory getInventory() {
         return inventory;
