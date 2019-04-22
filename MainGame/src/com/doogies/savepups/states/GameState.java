@@ -4,7 +4,6 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
-import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ public class GameState extends State {
 
     private boolean worldChanged = false;
     private Room currentRoom;
+
 
     public GameState(Handler handler){
         super(handler);
@@ -75,5 +75,4 @@ public class GameState extends State {
 
         worldChanged = false;
     }
-
 }
