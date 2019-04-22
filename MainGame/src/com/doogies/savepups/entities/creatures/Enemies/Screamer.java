@@ -38,10 +38,10 @@ public class Screamer extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.ogre_left);
-        animationUp = new Animation(64, Assets.ogre_right);
-        animationLeft = new Animation(64, Assets.ogre_left);
-        animationRight = new Animation(64, Assets.ogre_right);
+        animationDown = new Animation(64, Assets.screamer_left);
+        animationUp = new Animation(64, Assets.screamer_right);
+        animationLeft = new Animation(64, Assets.screamer_left);
+        animationRight = new Animation(64, Assets.screamer_right);
     }
 
 
@@ -151,16 +151,16 @@ public class Screamer extends Enemy {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.ogreIdleLeft;
+                return Assets.screamerIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.ogreIdleRight;
+                return Assets.screamerIdleRight;
             }
             else if(direction == 2) {
-                return Assets.ogreIdleRight;
+                return Assets.screamerIdleRight;
             }
             else if(direction == 3) {
-                return Assets.ogreIdleLeft;
+                return Assets.screamerIdleLeft;
             }
         }
         return Assets.enemyIdleDown;

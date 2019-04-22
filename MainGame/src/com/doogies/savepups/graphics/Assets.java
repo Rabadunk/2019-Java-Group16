@@ -23,6 +23,8 @@ public class Assets {
     public static BufferedImage[] ogre_right, ogre_left;
     public static BufferedImage ogreIdleRight, ogreIdleLeft;
 
+    public static BufferedImage[] screamer_right, screamer_left;
+    public static BufferedImage screamerIdleRight, screamerIdleLeft;
 
     public static BufferedImage attack;
 
@@ -54,6 +56,7 @@ public class Assets {
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
         SpriteSheet ogreSprites = new SpriteSheet(ImageLoader.loadImage("/textures/ogre.png"));
+        SpriteSheet screamerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/screamer.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
@@ -135,6 +138,31 @@ public class Assets {
 
         ogreIdleLeft = ogreSprites.crop(0, 0, width, height);
         ogreIdleRight = ogreSprites.crop(width * 7, height, width, height);
+
+        // Ogre animation
+        screamer_right = new BufferedImage[8];
+        screamer_right[0] = screamerSprites.crop(0, 0, width, height);
+        screamer_right[1] = screamerSprites.crop(width, 0, width, height);
+        screamer_right[2] = screamerSprites.crop(width * 2, 0, width, height);
+        screamer_right[3] = screamerSprites.crop(width * 3, 0, width, height);
+        screamer_right[4] = screamerSprites.crop(width * 4, 0, width, height);
+        screamer_right[5] = screamerSprites.crop(width * 5, 0, width, height);
+        screamer_right[6] = screamerSprites.crop(width * 6, 0, width, height);
+        screamer_right[7] = screamerSprites.crop(width * 7, 0, width, height);
+
+
+        screamer_left = new BufferedImage[8];
+        screamer_left[0] = screamerSprites.crop(0, height, width, height);
+        screamer_left[1] = screamerSprites.crop(width, height, width, height);
+        screamer_left[2] = screamerSprites.crop(width * 2, height, width, height);
+        screamer_left[3] = screamerSprites.crop(width * 3, height, width, height);
+        screamer_left[4] = screamerSprites.crop(width * 4, height, width, height);
+        screamer_left[5] = screamerSprites.crop(width * 5, height, width, height);
+        screamer_left[6] = screamerSprites.crop(width * 6, height, width, height);
+        screamer_left[7] = screamerSprites.crop(width * 7, height, width, height);
+
+        screamerIdleLeft = screamerSprites.crop(0, 0, width, height);
+        screamerIdleRight = screamerSprites.crop(width * 7, height, width, height);
 
 
         // ENVIRONMENT
