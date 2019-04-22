@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
@@ -8,7 +9,7 @@ import com.doogies.savepups.graphics.Assets;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Screamer extends Enemy {
+public class Orphan extends Enemy {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
@@ -21,8 +22,8 @@ public class Screamer extends Enemy {
     // 0 = down, 1 = up, 2 = left, 3 = right
 
 
-    public Screamer(Handler handler, float x, float y) {
-        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+    public Orphan(Handler handler, float x, float y) {
+        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH / 2, Creature.DEFAULT_CREATURE_HEIGHT / 2);
 
         attackUp = attackDown = attackLeft = attackRight = false;
 
@@ -38,10 +39,10 @@ public class Screamer extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.screamer_left);
-        animationUp = new Animation(64, Assets.screamer_right);
-        animationLeft = new Animation(64, Assets.screamer_left);
-        animationRight = new Animation(64, Assets.screamer_right);
+        animationDown = new Animation(64, Assets.orphan_left);
+        animationUp = new Animation(64, Assets.orphan_right);
+        animationLeft = new Animation(64, Assets.orphan_left);
+        animationRight = new Animation(64, Assets.orphan_right);
     }
 
 
@@ -151,16 +152,16 @@ public class Screamer extends Enemy {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.screamerIdleLeft;
+                return Assets.orphanIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.screamerIdleRight;
+                return Assets.orphanIdleRight;
             }
             else if(direction == 2) {
-                return Assets.screamerIdleRight;
+                return Assets.orphanIdleRight;
             }
             else if(direction == 3) {
-                return Assets.screamerIdleLeft;
+                return Assets.orphanIdleLeft;
             }
         }
         return Assets.enemyIdleDown;
@@ -214,4 +215,13 @@ public class Screamer extends Enemy {
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
+
+
+
+
+
+
+
+
 }

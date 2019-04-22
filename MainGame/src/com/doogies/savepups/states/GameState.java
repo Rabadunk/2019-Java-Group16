@@ -21,11 +21,9 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
-        handler.setRoom(house.getRoom(2));
+        handler.setRoom(house.getRoom(0));
 
         currentRoom = handler.getRoom();
-        handler.getPlayer().setX(currentRoom.getSpawnX());
-        handler.getPlayer().setY(currentRoom.getSpawnY());
     }
 
     @Override
