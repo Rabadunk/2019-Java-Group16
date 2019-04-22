@@ -22,6 +22,7 @@ public class VictoryState extends State {
     @Override
     public void tick() {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
+            // Reset game
             handler.getGame().gameState = new GameState(handler);
             State.setState(handler.getGame().menuState);
         }
@@ -31,7 +32,7 @@ public class VictoryState extends State {
     public void render(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0,0, handler.getWidth(), handler.getHeight());
-        Text.drawString(g,"NICE DUDE!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
+        Text.drawString(g,"Congratulations!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
         Text.drawString(g,"Press p to exit", 500, 600, true, Color.WHITE, Assets.font28);
 
     }

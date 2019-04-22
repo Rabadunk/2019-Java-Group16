@@ -14,6 +14,8 @@ public class Assets {
 
     public static BufferedImage computer, bed;
 
+    public static BufferedImage barrel1, barrel2;
+
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage playerIdleDown, playerIdleUp, playerIdleLeft, playerIdleRight;
 
@@ -48,6 +50,7 @@ public class Assets {
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
+        SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
@@ -126,5 +129,9 @@ public class Assets {
 
         // Items
         sword = itemSprites.crop(16, 0, 16, 16);
+
+        // Barrels
+        barrel1 = barrelSprites.crop(0, 0, 32, 32);
+        barrel2 = barrelSprites.crop(0, 32, 32, 32);
     }
 }
