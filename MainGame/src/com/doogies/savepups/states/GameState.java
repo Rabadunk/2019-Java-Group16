@@ -21,11 +21,9 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
-        handler.setRoom(house.getRoom(2));
+        handler.setRoom(house.getRoom(1));
 
         currentRoom = handler.getRoom();
-        handler.getPlayer().setX(currentRoom.getSpawnX());
-        handler.getPlayer().setY(currentRoom.getSpawnY());
     }
 
     @Override
@@ -37,11 +35,11 @@ public class GameState extends State {
     private void checkForRoomChange() {
         Player player = handler.getPlayer();
         Room room = house.getRoom(player.getTileWorldID());
-
         if(player.inEntry()) {
             currentRoom = room;
             handler.setRoom(room);
             worldChanged = true;
+            System.out.println("YOU'VE CHANGED WORLDS");
         }
     }
 
