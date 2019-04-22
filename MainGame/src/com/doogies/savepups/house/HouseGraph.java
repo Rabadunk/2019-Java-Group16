@@ -8,11 +8,12 @@ import java.util.List;
 
 public class HouseGraph {
 
-    private final int numOfRooms = 3;
+    private int numOfRooms = 4;
 
     private Room bedRoom;
     private Room hallwayRoom;
     private Room testRoom;
+    private Room lounge;
 
     private List<Integer> house[];
     private ArrayList<Room> rooms;
@@ -37,14 +38,17 @@ public class HouseGraph {
 
     private void generateRooms(Handler handler) {
         // Load rooms
-        bedRoom = new Room(handler, "res/rooms/bedroom.txt", "res/rooms/statics/bedroom.txt", 0);
-        hallwayRoom = new Room(handler, "res/rooms/hallway.txt", "res/rooms/statics/hallway.txt",1);
-        testRoom = new Room(handler, "res/rooms/testWorld.txt", "res/rooms/statics/hallway.txt",2);
+        testRoom = new Room(handler, "res/rooms/testWorld.txt", "res/rooms/statics/hallway.txt",0);
+        bedRoom = new Room(handler, "res/rooms/bedroom.txt", "res/rooms/statics/bedroom.txt", 1);
+        hallwayRoom = new Room(handler, "res/rooms/hallway.txt", "res/rooms/statics/hallway.txt",2);
+        lounge = new Room(handler, "res/rooms/lounge.txt", "res/rooms/statics/hallway.txt", 3);
 
         // Store rooms
+        rooms.add(testRoom);
         rooms.add(bedRoom);
         rooms.add(hallwayRoom);
-        rooms.add(testRoom);
+        rooms.add(lounge);
+
     }
 
     private void generateHouse() {
