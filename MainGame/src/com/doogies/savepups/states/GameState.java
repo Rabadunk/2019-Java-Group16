@@ -37,11 +37,11 @@ public class GameState extends State {
     private void checkForRoomChange() {
         Player player = handler.getPlayer();
         Room room = house.getRoom(player.getTileWorldID());
-
         if(player.inEntry()) {
             currentRoom = room;
             handler.setRoom(room);
             worldChanged = true;
+            System.out.println("YOU'VE CHANGED WORLDS");
         }
     }
 
