@@ -25,6 +25,8 @@ public class VictoryState extends State {
             // Reset game
             handler.getGame().gameState = new GameState(handler);
             State.setState(handler.getGame().menuState);
+            handler.getPlayer().setPlayerActive(false);
+            handler.getPlayer().setTimerSet(false);
         }
     }
 

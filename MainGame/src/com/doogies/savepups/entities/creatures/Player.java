@@ -439,4 +439,12 @@ public class Player extends Creature {
     public void setTimeTakenSeconds(int timeTakenSeconds) {
         this.timeTakenSeconds = timeTakenSeconds;
     }
+
+    public boolean isTimerSet() {
+        return timerSet;
+    }
+
+    public void setTimerSet(boolean timerSet) {
+        this.timerSet = timerSet;
+    }
 }
