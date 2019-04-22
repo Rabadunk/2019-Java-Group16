@@ -15,7 +15,7 @@ public class VictoryState extends State {
     public VictoryState(Handler handler){
         super(handler);
         gameMusic = new AudioPlayer();
-        gameMusic.setFileMusic("song");
+        gameMusic.setFileMusic("Victory");
     }
 
 
