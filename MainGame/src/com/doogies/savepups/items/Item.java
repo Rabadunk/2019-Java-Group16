@@ -9,7 +9,11 @@ import java.awt.image.BufferedImage;
 
 public class Item {
 
+    // Animations
+
     public static Animation coinGoldAnimation = new Animation(80, Assets.coinGold);
+    public static Animation coinSilverAnimation = new Animation(80, Assets.coinSilver);
+    public static Animation coinCopperAnimation = new Animation(80, Assets.coinCopper);
 
     //Handler
 
@@ -17,6 +21,8 @@ public class Item {
     public static Item bedItem = new Item(Assets.bed, "Bed", 0, false);
     public static Item attackItem = new Item(Assets.attack, "Attack", 1, false);
     public static Item coinGold = new Item(Assets.coinGold[0], "CoinGold", 2, true);
+    public static Item coinSilver = new Item(Assets.coinGold[0], "CoinSilver", 3, true);
+    public static Item coinCopper = new Item(Assets.coinGold[0], "CoinCopper", 4, true);
 
 
 
@@ -56,6 +62,8 @@ public class Item {
             handler.getRoom().getEntityManager().getPlayer().getInventory().addItem(this);
         }
         coinGoldAnimation.tick();
+        coinSilverAnimation.tick();
+        coinCopperAnimation.tick();
     }
 
     public void render(Graphics g){
@@ -85,11 +93,15 @@ public class Item {
 
     public BufferedImage getCurrentAnimationFrame(){
 
-        if(this.getName() == "coinGold") {
-            return coinGoldAnimation.getCurrentFrame();
-        }
-        else {
-            return coinGoldAnimation.getCurrentFrame();
+        switch(this.id) {
+            case 2:
+                return coinGoldAnimation.getCurrentFrame();
+            case 3:
+                return coinSilverAnimation.getCurrentFrame();
+            case 4:
+                return coinCopperAnimation.getCurrentFrame();
+            default:
+                return coinGoldAnimation.getCurrentFrame();
         }
     }
 

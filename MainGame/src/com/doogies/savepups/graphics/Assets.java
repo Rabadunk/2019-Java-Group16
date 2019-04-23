@@ -43,7 +43,7 @@ public class Assets {
     public static BufferedImage sword;
 
     // Coins
-    public static BufferedImage[] coinGold;
+    public static BufferedImage[] coinGold, coinSilver, coinCopper;
 
     // ui
     public static BufferedImage[] playButton, scoreButton, quitButton;
@@ -74,6 +74,8 @@ public class Assets {
         SpriteSheet orphanSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orphan.png"));
         SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
         SpriteSheet coinGoldSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_gold.png"));
+        SpriteSheet coinSilverSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_silver.png"));
+        SpriteSheet coinCopperSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_copper.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
@@ -267,5 +269,25 @@ public class Assets {
         coinGold[5] = coinGoldSprites.crop(160,0, 32, 32);
         coinGold[6] = coinGoldSprites.crop(192,0, 32, 32);
         coinGold[7] = coinGoldSprites.crop(224,0, 32, 32);
+
+        coinSilver = new BufferedImage[8];
+        coinSilver[0] = coinSilverSprites.crop(0,0, 32, 32);
+        coinSilver[1] = coinSilverSprites.crop(32,0, 32, 32);
+        coinSilver[2] = coinSilverSprites.crop(64,0, 32, 32);
+        coinSilver[3] = coinSilverSprites.crop(96,0, 32, 32);
+        coinSilver[4] = coinSilverSprites.crop(128,0, 32, 32);
+        coinSilver[5] = coinSilverSprites.crop(160,0, 32, 32);
+        coinSilver[6] = coinSilverSprites.crop(192,0, 32, 32);
+        coinSilver[7] = coinSilverSprites.crop(224,0, 32, 32);
+
+        coinCopper = new BufferedImage[8];
+        coinCopper[0] = coinCopperSprites.crop(0,0, 32, 32);
+        coinCopper[1] = coinCopperSprites.crop(32,0, 32, 32);
+        coinCopper[2] = coinCopperSprites.crop(64,0, 32, 32);
+        coinCopper[3] = coinCopperSprites.crop(96,0, 32, 32);
+        coinCopper[4] = coinCopperSprites.crop(128,0, 32, 32);
+        coinCopper[5] = coinCopperSprites.crop(160,0, 32, 32);
+        coinCopper[6] = coinCopperSprites.crop(192,0, 32, 32);
+        coinCopper[7] = coinCopperSprites.crop(224,0, 32, 32);
     }
 }
