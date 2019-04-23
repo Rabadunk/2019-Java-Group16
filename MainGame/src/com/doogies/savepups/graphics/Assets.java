@@ -36,6 +36,9 @@ public class Assets {
 
     public static BufferedImage sword;
 
+    // Coins
+    public static BufferedImage[] coinGold;
+
     // ui
     public static BufferedImage[] playButton, scoreButton, quitButton;
     public static BufferedImage inventoryScreen;
@@ -62,6 +65,7 @@ public class Assets {
         SpriteSheet ogreSprites = new SpriteSheet(ImageLoader.loadImage("/textures/ogre.png"));
         SpriteSheet screamerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/screamer.png"));
         SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
+        SpriteSheet coinGoldSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_gold.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
@@ -205,5 +209,16 @@ public class Assets {
         // Barrels
         barrel1 = barrelSprites.crop(0, 0, 32, 32);
         barrel2 = barrelSprites.crop(0, 32, 32, 32);
+
+        // Coins
+        coinGold = new BufferedImage[8];
+        coinGold[0] = coinGoldSprites.crop(0,0, 32, 32);
+        coinGold[1] = coinGoldSprites.crop(32,0, 32, 32);
+        coinGold[2] = coinGoldSprites.crop(64,0, 32, 32);
+        coinGold[3] = coinGoldSprites.crop(96,0, 32, 32);
+        coinGold[4] = coinGoldSprites.crop(128,0, 32, 32);
+        coinGold[5] = coinGoldSprites.crop(160,0, 32, 32);
+        coinGold[6] = coinGoldSprites.crop(192,0, 32, 32);
+        coinGold[7] = coinGoldSprites.crop(224,0, 32, 32);
     }
 }

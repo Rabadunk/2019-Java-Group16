@@ -1,6 +1,8 @@
 package com.doogies.savepups.items;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.graphics.Animation;
+import com.doogies.savepups.graphics.Assets;
 
 import java.awt.*;
 import java.util.ArrayList;

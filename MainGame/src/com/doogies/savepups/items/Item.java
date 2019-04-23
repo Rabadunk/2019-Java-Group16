@@ -1,6 +1,7 @@
 package com.doogies.savepups.items;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 
 import java.awt.*;
@@ -8,11 +9,16 @@ import java.awt.image.BufferedImage;
 
 public class Item {
 
+    public static Animation coinGoldAnimation = new Animation(80, Assets.coinGold);
+
     //Handler
 
     public static Item[] items = new Item[256];
-    public static Item bedItem = new Item(Assets.bed, "Bed", 0);
-    public static Item attackItem = new Item(Assets.attack, "Attack", 1);
+    public static Item bedItem = new Item(Assets.bed, "Bed", 0, false);
+    public static Item attackItem = new Item(Assets.attack, "Attack", 1, false);
+    public static Item coinGold = new Item(Assets.coinGold[0], "CoinGold", 2, true);
+
+
 
     // Class
 
@@ -22,21 +28,26 @@ public class Item {
     protected BufferedImage texture;
     protected String name;
     protected final int id;
+    protected boolean animated;
 
     protected Rectangle bounds;
 
     protected int x, y, count;
     protected boolean pickedUp = false;
 
-    public Item(BufferedImage texture, String name, int id){
+    public Item(BufferedImage texture, String name, int id, boolean animated){
         this.texture = texture;
         this.name = name;
         this.id = id;
         count = 1;
+        this.animated = animated;
+
 
         bounds = new Rectangle(x, y, ITEMWIDTH, ITEMHEIGHT);
 
         items[id] = this;
+
+
     }
 
     public void tick(){
@@ -44,6 +55,7 @@ public class Item {
             pickedUp = true;
             handler.getRoom().getEntityManager().getPlayer().getInventory().addItem(this);
         }
+        coinGoldAnimation.tick();
     }
 
     public void render(Graphics g){
@@ -55,7 +67,13 @@ public class Item {
     }
 
     public void render(Graphics g, int x, int y){
-        g.drawImage(texture, x, y, ITEMWIDTH, ITEMHEIGHT, null);
+
+        if(this.animated){
+            g.drawImage(getCurrentAnimationFrame(), x, y, ITEMWIDTH, ITEMHEIGHT, null);
+        }
+        else {
+            g.drawImage(texture, x, y, ITEMWIDTH, ITEMHEIGHT, null);
+        }
 
         // Red rectangle to represent players collision box
 //        g.setColor(Color.red);
@@ -65,15 +83,25 @@ public class Item {
 
     }
 
+    public BufferedImage getCurrentAnimationFrame(){
+
+        if(this.getName() == "coinGold") {
+            return coinGoldAnimation.getCurrentFrame();
+        }
+        else {
+            return coinGoldAnimation.getCurrentFrame();
+        }
+    }
+
     public Item createNew(int count){
-        Item i = new Item(texture, name, id);
+        Item i = new Item(texture, name, id, animated);
         i.setPickedUp(true);
         i.setCount(count);
         return i;
     }
 
     public Item createNew(int x, int y){
-        Item i = new Item(texture, name, id);
+        Item i = new Item(texture, name, id, animated);
         i.setPosition(x, y);
         return i;
     }
