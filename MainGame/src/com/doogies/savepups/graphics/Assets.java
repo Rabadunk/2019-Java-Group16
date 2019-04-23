@@ -18,14 +18,20 @@ public class Assets {
 
     public static BufferedImage barrel1, barrel2;
 
-    public static BufferedImage[] player_down, player_up, player_left, player_right;
-    public static BufferedImage playerIdleDown, playerIdleUp, playerIdleLeft, playerIdleRight;
+    public static BufferedImage[] player_left, player_right;
+    public static BufferedImage playerIdleLeft, playerIdleRight;
 
     public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right;
     public static BufferedImage enemyIdleDown, enemyIdleUp, enemyIdleLeft, enemyIdleRight;
 
     public static BufferedImage[] ogre_right, ogre_left;
     public static BufferedImage ogreIdleRight, ogreIdleLeft;
+
+    public static BufferedImage[] orc_right, orc_left;
+    public static BufferedImage orcIdleRight, orcIdleLeft;
+
+    public static BufferedImage[] orphan_right, orphan_left;
+    public static BufferedImage orphanIdleRight, orphanIdleLeft;
 
     public static BufferedImage[] screamer_right, screamer_left;
     public static BufferedImage screamerIdleRight, screamerIdleLeft;
@@ -64,6 +70,8 @@ public class Assets {
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
         SpriteSheet ogreSprites = new SpriteSheet(ImageLoader.loadImage("/textures/ogre.png"));
         SpriteSheet screamerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/screamer.png"));
+        SpriteSheet orcSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orc.png"));
+        SpriteSheet orphanSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orphan.png"));
         SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
         SpriteSheet coinGoldSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_gold.png"));
 
@@ -72,7 +80,7 @@ public class Assets {
         // Player animations
         int halfWidth = width/2;
         int halfHeight = height;
-        player_right = new BufferedImage[9];
+        player_right = new BufferedImage[8];
         player_right[0] = playersheet.crop(0,0, halfWidth, height);
         player_right[1] = playersheet.crop(halfWidth,0, halfWidth, height);
         player_right[2] = playersheet.crop(2*halfWidth,0, halfWidth, height);
@@ -81,22 +89,20 @@ public class Assets {
         player_right[5] = playersheet.crop(5*halfWidth,0, halfWidth, height);
         player_right[6] = playersheet.crop(6*halfWidth,0, halfWidth, height);
         player_right[7] = playersheet.crop(7*halfWidth,0, halfWidth, height);
-        player_right[8] = playersheet.crop(8*halfWidth,0, halfWidth, height);
 
-        player_left = new BufferedImage[9];
-        player_left[0] = playersheet.crop(0,halfHeight, halfWidth, height);
-        player_left[1] = playersheet.crop(halfWidth,halfHeight, halfWidth, height);
-        player_left[2] = playersheet.crop(2*halfWidth,halfHeight, halfWidth, height);
-        player_left[3] = playersheet.crop(3*halfWidth,halfHeight, halfWidth, height);
-        player_left[4] = playersheet.crop(4*halfWidth,halfHeight, halfWidth, height);
-        player_left[5] = playersheet.crop(5*halfWidth,halfHeight, halfWidth, height);
-        player_left[6] = playersheet.crop(6*halfWidth,halfHeight, halfWidth, height);
-        player_left[7] = playersheet.crop(7*halfWidth,halfHeight, halfWidth, height);
-        player_left[8] = playersheet.crop(8*halfWidth,halfHeight, halfWidth, height);
+        player_left = new BufferedImage[8];
+        player_left[0] = playersheet.crop(halfWidth,halfHeight, halfWidth, height);
+        player_left[1] = playersheet.crop(2*halfWidth,halfHeight, halfWidth, height);
+        player_left[2] = playersheet.crop(3*halfWidth,halfHeight, halfWidth, height);
+        player_left[3] = playersheet.crop(4*halfWidth,halfHeight, halfWidth, height);
+        player_left[4] = playersheet.crop(5*halfWidth,halfHeight, halfWidth, height);
+        player_left[5] = playersheet.crop(6*halfWidth,halfHeight, halfWidth, height);
+        player_left[6] = playersheet.crop(7*halfWidth,halfHeight, halfWidth, height);
+        player_left[7] = playersheet.crop(8*halfWidth,halfHeight, halfWidth, height);
 
 
 
-        playerIdleLeft = player_left[8];
+        playerIdleLeft = player_left[7];
         playerIdleRight = player_right[0];
         doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
 
@@ -150,7 +156,7 @@ public class Assets {
         ogreIdleLeft = ogreSprites.crop(0, 0, width, height);
         ogreIdleRight = ogreSprites.crop(width * 7, height, width, height);
 
-        // Ogre animation
+        // Screamer animation
         screamer_right = new BufferedImage[8];
         screamer_right[0] = screamerSprites.crop(0, 0, width, height);
         screamer_right[1] = screamerSprites.crop(width, 0, width, height);
@@ -175,6 +181,47 @@ public class Assets {
         screamerIdleLeft = screamerSprites.crop(0, 0, width, height);
         screamerIdleRight = screamerSprites.crop(width * 7, height, width, height);
 
+        // Orc animation
+        orc_right = new BufferedImage[8];
+        orc_right[0] = orcSprites.crop(0, 0, width, height);
+        orc_right[1] = orcSprites.crop(width, 0, width, height);
+        orc_right[2] = orcSprites.crop(width * 2, 0, width, height);
+        orc_right[3] = orcSprites.crop(width * 3, 0, width, height);
+        orc_right[4] = orcSprites.crop(width * 4, 0, width, height);
+        orc_right[5] = orcSprites.crop(width * 5, 0, width, height);
+        orc_right[6] = orcSprites.crop(width * 6, 0, width, height);
+        orc_right[7] = orcSprites.crop(width * 7, 0, width, height);
+
+
+        orc_left = new BufferedImage[8];
+        orc_left[0] = orcSprites.crop(0, height, width, height);
+        orc_left[1] = orcSprites.crop(width, height, width, height);
+        orc_left[2] = orcSprites.crop(width * 2, height, width, height);
+        orc_left[3] = orcSprites.crop(width * 3, height, width, height);
+        orc_left[4] = orcSprites.crop(width * 4, height, width, height);
+        orc_left[5] = orcSprites.crop(width * 5, height, width, height);
+        orc_left[6] = orcSprites.crop(width * 6, height, width, height);
+        orc_left[7] = orcSprites.crop(width * 7, height, width, height);
+
+        orcIdleLeft = orcSprites.crop(0, 0, width, height);
+        orcIdleRight = orcSprites.crop(width * 7, height, width, height);
+
+        // orphan
+        orphan_right = new BufferedImage[4];
+        orphan_right[0] = orphanSprites.crop(0, 0, width/2, height/2);
+        orphan_right[1] = orphanSprites.crop(16, 0, width/2, height/2);
+        orphan_right[2] = orphanSprites.crop(32, 0, width/2, height/2);
+        orphan_right[3] = orphanSprites.crop(48, 0, width/2, height/2);
+
+        orphan_left = new BufferedImage[4];
+        orphan_left[0] = orphanSprites.crop(0, 16, width/2, height/2);
+        orphan_left[1] = orphanSprites.crop(16, 16, width/2, height/2);
+        orphan_left[2] = orphanSprites.crop(32, 16, width/2, height/2);
+        orphan_left[3] = orphanSprites.crop(48, 16, width/2, height/2);
+
+
+        orphanIdleLeft = orphan_left[3];
+        orphanIdleRight = orphan_right[0];
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);

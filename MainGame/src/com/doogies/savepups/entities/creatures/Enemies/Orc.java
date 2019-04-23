@@ -8,7 +8,8 @@ import com.doogies.savepups.graphics.Assets;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Screamer extends Enemy {
+public class Orc extends Enemy{
+
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
@@ -21,7 +22,7 @@ public class Screamer extends Enemy {
     // 0 = down, 1 = up, 2 = left, 3 = right
 
 
-    public Screamer(Handler handler, float x, float y) {
+    public Orc(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
         attackUp = attackDown = attackLeft = attackRight = false;
@@ -38,10 +39,10 @@ public class Screamer extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.screamer_left);
-        animationUp = new Animation(64, Assets.screamer_right);
-        animationLeft = new Animation(64, Assets.screamer_left);
-        animationRight = new Animation(64, Assets.screamer_right);
+        animationDown = new Animation(64, Assets.orc_left);
+        animationUp = new Animation(64, Assets.orc_right);
+        animationLeft = new Animation(64, Assets.orc_left);
+        animationRight = new Animation(64, Assets.orc_right);
     }
 
 
@@ -151,16 +152,16 @@ public class Screamer extends Enemy {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.screamerIdleLeft;
+                return Assets.orcIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.screamerIdleRight;
+                return Assets.orcIdleRight;
             }
             else if(direction == 2) {
-                return Assets.screamerIdleRight;
+                return Assets.orcIdleRight;
             }
             else if(direction == 3) {
-                return Assets.screamerIdleLeft;
+                return Assets.orcIdleLeft;
             }
         }
         return Assets.enemyIdleDown;
@@ -215,3 +216,4 @@ public class Screamer extends Enemy {
         this.direction = direction;
     }
 }
+
