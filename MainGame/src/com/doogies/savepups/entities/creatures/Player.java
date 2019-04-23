@@ -46,9 +46,15 @@ public class Player extends Creature {
     // Game Timer
     private boolean timerStart = false;
     private boolean timerSet = false;
-
     private int timeTakenMinutes, timeTakenSeconds = 0;
     private long initalTime;
+
+    // Score
+    private int score = 0;
+    private int trackedGoldCoins = 0;
+    private int trackedSilverCoins = 0;
+    private int trackedCopperCoins = 0;
+
 
 
     // Player Direction
@@ -130,7 +136,13 @@ public class Player extends Creature {
 
         testDie();
 
-        // Timer stuff
+        timeTracker();
+        scoreTracker();
+
+    }
+
+    public void timeTracker(){
+
         if(playerActive && !timerSet){
             initalTime = System.currentTimeMillis();
             timerSet = true;
@@ -141,11 +153,25 @@ public class Player extends Creature {
             timeTakenSeconds = 0;
         }
         else {
-            //timeTaken = (int) initalTime;
             timeTakenMinutes = (int) (System.currentTimeMillis() - initalTime) / 1000 / 60;
             timeTakenSeconds = (int) ((System.currentTimeMillis() - initalTime) / 1000) % 60;
         }
+    }
 
+    public void scoreTracker(){
+
+        if(handler.getPlayer().getInventory().getItem("CoinGold") > trackedGoldCoins) {
+            score += 10 * handler.getPlayer().getInventory().getItem("CoinGold");
+            trackedGoldCoins++;
+        }
+        if(handler.getPlayer().getInventory().getItem("CoinSilver") > trackedSilverCoins) {
+            score += 5 * handler.getPlayer().getInventory().getItem("CoinSilver");
+            trackedSilverCoins++;
+        }
+        if(handler.getPlayer().getInventory().getItem("CoinCopper") > trackedCopperCoins) {
+            score += 1 * handler.getPlayer().getInventory().getItem("CoinCopper");
+            trackedCopperCoins++;
+        }
     }
 
     private void checkAttacks(){
@@ -446,5 +472,13 @@ public class Player extends Creature {
 
     public void setTimerSet(boolean timerSet) {
         this.timerSet = timerSet;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

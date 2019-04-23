@@ -32,7 +32,7 @@ public class Bed extends Entity {
     public void die() {
         System.out.println("???");
         handler.getRoom().getItemManager().addItem(Item.bedItem.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.coinSilver.createNew((int) x, (int) y));
+        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
     }
 
     @Override

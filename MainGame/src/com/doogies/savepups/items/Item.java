@@ -101,7 +101,7 @@ public class Item {
             case 4:
                 return coinCopperAnimation.getCurrentFrame();
             default:
-                return coinGoldAnimation.getCurrentFrame();
+                return coinCopperAnimation.getCurrentFrame();
         }
     }
 

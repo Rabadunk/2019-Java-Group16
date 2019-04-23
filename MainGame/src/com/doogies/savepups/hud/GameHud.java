@@ -36,7 +36,7 @@ public class GameHud {
             Text.drawString(g, "Time:  " + handler.getPlayer().getTimeTakenMinutes() + " : " + handler.getPlayer().getTimeTakenSeconds(),
                     handler.getWidth() / 2, 20, true, Color.WHITE, Assets.fontHud);
         }
-        Text.drawString(g, "Score:  ", handler.getWidth() / 2, 730, true, Color.WHITE, Assets.fontHud);
+        Text.drawString(g, "Score:  " + handler.getPlayer().getScore(), handler.getWidth() / 2, 730, true, Color.WHITE, Assets.fontHud);
 
         // Equiped items
         g.drawImage(Assets.sword, 20, 680, 64, 64, null);
