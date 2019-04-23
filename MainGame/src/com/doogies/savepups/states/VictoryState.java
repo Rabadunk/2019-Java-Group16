@@ -35,7 +35,19 @@ public class VictoryState extends State {
         g.setColor(Color.black);
         g.fillRect(0,0, handler.getWidth(), handler.getHeight());
         Text.drawString(g,"Congratulations!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
-        Text.drawString(g,"Press p to exit", 500, 600, true, Color.WHITE, Assets.font28);
+
+        Text.drawString(g, "Score: " + handler.getPlayer().getScore(),500, 600, true, Color.cyan,Assets.font28);
+
+        if(handler.getPlayer().getTimeTakenSeconds() < 10){
+            Text.drawString(g, "Time: " + handler.getPlayer().getTimeTakenMinutes() + ":0" + handler.getPlayer().getTimeTakenSeconds(),
+                    500, 570, true, Color.cyan, Assets.font28);
+        }
+        else {
+            Text.drawString(g, "Time: " + handler.getPlayer().getTimeTakenMinutes() + ":" + handler.getPlayer().getTimeTakenSeconds(),
+                    500, 570, true, Color.cyan, Assets.font28);
+        }
+
+        Text.drawString(g,"Press p to exit", 500, 650, true, Color.WHITE, Assets.font28);
 
     }
 
