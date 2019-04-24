@@ -4,9 +4,12 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.house.AStarNode;
+import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Screamer extends Enemy {
 
@@ -56,12 +59,16 @@ public class Screamer extends Enemy {
         //Movement
         if(colCircleBox(handler.getPlayer())) {
             diameter = 600;
-            moveToPlayer(handler.getPlayer());
+            setSpeed(2f);
+            moveToPlayer();
             move();
+            count = 31;
         } else {
-            count ++;
-            if(count > 30) {
+            setSpeed(1f);
+            count++;
+            if(count > 40) {
                 autoMoveDecider();
+                count = 0;
             }
             move();
 
@@ -93,9 +100,12 @@ public class Screamer extends Enemy {
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
                 (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
 
+        g.drawRect((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
+                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
+
         // Rect around player
         g.setColor(Color.red);
-        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight());
+        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()) + 32, handler.getPlayer().getWidth(), handler.getPlayer().getHeight() - 32);
     }
 
 

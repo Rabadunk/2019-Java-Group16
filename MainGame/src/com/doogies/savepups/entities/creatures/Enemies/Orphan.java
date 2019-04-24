@@ -27,10 +27,10 @@ public class Orphan extends Enemy {
 
         attackUp = attackDown = attackLeft = attackRight = false;
 
-        bounds.x = 16;
-        bounds.y = 20;
+        bounds.x = 0;
+        bounds.y = 0;
         bounds.width = 32;
-        bounds.height = 43;
+        bounds.height = 32;
 
         loadSprites();
         setSpeed(1f);
@@ -57,7 +57,7 @@ public class Orphan extends Enemy {
         //Movement
         if(colCircleBox(handler.getPlayer())) {
             diameter = 600;
-            moveToPlayer(handler.getPlayer());
+            moveToPlayer();
             move();
         } else {
             count ++;
@@ -96,7 +96,7 @@ public class Orphan extends Enemy {
 
         // Rect around player
         g.setColor(Color.red);
-        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight());
+        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()) + 32, handler.getPlayer().getWidth(), handler.getPlayer().getHeight() - 32);
     }
 
 

@@ -110,4 +110,8 @@ public abstract class Entity {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public Rectangle getBounds() {
+        return bounds;
+    }
 }
