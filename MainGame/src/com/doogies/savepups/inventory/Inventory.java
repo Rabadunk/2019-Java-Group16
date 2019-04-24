@@ -140,4 +140,12 @@ public class Inventory {
     public void setHandler(Handler handler) {
         this.handler = handler;
     }
+
+    public ArrayList<Item> getInventoryItems() {
+        return inventoryItems;
+    }
+
+    public void setInventoryItems(ArrayList<Item> inventoryItems) {
+        this.inventoryItems = inventoryItems;
+    }
 }

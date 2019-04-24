@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
+import com.doogies.savepups.inventory.Inventory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,9 +25,11 @@ public class VictoryState extends State {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
             // Reset game
             handler.getGame().gameState = new GameState(handler);
+            handler.getPlayer().setInventory(new Inventory(handler));
             State.setState(handler.getGame().menuState);
             handler.getPlayer().setPlayerActive(false);
             handler.getPlayer().setTimerSet(false);
+            handler.getPlayer().setScore(0);
         }
     }
 
