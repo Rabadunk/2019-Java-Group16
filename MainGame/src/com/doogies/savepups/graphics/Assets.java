@@ -21,6 +21,8 @@ public class Assets {
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage  playerIdleUp, playerIdleDown, playerIdleLeft, playerIdleRight;
 
+    public static BufferedImage[] playerAttackDown, playerAttackUp, playerAttackLeft, playerAttackRight;
+
     public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right;
     public static BufferedImage enemyIdleDown, enemyIdleUp, enemyIdleLeft, enemyIdleRight;
 
@@ -113,6 +115,29 @@ public class Assets {
         playerIdleLeft = player_left[0];
         playerIdleRight = player_right[0];
 
+        playerAttackUp = new BufferedImage[4];
+        playerAttackUp[0] = playersheet.crop(0 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[1] = playersheet.crop( 32 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[2] = playersheet.crop(2* 32 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[3] = playersheet.crop(3* 32 + 8,16 * 10, halfWidth, height);
+
+        playerAttackDown = new BufferedImage[4];
+        playerAttackDown[0] = playersheet.crop(0 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[1] = playersheet.crop( 32 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[2] = playersheet.crop(2* 32 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[3] = playersheet.crop(3* 32 + 8,16 * 8, halfWidth, height);
+
+        playerAttackLeft = new BufferedImage[4];
+        playerAttackLeft[0] = playersheet.crop(0 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[1] = playersheet.crop( 32 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[2] = playersheet.crop(2* 32 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[3] = playersheet.crop(3* 32 + 8, 16 * 14, halfWidth, height);
+
+        playerAttackRight = new BufferedImage[4];
+        playerAttackRight[0] = playersheet.crop(0 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[1] = playersheet.crop( 32 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[2] = playersheet.crop(2* 32 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[3] = playersheet.crop(3* 32 + 8, 16 * 12, halfWidth, height);
 
         doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
 

@@ -17,6 +17,8 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
 
+    private Room currentRoom;
+
     // Bed
     private boolean bed = false;
 
@@ -25,37 +27,30 @@ public class Player extends Creature {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
-    private Room currentRoom;
+    private Animation animationAttackDown, animationAttackUp, animationAttackLeft, animationAttackRight;
+
     private boolean attackUp, attackDown, attackLeft, attackRight;
 
     // Attack timer
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
-    //
-    private Inventory inventory;
-
     // Game hud
+    private Inventory inventory;
     private GameHud gameHud;
 
-    // TEMP SOUND CODE
-    private AudioPlayer sound;
-    private boolean playerActive = false;
-
-    private GameTimer gameTimer;
-
     // Game Timer
+    private GameTimer gameTimer;
     private boolean timerStart = false;
     private boolean timerSet = false;
     private int timeTakenMinutes, timeTakenSeconds = 0;
     private long initalTime;
+    private boolean playerActive = false;
 
     // Score
     private int score = 0;
     private int trackedGoldCoins = 0;
     private int trackedSilverCoins = 0;
     private int trackedCopperCoins = 0;
-
-
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -90,6 +85,11 @@ public class Player extends Creature {
         animationUp = new Animation(90, Assets.player_up);
         animationLeft = new Animation(80, Assets.player_left);
         animationRight = new Animation(80, Assets.player_right);
+
+        animationAttackDown = new Animation(160, Assets.playerAttackDown);
+        animationAttackUp = new Animation(160, Assets.playerAttackUp);
+        animationAttackLeft = new Animation(160, Assets.playerAttackLeft);
+        animationAttackRight = new Animation(160, Assets.playerAttackRight);
     }
 
     public void loadGameUtils() {
@@ -98,9 +98,6 @@ public class Player extends Creature {
 
         // hud
         gameHud = new GameHud(handler);
-
-        // Temp audio code
-        sound = new AudioPlayer();
 
         gameTimer = new GameTimer(handler);
     }
@@ -112,6 +109,12 @@ public class Player extends Creature {
         animationUp.tick();
         animationLeft.tick();
         animationRight.tick();
+
+        animationAttackDown.tick();
+        animationAttackUp.tick();
+        animationAttackLeft.tick();
+        animationAttackRight.tick();
+
 
         //Movement
         getInput();
@@ -127,6 +130,7 @@ public class Player extends Creature {
         // Hud
         gameHud.tick();
 
+        // Check silly bed function
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
             bed = !bed;
         }
@@ -136,6 +140,7 @@ public class Player extends Creature {
 
         testDie();
 
+        // Trackers
         timeTracker();
         scoreTracker();
 
@@ -316,38 +321,49 @@ public class Player extends Creature {
 
     public void postRender(Graphics g){
         //Attack animations
-        if(attackUp) {
-            renderAttack(g,0, -1);
-            //return Assets.playerIdleDown;
-        }
-        else if(attackDown) {
-            renderAttack(g,0, 1);
-            //return Assets.playerIdleUp;
-        }
-        else if(attackLeft) {
-            renderAttack(g,-1, 0);
-            //return Assets.playerIdleLeft;
-        }
-        else if(attackRight) {
-            renderAttack(g,1, 0);
-            //return Assets.playerIdleRight;
-        }        //Attack animations
+//        if(attackUp) {
+//            renderAttack(g,0, -1);
+//        }
+//        else if(attackDown) {
+//            renderAttack(g,0, 1);
+//        }
+//        else if(attackLeft) {
+//            renderAttack(g,-1, 0);
+//        }
+//        else if(attackRight) {
+//            renderAttack(g,1, 0);
+//        }
 
         gameHud.render(g);
         inventory.render(g);
 
     }
 
-    private void renderAttack(Graphics g, int dirX, int dirY) {
-        int attackX = (int) (x - handler.getGameCamera().getxOffset()) + (width / 2 + 20) * dirX;
-        int attackY = (int) (y - handler.getGameCamera().getyOffset()) + (height / 2 + 20) * dirY;
-        g.drawImage(Assets.attack, attackX, attackY, width, height, null);
-    }
+//    private void renderAttack(Graphics g, int dirX, int dirY) {
+//        int attackX = (int) (x - handler.getGameCamera().getxOffset()) + (width / 2) * dirX;
+//        int attackY = (int) (y - handler.getGameCamera().getyOffset()) + (height / 2) * dirY;
+//        g.drawImage(getCurrentAnimationFrame(), attackX, attackY, null);
+//    }
 
 
     // Getters and setters
 
     public BufferedImage getCurrentAnimationFrame(){
+        // Attack Animations
+        if(attackUp){
+            return animationAttackUp.getCurrentFrame();
+        }
+        else if(attackDown){
+            return animationAttackDown.getCurrentFrame();
+        }
+        else if(attackLeft){
+            return animationAttackLeft.getCurrentFrame();
+        }
+        else if(attackRight){
+            return animationAttackRight.getCurrentFrame();
+        }
+
+
         if(xMove <0){
             return animationLeft.getCurrentFrame();
         }
