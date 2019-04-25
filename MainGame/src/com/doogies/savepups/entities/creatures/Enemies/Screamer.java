@@ -95,6 +95,7 @@ public class Screamer extends Enemy {
 //        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
 //                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
 //                bounds.width, bounds.height);
+
         // Oval around enemy
         g.setColor(Color.blue);
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),

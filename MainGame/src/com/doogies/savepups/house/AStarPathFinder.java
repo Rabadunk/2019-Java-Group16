@@ -26,6 +26,8 @@ public class AStarPathFinder {
         AStarNode temp;
         openSet.add(startNode);
 
+        clearData();
+
         System.out.println("StartNodeX: " + startNode.x + " StartNodeY: " + startNode.y);
         System.out.println("endNodeX: " + endNode.x + " endNodeY: " + endNode.y);
 
@@ -55,8 +57,6 @@ public class AStarPathFinder {
 
                     temp = temp.previous;
                 }
-
-                clearData();
 
                 System.out.println("ReturnedNodeX: " + temp.x + " ReturnedNodeY: " + temp.y);
 

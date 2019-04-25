@@ -2,6 +2,7 @@ package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
+import com.doogies.savepups.entities.creatures.Enemies.Orphan;
 import com.doogies.savepups.entities.creatures.Enemies.Screamer;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.items.ItemManager;
@@ -47,7 +48,7 @@ public class Room {
         loadFurniture();
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        entityManager.addEntity(new Screamer(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT));
+        entityManager.addEntity(new Orphan(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT));
     }
 
 
