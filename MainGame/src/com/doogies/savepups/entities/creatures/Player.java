@@ -115,7 +115,6 @@ public class Player extends Creature {
         animationAttackLeft.tick();
         animationAttackRight.tick();
 
-
         //Movement
         getInput();
         move();
@@ -245,9 +244,7 @@ public class Player extends Creature {
 
     public void testDie(){
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)){
-            this.health = 0;
             die();
-            System.out.println("Test");
         }
 
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_M)){
@@ -312,43 +309,12 @@ public class Player extends Creature {
                     width, height, null);
         }
 
-
-        //DOesnt work
-        // Red rectangle to represent players collision box
-        g.setColor(Color.red);
-//        g.fillRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-//                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()), attackRangeSize, attackRangeSize);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
     }
 
     public void postRender(Graphics g){
-        //Attack animations
-//        if(attackUp) {
-//            renderAttack(g,0, -1);
-//        }
-//        else if(attackDown) {
-//            renderAttack(g,0, 1);
-//        }
-//        else if(attackLeft) {
-//            renderAttack(g,-1, 0);
-//        }
-//        else if(attackRight) {
-//            renderAttack(g,1, 0);
-//        }
-
         gameHud.render(g);
         inventory.render(g);
-
     }
-
-//    private void renderAttack(Graphics g, int dirX, int dirY) {
-//        int attackX = (int) (x - handler.getGameCamera().getxOffset()) + (width / 2) * dirX;
-//        int attackY = (int) (y - handler.getGameCamera().getyOffset()) + (height / 2) * dirY;
-//        g.drawImage(getCurrentAnimationFrame(), attackX, attackY, null);
-//    }
-
 
     // Getters and setters
 
@@ -367,7 +333,7 @@ public class Player extends Creature {
             return animationAttackRight.getCurrentFrame();
         }
 
-
+        // Walking animations
         if(xMove <0){
             return animationLeft.getCurrentFrame();
         }
@@ -383,6 +349,8 @@ public class Player extends Creature {
         else if(bed){
             return Assets.bed;
         }
+
+        // Idle animations
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
