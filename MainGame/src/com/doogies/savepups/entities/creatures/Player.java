@@ -187,6 +187,10 @@ public class Player extends Creature {
             return;
         }
 
+        if(inventory.isActive()){
+            return;
+        }
+
         Rectangle playerBounds = getCollisionBounds(0,0);
 
         attackUp = attackDown = attackLeft = attackRight = false;
@@ -259,6 +263,12 @@ public class Player extends Creature {
     }
 
     private void getInput() {
+        if(inventory.isActive()){
+            yMove = 0;
+            xMove = 0;
+            return;
+        }
+
         xMove = 0;
         yMove = 0;
 
@@ -285,12 +295,6 @@ public class Player extends Creature {
             direction = 3;
             playerActive = true;
         }
-//        if(handler.getKeyManager().boop) {
-//            bed = true;
-//        }
-//        if(handler.getKeyManager().aww) {
-//            bed = false;
-//        }
     }
 
     @Override
