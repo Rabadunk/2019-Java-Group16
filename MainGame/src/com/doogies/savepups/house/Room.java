@@ -3,8 +3,6 @@ package com.doogies.savepups.house;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Enemies.EnemyManager;
-import com.doogies.savepups.entities.creatures.Enemies.Orphan;
-import com.doogies.savepups.entities.creatures.Enemies.Screamer;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.items.ItemManager;
 
@@ -12,7 +10,6 @@ import com.doogies.savepups.entities.statics.StaticsManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 import java.awt.*;
-import java.io.File;
 
 public class Room {
 
@@ -50,19 +47,17 @@ public class Room {
         this.ID = ID;
         this.handler = handler;
         this.roomPath = "res/rooms/" + roomFile;
-        this.furniturePath = "res/rooms/statics/" + roomFile;
-        this.enemyPath = "res/rooms/enemySpawns/" + roomFile;
+        setupManagers();
+        loadRoom(roomPath);
+    }
+
+    private void setupManagers() {
         this.furniture = new StaticsManager(handler);
         this.enemies = new EnemyManager(handler);
         this.entityManager = new EntityManager(handler, handler.getPlayer());
         this.itemManager = new ItemManager(handler);
         this.gameHud = new GameHud(handler);
-        loadRoom(roomPath);
-        entityManager.getPlayer().setX(spawnX);
-        entityManager.getPlayer().setY(spawnY);
     }
-
-
 
     public void tick() {
         itemManager.tick();
