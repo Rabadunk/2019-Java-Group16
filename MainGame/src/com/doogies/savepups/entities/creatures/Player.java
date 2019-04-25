@@ -86,8 +86,8 @@ public class Player extends Creature {
 
     public void loadSprites() {
         //Animations
-        animationDown = new Animation(90, Assets.player_left);
-        animationUp = new Animation(90, Assets.player_right);
+        animationDown = new Animation(90, Assets.player_down);
+        animationUp = new Animation(90, Assets.player_up);
         animationLeft = new Animation(80, Assets.player_left);
         animationRight = new Animation(80, Assets.player_right);
     }
@@ -366,10 +366,10 @@ public class Player extends Creature {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.playerIdleLeft;
+                return Assets.playerIdleDown;
             }
             else if(direction == 1) {
-                return Assets.playerIdleRight;
+                return Assets.playerIdleUp;
             }
             else if(direction == 2) {
                 return Assets.playerIdleLeft;
