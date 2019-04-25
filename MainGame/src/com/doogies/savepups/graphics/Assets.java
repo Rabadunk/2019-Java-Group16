@@ -18,8 +18,10 @@ public class Assets {
 
     public static BufferedImage barrel1, barrel2;
 
-    public static BufferedImage[] player_left, player_right;
-    public static BufferedImage playerIdleLeft, playerIdleRight;
+    public static BufferedImage[] player_down, player_up, player_left, player_right;
+    public static BufferedImage  playerIdleUp, playerIdleDown, playerIdleLeft, playerIdleRight;
+
+    public static BufferedImage[] playerAttackDown, playerAttackUp, playerAttackLeft, playerAttackRight;
 
     public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right;
     public static BufferedImage enemyIdleDown, enemyIdleUp, enemyIdleLeft, enemyIdleRight;
@@ -62,7 +64,7 @@ public class Assets {
 
 
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
-        SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
+        SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
         SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
@@ -82,30 +84,61 @@ public class Assets {
         // Player animations
         int halfWidth = width/2;
         int halfHeight = height;
-        player_right = new BufferedImage[8];
-        player_right[0] = playersheet.crop(0,0, halfWidth, height);
-        player_right[1] = playersheet.crop(halfWidth,0, halfWidth, height);
-        player_right[2] = playersheet.crop(2*halfWidth,0, halfWidth, height);
-        player_right[3] = playersheet.crop(3*halfWidth,0, halfWidth, height);
-        player_right[4] = playersheet.crop(4*halfWidth,0, halfWidth, height);
-        player_right[5] = playersheet.crop(5*halfWidth,0, halfWidth, height);
-        player_right[6] = playersheet.crop(6*halfWidth,0, halfWidth, height);
-        player_right[7] = playersheet.crop(7*halfWidth,0, halfWidth, height);
 
-        player_left = new BufferedImage[8];
-        player_left[0] = playersheet.crop(halfWidth,halfHeight, halfWidth, height);
-        player_left[1] = playersheet.crop(2*halfWidth,halfHeight, halfWidth, height);
-        player_left[2] = playersheet.crop(3*halfWidth,halfHeight, halfWidth, height);
-        player_left[3] = playersheet.crop(4*halfWidth,halfHeight, halfWidth, height);
-        player_left[4] = playersheet.crop(5*halfWidth,halfHeight, halfWidth, height);
-        player_left[5] = playersheet.crop(6*halfWidth,halfHeight, halfWidth, height);
-        player_left[6] = playersheet.crop(7*halfWidth,halfHeight, halfWidth, height);
-        player_left[7] = playersheet.crop(8*halfWidth,halfHeight, halfWidth, height);
+        player_up = new BufferedImage[4];
+        player_up[0] = playersheet.crop(0,64, halfWidth, height);
+        player_up[1] = playersheet.crop(halfWidth,64, halfWidth, height);
+        player_up[2] = playersheet.crop(2*halfWidth,64, halfWidth, height);
+        player_up[3] = playersheet.crop(3*halfWidth,64, halfWidth, height);
+
+        player_down = new BufferedImage[4];
+        player_down[0] = playersheet.crop(0,0, halfWidth, height);
+        player_down[1] = playersheet.crop(halfWidth,0, halfWidth, height);
+        player_down[2] = playersheet.crop(2*halfWidth,0, halfWidth, height);
+        player_down[3] = playersheet.crop(3*halfWidth,0, halfWidth, height);
+
+        player_left = new BufferedImage[4];
+        player_left[0] = playersheet.crop(0,3*halfHeight, halfWidth, height);
+        player_left[1] = playersheet.crop(halfWidth,3*halfHeight, halfWidth, height);
+        player_left[2] = playersheet.crop(2*halfWidth,3*halfHeight, halfWidth, height);
+        player_left[3] = playersheet.crop(3*halfWidth,3*halfHeight, halfWidth, height);
+
+        player_right = new BufferedImage[4];
+        player_right[0] = playersheet.crop(0,halfHeight, halfWidth, height);
+        player_right[1] = playersheet.crop(halfWidth,halfHeight, halfWidth, height);
+        player_right[2] = playersheet.crop(2*halfWidth,halfHeight, halfWidth, height);
+        player_right[3] = playersheet.crop(3*halfWidth,halfHeight, halfWidth, height);
 
 
-
-        playerIdleLeft = player_left[7];
+        playerIdleUp = player_up[0];
+        playerIdleDown = player_down[0];
+        playerIdleLeft = player_left[0];
         playerIdleRight = player_right[0];
+
+        playerAttackUp = new BufferedImage[4];
+        playerAttackUp[0] = playersheet.crop(0 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[1] = playersheet.crop( 32 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[2] = playersheet.crop(2* 32 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[3] = playersheet.crop(3* 32 + 8,16 * 10, halfWidth, height);
+
+        playerAttackDown = new BufferedImage[4];
+        playerAttackDown[0] = playersheet.crop(0 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[1] = playersheet.crop( 32 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[2] = playersheet.crop(2* 32 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[3] = playersheet.crop(3* 32 + 8,16 * 8, halfWidth, height);
+
+        playerAttackLeft = new BufferedImage[4];
+        playerAttackLeft[0] = playersheet.crop(0 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[1] = playersheet.crop( 32 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[2] = playersheet.crop(2* 32 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[3] = playersheet.crop(3* 32 + 8, 16 * 14, halfWidth, height);
+
+        playerAttackRight = new BufferedImage[4];
+        playerAttackRight[0] = playersheet.crop(0 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[1] = playersheet.crop( 32 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[2] = playersheet.crop(2* 32 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[3] = playersheet.crop(3* 32 + 8, 16 * 12, halfWidth, height);
+
         doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
 
 
