@@ -41,6 +41,7 @@ public class VictoryState extends State {
 
         Text.drawString(g, "Score: " + handler.getPlayer().getScore(),500, 600, true, Color.cyan,Assets.font28);
 
+        // Correct format
         if(handler.getPlayer().getTimeTakenSeconds() < 10){
             Text.drawString(g, "Time: " + handler.getPlayer().getTimeTakenMinutes() + ":0" + handler.getPlayer().getTimeTakenSeconds(),
                     500, 570, true, Color.cyan, Assets.font28);
