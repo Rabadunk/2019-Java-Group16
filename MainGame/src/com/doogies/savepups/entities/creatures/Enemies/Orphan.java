@@ -57,11 +57,9 @@ public class Orphan extends Enemy {
         //Movement
         if(colCircleBox(handler.getPlayer())) {
             diameter = 600;
-            setSpeed(2f);
             moveToPlayer();
             move();
         } else {
-            setSpeed(1f);
             count ++;
             if(count > 30) {
                 autoMoveDecider();

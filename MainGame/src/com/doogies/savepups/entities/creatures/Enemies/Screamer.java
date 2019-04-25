@@ -59,12 +59,10 @@ public class Screamer extends Enemy {
         //Movement
         if(colCircleBox(handler.getPlayer())) {
             diameter = 600;
-            setSpeed(2f);
             moveToPlayer();
             move();
             count = 31;
         } else {
-            setSpeed(1f);
             count++;
             if(count > 40) {
                 autoMoveDecider();
