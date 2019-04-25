@@ -19,16 +19,14 @@ public class HouseGraph {
     private ArrayList<Room> rooms;
 
     public HouseGraph(Handler handler) {
-        constructGraph(numOfRooms);
+        rooms = new ArrayList<>();
         generateRooms(handler);
-        generateHouse();
     }
 
     private void constructGraph(int numOfRooms) {
         // Graph is represented by an adjacency list using linked lists
 
         house = new LinkedList[numOfRooms];
-        rooms = new ArrayList<>();
 
         for(int i = 0; i < numOfRooms; i++) {
             house[i] = new LinkedList<>();
@@ -38,10 +36,10 @@ public class HouseGraph {
 
     private void generateRooms(Handler handler) {
         // Load rooms
-        testRoom = new Room(handler, "res/rooms/testWorld.txt", "res/rooms/statics/hallway.txt",0);
-        bedRoom = new Room(handler, "res/rooms/bedroom.txt", "res/rooms/statics/bedroom.txt", 1);
-        hallwayRoom = new Room(handler, "res/rooms/hallway.txt", "res/rooms/statics/hallway.txt",2);
-        lounge = new Room(handler, "res/rooms/lounge.txt", "res/rooms/statics/hallway.txt", 3);
+        testRoom = new Room(handler, "testWorld.txt", 0);
+        bedRoom = new Room(handler, "bedroom.txt", 1);
+        hallwayRoom = new Room(handler, "hallway.txt", 2);
+        lounge = new Room(handler, "lounge.txt", 3);
 
          // Store rooms
         rooms.add(testRoom);

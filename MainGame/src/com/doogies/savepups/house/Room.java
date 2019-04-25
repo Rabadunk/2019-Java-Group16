@@ -2,6 +2,7 @@ package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
+import com.doogies.savepups.entities.creatures.Enemies.EnemyManager;
 import com.doogies.savepups.entities.creatures.Enemies.Orphan;
 import com.doogies.savepups.entities.creatures.Enemies.Screamer;
 import com.doogies.savepups.hud.GameHud;
@@ -11,18 +12,27 @@ import com.doogies.savepups.entities.statics.StaticsManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 import java.awt.*;
+import java.io.File;
 
 public class Room {
 
     private int width, height;
     private int spawnX, spawnY;
     private int ID;
+
     private int furnitureId;
     private int furnX;
     private int furnY;
 
+    private int enemyId;
+    private int enemyX, enemyY;
+
     private String furniturePath;
+    private String roomPath;
+    private String enemyPath;
+
     private StaticsManager furniture;
+    private EnemyManager enemies;
     private AStarPathFinder pathFinder;
     private Handler handler;
 
@@ -36,20 +46,22 @@ public class Room {
     private GameHud gameHud;
 
 
-    public Room(Handler handler, String roomPath, String furniturePath, int ID) {
+    public Room(Handler handler, String roomFile, int ID) {
         this.ID = ID;
         this.handler = handler;
-        this.furniturePath = furniturePath;
+        this.roomPath = "res/rooms/" + roomFile;
+        this.furniturePath = "res/rooms/statics/" + roomFile;
+        this.enemyPath = "res/rooms/enemySpawns/" + roomFile;
         this.furniture = new StaticsManager(handler);
+        this.enemies = new EnemyManager(handler);
         this.entityManager = new EntityManager(handler, handler.getPlayer());
         this.itemManager = new ItemManager(handler);
         this.gameHud = new GameHud(handler);
         loadRoom(roomPath);
         loadFurniture();
+        loadEnemies();
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        entityManager.addEntity(new Orphan(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT));
-        entityManager.addEntity(new Screamer(handler, 6 * Tile.TILEWIDTH, 6 * Tile.TILEHEIGHT));
     }
 
 
@@ -116,7 +128,16 @@ public class Room {
     }
 
     public void loadFurniture() {
+
+        File fileCheck = new File(furniturePath);
+
+        if(!fileCheck.exists()) {
+            System.out.println(furniturePath + " doesn't exist");
+            return;
+        }
+
         String file = Utils.loadFileAsString(furniturePath);
+
         String[] tokens = file.split(("\\s+"));
 
         for(int i = 0; i < tokens.length; i = i + 3) {
@@ -127,6 +148,30 @@ public class Room {
             furniture.insertStatics(entityManager, furnitureId, furnX, furnY);
         }
     }
+
+    public void loadEnemies() {
+
+        File fileCheck = new File(enemyPath);
+
+        if(!fileCheck.exists()) {
+            System.out.println(enemyPath + " doesn't exist");
+            return;
+        }
+
+        String file = Utils.loadFileAsString(enemyPath);
+
+        String[] tokens = file.split(("\\s+"));
+
+        for(int i = 0; i < tokens.length; i = i + 3) {
+            enemyId = Utils.parseInt(tokens[i]);
+            enemyX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
+            enemyY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
+
+            enemies.insertEnemies(entityManager, enemyId, enemyX, enemyY);
+        }
+    }
+
+
 
     // Getters and setters
     public Handler getHandler() {
