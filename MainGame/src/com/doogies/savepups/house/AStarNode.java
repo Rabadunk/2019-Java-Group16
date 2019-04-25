@@ -16,6 +16,7 @@ public class AStarNode {
     private ArrayList<AStarNode> neighbours;
     private Handler handler;
     private BufferedImage texture;
+    private boolean isEntry = false;
 
     public AStarNode previous;
 
@@ -84,7 +85,11 @@ public class AStarNode {
     }
 
     public boolean isEntry() {
-        return false;
+        return isEntry;
+    }
+
+    public void setEntry(boolean bool) {
+        isEntry = true;
     }
 
 }

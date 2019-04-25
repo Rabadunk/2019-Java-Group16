@@ -49,6 +49,7 @@ public class Room {
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
         entityManager.addEntity(new Orphan(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT));
+        entityManager.addEntity(new Screamer(handler, 6 * Tile.TILEWIDTH, 6 * Tile.TILEHEIGHT));
     }
 
 
@@ -98,8 +99,17 @@ public class Room {
         for(int y = 0; y < height; y++)
             for (int x = 0; x < width; x++) {
                 tileToken = Utils.parseInt(tokens[(x + y * width) + 4]);
-                AStarNode node = new AStarNode(x, y, Tile.tiles[tileToken].getTexture(), Tile.tiles[tileToken].isSolid(), handler);
-                pathFinder.addNode(x, y, node);
+
+                if(tileToken > 99) {
+                    AStarNode node = new AStarNode(x, y, Tile.tiles[3].getTexture(), Tile.tiles[3].isSolid(), handler);
+                    node.setEntry(true);
+                    node.worldID = tileToken % 100;
+                    pathFinder.addNode(x, y, node);
+                } else {
+                    AStarNode node = new AStarNode(x, y, Tile.tiles[tileToken].getTexture(), Tile.tiles[tileToken].isSolid(), handler);
+                    pathFinder.addNode(x, y, node);
+                }
+
             }
 
         pathFinder.makeNeighboursForNodes();
