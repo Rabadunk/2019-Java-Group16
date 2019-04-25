@@ -46,7 +46,6 @@ public class HouseGraph {
         rooms.add(bedRoom);
         rooms.add(hallwayRoom);
         rooms.add(lounge);
-
     }
 
     private void generateHouse() {

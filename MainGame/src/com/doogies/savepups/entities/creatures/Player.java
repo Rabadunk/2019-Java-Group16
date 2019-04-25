@@ -64,8 +64,8 @@ public class Player extends Creature {
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
         this.currentRoom = handler.getRoom();
-        setupAttack();
         setupBounds();
+        setupAttack();
         loadSprites();
         loadGameUtils();
     }
@@ -73,8 +73,8 @@ public class Player extends Creature {
     public void setupAttack() {
         attackUp = attackDown = attackLeft = attackRight = false;
         attackRectangle = new Rectangle();
-        attackRectangle.width = attackRangeSize;
-        attackRectangle.height = attackRangeSize;
+        attackRectangle.width = bounds.width;
+        attackRectangle.height = bounds.height;
     }
 
     public void setupBounds() {
@@ -203,14 +203,14 @@ public class Player extends Creature {
 
         // Up
         if(handler.getKeyManager().attack && direction == 1){
-            attackRectangle.x = playerBounds.x + playerBounds.width / 2;
+            attackRectangle.x = playerBounds.x;
             attackRectangle.y = playerBounds.y - attackRangeSize;
             attackUp = true;
             playerActive = true;
         }
         // Down
         else if(handler.getKeyManager().attack && direction == 0){
-            attackRectangle.x = playerBounds.x + playerBounds.width / 2;
+            attackRectangle.x = playerBounds.x;
             attackRectangle.y = playerBounds.y + playerBounds.height;
             attackDown = true;
             playerActive = true;
@@ -228,8 +228,7 @@ public class Player extends Creature {
             attackRectangle.y = playerBounds.y + playerBounds.height / 2 - attackRangeSize / 2;
             attackRight= true;
             playerActive = true;
-        }
-        else{
+        } else {
             return;
         }
 
@@ -316,6 +315,10 @@ public class Player extends Creature {
         }
 
         g.setColor(Color.red);
+        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
+                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
+                attackRectangle.width,
+                attackRectangle.height);
     }
 
     public void postRender(Graphics g){

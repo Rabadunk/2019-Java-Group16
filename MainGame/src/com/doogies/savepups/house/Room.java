@@ -58,8 +58,6 @@ public class Room {
         this.itemManager = new ItemManager(handler);
         this.gameHud = new GameHud(handler);
         loadRoom(roomPath);
-        loadFurniture();
-        loadEnemies();
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
     }
@@ -100,17 +98,37 @@ public class Room {
 
     private void loadRoom(String path) {
         String file = Utils.loadFileAsString(path);
-        String[] tokens = file.split(("\\s+"));
+        String[] roomAttributes = file.split((","));
+        System.out.println(roomAttributes.length);
+        getRoomDimensions(roomAttributes[0]);
+        getRoomPlayerSpawn(roomAttributes[1]);
+        getRoomTiles(roomAttributes[2]);
+        loadFurniture(roomAttributes[3]);
+        loadEnemies(roomAttributes[4]);
+
+    }
+
+    public void getRoomDimensions(String roomDimensions){
+        String[] tokens = roomDimensions.split(("\\s+"));
+        System.out.println(tokens[0] + " " + tokens[1]);
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]) * Tile.TILEWIDTH;
-        spawnY = Utils.parseInt(tokens[3]) * Tile.TILEHEIGHT;
+    }
+
+    public void getRoomPlayerSpawn(String spawnValues){
+        String[] tokens = spawnValues.split(("\\s+"));
+        spawnX = Utils.parseInt(tokens[1]) * Tile.TILEWIDTH;
+        spawnY = Utils.parseInt(tokens[2]) * Tile.TILEHEIGHT;
+    }
+
+    public void getRoomTiles(String tilePositions) {
+        String[] tokens = tilePositions.split(("\\s+"));
         pathFinder = new AStarPathFinder(width, height, handler);
         int tileToken;
 
         for(int y = 0; y < height; y++)
             for (int x = 0; x < width; x++) {
-                tileToken = Utils.parseInt(tokens[(x + y * width) + 4]);
+                tileToken = Utils.parseInt(tokens[(x + y * width) + 1]);
 
                 if(tileToken > 99) {
                     AStarNode node = new AStarNode(x, y, Tile.tiles[3].getTexture(), Tile.tiles[3].isSolid(), handler);
@@ -127,20 +145,13 @@ public class Room {
         pathFinder.makeNeighboursForNodes();
     }
 
-    public void loadFurniture() {
+    public void loadFurniture(String furnitureSpawns) {
 
-        File fileCheck = new File(furniturePath);
+        String[] tokens = furnitureSpawns.split(("\\s+"));
 
-        if(!fileCheck.exists()) {
-            System.out.println(furniturePath + " doesn't exist");
-            return;
-        }
+        if(tokens.length < 2) return;
 
-        String file = Utils.loadFileAsString(furniturePath);
-
-        String[] tokens = file.split(("\\s+"));
-
-        for(int i = 0; i < tokens.length; i = i + 3) {
+        for(int i = 1; i < tokens.length; i = i + 3) {
             furnitureId = Utils.parseInt(tokens[i]);
             furnX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
             furnY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
@@ -149,20 +160,13 @@ public class Room {
         }
     }
 
-    public void loadEnemies() {
+    public void loadEnemies(String enemySpawns) {
 
-        File fileCheck = new File(enemyPath);
+        String[] tokens = enemySpawns.split(("\\s+"));
 
-        if(!fileCheck.exists()) {
-            System.out.println(enemyPath + " doesn't exist");
-            return;
-        }
+        if(tokens.length < 2) return;
 
-        String file = Utils.loadFileAsString(enemyPath);
-
-        String[] tokens = file.split(("\\s+"));
-
-        for(int i = 0; i < tokens.length; i = i + 3) {
+        for(int i = 1; i < tokens.length; i = i + 3) {
             enemyId = Utils.parseInt(tokens[i]);
             enemyX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
             enemyY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
