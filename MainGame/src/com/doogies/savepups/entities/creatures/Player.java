@@ -8,6 +8,7 @@ import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
+import com.doogies.savepups.states.GameState;
 import com.doogies.savepups.states.State;
 import com.doogies.savepups.utils.GameTimer;
 
@@ -55,6 +56,10 @@ public class Player extends Creature {
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
     private int direction = 0;
+
+    // Game result
+    public static boolean isGameWon = false;
+
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
@@ -137,7 +142,7 @@ public class Player extends Creature {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
         }
 
-        testDie();
+        testStates();
 
         // Trackers
         timeTracker();
@@ -242,21 +247,22 @@ public class Player extends Creature {
 
     }
 
-    public void testDie(){
+    public void testStates(){
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_L)){
             die();
         }
 
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_M)){
-            State.setState(handler.getGame().victoryState);
+            isGameWon = true;
+            State.setState(handler.getGame().gameEndState);
         }
         
     }
 
     @Override
     public void die(){
-        State.setState(handler.getGame().gameOverState);
-        System.out.println("You lose");
+        isGameWon = false;
+        State.setState(handler.getGame().gameEndState);
     }
 
     private void getInput() {
@@ -470,5 +476,11 @@ public class Player extends Creature {
         this.score = score;
     }
 
+    public static boolean isIsGameWon() {
+        return isGameWon;
+    }
 
+    public static void setIsGameWon(boolean isGameWon) {
+        Player.isGameWon = isGameWon;
+    }
 }

@@ -17,20 +17,16 @@ public abstract class State {
     public static void setState(State state) {
         if(state == handler.getGame().gameState) {
             handler.getGame().menuState.stopMusic();
-            //handler.getGame().gameOverState.stopMusic();
+            handler.getGame().gameEndState.stopMusic();
         }
         if (state == handler.getGame().menuState){
             handler.getGame().menuState.startMusic();
-            handler.getGame().gameOverState.stopMusic();
-            handler.getGame().victoryState.stopMusic();
+            handler.getGame().gameEndState.stopMusic();
         }
-        if (state == handler.getGame().gameOverState){
-            handler.getGame().gameOverState.startMusic();
+
+        if(state == handler.getGame().gameEndState){
             handler.getGame().menuState.stopMusic();
-        }
-        if(state == handler.getGame().victoryState){
-            handler.getGame().menuState.stopMusic();
-            handler.getGame().victoryState.startMusic();
+            handler.getGame().gameEndState.startMusic();
         }
         currentState = state;
 

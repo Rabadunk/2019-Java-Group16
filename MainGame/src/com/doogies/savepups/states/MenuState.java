@@ -13,6 +13,7 @@ import com.doogies.savepups.ui.UIObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +48,7 @@ public class MenuState extends State{
 
 
         uiManager.addObject( new UIImageButton(100, 150, 300, 150, Assets.playButton, () -> {
-            if (handler.getKeyManager().enter) {
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 State.setState(handler.getGame().gameState);
                 handler.getPlayer().setX(135);
                 handler.getPlayer().setY(128);
@@ -61,7 +62,7 @@ public class MenuState extends State{
         }));
 
         uiManager.addObject( new UIImageButton(100, 350, 300, 150, Assets.scoreButton, () -> {
-            if(handler.getKeyManager().enter) {
+            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 State.setState(handler.getGame().gameState);
                 handler.setRoom(houseGraph.getRoom(2));
             }
@@ -73,7 +74,7 @@ public class MenuState extends State{
         }));
 
         uiManager.addObject( new UIImageButton(100, 550, 300, 150, Assets.quitButton, () -> {
-            if(handler.getKeyManager().enter) {
+            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 closeGame();
             }
             }, () -> {

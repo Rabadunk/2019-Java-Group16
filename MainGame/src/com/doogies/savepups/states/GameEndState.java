@@ -9,21 +9,24 @@ import com.doogies.savepups.inventory.Inventory;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class VictoryState extends State {
+public class GameEndState extends State {
 
-    public AudioPlayer gameMusic;
+    public AudioPlayer victoryMusic, defeatMusic;
 
-    public VictoryState(Handler handler){
+    public GameEndState(Handler handler){
         super(handler);
-        gameMusic = new AudioPlayer();
-        gameMusic.setFileMusic("Victory");
-    }
 
+        victoryMusic = new AudioPlayer();
+        victoryMusic.setFileMusic("Victory");
+
+        defeatMusic = new AudioPlayer();
+        defeatMusic.setFileMusic("NoHope");
+    }
 
     @Override
     public void tick() {
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
-            // Reset game
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)){
+            // Reset game.
             handler.getGame().gameState = new GameState(handler);
             handler.getPlayer().setInventory(new Inventory(handler));
             State.setState(handler.getGame().menuState);
@@ -31,13 +34,20 @@ public class VictoryState extends State {
             handler.getPlayer().setTimerSet(false);
             handler.getPlayer().setScore(0);
         }
+
     }
 
     @Override
     public void render(Graphics g) {
         g.setColor(Color.black);
         g.fillRect(0,0, handler.getWidth(), handler.getHeight());
-        Text.drawString(g,"Congratulations!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
+
+        if(handler.getPlayer().isGameWon){
+            Text.drawString(g,"Congratulations!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
+        }
+        else {
+            Text.drawString(g, "GAME OVER", 500, 200, true, Color.WHITE, Assets.fontTitle);
+        }
 
         Text.drawString(g, "Score: " + handler.getPlayer().getScore(),500, 600, true, Color.cyan,Assets.font28);
 
@@ -51,15 +61,23 @@ public class VictoryState extends State {
                     500, 570, true, Color.cyan, Assets.font28);
         }
 
-        Text.drawString(g,"Press p to exit", 500, 650, true, Color.WHITE, Assets.font28);
+        Text.drawString(g,"Press ENTER to exit", 500, 650, true, Color.WHITE, Assets.font28);
 
     }
 
     @Override
-    public void startMusic() { gameMusic.play(); }
+    public void startMusic() {
+        if(handler.getPlayer().isIsGameWon()){
+            victoryMusic.play();
+        }
+        else{
+            defeatMusic.play();
+        }
+    }
 
     @Override
     public void stopMusic() {
-        gameMusic.stop();
+        victoryMusic.stop();
+        defeatMusic.stop();
     }
 }

@@ -17,7 +17,6 @@ public class GameState extends State {
     private boolean worldChanged = false;
     private Room currentRoom;
 
-
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
