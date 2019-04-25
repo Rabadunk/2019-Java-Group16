@@ -79,9 +79,9 @@ public class Player extends Creature {
 
     public void setupBounds() {
         bounds.x = 0;
-        bounds.y = 32;
+        bounds.y = 12;
         bounds.width = 32;
-        bounds.height = 32;
+        bounds.height = 40;
     }
 
     public void loadSprites() {

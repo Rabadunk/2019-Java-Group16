@@ -56,12 +56,14 @@ public class Screamer extends Enemy {
         //Movement
         if(colCircleBox(handler.getPlayer())) {
             diameter = 600;
-            moveToPlayer(handler.getPlayer());
+            moveToPlayer();
             move();
+            count = 31;
         } else {
-            count ++;
-            if(count > 30) {
+            count++;
+            if(count > 40) {
                 autoMoveDecider();
+                count = 0;
             }
             move();
 
@@ -88,14 +90,20 @@ public class Screamer extends Enemy {
 //        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
 //                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
 //                bounds.width, bounds.height);
+
         // Oval around enemy
         g.setColor(Color.blue);
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
                 (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
 
+        g.drawRect((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
+                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
+
         // Rect around player
         g.setColor(Color.red);
-        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()), handler.getPlayer().getWidth(), handler.getPlayer().getHeight());
+        g.drawRect((int) (handler.getPlayer().getX() + player.getBounds().x - handler.getGameCamera().getxOffset()),
+                (int) (handler.getPlayer().getY() + player.getBounds().y - handler.getGameCamera().getyOffset()),
+                handler.getPlayer().getBounds().width, handler.getPlayer().getBounds().height);
     }
 
 

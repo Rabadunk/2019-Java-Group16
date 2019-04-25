@@ -57,7 +57,7 @@ public class Ogre extends Enemy {
         if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == Assets.bed)) {
             count = 51;
             diameter = 250;
-            moveToPlayer(handler.getPlayer());
+            moveToPlayer();
             move();
         } else {
             count ++;

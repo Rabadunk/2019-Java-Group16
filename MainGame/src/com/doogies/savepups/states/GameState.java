@@ -20,7 +20,7 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
-        handler.setRoom(house.getRoom(1));
+        handler.setRoom(house.getRoom(0));
 
         currentRoom = handler.getRoom();
     }
@@ -33,8 +33,8 @@ public class GameState extends State {
 
     private void checkForRoomChange() {
         Player player = handler.getPlayer();
-        Room room = house.getRoom(player.getTileWorldID());
         if(player.inEntry()) {
+            Room room = house.getRoom(player.getTileWorldID());
             currentRoom = room;
             handler.setRoom(room);
             worldChanged = true;
