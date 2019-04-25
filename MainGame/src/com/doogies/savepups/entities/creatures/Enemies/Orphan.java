@@ -94,9 +94,6 @@ public class Orphan extends Enemy {
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
                 (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
 
-        // Rect around player
-        g.setColor(Color.red);
-        g.drawRect((int) (handler.getPlayer().getX() - handler.getGameCamera().getxOffset()), (int) (handler.getPlayer().getY() - handler.getGameCamera().getyOffset()) + 32, handler.getPlayer().getWidth(), handler.getPlayer().getHeight() - 32);
     }
 
 
