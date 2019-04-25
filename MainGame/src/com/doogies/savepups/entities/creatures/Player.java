@@ -309,6 +309,7 @@ public class Player extends Creature {
                     width, height, null);
         }
 
+        g.setColor(Color.red);
     }
 
     public void postRender(Graphics g){
