@@ -82,13 +82,13 @@ public abstract class Creature extends Entity {
     }
 
     protected boolean collisionWithTile(int x, int y) {
-        return handler.getRoom().getTile(x, y).isSolid();
+        return handler.getRoom().getPathFinder().getNode(x, y).isSolid;
     }
 
-    public boolean inEntry() { return handler.getRoom().getTile(xPos, yPos).isEntry(); }
+    public boolean inEntry() { return handler.getRoom().getPathFinder().getNode(xPos, yPos).isEntry(); }
 
     public int getTileWorldID() {
-        return handler.getRoom().getTile((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH)).getWorldId();
+        return handler.getRoom().getPathFinder().getNode((int)((x + bounds.x + bounds.width) / Tile.TILEHEIGHT), (int) ((y + bounds.y + bounds.height) / Tile.TILEWIDTH)).worldID;
     }
 
 

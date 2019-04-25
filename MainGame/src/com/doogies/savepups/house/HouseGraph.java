@@ -43,7 +43,7 @@ public class HouseGraph {
         hallwayRoom = new Room(handler, "res/rooms/hallway.txt", "res/rooms/statics/hallway.txt",2);
         lounge = new Room(handler, "res/rooms/lounge.txt", "res/rooms/statics/hallway.txt", 3);
 
-        // Store rooms
+         // Store rooms
         rooms.add(testRoom);
         rooms.add(bedRoom);
         rooms.add(hallwayRoom);

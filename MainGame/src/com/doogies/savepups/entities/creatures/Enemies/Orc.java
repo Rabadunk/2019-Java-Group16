@@ -57,7 +57,7 @@ public class Orc extends Enemy{
         //Movement
         if(colCircleBox(handler.getPlayer())) {
             diameter = 600;
-            moveToPlayer(handler.getPlayer());
+            moveToPlayer();
             move();
         } else {
             count ++;

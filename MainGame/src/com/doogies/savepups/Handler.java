@@ -1,7 +1,5 @@
 package com.doogies.savepups;
 
-import com.doogies.savepups.entities.Entity;
-import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.house.Room;
