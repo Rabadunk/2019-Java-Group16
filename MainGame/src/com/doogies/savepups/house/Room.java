@@ -143,7 +143,7 @@ public class Room {
         ArrayList<AStarNode> nodes = HouseGraph.house.get(ID);
 
         for(AStarNode node: nodes) {
-            for(AStarNode nodeNeighbour : node.getNeighbours()) {
+            for(AStarNode nodeNeighbour : node.getHorizontalVerticalNeighbours()) {
                 if(!nodeNeighbour.isSolid) {
                     node.roomSpawnX = nodeNeighbour.x * Tile.TILEWIDTH;
                     node.roomSpawnY = nodeNeighbour.y * Tile.TILEHEIGHT;
