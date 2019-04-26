@@ -1,6 +1,7 @@
 package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
@@ -17,12 +18,16 @@ public class GameState extends State {
     private boolean worldChanged = false;
     private Room currentRoom;
 
+    public AudioPlayer goldCoinSound;
+
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
         handler.setRoom(house.getRoom(0));
 
         currentRoom = handler.getRoom();
+
+        goldCoinSound.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     @Override
