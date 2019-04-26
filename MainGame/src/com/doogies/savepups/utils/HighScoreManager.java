@@ -27,12 +27,14 @@ public class HighScoreManager {
             }
     };
 
-    private static final String savedFile = "/saves/scores.dat";
+    private static final String savedFile = "res/saves/scores.dat";
     ObjectOutputStream output = null;
     ObjectInputStream input = null;
 
     public HighScoreManager(Handler handler){
         this.handler = handler;
+
+        loadScoreFile();
     }
 
     public void loadScoreFile() {
