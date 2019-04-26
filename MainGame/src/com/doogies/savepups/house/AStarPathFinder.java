@@ -26,9 +26,6 @@ public class AStarPathFinder {
         AStarNode temp;
         openSet.add(startNode);
 
-        System.out.println("StartNodeX: " + startNode.x + " StartNodeY: " + startNode.y);
-        System.out.println("endNodeX: " + endNode.x + " endNodeY: " + endNode.y);
-
         if(startNode == endNode) {
             return startNode;
         }

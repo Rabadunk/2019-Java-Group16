@@ -94,7 +94,6 @@ public class Room {
     private void loadRoom(String path) {
         String file = Utils.loadFileAsString(path);
         String[] roomAttributes = file.split((","));
-        System.out.println(roomAttributes.length);
         getRoomDimensions(roomAttributes[0]);
         getRoomPlayerSpawn(roomAttributes[1]);
         getRoomTiles(roomAttributes[2]);
@@ -105,7 +104,6 @@ public class Room {
 
     public void getRoomDimensions(String roomDimensions){
         String[] tokens = roomDimensions.split(("\\s+"));
-        System.out.println(tokens[0] + " " + tokens[1]);
         width = Utils.parseInt(tokens[0]);
         height = Utils.parseInt(tokens[1]);
     }

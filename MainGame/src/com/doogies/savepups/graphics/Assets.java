@@ -41,6 +41,9 @@ public class Assets {
     public static BufferedImage[] vampire_down, vampire_up, vampire_left, vampire_right;
     public static BufferedImage  vampireIdleUp, vampireIdleDown, vampireIdleLeft, vampireIdleRight;
 
+    public static BufferedImage[] bat_down, bat_up, bat_left, bat_right;
+    public static BufferedImage  batIdleUp, batIdleDown, batIdleLeft, batIdleRight;
+
     public static BufferedImage attack;
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
@@ -291,6 +294,33 @@ public class Assets {
         vampireIdleDown = vampire_down[1];
         vampireIdleLeft = vampire_left[1];
         vampireIdleRight = vampire_right[1];
+
+        // Bat
+        bat_up = new BufferedImage[3];
+        bat_up[0] = vampireSprites.crop(80,height*3, width, height);
+        bat_up[1] = vampireSprites.crop(80 + width,height*3, width, height);
+        bat_up[2] = vampireSprites.crop(80 + 2*width,height*3, width, height);
+
+        bat_down = new BufferedImage[3];
+        bat_down[0] = vampireSprites.crop(80,0, width, height);
+        bat_down[1] = vampireSprites.crop(80 + width,0, width, height);
+        bat_down[2] = vampireSprites.crop(80 + 2*width,0, width, height);
+
+        bat_left = new BufferedImage[3];
+        bat_left[0] = vampireSprites.crop(80, height, width, height);
+        bat_left[1] = vampireSprites.crop(80 + width, height, width, height);
+        bat_left[2] = vampireSprites.crop(80 + 2*width, height, width, height);
+
+        bat_right = new BufferedImage[3];
+        bat_right[0] = vampireSprites.crop(80, height*2, width, height);
+        bat_right[1] = vampireSprites.crop(80 + width, height*2, width, height);
+        bat_right[2] = vampireSprites.crop(80 + 2*width, height*2, width, height);
+
+
+        batIdleUp = bat_up[1];
+        batIdleDown = bat_down[1];
+        batIdleLeft = bat_left[1];
+        batIdleRight = bat_right[1];
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);

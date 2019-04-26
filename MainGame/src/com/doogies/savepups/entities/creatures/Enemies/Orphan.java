@@ -32,6 +32,8 @@ public class Orphan extends Enemy {
         bounds.width = 32;
         bounds.height = 32;
 
+        setupAttack();
+
         loadSprites();
         setSpeed(1f);
         setHealth(2);
@@ -68,6 +70,9 @@ public class Orphan extends Enemy {
 
             diameter = 200;
         }
+
+        checkAttacks();
+        timeTracker();
     }
 
     @Override
@@ -93,6 +98,12 @@ public class Orphan extends Enemy {
         g.setColor(Color.blue);
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
                 (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
+
+        g.setColor(Color.red);
+        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
+                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
+                attackRectangle.width,
+                attackRectangle.height);
 
     }
 
