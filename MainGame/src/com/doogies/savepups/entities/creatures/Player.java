@@ -1,14 +1,12 @@
 package com.doogies.savepups.entities.creatures;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
-import com.doogies.savepups.states.GameState;
 import com.doogies.savepups.states.State;
 import com.doogies.savepups.utils.GameTimer;
 import com.doogies.savepups.utils.HighScoreManager;
@@ -18,8 +16,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Player extends Creature {
-
-    private Room currentRoom;
 
     // Bed
     private boolean bed = false;
@@ -65,7 +61,6 @@ public class Player extends Creature {
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
-        this.currentRoom = handler.getRoom();
         setupBounds();
         setupAttack();
         loadSprites();

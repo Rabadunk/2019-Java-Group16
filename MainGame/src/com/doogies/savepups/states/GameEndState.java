@@ -2,6 +2,7 @@ package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioPlayer;
+import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
 import com.doogies.savepups.inventory.Inventory;
@@ -27,12 +28,9 @@ public class GameEndState extends State {
     public void tick() {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)){
             // Reset game.
+            handler.newPlayer();
             handler.getGame().gameState = new GameState(handler);
-            handler.getPlayer().setInventory(new Inventory(handler));
             State.setState(handler.getGame().menuState);
-            handler.getPlayer().setPlayerActive(false);
-            handler.getPlayer().setTimerSet(false);
-            handler.getPlayer().setScore(0);
         }
 
     }

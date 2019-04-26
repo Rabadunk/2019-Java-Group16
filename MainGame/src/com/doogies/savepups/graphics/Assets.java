@@ -38,6 +38,12 @@ public class Assets {
     public static BufferedImage[] screamer_right, screamer_left;
     public static BufferedImage screamerIdleRight, screamerIdleLeft;
 
+    public static BufferedImage[] vampire_down, vampire_up, vampire_left, vampire_right;
+    public static BufferedImage  vampireIdleUp, vampireIdleDown, vampireIdleLeft, vampireIdleRight;
+
+    public static BufferedImage[] bat_down, bat_up, bat_left, bat_right;
+    public static BufferedImage  batIdleUp, batIdleDown, batIdleLeft, batIdleRight;
+
     public static BufferedImage attack;
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
@@ -70,10 +76,14 @@ public class Assets {
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
+
         SpriteSheet ogreSprites = new SpriteSheet(ImageLoader.loadImage("/textures/ogre.png"));
         SpriteSheet screamerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/screamer.png"));
         SpriteSheet orcSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orc.png"));
         SpriteSheet orphanSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orphan.png"));
+        SpriteSheet vampireSprites = new SpriteSheet(ImageLoader.loadImage("/textures/vampire.png"));
+
+
         SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
         SpriteSheet coinGoldSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_gold.png"));
         SpriteSheet coinSilverSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_silver.png"));
@@ -83,31 +93,30 @@ public class Assets {
 
         // Player animations
         int halfWidth = width/2;
-        int halfHeight = height;
 
         player_up = new BufferedImage[4];
-        player_up[0] = playersheet.crop(0,64, halfWidth, height);
-        player_up[1] = playersheet.crop(halfWidth,64, halfWidth, height);
-        player_up[2] = playersheet.crop(2*halfWidth,64, halfWidth, height);
-        player_up[3] = playersheet.crop(3*halfWidth,64, halfWidth, height);
+        player_up[0] = playersheet.crop(0,64, width/2, height);
+        player_up[1] = playersheet.crop(width/2,64, width/2, height);
+        player_up[2] = playersheet.crop(width,64, width/2, height);
+        player_up[3] = playersheet.crop(width + width/2,64, width/2, height);
 
         player_down = new BufferedImage[4];
-        player_down[0] = playersheet.crop(0,0, halfWidth, height);
-        player_down[1] = playersheet.crop(halfWidth,0, halfWidth, height);
-        player_down[2] = playersheet.crop(2*halfWidth,0, halfWidth, height);
-        player_down[3] = playersheet.crop(3*halfWidth,0, halfWidth, height);
+        player_down[0] = playersheet.crop(0,0,width/2, height);
+        player_down[1] = playersheet.crop(width/2,0, width/2, height);
+        player_down[2] = playersheet.crop(width,0, width/2, height);
+        player_down[3] = playersheet.crop(3*(width/2),0, width/2, height);
 
         player_left = new BufferedImage[4];
-        player_left[0] = playersheet.crop(0,3*halfHeight, halfWidth, height);
-        player_left[1] = playersheet.crop(halfWidth,3*halfHeight, halfWidth, height);
-        player_left[2] = playersheet.crop(2*halfWidth,3*halfHeight, halfWidth, height);
-        player_left[3] = playersheet.crop(3*halfWidth,3*halfHeight, halfWidth, height);
+        player_left[0] = playersheet.crop(0,3*height, width/2, height);
+        player_left[1] = playersheet.crop(width/2,3*height, width/2, height);
+        player_left[2] = playersheet.crop(width,3*height, width/2, height);
+        player_left[3] = playersheet.crop(3*(width/2),3*height, width/2, height);
 
         player_right = new BufferedImage[4];
-        player_right[0] = playersheet.crop(0,halfHeight, halfWidth, height);
-        player_right[1] = playersheet.crop(halfWidth,halfHeight, halfWidth, height);
-        player_right[2] = playersheet.crop(2*halfWidth,halfHeight, halfWidth, height);
-        player_right[3] = playersheet.crop(3*halfWidth,halfHeight, halfWidth, height);
+        player_right[0] = playersheet.crop(0, height, width/2, height);
+        player_right[1] = playersheet.crop(width/2, height, width/2, height);
+        player_right[2] = playersheet.crop(width, height, width/2, height);
+        player_right[3] = playersheet.crop(3*(width/2), height, width/2, height);
 
 
         playerIdleUp = player_up[0];
@@ -257,6 +266,61 @@ public class Assets {
 
         orphanIdleLeft = orphan_left[3];
         orphanIdleRight = orphan_right[0];
+
+        // Vampire
+        vampire_up = new BufferedImage[3];
+        vampire_up[0] = vampireSprites.crop(0,height*3, width/2, height);
+        vampire_up[1] = vampireSprites.crop(width/2,height*3, width/2, height);
+        vampire_up[2] = vampireSprites.crop(width,height*3, width/2, height);
+
+        vampire_down = new BufferedImage[3];
+        vampire_down[0] = vampireSprites.crop(0,0, width/2, height);
+        vampire_down[1] = vampireSprites.crop(width/2,0, width/2, height);
+        vampire_down[2] = vampireSprites.crop(width,0, width/2, height);
+
+        vampire_left = new BufferedImage[3];
+        vampire_left[0] = vampireSprites.crop(0, height, halfWidth, height);
+        vampire_left[1] = vampireSprites.crop(width/2, height, halfWidth, height);
+        vampire_left[2] = vampireSprites.crop(width, height, halfWidth, height);
+
+        vampire_right = new BufferedImage[3];
+        vampire_right[0] = vampireSprites.crop(0, height*2, halfWidth, height);
+        vampire_right[1] = vampireSprites.crop(width/2, height*2, halfWidth, height);
+        vampire_right[2] = vampireSprites.crop(width, height*2, halfWidth, height);
+
+
+
+        vampireIdleUp = vampire_up[1];
+        vampireIdleDown = vampire_down[1];
+        vampireIdleLeft = vampire_left[1];
+        vampireIdleRight = vampire_right[1];
+
+        // Bat
+        bat_up = new BufferedImage[3];
+        bat_up[0] = vampireSprites.crop(80,height*3, width, height);
+        bat_up[1] = vampireSprites.crop(80 + width,height*3, width, height);
+        bat_up[2] = vampireSprites.crop(80 + 2*width,height*3, width, height);
+
+        bat_down = new BufferedImage[3];
+        bat_down[0] = vampireSprites.crop(80,0, width, height);
+        bat_down[1] = vampireSprites.crop(80 + width,0, width, height);
+        bat_down[2] = vampireSprites.crop(80 + 2*width,0, width, height);
+
+        bat_left = new BufferedImage[3];
+        bat_left[0] = vampireSprites.crop(80, height, width, height);
+        bat_left[1] = vampireSprites.crop(80 + width, height, width, height);
+        bat_left[2] = vampireSprites.crop(80 + 2*width, height, width, height);
+
+        bat_right = new BufferedImage[3];
+        bat_right[0] = vampireSprites.crop(80, height*2, width, height);
+        bat_right[1] = vampireSprites.crop(80 + width, height*2, width, height);
+        bat_right[2] = vampireSprites.crop(80 + 2*width, height*2, width, height);
+
+
+        batIdleUp = bat_up[1];
+        batIdleDown = bat_down[1];
+        batIdleLeft = bat_left[1];
+        batIdleRight = bat_right[1];
 
         // ENVIRONMENT
 //        roof = mapsheet.crop(width * 9, 16, width, height - 2);

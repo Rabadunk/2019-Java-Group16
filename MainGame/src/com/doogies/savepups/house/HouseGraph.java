@@ -14,6 +14,7 @@ public class HouseGraph {
     private Room hallwayRoom;
     private Room testRoom;
     private Room lounge;
+    private Room bossRoom;
 
     private List<Integer> house[];
     private ArrayList<Room> rooms;
@@ -40,12 +41,14 @@ public class HouseGraph {
         bedRoom = new Room(handler, "bedroom.txt", 1);
         hallwayRoom = new Room(handler, "hallway.txt", 2);
         lounge = new Room(handler, "lounge.txt", 3);
+        bossRoom = new Room(handler, "bossRoom.txt", 4);
 
          // Store rooms
         rooms.add(testRoom);
         rooms.add(bedRoom);
         rooms.add(hallwayRoom);
         rooms.add(lounge);
+        rooms.add(bossRoom);
     }
 
     private void generateHouse() {
