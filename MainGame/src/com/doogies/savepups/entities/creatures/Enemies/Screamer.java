@@ -1,9 +1,11 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,10 +14,7 @@ public class Screamer extends Enemy {
 
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
-    private boolean attackUp, attackDown, attackLeft, attackRight;
 
-    // Attack timer
-    private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -24,12 +23,12 @@ public class Screamer extends Enemy {
     public Screamer(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
-        attackUp = attackDown = attackLeft = attackRight = false;
 
         bounds.x = 16;
         bounds.y = 20;
         bounds.width = 32;
         bounds.height = 43;
+        setupAttack();
 
         loadSprites();
         setSpeed(1f);
@@ -62,18 +61,21 @@ public class Screamer extends Enemy {
         } else {
             count++;
             if(count > 40) {
-                autoMoveDecider();
+                dontMove();
                 count = 0;
             }
             move();
 
             diameter = 200;
         }
+
+        checkAttacks();
+        timeTracker();
     }
 
     @Override
     public void die(){
-        System.out.println("Ogre has been slain");
+        System.out.println("Screamer has been slain");
     }
 
     @Override
@@ -86,10 +88,10 @@ public class Screamer extends Enemy {
 
         //DOesnt work
         // Red rectangle to represent players collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
+        g.setColor(Color.red);
+        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+                bounds.width, bounds.height);
 
         // Oval around enemy
         g.setColor(Color.blue);
@@ -104,42 +106,48 @@ public class Screamer extends Enemy {
         g.drawRect((int) (handler.getPlayer().getX() + player.getBounds().x - handler.getGameCamera().getxOffset()),
                 (int) (handler.getPlayer().getY() + player.getBounds().y - handler.getGameCamera().getyOffset()),
                 handler.getPlayer().getBounds().width, handler.getPlayer().getBounds().height);
+
+        g.setColor(Color.red);
+        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
+                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
+                attackRectangle.width,
+                attackRectangle.height);
     }
-
-
-    public void postRender(Graphics g){
-
-        //Attack animations
-
-        if(attackUp) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleDown;
-        }
-        else if(attackDown) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleUp;
-        }
-        else if(attackLeft) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleLeft;
-        }
-        else if(attackRight) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleRight;
-        }
-    }
+//
+//
+//    public void postRender(Graphics g){
+//
+//        //Attack animations
+//
+//        if(attackUp) {
+//            g.drawImage(Assets.attack,
+//                    (int) (x - handler.getGameCamera().getxOffset()),
+//                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
+//                    width, height, null);
+//            //return Assets.playerIdleDown;
+//        }
+//        else if(attackDown) {
+//            g.drawImage(Assets.attack,
+//                    (int) (x - handler.getGameCamera().getxOffset()),
+//                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
+//                    width, height, null);
+//            //return Assets.playerIdleUp;
+//        }
+//        else if(attackLeft) {
+//            g.drawImage(Assets.attack,
+//                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
+//                    (int) (y - handler.getGameCamera().getyOffset()),
+//                    width, height, null);
+//            //return Assets.playerIdleLeft;
+//        }
+//        else if(attackRight) {
+//            g.drawImage(Assets.attack,
+//                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
+//                    (int) (y - handler.getGameCamera().getyOffset()),
+//                    width, height, null);
+//            //return Assets.playerIdleRight;
+//        }
+//    }
 
     // Getters and setters
 

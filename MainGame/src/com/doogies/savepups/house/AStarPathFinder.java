@@ -26,9 +26,6 @@ public class AStarPathFinder {
         AStarNode temp;
         openSet.add(startNode);
 
-        System.out.println("StartNodeX: " + startNode.x + " StartNodeY: " + startNode.y);
-        System.out.println("endNodeX: " + endNode.x + " endNodeY: " + endNode.y);
-
         if(startNode == endNode) {
             return startNode;
         }
@@ -44,19 +41,13 @@ public class AStarPathFinder {
             }
 
             AStarNode current = openSet.get(lowestFScoreIndex);
-            //System.out.println("NodeX: " + current.x + " NodeY: " + current.y);
 
             if(current == endNode) {
                 temp = current;
 
                 while(temp.previous != startNode) {
-
-                    System.out.println("NodeX: " + temp.x + " NodeY: " + temp.y);
-
                     temp = temp.previous;
                 }
-
-                System.out.println("ReturnedNodeX: " + temp.x + " ReturnedNodeY: " + temp.y);
 
                 clearData();
 

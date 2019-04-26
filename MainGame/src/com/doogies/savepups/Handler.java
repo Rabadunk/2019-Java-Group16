@@ -52,4 +52,8 @@ public class Handler {
         player.setX(room.getSpawnX());
         player.setY(room.getSpawnY());
     }
+
+    public void newPlayer() {
+        player = new Player(this, 64, 64);
+    }
 }

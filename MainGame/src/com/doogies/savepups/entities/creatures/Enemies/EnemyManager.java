@@ -25,6 +25,8 @@ public class EnemyManager {
             case 3:
                 insertScreamer(entityManager, x, y);
                 break;
+            case 4:
+                insertVampire(entityManager, x, y);
         }
     }
 
@@ -46,5 +48,10 @@ public class EnemyManager {
     public void insertScreamer(EntityManager entityManager, int spawnX, int spawnY) {
         Screamer screamer = new Screamer(handler, spawnX, spawnY);
         entityManager.addEntity(screamer);
+    }
+
+    public void insertVampire(EntityManager entityManager, int spawnX, int spawnY) {
+        Vampire vampire = new Vampire(handler, spawnX, spawnY);
+        entityManager.addEntity(vampire);
     }
 }
