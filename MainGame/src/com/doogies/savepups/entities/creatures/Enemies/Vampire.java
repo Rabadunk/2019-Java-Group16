@@ -3,6 +3,7 @@ package com.doogies.savepups.entities.creatures.Enemies;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.states.State;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,14 +13,12 @@ public class Vampire extends Enemy {
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
     private BufferedImage idleDown, idleUp, idleLeft, idleRight;
-    private boolean attackUp, attackDown, attackLeft, attackRight;
-    private boolean isBat, humanSpritesNotLoaded, batSpritesNotLoaded = false;
+
+    private boolean isBat = false;
     private int switchCount = 0;
 
-    // Attack timer
-    private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
 
-    // Player Direction
+    // Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
 
 
@@ -27,11 +26,6 @@ public class Vampire extends Enemy {
         super(handler, x, y, 80, 80);
 
         attackUp = attackDown = attackLeft = attackRight = false;
-
-        bounds.x = 4;
-        bounds.y = 48;
-        bounds.width = 36;
-        bounds.height = 32;
 
         loadHumanSprites();
         setSpeed(1f);
@@ -48,11 +42,19 @@ public class Vampire extends Enemy {
         idleUp = Assets.vampireIdleUp;
         idleLeft = Assets.vampireIdleLeft;
         idleRight = Assets.vampireIdleRight;
+
+        loadHumanBounds();
+
         width = 40;
         height = 80;
         isBat = false;
-        batSpritesNotLoaded = true;
-        humanSpritesNotLoaded = false;
+    }
+
+    private void loadHumanBounds() {
+        bounds.x = 4;
+        bounds.y = 48;
+        bounds.width = 36;
+        bounds.height = 32;
     }
 
     private void loadBatSprites() {
@@ -65,17 +67,28 @@ public class Vampire extends Enemy {
         idleUp = Assets.batIdleUp;
         idleLeft = Assets.batIdleLeft;
         idleRight = Assets.batIdleRight;
-        width = 100;
-        height = 100;
+
+        loadBatBounds();
+
+        width = 64;
+        height = 64;
         isBat = true;
-        batSpritesNotLoaded = false;
-        humanSpritesNotLoaded = true;
+    }
+
+    private void loadBatBounds() {
+        bounds.x = 16;
+        bounds.y = 16;
+        bounds.width = 32;
+        bounds.height = 32;
     }
 
     private void changeToBat() {
         if(!isBat) {
             System.out.println("Changing to bat");
             loadBatSprites();
+
+            handler.getRoom();
+
         }
     }
 
@@ -98,17 +111,14 @@ public class Vampire extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())) {
-            diameter = 600;
+        if(!isBat) {
             moveToPlayer();
-            count = 31;
         } else {
             count++;
-            if(count > 40) {
+            if(count > 20) {
                 autoMoveDecider();
                 count = 0;
             }
-            diameter = 200;
         }
 
         move();
@@ -123,7 +133,6 @@ public class Vampire extends Enemy {
         }
 
         if(switchCount != 0) {
-            System.out.println("Reducing switch count: " + switchCount);
             switchCount = switchCount - 1;
         }
 
@@ -131,6 +140,7 @@ public class Vampire extends Enemy {
 
     @Override
     public void die(){
+        State.setState(handler.getGame().gameEndState);
         System.out.println("Vampire has been slain");
     }
 
@@ -143,22 +153,11 @@ public class Vampire extends Enemy {
                 width, height, null);
 
         // Red rectangle to represent collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
+        g.setColor(Color.red);
+        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+                bounds.width, bounds.height);
 
-        // Oval around enemy
-        g.setColor(Color.blue);
-        g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
-                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
-
-
-        // Rect around player
-//        g.setColor(Color.red);
-//        g.drawRect((int) (handler.getPlayer().getX() + player.getBounds().x - handler.getGameCamera().getxOffset()),
-//                (int) (handler.getPlayer().getY() + player.getBounds().y - handler.getGameCamera().getyOffset()),
-//                handler.getPlayer().getBounds().width, handler.getPlayer().getBounds().height);
     }
 
 
@@ -193,55 +192,6 @@ public class Vampire extends Enemy {
             }
         }
         return Assets.enemyIdleDown;
-    }
-
-
-    public boolean isAttackUp() {
-        return attackUp;
-    }
-
-    public void setAttackUp(boolean attackUp) {
-        this.attackUp = attackUp;
-    }
-
-    public boolean isAttackDown() {
-        return attackDown;
-    }
-
-    public void setAttackDown(boolean attackDown) {
-        this.attackDown = attackDown;
-    }
-
-    public boolean isAttackLeft() {
-        return attackLeft;
-    }
-
-    public void setAttackLeft(boolean attackLeft) {
-        this.attackLeft = attackLeft;
-    }
-
-    public boolean isAttackRight() {
-        return attackRight;
-    }
-
-    public void setAttackRight(boolean attackRight) {
-        this.attackRight = attackRight;
-    }
-
-    public long getAttackCooldown() {
-        return attackCooldown;
-    }
-
-    public void setAttackCooldown(long attackCooldown) {
-        this.attackCooldown = attackCooldown;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
     }
 
     public void damage(int amount) {
