@@ -18,6 +18,8 @@ public class HighScoreManager {
     private ArrayList<Score> highScores;
     private int i;
 
+    // Highest and lowest scores
+
 
     private Comparator<Score> scoreComparator = (Score score1, Score score2) -> {
             int sc1 = score1.getScore();
@@ -97,6 +99,9 @@ public class HighScoreManager {
         }
     }
 
+    public void addScore(String name, int score){
+        highScores.add(new Score(name, score));
+    }
     // Getters and setters
 
 
