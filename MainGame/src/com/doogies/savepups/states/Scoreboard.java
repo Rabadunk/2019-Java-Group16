@@ -32,11 +32,11 @@ public class Scoreboard extends State{
         // Displaying scores
 
         for(int i = 0; i < 10; i++){
-            Text.drawString(g, handler.getPlayer().getHighScoreManager().getArrayListScores().get(i).getName(),
+            Text.drawString(g, handler.getHighScoreManager().getHighScores().get(i).getName(),
                     230, 240 + i * 40, false, Color.WHITE, Assets.font28);
         }
         for(int i = 0; i < 10; i++){
-            Text.drawString(g, Integer.toString(handler.getPlayer().getHighScoreManager().getArrayListScores().get(i).getScore()),
+            Text.drawString(g, Integer.toString(handler.getHighScoreManager().getHighScores().get(i).getScore()),
                     600, 240 + i * 40, false, Color.WHITE, Assets.font28);
         }
 

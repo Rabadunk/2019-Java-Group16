@@ -56,8 +56,6 @@ public class Player extends Creature {
 
     // Game result
     public static boolean isGameWon = false;
-    private HighScoreManager highScoreManager;
-
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
@@ -65,7 +63,6 @@ public class Player extends Creature {
         setupAttack();
         loadSprites();
         loadGameUtils();
-        highScoreManager = new HighScoreManager(handler);
     }
 
     public void setupAttack() {
@@ -140,13 +137,14 @@ public class Player extends Creature {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
         }
 
+        // Test methods
         testStates();
+        testScore();
 
         // Trackers
         timeTracker();
         scoreTracker();
 
-        highScoreManager.tick();
 
     }
 
@@ -255,7 +253,12 @@ public class Player extends Creature {
             isGameWon = true;
             State.setState(handler.getGame().gameEndState);
         }
-        
+    }
+
+    public void testScore(){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_Y)){
+            score += 999999999;
+        }
     }
 
     @Override
@@ -488,11 +491,5 @@ public class Player extends Creature {
         Player.isGameWon = isGameWon;
     }
 
-    public HighScoreManager getHighScoreManager() {
-        return highScoreManager;
-    }
 
-    public void setHighScoreManager(HighScoreManager highScoreManager) {
-        this.highScoreManager = highScoreManager;
-    }
 }

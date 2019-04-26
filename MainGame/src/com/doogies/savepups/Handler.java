@@ -5,6 +5,7 @@ import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
+import com.doogies.savepups.utils.HighScoreManager;
 
 public class Handler {
 
@@ -12,9 +13,12 @@ public class Handler {
     private Room room;
     public Player player;
 
+    public HighScoreManager highScoreManager;
+
     public Handler(Game game) {
         this.game = game;
         player = new Player(this, 64, 64);
+        highScoreManager = new HighScoreManager(this);
     }
 
     public GameCamera getGameCamera() {
@@ -55,5 +59,13 @@ public class Handler {
 
     public void newPlayer() {
         player = new Player(this, 64, 64);
+    }
+
+    public HighScoreManager getHighScoreManager() {
+        return highScoreManager;
+    }
+
+    public void setHighScoreManager(HighScoreManager highScoreManager) {
+        this.highScoreManager = highScoreManager;
     }
 }

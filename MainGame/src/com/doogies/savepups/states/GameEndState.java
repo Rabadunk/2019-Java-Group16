@@ -14,6 +14,8 @@ public class GameEndState extends State {
 
     public AudioPlayer victoryMusic, defeatMusic;
 
+    private boolean scoreSet = false;
+
     public GameEndState(Handler handler){
         super(handler);
 
@@ -26,6 +28,11 @@ public class GameEndState extends State {
 
     @Override
     public void tick() {
+        if(handler.getPlayer().getScore() > handler.getHighScoreManager().getLowestScore() && !scoreSet){
+            handler.getHighScoreManager().addScore("New player", handler.getPlayer().getScore());
+            scoreSet = true;
+            handler.getHighScoreManager().printScoresOnce();
+        }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)){
             // Reset game.
             handler.newPlayer();
@@ -41,11 +48,18 @@ public class GameEndState extends State {
         g.fillRect(0,0, handler.getWidth(), handler.getHeight());
 
         if(handler.getPlayer().isGameWon){
-            Text.drawString(g,"Congratulations!!!", 500, 200, true, Color.WHITE, Assets.fontTitle);
+            if(handler.getPlayer().getScore() > handler.getHighScoreManager().getLowestScore()) {
+                Text.drawString(g, "New high score!", 500, 200, true, Color.WHITE, Assets.fontTitle);
+            }
+            else{
+                Text.drawString(g, "Congratulations!", 500, 200, true, Color.WHITE, Assets.fontTitle);
+            }
         }
         else {
             Text.drawString(g, "GAME OVER", 500, 200, true, Color.WHITE, Assets.fontTitle);
         }
+
+
 
         Text.drawString(g, "Score: " + handler.getPlayer().getScore(),500, 600, true, Color.cyan,Assets.font28);
 

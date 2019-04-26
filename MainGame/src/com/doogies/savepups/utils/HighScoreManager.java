@@ -17,8 +17,10 @@ public class HighScoreManager {
     private ArrayList<Score> arrayListScores;
     private ArrayList<Score> highScores;
     private int i;
+    private  boolean scoreAdded = false;
 
     // Highest and lowest scores
+    private int lowestScore, highestScore;
 
 
     private Comparator<Score> scoreComparator = (Score score1, Score score2) -> {
@@ -48,6 +50,8 @@ public class HighScoreManager {
         convertStringScoresToInts();
 
         sortScores();
+        lowestScore = arrayListScores.get(10).getScore();
+        highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
 
         printScoresOnce();
@@ -71,19 +75,26 @@ public class HighScoreManager {
 
     public int discardExtraScores(){
         if(arrayListScores.size() > 10) {
-            System.out.println("Greater than 10");
             for (i = 0; i < 10; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
                 //highScores.add(new Score(arrayListScores.get(i).getName(), arrayListScores.get(i).getScore()));
                 highScores.add(arrayListScores.get(i));
             }
         }
+        Collections.sort(highScores, scoreComparator);
         return 0;
     }
 
     public void tick(){
-//        for(Score s : stringScores)
-//            System.out.println(s.getScore() + ":" + s.getName());
+        if(scoreAdded){
+            scoreAdded = false;
+            System.out.println("Score added");
+            sortScores();
+            lowestScore = arrayListScores.get(10).getScore();
+            highestScore = arrayListScores.get(0).getScore();
+            discardExtraScores();
+
+        }
     }
 
 
@@ -97,10 +108,12 @@ public class HighScoreManager {
         for(Score s: highScores){
             System.out.println(s.getName() + " " + s.getScore());
         }
+        System.out.println("Highest: " + highestScore + " Lowest: " + lowestScore);
     }
 
     public void addScore(String name, int score){
         highScores.add(new Score(name, score));
+        scoreAdded = true;
     }
     // Getters and setters
 
@@ -119,6 +132,25 @@ public class HighScoreManager {
 
     public void setHighScores(ArrayList<Score> highScores) {
         this.highScores = highScores;
+    }
+
+    // Getters and setters
+
+
+    public int getLowestScore() {
+        return lowestScore;
+    }
+
+    public void setLowestScore(int lowestScore) {
+        this.lowestScore = lowestScore;
+    }
+
+    public int getHighestScore() {
+        return highestScore;
+    }
+
+    public void setHighestScore(int highScore) {
+        this.highestScore = highScore;
     }
 }
 // Some of the code is
