@@ -9,6 +9,7 @@ import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
 import com.doogies.savepups.states.State;
 import com.doogies.savepups.utils.GameTimer;
+import com.doogies.savepups.utils.HighScoreManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -55,6 +56,7 @@ public class Player extends Creature {
 
     // Game result
     public static boolean isGameWon = false;
+    private HighScoreManager highScoreManager;
 
 
     public Player(Handler handler, float x, float y) {
@@ -63,6 +65,7 @@ public class Player extends Creature {
         setupAttack();
         loadSprites();
         loadGameUtils();
+        highScoreManager = new HighScoreManager(handler);
     }
 
     public void setupAttack() {
@@ -142,6 +145,8 @@ public class Player extends Creature {
         // Trackers
         timeTracker();
         scoreTracker();
+
+        highScoreManager.tick();
 
     }
 
@@ -491,5 +496,13 @@ public class Player extends Creature {
 
     public static void setIsGameWon(boolean isGameWon) {
         Player.isGameWon = isGameWon;
+    }
+
+    public HighScoreManager getHighScoreManager() {
+        return highScoreManager;
+    }
+
+    public void setHighScoreManager(HighScoreManager highScoreManager) {
+        this.highScoreManager = highScoreManager;
     }
 }

@@ -64,6 +64,9 @@ public abstract class Enemy extends Creature {
                 (int) ((y + bounds.y) / Tile.TILEHEIGHT)
         );
 
+        //System.out.println("PlayerNodeX: " + goalNode.x + " PlayerNodeY: " + goalNode.y);
+        //System.out.println("Our Location: " + startNode.x + " " + startNode.y);
+
         AStarNode node = handler.getRoom().getPathFinder().pathFind(startNode, goalNode);
 
         if(y > (node.y * Tile.TILEHEIGHT) + 1) {
@@ -85,7 +88,7 @@ public abstract class Enemy extends Creature {
             xMove = speed;
             direction = 3;
         }
-
+        
         if(getDistanceToPlayer() < 0.8 * Tile.TILEWIDTH) {
             dontMove();
         }
