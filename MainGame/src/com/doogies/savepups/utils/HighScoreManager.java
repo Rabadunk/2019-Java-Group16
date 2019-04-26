@@ -2,6 +2,9 @@ package com.doogies.savepups.utils;
 
 import com.doogies.savepups.Handler;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -110,6 +113,24 @@ public class HighScoreManager {
         lowestScore = arrayListScores.get(10).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
+        writeNewscores();
+    }
+
+    public void writeNewscores(){
+        Writer fileWriter = null;
+        try {
+            fileWriter = new FileWriter(savedFile);
+            //fileWriter.write("data 1");
+            for(i = 0; i < highScores.size(); i++){
+                fileWriter.write(handler.highScoreManager.getHighScores().get(i).getName());
+                fileWriter.write(" ");
+                fileWriter.write(Integer.toString(handler.highScoreManager.getHighScores().get(i).getScore()));
+                fileWriter.write("\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     // Getters and setters
 
@@ -130,9 +151,6 @@ public class HighScoreManager {
         this.highScores = highScores;
     }
 
-    // Getters and setters
-
-
     public int getLowestScore() {
         return lowestScore;
     }
@@ -149,5 +167,5 @@ public class HighScoreManager {
         this.highestScore = highScore;
     }
 }
-// Some of the code is
-// From https://stackoverflow.com/questions/22339123/adding-highscores-to-java-game-from-console-to-jpanel-saving-highscore-in-en
+// Comparator is from
+// https://stackoverflow.com/questions/22339123/adding-highscores-to-java-game-from-console-to-jpanel-saving-highscore-in-en
