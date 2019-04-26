@@ -26,8 +26,8 @@ public class AStarPathFinder {
         AStarNode temp;
         openSet.add(startNode);
 
-        System.out.println("StartNodeX: " + startNode.x + " StartNodeY: " + startNode.y);
-        System.out.println("endNodeX: " + endNode.x + " endNodeY: " + endNode.y);
+        //System.out.println("StartNodeX: " + startNode.x + " StartNodeY: " + startNode.y);
+        //System.out.println("endNodeX: " + endNode.x + " endNodeY: " + endNode.y);
 
         if(startNode == endNode) {
             return startNode;
@@ -51,12 +51,12 @@ public class AStarPathFinder {
 
                 while(temp.previous != startNode) {
 
-                    System.out.println("NodeX: " + temp.x + " NodeY: " + temp.y);
+                    //System.out.println("NodeX: " + temp.x + " NodeY: " + temp.y);
 
                     temp = temp.previous;
                 }
 
-                System.out.println("ReturnedNodeX: " + temp.x + " ReturnedNodeY: " + temp.y);
+               // System.out.println("ReturnedNodeX: " + temp.x + " ReturnedNodeY: " + temp.y);
 
                 clearData();
 
@@ -109,7 +109,7 @@ public class AStarPathFinder {
 
         }
 
-        System.out.println("Path find complete");
+//        System.out.println("Path find complete");
 
 
         return startNode;

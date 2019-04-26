@@ -37,8 +37,8 @@ public abstract class Enemy extends Creature {
                 (int) ((y + bounds.y) / Tile.TILEHEIGHT)
         );
 
-        System.out.println("PlayerNodeX: " + goalNode.x + " PlayerNodeY: " + goalNode.y);
-        System.out.println("Our Location: " + startNode.x + " " + startNode.y);
+        //System.out.println("PlayerNodeX: " + goalNode.x + " PlayerNodeY: " + goalNode.y);
+        //System.out.println("Our Location: " + startNode.x + " " + startNode.y);
 
         AStarNode node = handler.getRoom().getPathFinder().pathFind(startNode, goalNode);
 
@@ -62,8 +62,8 @@ public abstract class Enemy extends Creature {
             direction = 3;
         }
 
-        System.out.println("Actually moving to: " + node.x + " " + node.y);
-        System.out.println();
+        //System.out.println("Actually moving to: " + node.x + " " + node.y);
+       // System.out.println();
 
         this.dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
         this.dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
