@@ -46,6 +46,9 @@ public class AStarPathFinder {
                 temp = current;
 
                 while(temp.previous != startNode) {
+
+                    //System.out.println("NodeX: " + temp.x + " NodeY: " + temp.y);
+
                     temp = temp.previous;
                 }
 
@@ -100,7 +103,7 @@ public class AStarPathFinder {
 
         }
 
-        System.out.println("Path find complete");
+//        System.out.println("Path find complete");
 
 
         return startNode;

@@ -1,11 +1,10 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.utils.GameTimer;
+import com.doogies.savepups.items.Item;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -75,6 +74,7 @@ public class Screamer extends Enemy {
 
     @Override
     public void die(){
+        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
         System.out.println("Screamer has been slain");
     }
 
@@ -86,8 +86,6 @@ public class Screamer extends Enemy {
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
 
-        //DOesnt work
-        // Red rectangle to represent players collision box
         g.setColor(Color.red);
         g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
                 (int)(y + bounds.y - handler.getGameCamera().getyOffset()),

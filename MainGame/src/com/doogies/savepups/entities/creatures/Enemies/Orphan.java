@@ -5,6 +5,7 @@ import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.items.Item;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -78,6 +79,7 @@ public class Orphan extends Enemy {
     @Override
     public void die(){
         System.out.println("Ogre has been slain");
+        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
     }
 
     @Override
