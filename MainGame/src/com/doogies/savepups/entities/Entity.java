@@ -15,6 +15,7 @@ public abstract class Entity {
 
     protected Handler handler;
     protected Rectangle bounds;
+    protected boolean takenDamage = false;
 
 
     public Entity(Handler handler, float x, float y, int width, int height) {
@@ -40,6 +41,8 @@ public abstract class Entity {
             active = false;
             die();
         }
+
+        takenDamage = true;
     }
 
 

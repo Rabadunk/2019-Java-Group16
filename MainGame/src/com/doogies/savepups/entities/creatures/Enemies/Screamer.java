@@ -98,20 +98,6 @@ public class Screamer extends Enemy {
         g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
                 (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
 
-        g.drawRect((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
-                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
-
-        // Rect around player
-        g.setColor(Color.red);
-        g.drawRect((int) (handler.getPlayer().getX() + player.getBounds().x - handler.getGameCamera().getxOffset()),
-                (int) (handler.getPlayer().getY() + player.getBounds().y - handler.getGameCamera().getyOffset()),
-                handler.getPlayer().getBounds().width, handler.getPlayer().getBounds().height);
-
-        g.setColor(Color.red);
-        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
-                attackRectangle.width,
-                attackRectangle.height);
     }
 //
 //

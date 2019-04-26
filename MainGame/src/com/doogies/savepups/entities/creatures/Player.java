@@ -296,7 +296,17 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        if (getCurrentAnimationFrame() == Assets.bed){
+
+        if(takenDamage) {
+            takenDamage = false;
+            g.drawImage(getCurrentAnimationFrame(),
+                    (int) (x - handler.getGameCamera().getxOffset()),
+                    (int) (y - handler.getGameCamera().getyOffset()),
+                    width, height, null);
+            g.setColor(Color.red);
+            g.fillRect(0,0, handler.getGame().getWidth(), handler.getGame().getHeight());
+        }
+        else if (getCurrentAnimationFrame() == Assets.bed){
             g.drawImage(getCurrentAnimationFrame(),
                     (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
                     (int)(y - handler.getGameCamera().getyOffset()),
