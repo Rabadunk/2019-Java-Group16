@@ -25,7 +25,7 @@ public abstract class Enemy extends Creature {
     int attackRangeSize = bounds.width;
 
     // Attack timer
-    protected long lastAttackTimer, attackCooldown = 1800, attackTimer = attackCooldown;
+    protected long lastAttackTimer, attackCooldown = 2500, attackTimer = attackCooldown;
 
     // Game Timer
     protected GameTimer gameTimer;
@@ -89,17 +89,9 @@ public abstract class Enemy extends Creature {
             direction = 3;
         }
 
-
-        //System.out.println("Actually moving to: " + node.x + " " + node.y);
-       // System.out.println();
-
-        this.dx = (x + width/2 - handler.getGameCamera().getxOffset()) - (player.getX() - handler.getGameCamera().getxOffset() + player.getWidth() / 2);
-        this.dy = (y + height/2 - handler.getGameCamera().getyOffset()) - (player.getY() - handler.getGameCamera().getyOffset() + player.getHeight() / 2);
-
-        if(getDistanceToPlayer() < 0.8 * Tile.TILEWIDTH) {
+        if(getDistanceToPlayer() <  Tile.TILEWIDTH) {
             dontMove();
         }
-
     }
 
     protected void autoMoveDecider() {
@@ -156,8 +148,6 @@ public abstract class Enemy extends Creature {
 
         Rectangle enemyBounds = getCollisionBounds(0, 0);
         Boolean shouldAttack = getDistanceToPlayer() < 0.8 * Tile.TILEWIDTH;
-
-        //System.out.println(shouldAttack);
 
         attackUp = attackDown = attackLeft = attackRight = false;
 

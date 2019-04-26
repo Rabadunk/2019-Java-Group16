@@ -34,6 +34,7 @@ public class GameState extends State {
     public void tick() {
         checkForRoomChange();
         handler.getRoom().tick();
+        //handler.highScoreManager.tick();
     }
 
     private void checkForRoomChange() {

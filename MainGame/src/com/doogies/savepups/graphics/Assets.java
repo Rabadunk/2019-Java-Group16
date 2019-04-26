@@ -23,6 +23,11 @@ public class Assets {
 
     public static BufferedImage[] playerAttackDown, playerAttackUp, playerAttackLeft, playerAttackRight;
 
+    public static BufferedImage[] playerAttacked_down, playerAttacked_up, playerAttacked_left, playerAttacked_right;
+    public static BufferedImage  playerAttackedIdleUp, playerAttackedIdleDown, playerAttackedIdleLeft, playerAttackedIdleRight;
+
+    public static BufferedImage[] playerAttackedAttackDown, playerAttackedAttackUp, playerAttackedAttackLeft, playerAttackedAttackRight;
+
     public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right;
     public static BufferedImage enemyIdleDown, enemyIdleUp, enemyIdleLeft, enemyIdleRight;
 
@@ -71,6 +76,7 @@ public class Assets {
 
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
+        SpriteSheet playerAttackedsheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/characterAttacked.png"));
         SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
@@ -91,9 +97,7 @@ public class Assets {
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
 
-        // Player animations
-        int halfWidth = width/2;
-
+        // Player
         player_up = new BufferedImage[4];
         player_up[0] = playersheet.crop(0,64, width/2, height);
         player_up[1] = playersheet.crop(width/2,64, width/2, height);
@@ -125,28 +129,84 @@ public class Assets {
         playerIdleRight = player_right[0];
 
         playerAttackUp = new BufferedImage[4];
-        playerAttackUp[0] = playersheet.crop(0 + 8,16 * 10, halfWidth, height);
-        playerAttackUp[1] = playersheet.crop( 32 + 8,16 * 10, halfWidth, height);
-        playerAttackUp[2] = playersheet.crop(2* 32 + 8,16 * 10, halfWidth, height);
-        playerAttackUp[3] = playersheet.crop(3* 32 + 8,16 * 10, halfWidth, height);
+        playerAttackUp[0] = playersheet.crop(0 + 8,16 * 10, width/2, height);
+        playerAttackUp[1] = playersheet.crop( 32 + 8,16 * 10, width/2, height);
+        playerAttackUp[2] = playersheet.crop(2* 32 + 8,16 * 10, width/2, height);
+        playerAttackUp[3] = playersheet.crop(3* 32 + 8,16 * 10, width/2, height);
 
         playerAttackDown = new BufferedImage[4];
-        playerAttackDown[0] = playersheet.crop(0 + 8,16 * 8, halfWidth, height);
-        playerAttackDown[1] = playersheet.crop( 32 + 8,16 * 8, halfWidth, height);
-        playerAttackDown[2] = playersheet.crop(2* 32 + 8,16 * 8, halfWidth, height);
-        playerAttackDown[3] = playersheet.crop(3* 32 + 8,16 * 8, halfWidth, height);
+        playerAttackDown[0] = playersheet.crop(0 + 8,16 * 8, width/2, height);
+        playerAttackDown[1] = playersheet.crop( 32 + 8,16 * 8, width/2, height);
+        playerAttackDown[2] = playersheet.crop(2* 32 + 8,16 * 8, width/2, height);
+        playerAttackDown[3] = playersheet.crop(3* 32 + 8,16 * 8, width/2, height);
 
         playerAttackLeft = new BufferedImage[4];
-        playerAttackLeft[0] = playersheet.crop(0 + 8, 16 * 14, halfWidth, height);
-        playerAttackLeft[1] = playersheet.crop( 32 + 8, 16 * 14, halfWidth, height);
-        playerAttackLeft[2] = playersheet.crop(2* 32 + 8, 16 * 14, halfWidth, height);
-        playerAttackLeft[3] = playersheet.crop(3* 32 + 8, 16 * 14, halfWidth, height);
+        playerAttackLeft[0] = playersheet.crop(0 + 8, 16 * 14, width/2, height);
+        playerAttackLeft[1] = playersheet.crop( 32 + 8, 16 * 14, width/2, height);
+        playerAttackLeft[2] = playersheet.crop(2* 32 + 8, 16 * 14, width/2, height);
+        playerAttackLeft[3] = playersheet.crop(3* 32 + 8, 16 * 14, width/2, height);
 
         playerAttackRight = new BufferedImage[4];
-        playerAttackRight[0] = playersheet.crop(0 + 8, 16 * 12, halfWidth, height);
-        playerAttackRight[1] = playersheet.crop( 32 + 8, 16 * 12, halfWidth, height);
-        playerAttackRight[2] = playersheet.crop(2* 32 + 8, 16 * 12, halfWidth, height);
-        playerAttackRight[3] = playersheet.crop(3* 32 + 8, 16 * 12, halfWidth, height);
+        playerAttackRight[0] = playersheet.crop(0 + 8, 16 * 12, width/2, height);
+        playerAttackRight[1] = playersheet.crop( 32 + 8, 16 * 12, width/2, height);
+        playerAttackRight[2] = playersheet.crop(2* 32 + 8, 16 * 12, width/2, height);
+        playerAttackRight[3] = playersheet.crop(3* 32 + 8, 16 * 12, width/2, height);
+
+        // Player taken damage
+
+        playerAttacked_up = new BufferedImage[4];
+        playerAttacked_up[0] = playerAttackedsheet.crop(0,64, width/2, height);
+        playerAttacked_up[1] = playerAttackedsheet.crop(width/2,64, width/2, height);
+        playerAttacked_up[2] = playerAttackedsheet.crop(width,64, width/2, height);
+        playerAttacked_up[3] = playerAttackedsheet.crop(width + width/2,64, width/2, height);
+
+        playerAttacked_down = new BufferedImage[4];
+        playerAttacked_down[0] = playerAttackedsheet.crop(0,0,width/2, height);
+        playerAttacked_down[1] = playerAttackedsheet.crop(width/2,0, width/2, height);
+        playerAttacked_down[2] = playerAttackedsheet.crop(width,0, width/2, height);
+        playerAttacked_down[3] = playerAttackedsheet.crop(3*(width/2),0, width/2, height);
+
+        playerAttacked_left = new BufferedImage[4];
+        playerAttacked_left[0] = playerAttackedsheet.crop(0,3*height, width/2, height);
+        playerAttacked_left[1] = playerAttackedsheet.crop(width/2,3*height, width/2, height);
+        playerAttacked_left[2] = playerAttackedsheet.crop(width,3*height, width/2, height);
+        playerAttacked_left[3] = playerAttackedsheet.crop(3*(width/2),3*height, width/2, height);
+
+        playerAttacked_right = new BufferedImage[4];
+        playerAttacked_right[0] = playerAttackedsheet.crop(0, height, width/2, height);
+        playerAttacked_right[1] = playerAttackedsheet.crop(width/2, height, width/2, height);
+        playerAttacked_right[2] = playerAttackedsheet.crop(width, height, width/2, height);
+        playerAttacked_right[3] = playerAttackedsheet.crop(3*(width/2), height, width/2, height);
+
+
+        playerAttackedIdleUp = playerAttacked_up[0];
+        playerAttackedIdleDown = playerAttacked_down[0];
+        playerAttackedIdleLeft = playerAttacked_left[0];
+        playerAttackedIdleRight = playerAttacked_right[0];
+
+        playerAttackedAttackUp = new BufferedImage[4];
+        playerAttackedAttackUp[0] = playerAttackedsheet.crop(0 + 8,16 * 10, width/2, height);
+        playerAttackedAttackUp[1] = playerAttackedsheet.crop( 32 + 8,16 * 10, width/2, height);
+        playerAttackedAttackUp[2] = playerAttackedsheet.crop(2* 32 + 8,16 * 10, width/2, height);
+        playerAttackedAttackUp[3] = playerAttackedsheet.crop(3* 32 + 8,16 * 10, width/2, height);
+
+        playerAttackedAttackDown = new BufferedImage[4];
+        playerAttackedAttackDown[0] = playerAttackedsheet.crop(0 + 8,16 * 8, width/2, height);
+        playerAttackedAttackDown[1] = playerAttackedsheet.crop( 32 + 8,16 * 8, width/2, height);
+        playerAttackedAttackDown[2] = playerAttackedsheet.crop(2* 32 + 8,16 * 8, width/2, height);
+        playerAttackedAttackDown[3] = playerAttackedsheet.crop(3* 32 + 8,16 * 8, width/2, height);
+
+        playerAttackedAttackLeft = new BufferedImage[4];
+        playerAttackedAttackLeft[0] = playerAttackedsheet.crop(0 + 8, 16 * 14, width/2, height);
+        playerAttackedAttackLeft[1] = playerAttackedsheet.crop( 32 + 8, 16 * 14, width/2, height);
+        playerAttackedAttackLeft[2] = playerAttackedsheet.crop(2* 32 + 8, 16 * 14, width/2, height);
+        playerAttackedAttackLeft[3] = playerAttackedsheet.crop(3* 32 + 8, 16 * 14, width/2, height);
+
+        playerAttackedAttackRight = new BufferedImage[4];
+        playerAttackedAttackRight[0] = playerAttackedsheet.crop(0 + 8, 16 * 12, width/2, height);
+        playerAttackedAttackRight[1] = playerAttackedsheet.crop( 32 + 8, 16 * 12, width/2, height);
+        playerAttackedAttackRight[2] = playerAttackedsheet.crop(2* 32 + 8, 16 * 12, width/2, height);
+        playerAttackedAttackRight[3] = playerAttackedsheet.crop(3* 32 + 8, 16 * 12, width/2, height);
 
         doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
 
@@ -279,14 +339,14 @@ public class Assets {
         vampire_down[2] = vampireSprites.crop(width,0, width/2, height);
 
         vampire_left = new BufferedImage[3];
-        vampire_left[0] = vampireSprites.crop(0, height, halfWidth, height);
-        vampire_left[1] = vampireSprites.crop(width/2, height, halfWidth, height);
-        vampire_left[2] = vampireSprites.crop(width, height, halfWidth, height);
+        vampire_left[0] = vampireSprites.crop(0, height, width/2, height);
+        vampire_left[1] = vampireSprites.crop(width/2, height, width/2, height);
+        vampire_left[2] = vampireSprites.crop(width, height, width/2, height);
 
         vampire_right = new BufferedImage[3];
-        vampire_right[0] = vampireSprites.crop(0, height*2, halfWidth, height);
-        vampire_right[1] = vampireSprites.crop(width/2, height*2, halfWidth, height);
-        vampire_right[2] = vampireSprites.crop(width, height*2, halfWidth, height);
+        vampire_right[0] = vampireSprites.crop(0, height*2, width/2, height);
+        vampire_right[1] = vampireSprites.crop(width/2, height*2, width/2, height);
+        vampire_right[2] = vampireSprites.crop(width, height*2, width/2, height);
 
 
 

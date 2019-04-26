@@ -54,7 +54,7 @@ public class HighScoreManager {
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
 
-        printScoresOnce();
+//        printScoresOnce();
     }
 
     public void loadScoreFileToStringList() {
@@ -73,28 +73,18 @@ public class HighScoreManager {
         Collections.sort(arrayListScores, scoreComparator);
     }
 
-    public int discardExtraScores(){
+    public void discardExtraScores(){
         if(arrayListScores.size() > 10) {
             for (i = 0; i < 10; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
-                //highScores.add(new Score(arrayListScores.get(i).getName(), arrayListScores.get(i).getScore()));
                 highScores.add(arrayListScores.get(i));
             }
         }
         Collections.sort(highScores, scoreComparator);
-        return 0;
     }
 
     public void tick(){
-        if(scoreAdded){
-            scoreAdded = false;
-            System.out.println("Score added");
-            sortScores();
-            lowestScore = arrayListScores.get(10).getScore();
-            highestScore = arrayListScores.get(0).getScore();
-            discardExtraScores();
-
-        }
+        //Not being ticked right now
     }
 
 
@@ -111,9 +101,15 @@ public class HighScoreManager {
         System.out.println("Highest: " + highestScore + " Lowest: " + lowestScore);
     }
 
+
     public void addScore(String name, int score){
-        highScores.add(new Score(name, score));
+        arrayListScores.add(new Score(name, score));
         scoreAdded = true;
+        //System.out.println("Score added");
+        sortScores();
+        lowestScore = arrayListScores.get(10).getScore();
+        highestScore = arrayListScores.get(0).getScore();
+        discardExtraScores();
     }
     // Getters and setters
 

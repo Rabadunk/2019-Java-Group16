@@ -57,6 +57,9 @@ public class Player extends Creature {
     // Game result
     public static boolean isGameWon = false;
 
+    private int takenDamageCounter = 0;
+
+
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
         setupBounds();
@@ -304,6 +307,11 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
+
+        if(takenDamage) {
+            takenDamageCounter = 50;
+        }
+
         if (getCurrentAnimationFrame() == Assets.bed){
             g.drawImage(getCurrentAnimationFrame(),
                     (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
@@ -333,6 +341,11 @@ public class Player extends Creature {
 
     public BufferedImage getCurrentAnimationFrame(){
         // Attack Animations
+
+        if(takenDamageCounter != 0) {
+            return getDamageFrame();
+        }
+
         if(attackUp){
             return animationAttackUp.getCurrentFrame();
         }
@@ -385,7 +398,67 @@ public class Player extends Creature {
         }
     }
 
-    // Getters and setters
+    public BufferedImage getDamageFrame() {
+
+        takenDamage = false;
+
+        if(takenDamageCounter != 0) {
+            takenDamageCounter = takenDamageCounter - 1;
+        }
+
+        if(attackUp){
+            return Assets.playerAttackedAttackUp[animationAttackUp.getCurrentIndex()];
+        }
+        else if(attackDown){
+            return Assets.playerAttackedAttackDown[animationAttackDown.getCurrentIndex()];
+        }
+        else if(attackLeft){
+            return Assets.playerAttackedAttackLeft[animationAttackLeft.getCurrentIndex()];
+        }
+        else if(attackRight){
+            return Assets.playerAttackedAttackRight[animationAttackRight.getCurrentIndex()];
+        }
+
+        // Walking animations
+        if(xMove <0){
+            return Assets.playerAttacked_left[animationLeft.getCurrentIndex()];
+        }
+        else if(xMove > 0){
+            return Assets.playerAttacked_right[animationRight.getCurrentIndex()];
+        }
+        else if(yMove < 0) {
+            return Assets.playerAttacked_up[animationUp.getCurrentIndex()];
+        }
+        else if(yMove > 0){
+            return Assets.playerAttacked_down[animationDown.getCurrentIndex()];
+        }
+        else if(bed){
+            return Assets.bed;
+        }
+
+        // Idle animations
+        else{
+            // 0 = down, 1 = up, 2 = left, 3 = right
+            if(direction == 0) {
+                return Assets.playerAttackedIdleDown;
+            }
+            else if(direction == 1) {
+                return Assets.playerAttackedIdleUp;
+            }
+            else if(direction == 2) {
+                return Assets.playerAttackedIdleLeft;
+            }
+            else if(direction == 3) {
+                return Assets.playerAttackedIdleRight;
+            }
+            else{
+                // Dunno aye
+                return Assets.bed;
+            }
+        }
+    }
+
+
 
     public Inventory getInventory() {
         return inventory;

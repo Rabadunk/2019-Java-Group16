@@ -23,10 +23,8 @@ public class Room {
 
     private int enemyId;
     private int enemyX, enemyY;
-
-    private String furniturePath;
+    
     private String roomPath;
-    private String enemyPath;
 
     private StaticsManager furniture;
     private EnemyManager enemies;
@@ -99,7 +97,6 @@ public class Room {
         getRoomTiles(roomAttributes[2]);
         loadFurniture(roomAttributes[3]);
         loadEnemies(roomAttributes[4]);
-
     }
 
     public void getRoomDimensions(String roomDimensions){
