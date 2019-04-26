@@ -17,6 +17,7 @@ public class AStarNode {
     private Handler handler;
     private BufferedImage texture;
     private boolean isEntry = false;
+    public int roomSpawnX, roomSpawnY;
 
     public AStarNode previous;
 
@@ -91,5 +92,6 @@ public class AStarNode {
     public void setEntry(boolean bool) {
         isEntry = true;
     }
+
 
 }

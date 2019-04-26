@@ -2,9 +2,13 @@ package com.doogies.savepups;
 
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.GameCamera;
+import com.doogies.savepups.house.AStarNode;
+import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
+
+import java.util.ArrayList;
 
 public class Handler {
 
@@ -47,10 +51,10 @@ public class Handler {
 
     public Player getPlayer() { return player; }
 
-    public void setRoom(Room room) {
+    public void setRoom(Room room, int x, int y) {
         this.room = room;
-        player.setX(room.getSpawnX());
-        player.setY(room.getSpawnY());
+        player.setX(x);
+        player.setY(y);
     }
 
     public void newPlayer() {

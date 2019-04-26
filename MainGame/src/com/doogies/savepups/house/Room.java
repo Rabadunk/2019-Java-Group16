@@ -10,12 +10,13 @@ import com.doogies.savepups.entities.statics.StaticsManager;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Room {
 
     private int width, height;
     private int spawnX, spawnY;
-    private int ID;
+    public int ID;
 
     private int furnitureId;
     private int furnX;
@@ -116,14 +117,15 @@ public class Room {
         pathFinder = new AStarPathFinder(width, height, handler);
         int tileToken;
 
-        for(int y = 0; y < height; y++)
+        for (int y = 0; y < height; y++){
             for (int x = 0; x < width; x++) {
                 tileToken = Utils.parseInt(tokens[(x + y * width) + 1]);
 
-                if(tileToken > 99) {
+                if (tileToken > 99) {
                     AStarNode node = new AStarNode(x, y, Tile.tiles[3].getTexture(), Tile.tiles[3].isSolid(), handler);
                     node.setEntry(true);
                     node.worldID = tileToken % 100;
+                    HouseGraph.addRoomEntrance(ID, node.worldID, node);
                     pathFinder.addNode(x, y, node);
                 } else {
                     AStarNode node = new AStarNode(x, y, Tile.tiles[tileToken].getTexture(), Tile.tiles[tileToken].isSolid(), handler);
@@ -131,8 +133,23 @@ public class Room {
                 }
 
             }
+        }
 
         pathFinder.makeNeighboursForNodes();
+        setWorldTileSpawns();
+    }
+
+    public void setWorldTileSpawns() {
+        ArrayList<AStarNode> nodes = HouseGraph.house.get(ID);
+
+        for(AStarNode node: nodes) {
+            for(AStarNode nodeNeighbour : node.getNeighbours()) {
+                if(!nodeNeighbour.isSolid) {
+                    node.roomSpawnX = nodeNeighbour.x * Tile.TILEWIDTH;
+                    node.roomSpawnY = nodeNeighbour.y * Tile.TILEHEIGHT;
+                }
+            }
+        }
     }
 
     public void loadFurniture(String furnitureSpawns) {
