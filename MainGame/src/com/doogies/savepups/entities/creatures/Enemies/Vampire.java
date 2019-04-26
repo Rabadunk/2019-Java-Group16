@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.states.State;
+import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,11 +26,15 @@ public class Vampire extends Enemy {
     public Vampire(Handler handler, float x, float y) {
         super(handler, x, y, 80, 80);
 
-        attackUp = attackDown = attackLeft = attackRight = false;
-
-        loadHumanSprites();
-        setSpeed(1f);
+        turnIntoHuman();
+        setupAttack();
         setHealth(20);
+    }
+
+    private void turnIntoHuman() {
+        loadHumanSprites();
+        loadHumanBounds();
+        loadHumanAttributes();
     }
 
     private void loadHumanSprites() {
@@ -42,12 +47,6 @@ public class Vampire extends Enemy {
         idleUp = Assets.vampireIdleUp;
         idleLeft = Assets.vampireIdleLeft;
         idleRight = Assets.vampireIdleRight;
-
-        loadHumanBounds();
-
-        width = 40;
-        height = 80;
-        isBat = false;
     }
 
     private void loadHumanBounds() {
@@ -55,6 +54,13 @@ public class Vampire extends Enemy {
         bounds.y = 48;
         bounds.width = 36;
         bounds.height = 32;
+    }
+
+    private void loadHumanAttributes() {
+        setSpeed(1f);
+        width = 40;
+        height = 80;
+        isBat = false;
     }
 
     private void loadBatSprites() {
@@ -73,30 +79,43 @@ public class Vampire extends Enemy {
         width = 64;
         height = 64;
         isBat = true;
+        setSpeed(4f);
     }
 
     private void loadBatBounds() {
-        bounds.x = 16;
-        bounds.y = 16;
-        bounds.width = 32;
-        bounds.height = 32;
+        bounds.x = 24;
+        bounds.y = 24;
+        bounds.width = 16;
+        bounds.height = 16;
     }
 
     private void changeToBat() {
         if(!isBat) {
             System.out.println("Changing to bat");
             loadBatSprites();
-
-            handler.getRoom();
-
+            spawnOrphans();
         }
     }
 
     private void changeToHuman() {
         if (isBat) {
             System.out.println("Changing to human");
-            loadHumanSprites();
+            turnIntoHuman();
         }
+    }
+
+    private void spawnOrphans() {
+        Orphan orphanOne = new Orphan(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT);
+        Orphan orphanTwo = new Orphan(handler, 15 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT);
+        Orphan orphanThree = new Orphan(handler, 5 * Tile.TILEWIDTH, 15 * Tile.TILEHEIGHT);
+        Orphan orphanFour = new Orphan(handler, 15 * Tile.TILEWIDTH, 15 * Tile.TILEHEIGHT);
+        handler.getRoom().newEntityManager();
+        handler.getRoom().getEntityManager().addEntity(this);
+        handler.getRoom().getEntityManager().addEntity(orphanOne);
+        handler.getRoom().getEntityManager().addEntity(orphanTwo);
+        handler.getRoom().getEntityManager().addEntity(orphanThree);
+        handler.getRoom().getEntityManager().addEntity(orphanFour);
+
     }
 
 
@@ -110,9 +129,19 @@ public class Vampire extends Enemy {
         animationLeft.tick();
         animationRight.tick();
 
+        if(collisionWithTile((int) (x + bounds.x)/Tile.TILEHEIGHT,
+                (int) (y + bounds.y)/Tile.TILEHEIGHT) ||
+                getDistanceToPlayer() < 1) {
+            System.out.println(getDistanceToPlayer());
+            x = 8 * Tile.TILEHEIGHT;
+            y = 8 * Tile.TILEHEIGHT;
+        }
+
         //Movement
         if(!isBat) {
             moveToPlayer();
+            checkAttacks();
+            timeTracker();
         } else {
             count++;
             if(count > 20) {
@@ -127,14 +156,10 @@ public class Vampire extends Enemy {
             health % 5 == 0) {
             health = health - 1;
             changeToBat();
-            switchCount = 1000;
-        } else if(switchCount == 0) {
+        } else if(handler.getRoom().getEntityManager().getEntities().size() < 3) {
             changeToHuman();
         }
 
-        if(switchCount != 0) {
-            switchCount = switchCount - 1;
-        }
 
     }
 
@@ -157,6 +182,12 @@ public class Vampire extends Enemy {
         g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
                 (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
                 bounds.width, bounds.height);
+
+        g.setColor(Color.red);
+        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
+                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
+                attackRectangle.width,
+                attackRectangle.height);
 
     }
 

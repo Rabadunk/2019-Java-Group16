@@ -147,7 +147,7 @@ public abstract class Enemy extends Creature {
         }
 
         Rectangle enemyBounds = getCollisionBounds(0, 0);
-        Boolean shouldAttack = getDistanceToPlayer() < 0.8 * Tile.TILEWIDTH;
+        Boolean shouldAttack = getDistanceToPlayer() < Tile.TILEWIDTH;
 
         attackUp = attackDown = attackLeft = attackRight = false;
 

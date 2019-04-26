@@ -23,7 +23,7 @@ public class Room {
 
     private int enemyId;
     private int enemyX, enemyY;
-    
+
     private String roomPath;
 
     private StaticsManager furniture;
@@ -180,14 +180,12 @@ public class Room {
         return itemManager;
     }
 
-    public void setItemManager(ItemManager itemManager) {
-        this.itemManager = itemManager;
-    }
-
-    public int getID(){return  ID;}
-
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    public void newEntityManager() {
+        entityManager = new EntityManager(handler, handler.getPlayer());
     }
 
     public AStarPathFinder getPathFinder() { return pathFinder; }
@@ -207,5 +205,6 @@ public class Room {
     public int getSpawnY() {
         return spawnY;
     }
+
 
 }
