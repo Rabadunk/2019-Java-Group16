@@ -88,7 +88,7 @@ public abstract class Enemy extends Creature {
             xMove = speed;
             direction = 3;
         }
-        
+
         if(getDistanceToPlayer() < 0.8 * Tile.TILEWIDTH) {
             dontMove();
         }

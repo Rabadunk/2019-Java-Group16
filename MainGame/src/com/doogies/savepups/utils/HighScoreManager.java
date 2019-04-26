@@ -50,7 +50,7 @@ public class HighScoreManager {
         sortScores();
         discardExtraScores();
 
-        printScoresOnce();
+//        printScoresOnce();
     }
 
     public void loadScoreFileToStringList() {
@@ -71,7 +71,7 @@ public class HighScoreManager {
 
     public int discardExtraScores(){
         if(arrayListScores.size() > 10) {
-            System.out.println("Greater than 10");
+//            System.out.println("Greater than 10");
             for (i = 0; i < 10; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
                 //highScores.add(new Score(arrayListScores.get(i).getName(), arrayListScores.get(i).getScore()));
@@ -92,12 +92,12 @@ public class HighScoreManager {
             System.out.println(s.getName() + " " + s.getScore());
         }
     }
-
-    public void printScoresOnce(){
-        for(Score s: highScores){
-            System.out.println(s.getName() + " " + s.getScore());
-        }
-    }
+//
+//    public void printScoresOnce(){
+//        for(Score s: highScores){
+//            System.out.println(s.getName() + " " + s.getScore());
+//        }
+//    }
 
     public void addScore(String name, int score){
         highScores.add(new Score(name, score));

@@ -243,4 +243,15 @@ public class Vampire extends Enemy {
     public void setDirection(int direction) {
         this.direction = direction;
     }
+
+    public void damage(int amount) {
+        if(isBat) return;
+        else{
+            health -= amount;
+            if(health <= 0){
+                active = false;
+                die();
+            }
+        }
+    }
 }
