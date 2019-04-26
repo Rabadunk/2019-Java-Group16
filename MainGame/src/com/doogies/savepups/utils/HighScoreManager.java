@@ -77,10 +77,12 @@ public class HighScoreManager {
     }
 
     public void discardExtraScores(){
+        highScores.clear();
         if(arrayListScores.size() > 10) {
             for (i = 0; i < 10; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
                 highScores.add(arrayListScores.get(i));
+                System.out.println(highScores.size());
             }
         }
         Collections.sort(highScores, scoreComparator);
@@ -108,12 +110,13 @@ public class HighScoreManager {
     public void addScore(String name, int score){
         arrayListScores.add(new Score(name, score));
         scoreAdded = true;
-        //System.out.println("Score added");
+        System.out.println("Score added");
         sortScores();
         lowestScore = arrayListScores.get(10).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
-        writeNewscores();
+        //System.out.println(highScores.size());
+        //writeNewscores();
     }
 
     public void writeNewscores(){
