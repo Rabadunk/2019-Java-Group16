@@ -17,7 +17,7 @@ public class Orphan extends Enemy {
     private boolean attackUp, attackDown, attackLeft, attackRight;
 
     // Attack timer
-    private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
+    private long attackCooldown = 3000;
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -37,7 +37,7 @@ public class Orphan extends Enemy {
 
         loadSprites();
         setSpeed(1f);
-        setHealth(2);
+        setHealth(1);
     }
 
     private void loadSprites() {

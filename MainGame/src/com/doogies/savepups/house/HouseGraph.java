@@ -1,6 +1,7 @@
 package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.graphics.Assets;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,22 +16,27 @@ public class HouseGraph {
     private Room testRoom;
     private Room lounge;
     private Room bossRoom;
+    private Handler handler;
 
-    private List<Integer> house[];
+    public static ArrayList<ArrayList> house;
     private ArrayList<Room> rooms;
 
     public HouseGraph(Handler handler) {
+        this.handler = handler;
         rooms = new ArrayList<>();
+        house = new ArrayList<>();
+        constructGraph(5);
         generateRooms(handler);
     }
 
     private void constructGraph(int numOfRooms) {
         // Graph is represented by an adjacency list using linked lists
 
-        house = new LinkedList[numOfRooms];
-
-        for(int i = 0; i < numOfRooms; i++) {
-            house[i] = new LinkedList<>();
+        for(int i = 0; i < numOfRooms + 1; i++) {
+            house.add(new ArrayList<AStarNode>());
+            for(int j = 0; j < numOfRooms + 1; j++) {
+                house.get(i).add(new AStarNode(1, 1, Assets.damagedFloor, false, handler));
+            }
         }
 
     }
@@ -51,16 +57,8 @@ public class HouseGraph {
         rooms.add(bossRoom);
     }
 
-    private void generateHouse() {
-        // Add bedroom and connections
-        addRoomEntrance(0, 1);
-
-        // Add hallway and connections
-        addRoomEntrance(1, 0);
-    }
-
-    public void addRoomEntrance(int thisRoomID, int otherRoomID) {
-        house[thisRoomID].add(0, otherRoomID);
+    public static void addRoomEntrance(int thisRoomID, int otherRoomId, AStarNode node) {
+        house.get(thisRoomID).add(otherRoomId, node);
     }
 
     public Room getRoom(int roomID) {

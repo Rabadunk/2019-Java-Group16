@@ -22,14 +22,11 @@ public abstract class Enemy extends Creature {
     protected AStarNode moveTo;
 
     protected Rectangle attackRectangle;
-    int attackRangeSize = bounds.width;
 
     // Attack timer
     protected long lastAttackTimer, attackCooldown = 2500, attackTimer = attackCooldown;
 
     // Game Timer
-    protected GameTimer gameTimer;
-    protected boolean timerStart = false;
     protected boolean timerSet = false;
     protected int timeTakenMinutes, timeTakenSeconds = 0;
     protected long initalTime;
@@ -64,32 +61,29 @@ public abstract class Enemy extends Creature {
                 (int) ((y + bounds.y) / Tile.TILEHEIGHT)
         );
 
-        //System.out.println("PlayerNodeX: " + goalNode.x + " PlayerNodeY: " + goalNode.y);
-        //System.out.println("Our Location: " + startNode.x + " " + startNode.y);
-
         AStarNode node = handler.getRoom().getPathFinder().pathFind(startNode, goalNode);
 
-        if(y > (node.y * Tile.TILEHEIGHT) + 1) {
+        if(y > (node.y * Tile.TILEHEIGHT) + Tile.TILEHEIGHT / 4) {
             yMove = -speed;
             direction = 1;
         }
 
-        if(y < (node.y * Tile.TILEHEIGHT) - 1) {
+        if(y < (node.y * Tile.TILEHEIGHT) - Tile.TILEHEIGHT / 4) {
             yMove = speed;
             direction = 0;
         }
 
-        if(x > (node.x * Tile.TILEWIDTH) + 1) {
+        if(x > (node.x * Tile.TILEWIDTH) + Tile.TILEWIDTH / 4) {
             xMove = -speed;
             direction = 2;
         }
 
-        if(x < (node.x * Tile.TILEWIDTH) - 1) {
+        if(x < (node.x * Tile.TILEWIDTH) - Tile.TILEWIDTH / 4) {
             xMove = speed;
             direction = 3;
         }
 
-        if(getDistanceToPlayer() <  Tile.TILEWIDTH) {
+        if(getDistanceToPlayer() <  Tile.TILEWIDTH/2) {
             dontMove();
         }
     }
@@ -147,7 +141,7 @@ public abstract class Enemy extends Creature {
         }
 
         Rectangle enemyBounds = getCollisionBounds(0, 0);
-        Boolean shouldAttack = getDistanceToPlayer() < 0.8 * Tile.TILEWIDTH;
+        Boolean shouldAttack = getDistanceToPlayer() < Tile.TILEWIDTH;
 
         attackUp = attackDown = attackLeft = attackRight = false;
 
