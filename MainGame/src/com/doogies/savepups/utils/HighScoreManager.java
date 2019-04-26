@@ -50,18 +50,50 @@ public class HighScoreManager {
         highScores = new ArrayList<>();
 
         loadScoreFileToStringList();
+
+
         convertStringScoresToInts();
 
         sortScores();
-        lowestScore = arrayListScores.get(10).getScore();
+        lowestScore = arrayListScores.get(arrayListScores.size() - 1).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
+
+
+
+
 
 //        printScoresOnce();
     }
 
     public void loadScoreFileToStringList() {
         stringScores = loadFileAsString(savedFile).split(("\\s+"));
+        System.out.println(stringScores.length);
+
+        // Detects and attemps to fix a non compatible save file
+        if(stringScores.length % 2 != 0){
+            System.out.println("Save file error!");
+            System.exit(0);
+        }
+        else{
+            fixHighScoreSave();
+        }
+
+    }
+
+    public void fixHighScoreSave(){
+        Writer fileWriter = null;
+        for(int i = 0; i < 20 - stringScores.length; i = i + 2){
+            try {
+                fileWriter = new FileWriter(savedFile, true);
+                fileWriter.write("Noone ");
+                fileWriter.write("0\n");
+                fileWriter.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void convertStringScoresToInts() {
@@ -116,7 +148,7 @@ public class HighScoreManager {
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
         //System.out.println(highScores.size());
-        //writeNewscores();
+        writeNewscores();
     }
 
     public void writeNewscores(){
@@ -125,10 +157,10 @@ public class HighScoreManager {
             fileWriter = new FileWriter(savedFile);
             //fileWriter.write("data 1");
             for(i = 0; i < highScores.size(); i++){
+                fileWriter.write("\n");
                 fileWriter.write(handler.highScoreManager.getHighScores().get(i).getName());
                 fileWriter.write(" ");
                 fileWriter.write(Integer.toString(handler.highScoreManager.getHighScores().get(i).getScore()));
-                fileWriter.write("\n");
             }
             fileWriter.close();
         } catch (IOException e) {
