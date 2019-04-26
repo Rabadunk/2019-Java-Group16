@@ -27,7 +27,7 @@ public class GameState extends State {
 
         currentRoom = handler.getRoom();
 
-        goldCoinSound.setFile("/soundEffects/rpgSounds/inventory/coin2");
+        //goldCoinSound.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     @Override

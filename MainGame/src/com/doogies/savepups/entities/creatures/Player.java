@@ -492,4 +492,12 @@ public class Player extends Creature {
     public static void setIsGameWon(boolean isGameWon) {
         Player.isGameWon = isGameWon;
     }
+
+    public HighScoreManager getHighScoreManager() {
+        return highScoreManager;
+    }
+
+    public void setHighScoreManager(HighScoreManager highScoreManager) {
+        this.highScoreManager = highScoreManager;
+    }
 }
