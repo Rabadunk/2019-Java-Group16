@@ -57,10 +57,12 @@ public class MenuState extends State{
 
         uiManager.addObject( new UIImageButton(100, 350, 300, 150, Assets.scoreButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                stopMusic();
                 State.setState(handler.getGame().scoreboard);
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
+            stopMusic();
             State.setState(handler.getGame().scoreboard);
         }));
 

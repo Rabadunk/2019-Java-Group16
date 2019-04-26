@@ -23,7 +23,7 @@ public class GameState extends State {
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
-        handler.setRoom(house.getRoom(4));
+        handler.setRoom(house.getRoom(1));
 
         currentRoom = handler.getRoom();
 

@@ -53,10 +53,10 @@ public class HouseGraph {
 
     private void generateHouse() {
         // Add bedroom and connections
-        addRoomEntrance(0, 1);
+        addRoomEntrance(1, 2);
 
         // Add hallway and connections
-        addRoomEntrance(1, 0);
+        addRoomEntrance(2, 1);
     }
 
     public void addRoomEntrance(int thisRoomID, int otherRoomID) {
