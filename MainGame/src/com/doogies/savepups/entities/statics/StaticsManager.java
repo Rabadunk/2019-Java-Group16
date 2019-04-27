@@ -38,6 +38,9 @@ public class StaticsManager {
             case 7:
                 insertCupboard(entityManager, x, y);
                 break;
+            case 8:
+                insertStool(entityManager, x, y);
+                break;
         }
     }
 
@@ -79,5 +82,10 @@ public class StaticsManager {
     public void insertCupboard(EntityManager entityManager, int spawnX, int spawnY) {
         Cupboard cupboard = new Cupboard(handler, spawnX, spawnY);
         entityManager.addEntity(cupboard);
+    }
+
+    public void insertStool(EntityManager entityManager, int spawnX, int spawnY) {
+        Stool stool = new Stool(handler, spawnX, spawnY);
+        entityManager.addEntity(stool);
     }
 }
