@@ -105,10 +105,10 @@ public class Vampire extends Enemy {
     }
 
     private void spawnOrphans() {
-        Orphan orphanOne = new Orphan(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT);
-        Orphan orphanTwo = new Orphan(handler, 15 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT);
-        Orphan orphanThree = new Orphan(handler, 5 * Tile.TILEWIDTH, 15 * Tile.TILEHEIGHT);
-        Orphan orphanFour = new Orphan(handler, 15 * Tile.TILEWIDTH, 15 * Tile.TILEHEIGHT);
+        Orphan orphanOne = new Orphan(handler, 4 * Tile.TILEWIDTH, 4 * Tile.TILEHEIGHT);
+        Orphan orphanTwo = new Orphan(handler, 16 * Tile.TILEWIDTH, 4 * Tile.TILEHEIGHT);
+        Orphan orphanThree = new Orphan(handler, 4 * Tile.TILEWIDTH, 16 * Tile.TILEHEIGHT);
+        Orphan orphanFour = new Orphan(handler, 16 * Tile.TILEWIDTH, 16 * Tile.TILEHEIGHT);
         handler.getRoom().newEntityManager();
         handler.getRoom().getEntityManager().addEntity(this);
         handler.getRoom().getEntityManager().addEntity(orphanOne);

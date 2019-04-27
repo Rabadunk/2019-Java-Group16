@@ -2,6 +2,9 @@ package com.doogies.savepups.graphics;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
+import com.doogies.savepups.graphics.assets.TileAssets;
 import com.doogies.savepups.tiles.Tile;
 
 public class Assets {
@@ -69,6 +72,10 @@ public class Assets {
     //
 
     public static void init() {
+
+        TileAssets.init();
+        FurnitureAssets.init();
+
         font28 = FontLoader.loadFont("res/fonts/slkscr/slkscr.ttf", 28);
         fontTitle = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 76);
         fontTitleBig = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 96);
@@ -77,11 +84,9 @@ public class Assets {
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));
 
-        SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
         SpriteSheet playerAttackedsheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/characterAttacked.png"));
         SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
-        SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
 
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
@@ -384,20 +389,6 @@ public class Assets {
         batIdleDown = bat_down[1];
         batIdleLeft = bat_left[1];
         batIdleRight = bat_right[1];
-
-        // ENVIRONMENT
-//        roof = mapsheet.crop(width * 9, 16, width, height - 2);
-        computer = mapsheet.crop(0, 0, width, height);
-        bed = mapsheet.crop(width, 0, width, height + 16);
-//        door = mapsheet.crop(237, 16, 21, 31);
-
-        // Tileset Spritesheet
-        // Crops the texture from the spritesheet. Tiles are always 64x64 pixels in this sprite sheet
-        // So we can use an row/column * 64 to quickly obtain the starting position of the sprite.
-        pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
-        brickWall = tileSpritesheet.crop((2 - 1)* tileWidth,(1 - 1)* tileHeight, tileWidth, tileHeight);
-        doorwayWall = tileSpritesheet.crop((3 - 1)* tileWidth,(1 - 1) * tileHeight, tileWidth, tileHeight);
-        damagedFloor = tileSpritesheet.crop((1 - 1) * tileWidth,(2 - 1)* tileHeight, tileWidth, tileHeight);
 
         // UI
         playButton = new BufferedImage[2];
