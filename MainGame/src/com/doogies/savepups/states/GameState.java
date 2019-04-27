@@ -9,6 +9,7 @@ import com.doogies.savepups.house.Room;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +32,10 @@ public class GameState extends State {
 
     @Override
     public void tick() {
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
+            State.setState(handler.getGame().pause);
+            System.out.println("Esc");
+        }
         checkForRoomChange();
         handler.getRoom().tick();
         //handler.highScoreManager.tick();

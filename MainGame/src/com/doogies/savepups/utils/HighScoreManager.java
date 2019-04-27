@@ -51,7 +51,6 @@ public class HighScoreManager {
 
         loadScoreFileToStringList();
 
-
         convertStringScoresToInts();
 
         sortScores();
@@ -59,16 +58,12 @@ public class HighScoreManager {
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
 
-
-
-
-
 //        printScoresOnce();
     }
 
     public void loadScoreFileToStringList() {
         stringScores = loadFileAsString(savedFile).split(("\\s+"));
-        System.out.println(stringScores.length);
+        //System.out.println(stringScores.length);
 
         // Detects and attemps to fix a non compatible save file
         if(stringScores.length % 2 != 0){
@@ -78,7 +73,6 @@ public class HighScoreManager {
         else{
             fixHighScoreSave();
         }
-
     }
 
     public void fixHighScoreSave(){
@@ -114,7 +108,7 @@ public class HighScoreManager {
             for (i = 0; i < 11; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
                 highScores.add(arrayListScores.get(i));
-                System.out.println(highScores.size());
+                //System.out.println(highScores.size());
             }
         }
         Collections.sort(highScores, scoreComparator);
@@ -142,7 +136,7 @@ public class HighScoreManager {
     public void addScore(String name, int score){
         arrayListScores.add(new Score(name, score));
         scoreAdded = true;
-        System.out.println("Score added");
+        //System.out.println("Score added");
         sortScores();
         lowestScore = arrayListScores.get(9).getScore();
         highestScore = arrayListScores.get(0).getScore();

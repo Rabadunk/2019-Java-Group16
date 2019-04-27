@@ -1,96 +1,55 @@
 package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
-import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.ui.UIImageButton;
 import com.doogies.savepups.ui.UIManager;
 import com.doogies.savepups.ui.UIObject;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.util.concurrent.TimeUnit;
 
-public class MenuState extends State{
+public class PauseState extends State {
 
     private UIManager uiManager;
     private int indexOfActiveButton = 0;
     private int lastIndex = 0;
     private boolean hasBeenPressed = false;
 
-    public AudioPlayer menuMusic;
-
-    private long lastTime, timer;
-    private int index;
-
-    private HouseGraph houseGraph;
-
-    public MenuState(Handler handler){
+    public PauseState(Handler handler) {
         super(handler);
-
-//        Music player = new Music("menu");
-//        player.run();
-
-        menuMusic = new AudioPlayer();
-        menuMusic.setFileMusic("Happywalk");
-        //menuMusic.play();
-
-        houseGraph = new HouseGraph(handler);
 
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-
-        uiManager.addObject( new UIImageButton(100, 200, 300, 100, Assets.playButton, () -> {
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+        // Resume button
+        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 310, 300, 100, Assets.blankButton, () -> {
+            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                stopMusic();
                 State.setState(handler.getGame().gameState);
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
+            stopMusic();
             State.setState(handler.getGame().gameState);
-
         }));
 
-        uiManager.addObject( new UIImageButton(100, 310, 300, 100, Assets.scoreButton, () -> {
+        // Main menu button
+        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 420, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
-                State.setState(handler.getGame().scoreboard);
+                State.setState(handler.getGame().menuState);
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
             stopMusic();
-            State.setState(handler.getGame().scoreboard);
+            State.setState(handler.getGame().menuState);
         }));
 
-        // Controls button
-        uiManager.addObject( new UIImageButton(100, 420, 300, 100, Assets.blankButton, () -> {
-            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
-                stopMusic();
-                State.setState(handler.getGame().controls);
-            }
-        }, () -> {
-            handler.getMouseManager().setUiManager(null);
-            stopMusic();
-            State.setState(handler.getGame().controls);
-        }));
-
-        uiManager.addObject( new UIImageButton(100, 530, 300, 100, Assets.quitButton, () -> {
-            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
-                closeGame();
-            }
-            }, () -> {
-                closeGame();
-            }));
-    }
 
 
-    public void closeGame(){
-        JFrame frame = handler.getGame().getDisplay().getFrame();
-        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
 
     @Override
@@ -99,34 +58,26 @@ public class MenuState extends State{
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
         checkInputs();
-
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.pink);
+
+        g.setColor(Color.blue);
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
+
         //temp code
         g.setColor(Color.RED);
         g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 10, 10);
         uiManager.render(g);
 
         // Title
-        Text.drawString(g, "Save the Puppies!", 550, 100, true, Color.WHITE, Assets.fontTitleBig);
+        Text.drawString(g, "Paused", handler.getWidth()/2, 100, true, Color.WHITE, Assets.fontTitle);
 
         // Button texts
-        Text.drawString(g, "Controls", 100 + 150, 420 + 50,true, Color.WHITE, Assets.font28);
+        Text.drawString(g, "Resume", handler.getWidth()/2, 310 + 50,true, Color.WHITE, Assets.font28);
+        Text.drawString(g, "Exit to main menu", handler.getWidth()/2, 420 + 50,true, Color.WHITE, Assets.font28);
 
-        // Draw doogie
-        g.drawImage(Assets.doogie,500, 250, 400, 400, null);
-    }
-
-    @Override
-    public void startMusic() { menuMusic.play(); }
-
-    @Override
-    public void stopMusic() {
-        menuMusic.stop();
     }
 
     public void getInput() {
@@ -173,4 +124,13 @@ public class MenuState extends State{
         }
     }
 
+    @Override
+    public void startMusic() {
+
+    }
+
+    @Override
+    public void stopMusic() {
+
+    }
 }
