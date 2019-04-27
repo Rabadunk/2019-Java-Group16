@@ -6,7 +6,7 @@ public class DoorwayWallTile extends Tile {
 
 
     public DoorwayWallTile(int id) {
-        super(TileAssets.doorwayWall, id);
+        super(TileAssets.doorwayWall, id, false);
     }
 
     @Override

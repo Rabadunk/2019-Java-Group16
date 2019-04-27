@@ -15,17 +15,17 @@ public class Tile {
     public static Tile brickWallTile = new BrickWallTile(2);
     public static Tile doorwayWallTile = new DoorwayWallTile(3);
 
-    public static  Tile pinkCarpetTopLeft = new Tile(TileAssets.pinkCarpetTopLeft, 4);
-    public static  Tile pinkCarpetTop = new Tile(TileAssets.pinkCarpetTop, 5);
-    public static  Tile pinkCarpetTopRight = new Tile(TileAssets.pinkCarpetTopRight, 6);
-    public static  Tile pinkCarpetLeft = new Tile(TileAssets.pinkCarpetLeft, 7);
-    public static  Tile pinkCarpetCenter = new Tile(TileAssets.pinkCarpetCenter, 8);
-    public static  Tile pinkCarpetRight = new Tile(TileAssets.pinkCarpetRight, 9);
-    public static  Tile pinkCarpetBottomLeft = new Tile(TileAssets.pinkCarpetBottomLeft, 10);
-    public static  Tile pinkCarpetBottom = new Tile(TileAssets.pinkCarpetBottom, 11);
-    public static  Tile pinkCarpetBottomRight = new Tile(TileAssets.pinkCarpetBottomRight, 12);
+    public static  Tile pinkCarpetTopLeft = new Tile(TileAssets.pinkCarpetTopLeft, 4, false);
+    public static  Tile pinkCarpetTop = new Tile(TileAssets.pinkCarpetTop, 5, false);
+    public static  Tile pinkCarpetTopRight = new Tile(TileAssets.pinkCarpetTopRight, 6, false);
+    public static  Tile pinkCarpetLeft = new Tile(TileAssets.pinkCarpetLeft, 7, false);
+    public static  Tile pinkCarpetCenter = new Tile(TileAssets.pinkCarpetCenter, 8, false);
+    public static  Tile pinkCarpetRight = new Tile(TileAssets.pinkCarpetRight, 9, false);
+    public static  Tile pinkCarpetBottomLeft = new Tile(TileAssets.pinkCarpetBottomLeft, 10, false);
+    public static  Tile pinkCarpetBottom = new Tile(TileAssets.pinkCarpetBottom, 11, false);
+    public static  Tile pinkCarpetBottomRight = new Tile(TileAssets.pinkCarpetBottomRight, 12, false);
 
-    public static Tile window = new Tile(TileAssets.window, 13);
+    public static Tile window = new Tile(TileAssets.window, 13, true);
 
 
     // CLASS
@@ -36,10 +36,12 @@ public class Tile {
     protected final int id;
     protected int worldId;
     protected boolean entry = false;
+    public boolean isSolid = false;
 
-    public Tile(BufferedImage texture, int id) {
+    public Tile(BufferedImage texture, int id, boolean isSolid) {
         this.texture = texture;
         this.id = id;
+        this.isSolid = isSolid;
         tiles[id] = this;
     }
 
@@ -56,7 +58,7 @@ public class Tile {
     }
 
     public boolean isSolid() {
-        return false;
+        return isSolid;
     }
 
     public boolean isEntry() { return entry; }
