@@ -1,13 +1,11 @@
 package com.doogies.savepups.tiles;
 
-import com.doogies.savepups.graphics.Assets;
-
-import java.awt.image.BufferedImage;
+import com.doogies.savepups.graphics.assets.TileAssets;
 
 public class BrickWallTile extends Tile {
 
     public BrickWallTile(int id) {
-        super(Assets.brickWall, id);
+        super(TileAssets.brickWall, id);
     }
 
     @Override

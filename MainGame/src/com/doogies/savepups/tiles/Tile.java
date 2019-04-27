@@ -1,5 +1,7 @@
 package com.doogies.savepups.tiles;
 
+import com.doogies.savepups.graphics.assets.TileAssets;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -12,6 +14,16 @@ public class Tile {
     public static Tile damagedFloorTile = new DamagedFloorTile(1);
     public static Tile brickWallTile = new BrickWallTile(2);
     public static Tile doorwayWallTile = new DoorwayWallTile(3);
+
+    public static  Tile pinkCarpetTopLeft = new Tile(TileAssets.pinkCarpetTopLeft, 4);
+    public static  Tile pinkCarpetTop = new Tile(TileAssets.pinkCarpetTop, 5);
+    public static  Tile pinkCarpetTopRight = new Tile(TileAssets.pinkCarpetTopRight, 6);
+    public static  Tile pinkCarpetLeft = new Tile(TileAssets.pinkCarpetLeft, 7);
+    public static  Tile pinkCarpetCenter = new Tile(TileAssets.pinkCarpetCenter, 8);
+    public static  Tile pinkCarpetRight = new Tile(TileAssets.pinkCarpetRight, 9);
+    public static  Tile pinkCarpetBottomLeft = new Tile(TileAssets.pinkCarpetBottomLeft, 10);
+    public static  Tile pinkCarpetBottom = new Tile(TileAssets.pinkCarpetBottom, 11);
+    public static  Tile pinkCarpetBottomRight = new Tile(TileAssets.pinkCarpetBottomRight, 12);
 
 
     // CLASS
