@@ -54,6 +54,9 @@ public class PauseState extends State {
 
     @Override
     public void tick() {
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
+            State.setState(handler.getGame().gameState);
+        }
         uiManager.tick();
         getInput();
         uiManager.getObjects().get(indexOfActiveButton).setSelected(true);
@@ -64,6 +67,7 @@ public class PauseState extends State {
     public void render(Graphics g) {
 
         handler.getRoom().render(g);
+        g.drawImage(Assets.tint, 0,0, null);
 
        // g.setColor(Color.blue);
      //   g.fillRect(0, 0, handler.getWidth(), handler.getHeight());

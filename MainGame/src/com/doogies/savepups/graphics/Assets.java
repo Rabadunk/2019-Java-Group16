@@ -64,6 +64,7 @@ public class Assets {
     // ui
     public static BufferedImage[] playButton, scoreButton, quitButton, blankButton;
     public static BufferedImage inventoryScreen;
+    public static BufferedImage tint;
 
     // variables to make tileset calcs cleaner
     private static final int tileHeight = Tile.TILEHEIGHT;
@@ -104,6 +105,7 @@ public class Assets {
         SpriteSheet coinCopperSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_copper.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
+        tint = ImageLoader.loadImage("/ui/tint.png");
 
         // Player
         player_up = new BufferedImage[4];

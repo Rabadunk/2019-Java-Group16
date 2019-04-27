@@ -32,9 +32,8 @@ public class GameState extends State {
 
     @Override
     public void tick() {
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
             State.setState(handler.getGame().pause);
-            System.out.println("Esc");
         }
         checkForRoomChange();
         handler.getRoom().tick();
