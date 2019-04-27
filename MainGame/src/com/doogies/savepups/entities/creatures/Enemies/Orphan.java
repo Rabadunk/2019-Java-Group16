@@ -1,11 +1,9 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -59,27 +57,11 @@ public class Orphan extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
-            diameter = 600;
-            moveToPlayer();
-            move();
-            System.out.println("moving to player");
-            checkAttacks();
-        } else {
-            count ++;
-            if(count > 30) {
-                autoMoveDecider();
-            }
-            move();
-
-            diameter = 200;
-        }
-        timeTracker();
+        basicEnemyMoveTick();
     }
 
     @Override
     public void die(){
-        System.out.println("Ogre has been slain");
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
     }
 

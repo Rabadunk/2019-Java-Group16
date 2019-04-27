@@ -2,7 +2,6 @@ package com.doogies.savepups.entities.statics;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
-import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 import com.doogies.savepups.tiles.Tile;
@@ -10,15 +9,15 @@ import com.doogies.savepups.tiles.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class PotPlant extends Entity {
+public class ShelfWithPot extends Entity {
 
-    private BufferedImage potPlantTexture = FurnitureAssets.potPlant;
+    private BufferedImage shelfWithPot = FurnitureAssets.shelfWithPot;
 
-    public PotPlant(Handler handler, float x, float y) {
-        super(handler, x, y, Tile.TILEWIDTH/2, Tile.TILEHEIGHT/2);
+    public ShelfWithPot(Handler handler, float x, float y) {
+        super(handler, x, y, Tile.TILEWIDTH/2, Tile.TILEHEIGHT);
 
         bounds.x = 0;
-        bounds.y = height/2;
+        bounds.y = Tile.TILEHEIGHT/2;
         bounds.width = width;
         bounds.height = height/4;
 
@@ -36,7 +35,7 @@ public class PotPlant extends Entity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(potPlantTexture,
+        g.drawImage(shelfWithPot,
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
@@ -45,8 +44,6 @@ public class PotPlant extends Entity {
         g.setColor(Color.red);
         g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
                 (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-               bounds.width, bounds.height);
+                bounds.width, bounds.height);
     }
-
-
 }

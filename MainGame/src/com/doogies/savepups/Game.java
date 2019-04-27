@@ -200,6 +200,8 @@ public class Game implements Runnable {
 
     public int getHeight() { return height; }
 
-    public Display getDisplay() { return display; };
+    public Display getDisplay() { return display; }
+
+    public Graphics getGraphics() { return  g; }
 
 }

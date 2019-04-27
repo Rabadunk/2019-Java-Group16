@@ -4,7 +4,6 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -53,24 +52,7 @@ public class Screamer extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
-            diameter = 600;
-            moveToPlayer();
-            move();
-            count = 31;
-            checkAttacks();
-        } else {
-            count++;
-            if(count > 40) {
-                dontMove();
-                count = 0;
-            }
-            move();
-
-            diameter = 200;
-        }
-
-        timeTracker();
+        basicEnemyMoveTick();
     }
 
     @Override
@@ -130,54 +112,5 @@ public class Screamer extends Enemy {
             }
         }
         return Assets.enemyIdleDown;
-    }
-
-
-    public boolean isAttackUp() {
-        return attackUp;
-    }
-
-    public void setAttackUp(boolean attackUp) {
-        this.attackUp = attackUp;
-    }
-
-    public boolean isAttackDown() {
-        return attackDown;
-    }
-
-    public void setAttackDown(boolean attackDown) {
-        this.attackDown = attackDown;
-    }
-
-    public boolean isAttackLeft() {
-        return attackLeft;
-    }
-
-    public void setAttackLeft(boolean attackLeft) {
-        this.attackLeft = attackLeft;
-    }
-
-    public boolean isAttackRight() {
-        return attackRight;
-    }
-
-    public void setAttackRight(boolean attackRight) {
-        this.attackRight = attackRight;
-    }
-
-    public long getAttackCooldown() {
-        return attackCooldown;
-    }
-
-    public void setAttackCooldown(long attackCooldown) {
-        this.attackCooldown = attackCooldown;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
     }
 }

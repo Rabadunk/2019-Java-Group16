@@ -4,7 +4,6 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -33,7 +32,7 @@ public class Orc extends Enemy{
         bounds.y = 20;
         bounds.width = 32;
         bounds.height = 43;
-
+        setupAttack();
         loadSprites();
         setSpeed(1f);
         setHealth(2);
@@ -57,19 +56,7 @@ public class Orc extends Enemy{
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
-            diameter = 600;
-            moveToPlayer();
-            move();
-        } else {
-            count ++;
-            if(count > 30) {
-                autoMoveDecider();
-            }
-            move();
-
-            diameter = 200;
-        }
+        basicEnemyMoveTick();
     }
 
     @Override

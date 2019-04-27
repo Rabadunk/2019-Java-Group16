@@ -28,6 +28,8 @@ public class StaticsManager {
             case 4:
                 insertComputer(entityManager, x, y);
                 break;
+            case 5:
+                insertShelfWithPot(entityManager, x, y);
         }
     }
 
@@ -54,5 +56,10 @@ public class StaticsManager {
     public void insertComputer(EntityManager entityManager, int spawnX, int spawnY) {
         Computer computer = new Computer(handler, spawnX, spawnY);
         entityManager.addEntity(computer);
+    }
+
+    public void insertShelfWithPot(EntityManager entityManager, int spawnX, int spawnY) {
+        ShelfWithPot shelfWithPot = new ShelfWithPot(handler, spawnX, spawnY);
+        entityManager.addEntity(shelfWithPot);
     }
 }

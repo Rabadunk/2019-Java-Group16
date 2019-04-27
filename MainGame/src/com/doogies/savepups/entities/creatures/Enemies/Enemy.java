@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.entities.creatures.Player;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.GameTimer;
@@ -32,9 +33,6 @@ public abstract class Enemy extends Creature {
     protected long initalTime;
     protected boolean playerActive = false;
 
-
-    protected boolean attackUp, attackDown, attackLeft, attackRight;
-
     public Enemy(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
         player = handler.getPlayer();
@@ -43,10 +41,26 @@ public abstract class Enemy extends Creature {
     }
 
     protected void setupAttack() {
-        attackUp = attackDown = attackLeft = attackRight = false;
         attackRectangle = new Rectangle();
         attackRectangle.width = bounds.width;
         attackRectangle.height = bounds.height;
+    }
+
+    protected  void basicEnemyMoveTick() {
+        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
+            diameter = 600;
+            moveToPlayer();
+            move();
+            checkAttacks();
+        } else {
+            count ++;
+            if(count > 30) {
+                autoMoveDecider();
+            }
+            move();
+            diameter = 200;
+        }
+        timeTracker();
     }
 
     protected void moveToPlayer() {
@@ -141,38 +155,11 @@ public abstract class Enemy extends Creature {
         }
 
         Rectangle enemyBounds = getCollisionBounds(0, 0);
+        Rectangle playerBounds = player.getCollisionBounds(0, 0);
         Boolean shouldAttack = getDistanceToPlayer() < Tile.TILEWIDTH;
 
-        attackUp = attackDown = attackLeft = attackRight = false;
-
-        // 0 = down, 1 = up, 2 = left, 3 = right
-
-        // Up
-        if (shouldAttack && direction == 1) {
-            attackRectangle.x = enemyBounds.x;
-            attackRectangle.y = enemyBounds.y - enemyBounds.height;
-            attackUp = true;
-            playerActive = true;
-        }
-        // Down
-        else if (shouldAttack && direction == 0) {
-            attackRectangle.x = enemyBounds.x;
-            attackRectangle.y = enemyBounds.y + enemyBounds.height;
-            attackDown = true;
-            playerActive = true;
-        }
-        // Left
-        else if (shouldAttack && direction == 2) {
-            attackRectangle.x = enemyBounds.x - enemyBounds.width;
-            attackRectangle.y = enemyBounds.y;
-            attackLeft = true;
-            playerActive = true;
-        }
-        // Right
-        else if (shouldAttack && direction == 3) {
-            attackRectangle.x = enemyBounds.x + enemyBounds.width;
-            attackRectangle.y = enemyBounds.y;
-            attackRight = true;
+        if (shouldAttack) {
+            setupAttackRectangle(enemyBounds, playerBounds);
             playerActive = true;
         } else {
             return;
@@ -181,10 +168,31 @@ public abstract class Enemy extends Creature {
         attackTimer = 0;
 
         for (Entity e : handler.getRoom().getEntityManager().getEntities()) {
-            if (e.equals(handler.getPlayer()) && e.getCollisionBounds(0,0).intersects(attackRectangle)) {
+            if (!(e instanceof  Enemy) && e.getCollisionBounds(0,0).intersects(attackRectangle)) {
                 e.damage(1);
             }
         }
+    }
+
+    protected void setupAttackRectangle(Rectangle enemyBounds, Rectangle playerBounds) {
+
+        if(enemyBounds.x > playerBounds.x) {
+            attackRectangle.x = enemyBounds.x - enemyBounds.width;
+        } else if (enemyBounds.x < playerBounds.x){
+            attackRectangle.x = enemyBounds.x + enemyBounds.width;
+        } else {
+            attackRectangle.x = enemyBounds.x;
+        }
+
+        if(enemyBounds.y > playerBounds.y) {
+            attackRectangle.y = enemyBounds.y - enemyBounds.height;
+        } else if(enemyBounds.y < playerBounds.y){
+            attackRectangle.y = enemyBounds.y + enemyBounds.height;
+        } else {
+            attackRectangle.y = enemyBounds.y;
+        }
+
+
     }
 
     protected void timeTracker(){

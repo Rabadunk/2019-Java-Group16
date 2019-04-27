@@ -133,8 +133,8 @@ public class Vampire extends Enemy {
                 (int) (y + bounds.y)/Tile.TILEHEIGHT) ||
                 getDistanceToPlayer() < 1) {
             System.out.println(getDistanceToPlayer());
-            x = 8 * Tile.TILEHEIGHT;
-            y = 8 * Tile.TILEHEIGHT;
+            x = 10 * Tile.TILEHEIGHT;
+            y = 17 * Tile.TILEHEIGHT;
         }
 
         //Movement

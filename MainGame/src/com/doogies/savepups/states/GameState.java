@@ -48,7 +48,6 @@ public class GameState extends State {
             AStarNode entrance = houseGraph.get(handler.getRoom().ID);
             handler.setRoom(room, entrance.roomSpawnX, entrance.roomSpawnY);
             worldChanged = true;
-            System.out.println("YOU'VE CHANGED WORLDS");
         }
     }
 
