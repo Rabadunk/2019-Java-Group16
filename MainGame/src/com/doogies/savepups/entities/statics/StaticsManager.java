@@ -22,6 +22,12 @@ public class StaticsManager {
             case 2:
                 insertBarrel2(entityManager, x, y);
                 break;
+            case 3:
+                insertPotPlant(entityManager, x, y);
+                break;
+            case 4:
+                insertComputer(entityManager, x, y);
+                break;
         }
     }
 
@@ -38,5 +44,15 @@ public class StaticsManager {
     public void insertBarrel2(EntityManager entityManager, int spawnX, int spawnY) {
         Barrel2 barrel2 = new Barrel2(handler, spawnX, spawnY);
         entityManager.addEntity(barrel2);
+    }
+
+    public void insertPotPlant(EntityManager entityManager, int spawnX, int spawnY) {
+        PotPlant potPlant = new PotPlant(handler, spawnX, spawnY);
+        entityManager.addEntity(potPlant);
+    }
+
+    public void insertComputer(EntityManager entityManager, int spawnX, int spawnY) {
+        Computer computer = new Computer(handler, spawnX, spawnY);
+        entityManager.addEntity(computer);
     }
 }

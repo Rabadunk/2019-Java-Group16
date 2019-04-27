@@ -1,12 +1,12 @@
 package com.doogies.savepups.tiles;
 
-import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.TileAssets;
 
 public class DoorwayWallTile extends Tile {
 
 
     public DoorwayWallTile(int id) {
-        super(Assets.doorwayWall, id);
+        super(TileAssets.doorwayWall, id, false);
     }
 
     @Override
