@@ -165,6 +165,7 @@ public class Vampire extends Enemy {
 
     @Override
     public void die(){
+        player.isGameWon = true;
         State.setState(handler.getGame().gameEndState);
         System.out.println("Vampire has been slain");
     }
@@ -176,19 +177,6 @@ public class Vampire extends Enemy {
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        // Red rectangle to represent collision box
-        g.setColor(Color.red);
-        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
-
-        g.setColor(Color.red);
-        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
-                attackRectangle.width,
-                attackRectangle.height);
-
     }
 
 
@@ -222,7 +210,7 @@ public class Vampire extends Enemy {
                 return idleRight;
             }
         }
-        return Assets.enemyIdleDown;
+        return idleDown;
     }
 
     public void damage(int amount) {

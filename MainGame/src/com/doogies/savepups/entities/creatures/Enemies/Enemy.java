@@ -47,13 +47,13 @@ public abstract class Enemy extends Creature {
     }
 
     protected  void basicEnemyMoveTick() {
-        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
+        if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
             diameter = 600;
             moveToPlayer();
             move();
             checkAttacks();
         } else {
-            count ++;
+            count++;
             if(count > 30) {
                 autoMoveDecider();
             }
@@ -181,7 +181,7 @@ public abstract class Enemy extends Creature {
         } else if (enemyBounds.x < playerBounds.x){
             attackRectangle.x = enemyBounds.x + enemyBounds.width;
         } else {
-            attackRectangle.x = enemyBounds.x;
+            attackRectangle.x = playerBounds.x;
         }
 
         if(enemyBounds.y > playerBounds.y) {
@@ -189,10 +189,8 @@ public abstract class Enemy extends Creature {
         } else if(enemyBounds.y < playerBounds.y){
             attackRectangle.y = enemyBounds.y + enemyBounds.height;
         } else {
-            attackRectangle.y = enemyBounds.y;
+            attackRectangle.y = playerBounds.y;
         }
-
-
     }
 
     protected void timeTracker(){

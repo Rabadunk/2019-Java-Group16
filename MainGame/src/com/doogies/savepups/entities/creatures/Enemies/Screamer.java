@@ -14,24 +14,20 @@ public class Screamer extends Enemy {
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
 
-
-    // Player Direction
-    // 0 = down, 1 = up, 2 = left, 3 = right
-
-
     public Screamer(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+        setupBounds();
+        setupAttack();
+        loadSprites();
+        setSpeed(1f);
+        setHealth(2);
+    }
 
-
+    private void setupBounds() {
         bounds.x = 16;
         bounds.y = 20;
         bounds.width = 32;
         bounds.height = 43;
-        setupAttack();
-
-        loadSprites();
-        setSpeed(1f);
-        setHealth(2);
     }
 
     private void loadSprites() {
@@ -63,26 +59,13 @@ public class Screamer extends Enemy {
 
     @Override
     public void render(Graphics g) {
-
         g.drawImage(getCurrentAnimationFrame(),
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        g.setColor(Color.red);
-        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
-
-        // Oval around enemy
-        g.setColor(Color.blue);
-        g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
-                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
-
     }
 
     // Getters and setters
-
     private BufferedImage getCurrentAnimationFrame(){
         if(xMove <0){
             return animationLeft.getCurrentFrame();
@@ -96,21 +79,6 @@ public class Screamer extends Enemy {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
-        else{
-            // 0 = down, 1 = up, 2 = left, 3 = right
-            if(direction == 0) {
-                return Assets.screamerIdleLeft;
-            }
-            else if(direction == 1) {
-                return Assets.screamerIdleRight;
-            }
-            else if(direction == 2) {
-                return Assets.screamerIdleRight;
-            }
-            else if(direction == 3) {
-                return Assets.screamerIdleLeft;
-            }
-        }
-        return Assets.enemyIdleDown;
+        return Assets.screamerIdleLeft;
     }
 }
