@@ -22,7 +22,7 @@ public class Bed extends Entity {
         bounds.width = width + 5;
         bounds.height = (int) (height - height / 2.0f);
 
-        setHealth(10);
+        setHealth(1);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Bed extends Entity {
     @Override
     public void die() {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y + Tile.TILEHEIGHT));
+        handler.getRoom().getItemManager().addItem(Item.bedItem.createNew((int) x, (int) y + Tile.TILEHEIGHT));
     }
 
     @Override

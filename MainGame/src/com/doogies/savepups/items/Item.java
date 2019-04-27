@@ -3,6 +3,7 @@ package com.doogies.savepups.items;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,7 +19,7 @@ public class Item {
     //Handler
 
     public static Item[] items = new Item[256];
-    public static Item bedItem = new Item(Assets.bed, "Bed", 0, false);
+    public static Item bedItem = new Item(FurnitureAssets.bed, "Bed", 0, false);
     public static Item attackItem = new Item(Assets.attack, "Attack", 1, false);
     public static Item coinGold = new Item(Assets.coinGold[0], "CoinGold", 2, true);
     public static Item coinSilver = new Item(Assets.coinGold[0], "CoinSilver", 3, true);
