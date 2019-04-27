@@ -1,13 +1,13 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.tiles.Tile;
-import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 import java.util.Random;
@@ -33,11 +33,19 @@ public abstract class Enemy extends Creature {
     protected long initalTime;
     protected boolean playerActive = false;
 
+    protected boolean attackUp, attackDown, attackLeft, attackRight;
+
+    public static AudioPlayer goldCoinDrop;
+
     public Enemy(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
         player = handler.getPlayer();
         diameter = 200;
         moveTo = new AStarNode((int) x, (int) y, Tile.tiles[0].getTexture(), false, handler);
+
+        // Audio
+        goldCoinDrop = new AudioPlayer();
+        goldCoinDrop.setFile("/soundEffects/rpgSounds/inventory/coin2_16");
     }
 
     protected void setupAttack() {
@@ -47,6 +55,9 @@ public abstract class Enemy extends Creature {
     }
 
     protected  void basicEnemyMoveTick() {
+
+        glitchCollisionRespawn();
+
         if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
             diameter = 600;
             moveToPlayer();
@@ -61,6 +72,16 @@ public abstract class Enemy extends Creature {
             diameter = 200;
         }
         timeTracker();
+    }
+
+    protected void glitchCollisionRespawn() {
+        if(collisionWithTile((int) (x + bounds.x)/Tile.TILEHEIGHT,
+                             (int) (y + bounds.y)/Tile.TILEHEIGHT) ||
+                checkEntityCollision(0, 0)) {
+
+            x = (new Random().nextInt(handler.getRoom().getWidth() - 2) + 1) * Tile.TILEWIDTH;
+            y = (new Random().nextInt(handler.getRoom().getHeight() - 2) + 1) * Tile.TILEHEIGHT;
+        }
     }
 
     protected void moveToPlayer() {

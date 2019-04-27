@@ -56,6 +56,8 @@ public class Assets {
 
     public static BufferedImage sword;
 
+    public static BufferedImage[] life;
+
     // Coins
     public static BufferedImage[] coinGold, coinSilver, coinCopper;
 
@@ -69,6 +71,7 @@ public class Assets {
     private static final int tileWidth = Tile.TILEHEIGHT;
 
     //
+    public static BufferedImage dog;
 
     public static void init() {
 
@@ -101,6 +104,10 @@ public class Assets {
         SpriteSheet coinGoldSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_gold.png"));
         SpriteSheet coinSilverSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_silver.png"));
         SpriteSheet coinCopperSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_copper.png"));
+        SpriteSheet objects = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/objects.png"));
+
+        //Dooogies
+        SpriteSheet dogSheet = new SpriteSheet(ImageLoader.loadImage("/textures/doogies/lpccatratdog.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
         tint = ImageLoader.loadImage("/ui/tint.png");
@@ -410,6 +417,15 @@ public class Assets {
         // Items
         sword = itemSprites.crop(16, 0, 16, 16);
 
+        life = new BufferedImage[4];
+        life[0] = objects.crop(0,48, 16, 16);
+        life[1] = objects.crop(16,48, 16, 16);
+        life[2] = objects.crop(32,48, 16, 16);
+        life[3] = objects.crop(48,48, 16, 16);
+
+        dog = dogSheet.crop(128, 160, 48,48);
+
+
         // Barrels
         barrel1 = barrelSprites.crop(0, 0, 32, 32);
         barrel2 = barrelSprites.crop(0, 32, 32, 32);
@@ -444,5 +460,6 @@ public class Assets {
         coinCopper[5] = coinCopperSprites.crop(160,0, 32, 32);
         coinCopper[6] = coinCopperSprites.crop(192,0, 32, 32);
         coinCopper[7] = coinCopperSprites.crop(224,0, 32, 32);
+
     }
 }

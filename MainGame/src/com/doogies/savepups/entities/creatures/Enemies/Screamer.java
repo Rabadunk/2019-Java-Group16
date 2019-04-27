@@ -53,8 +53,10 @@ public class Screamer extends Enemy {
 
     @Override
     public void die(){
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
         System.out.println("Screamer has been slain");
+        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x, (int) y));
+        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
+        goldCoinDrop.play();
     }
 
     @Override

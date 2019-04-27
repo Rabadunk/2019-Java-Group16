@@ -3,8 +3,6 @@ package com.doogies.savepups.hud;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
-import com.doogies.savepups.states.State;
-import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 
@@ -24,7 +22,7 @@ public class GameHud {
     public void render(Graphics g){
         // Health and beds which later will be dooogies
         Text.drawString(g, "Health:  " + handler.getPlayer().getHealth(), 15,30, false, Color.WHITE, Assets.fontHud);
-        g.drawImage(Assets.coinGold[4], handler.getWidth() - 120 ,13, null);
+        g.drawImage(Assets.dog, handler.getWidth() - 120 ,13, 24,24, null);
         Text.drawString(g, ": "+handler.getPlayer().getInventory().getItem("CoinGold"), handler.getWidth() - 90,30, false, Color.WHITE, Assets.fontHud);
 
         // Score and time

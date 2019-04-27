@@ -54,6 +54,8 @@ public class MenuState extends State{
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
+            handler.newPlayer();
+            handler.getGame().gameState = new GameState(handler);
             State.setState(handler.getGame().gameState);
 
         }));

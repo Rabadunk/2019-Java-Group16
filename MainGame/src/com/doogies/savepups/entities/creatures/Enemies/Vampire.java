@@ -122,13 +122,7 @@ public class Vampire extends Enemy {
         animationLeft.tick();
         animationRight.tick();
 
-        if(collisionWithTile((int) (x + bounds.x)/Tile.TILEHEIGHT,
-                (int) (y + bounds.y)/Tile.TILEHEIGHT) ||
-                getDistanceToPlayer() < 1) {
-            System.out.println(getDistanceToPlayer());
-            x = 10 * Tile.TILEHEIGHT;
-            y = 17 * Tile.TILEHEIGHT;
-        }
+        glitchCollisionRespawn();
 
         //Movement
         if(!isBat) {
