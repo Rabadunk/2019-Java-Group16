@@ -63,8 +63,10 @@ public class PauseState extends State {
     @Override
     public void render(Graphics g) {
 
-        g.setColor(Color.blue);
-        g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
+        handler.getRoom().render(g);
+
+       // g.setColor(Color.blue);
+     //   g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
 
         //temp code
         g.setColor(Color.RED);
