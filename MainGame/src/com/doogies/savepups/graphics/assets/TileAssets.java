@@ -1,6 +1,5 @@
 package com.doogies.savepups.graphics.assets;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import com.doogies.savepups.graphics.ImageLoader;
@@ -19,15 +18,13 @@ public class TileAssets {
         tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
 
         loadPinkCarpet();
+        loadWalls();
 
         // Tileset Spritesheet
         // Crops the texture from the spritesheet. Tiles are always 64x64 pixels in this sprite sheet
         // So we can use an row/column * 64 to quickly obtain the starting position of the sprite.
-        brickWall = tileSpritesheet.crop(tileWidth,0, tileWidth, tileHeight);
         pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,0, tileWidth, tileHeight);
-        doorwayWall = tileSpritesheet.crop((3 - 1)* tileWidth,0, tileWidth, tileHeight);
         damagedFloor = tileSpritesheet.crop((1 - 1) * tileWidth,0, tileWidth, tileHeight);
-        window = tileSpritesheet.crop(2*tileWidth, tileHeight, tileWidth, tileHeight);
     }
 
     private static void loadPinkCarpet() {
@@ -40,5 +37,11 @@ public class TileAssets {
         pinkCarpetBottomLeft = tileSpritesheet.crop(0, tileHeight * 4, tileWidth, tileHeight);
         pinkCarpetBottom = tileSpritesheet.crop(tileWidth, tileHeight * 4, tileWidth, tileHeight);
         pinkCarpetBottomRight = tileSpritesheet.crop(2*tileWidth, tileHeight * 4, tileWidth, tileHeight);
+    }
+
+    private static void loadWalls() {
+        brickWall = tileSpritesheet.crop(tileWidth,0, tileWidth, tileHeight);
+        doorwayWall = tileSpritesheet.crop((3 - 1)* tileWidth,0, tileWidth, tileHeight);
+        window = tileSpritesheet.crop(2*tileWidth, tileHeight, tileWidth, tileHeight);
     }
 }
