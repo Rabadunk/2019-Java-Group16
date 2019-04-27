@@ -2,6 +2,9 @@ package com.doogies.savepups.utils;
 
 import com.doogies.savepups.Handler;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,18 +50,50 @@ public class HighScoreManager {
         highScores = new ArrayList<>();
 
         loadScoreFileToStringList();
+
+
         convertStringScoresToInts();
 
         sortScores();
-        lowestScore = arrayListScores.get(10).getScore();
+        lowestScore = arrayListScores.get(arrayListScores.size() - 1).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
+
+
+
+
 
 //        printScoresOnce();
     }
 
     public void loadScoreFileToStringList() {
         stringScores = loadFileAsString(savedFile).split(("\\s+"));
+        System.out.println(stringScores.length);
+
+        // Detects and attemps to fix a non compatible save file
+        if(stringScores.length % 2 != 0){
+            System.out.println("Save file error!");
+            System.exit(0);
+        }
+        else{
+            fixHighScoreSave();
+        }
+
+    }
+
+    public void fixHighScoreSave(){
+        Writer fileWriter = null;
+        for(int i = 0; i < 20 - stringScores.length; i = i + 2){
+            try {
+                fileWriter = new FileWriter(savedFile, true);
+                fileWriter.write("Noone ");
+                fileWriter.write("0\n");
+                fileWriter.close();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void convertStringScoresToInts() {
@@ -74,10 +109,12 @@ public class HighScoreManager {
     }
 
     public void discardExtraScores(){
+        highScores.clear();
         if(arrayListScores.size() > 10) {
             for (i = 0; i < 10; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
                 highScores.add(arrayListScores.get(i));
+                System.out.println(highScores.size());
             }
         }
         Collections.sort(highScores, scoreComparator);
@@ -105,11 +142,30 @@ public class HighScoreManager {
     public void addScore(String name, int score){
         arrayListScores.add(new Score(name, score));
         scoreAdded = true;
-        //System.out.println("Score added");
+        System.out.println("Score added");
         sortScores();
         lowestScore = arrayListScores.get(10).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
+        //System.out.println(highScores.size());
+        writeNewscores();
+    }
+
+    public void writeNewscores(){
+        Writer fileWriter = null;
+        try {
+            fileWriter = new FileWriter(savedFile);
+            //fileWriter.write("data 1");
+            for(i = 0; i < highScores.size(); i++){
+                fileWriter.write("\n");
+                fileWriter.write(handler.highScoreManager.getHighScores().get(i).getName());
+                fileWriter.write(" ");
+                fileWriter.write(Integer.toString(handler.highScoreManager.getHighScores().get(i).getScore()));
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     // Getters and setters
 
@@ -130,9 +186,6 @@ public class HighScoreManager {
         this.highScores = highScores;
     }
 
-    // Getters and setters
-
-
     public int getLowestScore() {
         return lowestScore;
     }
@@ -149,5 +202,5 @@ public class HighScoreManager {
         this.highestScore = highScore;
     }
 }
-// Some of the code is
-// From https://stackoverflow.com/questions/22339123/adding-highscores-to-java-game-from-console-to-jpanel-saving-highscore-in-en
+// Comparator is from
+// https://stackoverflow.com/questions/22339123/adding-highscores-to-java-game-from-console-to-jpanel-saving-highscore-in-en
