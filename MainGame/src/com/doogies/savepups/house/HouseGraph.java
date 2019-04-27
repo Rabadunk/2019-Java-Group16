@@ -9,14 +9,12 @@ import java.util.List;
 
 public class HouseGraph {
 
-    private int numOfRooms = 4;
-
-    private Room bedRoom;
-    private Room hallwayRoom;
-    private Room testRoom;
-    private Room lounge;
-    private Room bossRoom;
-    private Handler handler;
+    public static Room bedRoom;
+    public static Room hallwayRoom;
+    public static Room testRoom;
+    public static Room lounge;
+    public static Room bossRoom;
+    public static Handler handler;
 
     public static ArrayList<ArrayList> house;
     private ArrayList<Room> rooms;

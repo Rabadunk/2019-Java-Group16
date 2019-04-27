@@ -122,6 +122,16 @@ public class Inventory {
         return 0;
     }
 
+    public boolean hasItem(String name){
+        for(Item i: inventoryItems){
+            if(i.getName() == name){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     // Getters and setters
 
 
