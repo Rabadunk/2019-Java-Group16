@@ -389,7 +389,7 @@ public class Assets {
         batIdleDown = bat_down[1];
         batIdleLeft = bat_left[1];
         batIdleRight = bat_right[1];
-        
+
         // UI
         playButton = new BufferedImage[2];
         playButton[0] = button.crop(0, 0, 300, 150); // Not selected
