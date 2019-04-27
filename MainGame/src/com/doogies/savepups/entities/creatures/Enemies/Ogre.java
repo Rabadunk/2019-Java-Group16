@@ -23,6 +23,9 @@ public class Ogre extends Enemy {
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
 
+    // Audio
+    public static AudioPlayer ogre1, ogre2, ogre3, ogre4, ogre5;
+
 
 
     public Ogre(Handler handler, float x, float y) {
@@ -34,6 +37,19 @@ public class Ogre extends Enemy {
         bounds.y = 20;
         bounds.width = 32;
         bounds.height = 43;
+
+        // Audio
+        ogre1 = new AudioPlayer();
+        ogre2 = new AudioPlayer();
+        ogre3 = new AudioPlayer();
+        ogre4 = new AudioPlayer();
+        ogre5 = new AudioPlayer();
+
+        ogre1.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre1_16");
+        ogre2.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre2_16");
+        ogre3.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre3_16");
+        ogre4.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre4_16");
+        ogre5.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre5_16");
 
         loadSprites();
         setSpeed(1f);
@@ -63,10 +79,12 @@ public class Ogre extends Enemy {
             diameter = 250;
             moveToPlayer();
             move();
+            ogre2.play();
         } else {
             count ++;
             if(count > 50) {
                 autoMoveDecider();
+                ogre3.play();
             }
             move();
 
