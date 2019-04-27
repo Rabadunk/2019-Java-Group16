@@ -110,7 +110,13 @@ public class Inventory {
                 return;
             }
         }
-        inventoryItems.add(item);
+        // Picked up health item
+        if(item.getId() == 5){
+            handler.getPlayer().setHealth(handler.getPlayer().getHealth() + 1);
+        }
+        else {
+            inventoryItems.add(item);
+        }
     }
 
     public int getItem(String name){

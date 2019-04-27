@@ -15,6 +15,7 @@ public class Item {
     public static Animation coinGoldAnimation = new Animation(80, Assets.coinGold);
     public static Animation coinSilverAnimation = new Animation(80, Assets.coinSilver);
     public static Animation coinCopperAnimation = new Animation(80, Assets.coinCopper);
+    public static Animation lifeAnimation = new Animation(80, Assets.life);
 
     //Handler
 
@@ -24,6 +25,7 @@ public class Item {
     public static Item coinGold = new Item(Assets.coinGold[0], "CoinGold", 2, true);
     public static Item coinSilver = new Item(Assets.coinGold[0], "CoinSilver", 3, true);
     public static Item coinCopper = new Item(Assets.coinGold[0], "CoinCopper", 4, true);
+    public static Item life = new Item(Assets.life[0], "CoinCopper", 5, true);
 
 
 
@@ -65,6 +67,7 @@ public class Item {
         coinGoldAnimation.tick();
         coinSilverAnimation.tick();
         coinCopperAnimation.tick();
+        lifeAnimation.tick();
     }
 
     public void render(Graphics g){
@@ -101,6 +104,8 @@ public class Item {
                 return coinSilverAnimation.getCurrentFrame();
             case 4:
                 return coinCopperAnimation.getCurrentFrame();
+            case 5:
+                return lifeAnimation.getCurrentFrame();
             default:
                 return coinCopperAnimation.getCurrentFrame();
         }
