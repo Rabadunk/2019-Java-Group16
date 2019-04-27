@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -52,11 +53,12 @@ public class Screamer extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())) {
+        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
             diameter = 600;
             moveToPlayer();
             move();
             count = 31;
+            checkAttacks();
         } else {
             count++;
             if(count > 40) {
@@ -68,7 +70,6 @@ public class Screamer extends Enemy {
             diameter = 200;
         }
 
-        checkAttacks();
         timeTracker();
     }
 
@@ -97,41 +98,6 @@ public class Screamer extends Enemy {
                 (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
 
     }
-//
-//
-//    public void postRender(Graphics g){
-//
-//        //Attack animations
-//
-//        if(attackUp) {
-//            g.drawImage(Assets.attack,
-//                    (int) (x - handler.getGameCamera().getxOffset()),
-//                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
-//                    width, height, null);
-//            //return Assets.playerIdleDown;
-//        }
-//        else if(attackDown) {
-//            g.drawImage(Assets.attack,
-//                    (int) (x - handler.getGameCamera().getxOffset()),
-//                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
-//                    width, height, null);
-//            //return Assets.playerIdleUp;
-//        }
-//        else if(attackLeft) {
-//            g.drawImage(Assets.attack,
-//                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
-//                    (int) (y - handler.getGameCamera().getyOffset()),
-//                    width, height, null);
-//            //return Assets.playerIdleLeft;
-//        }
-//        else if(attackRight) {
-//            g.drawImage(Assets.attack,
-//                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
-//                    (int) (y - handler.getGameCamera().getyOffset()),
-//                    width, height, null);
-//            //return Assets.playerIdleRight;
-//        }
-//    }
 
     // Getters and setters
 

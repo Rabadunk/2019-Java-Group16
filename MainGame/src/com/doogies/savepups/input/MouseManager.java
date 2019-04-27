@@ -103,6 +103,9 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     }
 
+    public UIManager getUiManager() {
+        return uiManager;
+    }
 
     public boolean isMoved() {
         return moved;

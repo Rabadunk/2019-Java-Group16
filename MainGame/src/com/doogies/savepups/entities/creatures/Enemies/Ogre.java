@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -55,7 +56,7 @@ public class Ogre extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == Assets.bed)) {
+        if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
             count = 51;
             diameter = 250;
             moveToPlayer();

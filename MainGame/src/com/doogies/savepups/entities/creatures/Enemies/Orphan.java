@@ -5,6 +5,7 @@ import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -58,10 +59,12 @@ public class Orphan extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())) {
+        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
             diameter = 600;
             moveToPlayer();
             move();
+            System.out.println("moving to player");
+            checkAttacks();
         } else {
             count ++;
             if(count > 30) {
@@ -71,8 +74,6 @@ public class Orphan extends Enemy {
 
             diameter = 200;
         }
-
-        checkAttacks();
         timeTracker();
     }
 
@@ -111,40 +112,6 @@ public class Orphan extends Enemy {
     }
 
 
-    public void postRender(Graphics g){
-
-        //Attack animations
-
-        if(attackUp) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleDown;
-        }
-        else if(attackDown) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleUp;
-        }
-        else if(attackLeft) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleLeft;
-        }
-        else if(attackRight) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleRight;
-        }
-    }
-
     // Getters and setters
 
     private BufferedImage getCurrentAnimationFrame(){
@@ -177,62 +144,5 @@ public class Orphan extends Enemy {
         }
         return Assets.enemyIdleDown;
     }
-
-
-    public boolean isAttackUp() {
-        return attackUp;
-    }
-
-    public void setAttackUp(boolean attackUp) {
-        this.attackUp = attackUp;
-    }
-
-    public boolean isAttackDown() {
-        return attackDown;
-    }
-
-    public void setAttackDown(boolean attackDown) {
-        this.attackDown = attackDown;
-    }
-
-    public boolean isAttackLeft() {
-        return attackLeft;
-    }
-
-    public void setAttackLeft(boolean attackLeft) {
-        this.attackLeft = attackLeft;
-    }
-
-    public boolean isAttackRight() {
-        return attackRight;
-    }
-
-    public void setAttackRight(boolean attackRight) {
-        this.attackRight = attackRight;
-    }
-
-    public long getAttackCooldown() {
-        return attackCooldown;
-    }
-
-    public void setAttackCooldown(long attackCooldown) {
-        this.attackCooldown = attackCooldown;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-
-
-
-
-
-
-
 
 }

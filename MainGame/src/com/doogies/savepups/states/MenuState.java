@@ -47,6 +47,7 @@ public class MenuState extends State{
 
         uiManager.addObject( new UIImageButton(100, 200, 300, 100, Assets.playButton, () -> {
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                handler.getGame().gameState = new GameState(handler);
                 State.setState(handler.getGame().gameState);
             }
         }, () -> {
