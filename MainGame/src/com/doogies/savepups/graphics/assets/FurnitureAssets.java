@@ -14,6 +14,7 @@ public class FurnitureAssets {
     public static BufferedImage computer, bed, potPlant;
     public static BufferedImage shelfWithPot;
     public static BufferedImage drawers;
+    public static BufferedImage cupboard;
 
     public static void init() {
         furnitureSheet = new SpriteSheet(ImageLoader.loadImage("/textures/furnitureSpritesheet.png"));
@@ -23,6 +24,7 @@ public class FurnitureAssets {
         computer = furnitureSheet.crop(tileWidth*2, 0, tileWidth*2, tileHeight);
         shelfWithPot = furnitureSheet.crop(tileWidth*4, 0, tileWidth/2, tileHeight);
         drawers = furnitureSheet.crop(tileWidth*4 + tileWidth/2, 0, tileWidth/2, tileHeight);
+        cupboard = furnitureSheet.crop(tileWidth, tileHeight, tileWidth*2, tileHeight*2);
     }
 
 }
