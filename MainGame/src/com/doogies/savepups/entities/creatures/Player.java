@@ -47,8 +47,11 @@ public class Player extends Creature {
     private boolean timerStart = false;
     private boolean timerSet = false;
     private int timeTakenMinutes, timeTakenSeconds = 0;
-    private long initalTime;
+
+    private long secondCounter;
     private boolean playerActive = false;
+
+    private int tickCounter = 0;
 
     // Score
     private int score = 0;
@@ -156,9 +159,13 @@ public class Player extends Creature {
 
     public void timeTracker(){
 
-        if(playerActive && !timerSet){
-            initalTime = System.currentTimeMillis();
-            timerSet = true;
+        if(playerActive){
+            tickCounter++;
+            //System.out.println(tickCounter);
+            if(tickCounter >= 60){
+                secondCounter++;
+                tickCounter = 0;
+            }
         }
 
         if(!playerActive) {
@@ -166,8 +173,8 @@ public class Player extends Creature {
             timeTakenSeconds = 0;
         }
         else {
-            timeTakenMinutes = (int) (System.currentTimeMillis() - initalTime) / 1000 / 60;
-            timeTakenSeconds = (int) ((System.currentTimeMillis() - initalTime) / 1000) % 60;
+            timeTakenMinutes = (int) (secondCounter) / 60;
+            timeTakenSeconds = (int) (secondCounter) % 60;
         }
     }
 

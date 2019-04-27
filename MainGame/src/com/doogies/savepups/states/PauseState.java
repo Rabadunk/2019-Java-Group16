@@ -82,7 +82,7 @@ public class PauseState extends State {
 
         // Button texts
         Text.drawString(g, "Resume", handler.getWidth()/2, 310 + 50,true, Color.WHITE, Assets.font28);
-        Text.drawString(g, "Exit to main menu", handler.getWidth()/2, 420 + 50,true, Color.WHITE, Assets.font28);
+        Text.drawString(g, "Main menu", handler.getWidth()/2, 420 + 50,true, Color.WHITE, Assets.font28);
 
     }
 
