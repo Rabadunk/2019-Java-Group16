@@ -22,7 +22,7 @@ public class FurnitureAssets {
         potPlant = furnitureSheet.crop(tileWidth, 0, tileWidth, tileHeight);
         computer = furnitureSheet.crop(tileWidth*2, 0, tileWidth*2, tileHeight);
         shelfWithPot = furnitureSheet.crop(tileWidth*4, 0, tileWidth/2, tileHeight);
-        drawers = furnitureSheet.crop(tileWidth*5, 0, tileWidth/2, tileHeight);
+        drawers = furnitureSheet.crop(tileWidth*4 + tileWidth/2, 0, tileWidth/2, tileHeight);
     }
 
 }

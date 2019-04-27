@@ -9,11 +9,11 @@ import com.doogies.savepups.tiles.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ShelfWithPot extends Entity {
+public class Drawers extends Entity {
 
-    private BufferedImage shelfWithPot = FurnitureAssets.shelfWithPot;
+    private BufferedImage drawersTexture = FurnitureAssets.drawers;
 
-    public ShelfWithPot(Handler handler, float x, float y) {
+    public Drawers(Handler handler, float x, float y) {
         super(handler, x + Tile.TILEWIDTH/4, y, Tile.TILEWIDTH/2, Tile.TILEHEIGHT);
 
         bounds.x = 0;
@@ -21,7 +21,7 @@ public class ShelfWithPot extends Entity {
         bounds.width = width;
         bounds.height = height/4;
 
-        setHealth(1);
+        setHealth(2);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ShelfWithPot extends Entity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(shelfWithPot,
+        g.drawImage(drawersTexture,
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);

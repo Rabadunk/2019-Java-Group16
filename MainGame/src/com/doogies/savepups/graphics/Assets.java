@@ -15,8 +15,6 @@ public class Assets {
 
     //public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
 
-    public static BufferedImage computer, bed;
-
     public static BufferedImage doogie;
 
     public static BufferedImage barrel1, barrel2;

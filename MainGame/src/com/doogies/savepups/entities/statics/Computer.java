@@ -21,7 +21,7 @@ public class Computer extends Entity {
         bounds.width = width - 24;
         bounds.height = height/8;
 
-        setHealth(20);
+        setHealth(3);
     }
 
     @Override

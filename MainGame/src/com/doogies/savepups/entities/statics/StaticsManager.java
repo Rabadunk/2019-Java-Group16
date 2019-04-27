@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.statics;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.EntityManager;
 
 public class StaticsManager {
@@ -30,6 +31,10 @@ public class StaticsManager {
                 break;
             case 5:
                 insertShelfWithPot(entityManager, x, y);
+                break;
+            case 6:
+                insertDrawers(entityManager, x, y);
+                break;
         }
     }
 
@@ -61,5 +66,10 @@ public class StaticsManager {
     public void insertShelfWithPot(EntityManager entityManager, int spawnX, int spawnY) {
         ShelfWithPot shelfWithPot = new ShelfWithPot(handler, spawnX, spawnY);
         entityManager.addEntity(shelfWithPot);
+    }
+
+    public void insertDrawers(EntityManager entityManager, int spawnX, int spawnY) {
+        Drawers drawer = new Drawers(handler, spawnX, spawnY);
+        entityManager.addEntity(drawer);
     }
 }

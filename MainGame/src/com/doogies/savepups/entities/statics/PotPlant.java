@@ -22,7 +22,7 @@ public class PotPlant extends Entity {
         bounds.width = width;
         bounds.height = height/4;
 
-        setHealth(2);
+        setHealth(1);
     }
 
     @Override
