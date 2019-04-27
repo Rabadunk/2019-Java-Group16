@@ -111,7 +111,7 @@ public class HighScoreManager {
     public void discardExtraScores(){
         highScores.clear();
         if(arrayListScores.size() > 10) {
-            for (i = 0; i < 10; i++) {
+            for (i = 0; i < 11; i++) {
                 //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
                 highScores.add(arrayListScores.get(i));
                 System.out.println(highScores.size());
@@ -144,7 +144,7 @@ public class HighScoreManager {
         scoreAdded = true;
         System.out.println("Score added");
         sortScores();
-        lowestScore = arrayListScores.get(10).getScore();
+        lowestScore = arrayListScores.get(9).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
         //System.out.println(highScores.size());
@@ -157,10 +157,10 @@ public class HighScoreManager {
             fileWriter = new FileWriter(savedFile);
             //fileWriter.write("data 1");
             for(i = 0; i < highScores.size(); i++){
-                fileWriter.write("\n");
                 fileWriter.write(handler.highScoreManager.getHighScores().get(i).getName());
                 fileWriter.write(" ");
                 fileWriter.write(Integer.toString(handler.highScoreManager.getHighScores().get(i).getScore()));
+                fileWriter.write("\n");
             }
             fileWriter.close();
         } catch (IOException e) {
