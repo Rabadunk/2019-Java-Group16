@@ -7,5 +7,5 @@ Hi 2002
 New_player 910
 New_player 910
 New_player 780
-New_player 360
+New_player 550
 New_player 360

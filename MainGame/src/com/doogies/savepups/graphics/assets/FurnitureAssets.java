@@ -18,6 +18,7 @@ public class FurnitureAssets {
 
         bed = furnitureSheet.crop(0, 0, tileWidth, tileHeight * 2);
         potPlant = furnitureSheet.crop(tileWidth, 0, tileWidth, tileHeight);
+        computer = furnitureSheet.crop(tileWidth*2, 0, tileWidth*2, tileHeight);
     }
 
 }

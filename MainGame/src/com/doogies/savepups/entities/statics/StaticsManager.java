@@ -25,6 +25,9 @@ public class StaticsManager {
             case 3:
                 insertPotPlant(entityManager, x, y);
                 break;
+            case 4:
+                insertComputer(entityManager, x, y);
+                break;
         }
     }
 
@@ -46,5 +49,10 @@ public class StaticsManager {
     public void insertPotPlant(EntityManager entityManager, int spawnX, int spawnY) {
         PotPlant potPlant = new PotPlant(handler, spawnX, spawnY);
         entityManager.addEntity(potPlant);
+    }
+
+    public void insertComputer(EntityManager entityManager, int spawnX, int spawnY) {
+        Computer computer = new Computer(handler, spawnX, spawnY);
+        entityManager.addEntity(computer);
     }
 }
