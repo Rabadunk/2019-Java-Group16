@@ -6,7 +6,6 @@ import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.tiles.Tile;
-import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 import java.util.Random;

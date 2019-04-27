@@ -6,20 +6,15 @@ import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.house.HouseGraph;
-import com.doogies.savepups.house.Room;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
 import com.doogies.savepups.items.Item;
 import com.doogies.savepups.states.State;
 import com.doogies.savepups.tiles.Tile;
-import com.doogies.savepups.utils.GameTimer;
-import com.doogies.savepups.utils.HighScoreManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-
-import static com.doogies.savepups.items.Item.bedItem;
 
 public class Player extends Creature {
 
@@ -43,7 +38,6 @@ public class Player extends Creature {
     private GameHud gameHud;
 
     // Game Timer
-    private GameTimer gameTimer;
     private boolean timerStart = false;
     private boolean timerSet = false;
     private int timeTakenMinutes, timeTakenSeconds = 0;
@@ -110,8 +104,6 @@ public class Player extends Creature {
 
         // hud
         gameHud = new GameHud(handler);
-
-        gameTimer = new GameTimer(handler);
     }
 
     @Override

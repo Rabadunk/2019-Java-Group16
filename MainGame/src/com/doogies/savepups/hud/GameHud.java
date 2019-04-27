@@ -3,8 +3,6 @@ package com.doogies.savepups.hud;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
-import com.doogies.savepups.states.State;
-import com.doogies.savepups.utils.GameTimer;
 
 import java.awt.*;
 
