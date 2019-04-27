@@ -51,17 +51,12 @@ public class HighScoreManager {
 
         loadScoreFileToStringList();
 
-
         convertStringScoresToInts();
 
         sortScores();
         lowestScore = arrayListScores.get(arrayListScores.size() - 1).getScore();
         highestScore = arrayListScores.get(0).getScore();
         discardExtraScores();
-
-
-
-
 
 //        printScoresOnce();
     }
@@ -78,7 +73,6 @@ public class HighScoreManager {
         else{
             fixHighScoreSave();
         }
-
     }
 
     public void fixHighScoreSave(){
