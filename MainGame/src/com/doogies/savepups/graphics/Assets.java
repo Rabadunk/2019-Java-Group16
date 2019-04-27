@@ -8,7 +8,7 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
-    public static Font font28, fontTitle, fontHud;
+    public static Font font28, fontTitle, fontHud, fontTitleBig;
 
     //public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
 
@@ -59,7 +59,7 @@ public class Assets {
     public static BufferedImage[] coinGold, coinSilver, coinCopper;
 
     // ui
-    public static BufferedImage[] playButton, scoreButton, quitButton;
+    public static BufferedImage[] playButton, scoreButton, quitButton, blankButton;
     public static BufferedImage inventoryScreen;
 
     // variables to make tileset calcs cleaner
@@ -71,15 +71,18 @@ public class Assets {
     public static void init() {
         font28 = FontLoader.loadFont("res/fonts/slkscr/slkscr.ttf", 28);
         fontTitle = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 76);
+        fontTitleBig = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 96);
         fontHud = FontLoader.loadFont("res/fonts/ArmWrestler/ArmWrestler.ttf", 28);
 
+        SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
+        SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));
 
         SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/mapdata.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
         SpriteSheet playerAttackedsheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/characterAttacked.png"));
         SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
         SpriteSheet tileSpritesheet = new SpriteSheet(ImageLoader.loadImage("/textures/tileSpritesheet.png"));
-        SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
+
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
 
@@ -408,6 +411,10 @@ public class Assets {
         scoreButton = new BufferedImage[2];
         scoreButton[0] = button.crop(0, 300, 300, 150); // Not selected
         scoreButton[1] = button.crop(300, 300, 300, 150);
+
+        blankButton = new BufferedImage[2];
+        blankButton[0] = blankbutton.crop(0, 300, 300, 150); // Not selected
+        blankButton[1] = blankbutton.crop(300, 300, 300, 150);
 
         // Items
         sword = itemSprites.crop(16, 0, 16, 16);

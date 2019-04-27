@@ -45,7 +45,7 @@ public class MenuState extends State{
         handler.getMouseManager().setUiManager(uiManager);
 
 
-        uiManager.addObject( new UIImageButton(100, 150, 300, 150, Assets.playButton, () -> {
+        uiManager.addObject( new UIImageButton(100, 200, 300, 100, Assets.playButton, () -> {
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 State.setState(handler.getGame().gameState);
             }
@@ -55,7 +55,7 @@ public class MenuState extends State{
 
         }));
 
-        uiManager.addObject( new UIImageButton(100, 350, 300, 150, Assets.scoreButton, () -> {
+        uiManager.addObject( new UIImageButton(100, 310, 300, 100, Assets.scoreButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
                 State.setState(handler.getGame().scoreboard);
@@ -66,7 +66,19 @@ public class MenuState extends State{
             State.setState(handler.getGame().scoreboard);
         }));
 
-        uiManager.addObject( new UIImageButton(100, 550, 300, 150, Assets.quitButton, () -> {
+        // Controls button
+        uiManager.addObject( new UIImageButton(100, 420, 300, 100, Assets.blankButton, () -> {
+            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                stopMusic();
+                State.setState(handler.getGame().controls);
+            }
+        }, () -> {
+            handler.getMouseManager().setUiManager(null);
+            stopMusic();
+            State.setState(handler.getGame().controls);
+        }));
+
+        uiManager.addObject( new UIImageButton(100, 530, 300, 100, Assets.quitButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 closeGame();
             }
@@ -101,10 +113,13 @@ public class MenuState extends State{
         uiManager.render(g);
 
         // Title
-        Text.drawString(g, "Save the Puppies!", 550, 75, true, Color.WHITE, Assets.fontTitle);
+        Text.drawString(g, "Save the Puppies!", 550, 100, true, Color.WHITE, Assets.fontTitleBig);
+
+        // Button texts
+        Text.drawString(g, "Controls", 100 + 150, 420 + 50,true, Color.WHITE, Assets.font28);
 
         // Draw doogie
-        g.drawImage(Assets.doogie,500, 300, null);
+        g.drawImage(Assets.doogie,500, 250, 400, 400, null);
     }
 
     @Override
