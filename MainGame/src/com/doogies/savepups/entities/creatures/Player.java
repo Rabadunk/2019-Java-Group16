@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
@@ -62,6 +63,9 @@ public class Player extends Creature {
 
     private int takenDamageCounter = 0;
 
+    // Audio
+    public static AudioPlayer swordSwing;
+
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
@@ -69,6 +73,10 @@ public class Player extends Creature {
         setupAttack();
         loadSprites();
         loadGameUtils();
+
+        // Audio
+        swordSwing = new AudioPlayer();
+        swordSwing.setFile("/soundEffects/rpgSounds/battle/swing2_16");
     }
 
     public void setupAttack() {
@@ -234,6 +242,8 @@ public class Player extends Creature {
         } else {
             return;
         }
+
+        swordSwing.play();
 
         attackTimer = 0;
 

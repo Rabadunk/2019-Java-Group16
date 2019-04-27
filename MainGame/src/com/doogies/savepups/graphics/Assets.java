@@ -73,6 +73,7 @@ public class Assets {
     private static final int tileWidth = Tile.TILEHEIGHT;
 
     //
+    public static BufferedImage dog;
 
     public static void init() {
 
@@ -106,6 +107,9 @@ public class Assets {
         SpriteSheet coinSilverSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_silver.png"));
         SpriteSheet coinCopperSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_copper.png"));
         SpriteSheet objects = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/objects.png"));
+
+        //Dooogies
+        SpriteSheet dogSheet = new SpriteSheet(ImageLoader.loadImage("/textures/doogies/lpccatratdog.png"));
 
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
         tint = ImageLoader.loadImage("/ui/tint.png");
@@ -420,6 +424,8 @@ public class Assets {
         life[1] = objects.crop(16,48, 16, 16);
         life[2] = objects.crop(32,48, 16, 16);
         life[3] = objects.crop(48,48, 16, 16);
+
+        dog = dogSheet.crop(128, 160, 48,48);
 
 
         // Barrels

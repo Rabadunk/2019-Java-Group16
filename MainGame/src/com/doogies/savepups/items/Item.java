@@ -25,7 +25,8 @@ public class Item {
     public static Item coinGold = new Item(Assets.coinGold[0], "CoinGold", 2, true);
     public static Item coinSilver = new Item(Assets.coinGold[0], "CoinSilver", 3, true);
     public static Item coinCopper = new Item(Assets.coinGold[0], "CoinCopper", 4, true);
-    public static Item life = new Item(Assets.life[0], "CoinCopper", 5, true);
+    public static Item life = new Item(Assets.life[0], "Life", 5, true);
+    public static Item dog = new Item(Assets.dog, "Dog", 6, false);
 
 
 

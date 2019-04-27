@@ -165,6 +165,7 @@ public class Vampire extends Enemy {
 
     @Override
     public void die(){
+        handler.getPlayer().setIsGameWon(true);
         State.setState(handler.getGame().gameEndState);
         System.out.println("Vampire has been slain");
     }

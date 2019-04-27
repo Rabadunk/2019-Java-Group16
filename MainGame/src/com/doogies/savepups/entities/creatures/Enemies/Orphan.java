@@ -81,6 +81,7 @@ public class Orphan extends Enemy {
     public void die(){
         System.out.println("Ogre has been slain");
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
+        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x, (int) y));
     }
 
     @Override
