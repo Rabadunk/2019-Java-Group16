@@ -2,6 +2,7 @@ package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioPlayer;
+import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.Text;
 import com.doogies.savepups.house.HouseGraph;
@@ -47,6 +48,7 @@ public class MenuState extends State{
 
         uiManager.addObject( new UIImageButton(100, 200, 300, 100, Assets.playButton, () -> {
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                handler.newPlayer();
                 handler.getGame().gameState = new GameState(handler);
                 State.setState(handler.getGame().gameState);
             }
