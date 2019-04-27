@@ -4,16 +4,22 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
+import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
+import com.doogies.savepups.items.Item;
 import com.doogies.savepups.states.State;
+import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.GameTimer;
 import com.doogies.savepups.utils.HighScoreManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
+import static com.doogies.savepups.items.Item.bedItem;
 
 public class Player extends Creature {
 
@@ -133,11 +139,8 @@ public class Player extends Creature {
         gameHud.tick();
 
         // Check silly bed function
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G)){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_G) && inventory.hasItem("Bed")){
             bed = !bed;
-        }
-
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
         }
 
         // Test methods
@@ -280,6 +283,14 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_PAGE_DOWN)) {
+            if(!this.inventory.hasItem("Bed")) {
+                inventory.addItem(Item.bedItem);
+            }
+            setHealth(10);
+            handler.setRoom(HouseGraph.bossRoom, 10 * Tile.TILEWIDTH, 2 * Tile.TILEHEIGHT);
+        }
+
         if(handler.getKeyManager().up) {
             yMove = -speed;
             direction = 1;
@@ -312,11 +323,11 @@ public class Player extends Creature {
             takenDamageCounter = 50;
         }
 
-        if (getCurrentAnimationFrame() == Assets.bed){
+        if (getCurrentAnimationFrame() == FurnitureAssets.bed){
             g.drawImage(getCurrentAnimationFrame(),
-                    (int)(x - handler.getGameCamera().getxOffset()) + width / 4,
-                    (int)(y - handler.getGameCamera().getyOffset()),
-                    width*2, height*2,null);
+                    (int)(x + bounds.x - handler.getGameCamera().getxOffset()),
+                    (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
+                    bounds.width, bounds.height,null);
         }
         else {
             g.drawImage(getCurrentAnimationFrame(),
@@ -373,7 +384,7 @@ public class Player extends Creature {
             return animationDown.getCurrentFrame();
         }
         else if(bed){
-            return Assets.bed;
+            return FurnitureAssets.bed;
         }
 
         // Idle animations
