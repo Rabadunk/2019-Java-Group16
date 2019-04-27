@@ -84,7 +84,6 @@ public class Assets {
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));
 
-        SpriteSheet mapsheet = new SpriteSheet(ImageLoader.loadImage("/textures/furnitureSpritesheet.png"));
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
         SpriteSheet playerAttackedsheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/characterAttacked.png"));
         SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
@@ -390,14 +389,7 @@ public class Assets {
         batIdleDown = bat_down[1];
         batIdleLeft = bat_left[1];
         batIdleRight = bat_right[1];
-
-        // ENVIRONMENT
-//        roof = mapsheet.crop(width * 9, 16, width, height - 2);
-        computer = mapsheet.crop(0, 0, width, height);
-        bed = mapsheet.crop(0, 0, width, height * 2);
-//        door = mapsheet.crop(237, 16, 21, 31);
-
-
+        
         // UI
         playButton = new BufferedImage[2];
         playButton[0] = button.crop(0, 0, 300, 150); // Not selected
