@@ -25,6 +25,8 @@ public class Tile {
     public static  Tile pinkCarpetBottom = new Tile(TileAssets.pinkCarpetBottom, 11);
     public static  Tile pinkCarpetBottomRight = new Tile(TileAssets.pinkCarpetBottomRight, 12);
 
+    public static Tile window = new Tile(TileAssets.window, 13);
+
 
     // CLASS
 

@@ -11,6 +11,7 @@ public class TileAssets {
 
     public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
     public static BufferedImage pinkCarpetTopLeft, pinkCarpetTop, pinkCarpetTopRight, pinkCarpetLeft, pinkCarpetCenter, pinkCarpetRight, pinkCarpetBottomLeft, pinkCarpetBottom, pinkCarpetBottomRight;
+    public static BufferedImage window;
     private static final int tileWidth = Tile.TILEWIDTH, tileHeight = Tile.TILEHEIGHT;
     private static SpriteSheet tileSpritesheet;
 
@@ -26,6 +27,7 @@ public class TileAssets {
         pinkFloor = tileSpritesheet.crop((4 -1)* tileWidth,0, tileWidth, tileHeight);
         doorwayWall = tileSpritesheet.crop((3 - 1)* tileWidth,0, tileWidth, tileHeight);
         damagedFloor = tileSpritesheet.crop((1 - 1) * tileWidth,0, tileWidth, tileHeight);
+        window = tileSpritesheet.crop(2*tileWidth, tileHeight, tileWidth, tileHeight);
     }
 
     private static void loadPinkCarpet() {
