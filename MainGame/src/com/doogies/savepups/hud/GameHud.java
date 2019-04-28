@@ -37,11 +37,14 @@ public class GameHud {
         Text.drawString(g, "Score:  " + handler.getPlayer().getScore(), handler.getWidth() / 2, 730, true, Color.WHITE, Assets.fontHud);
 
         // Equiped items
-        g.drawImage(Assets.sword, 20, 680, 64, 64, null);
+//        g.drawImage(Assets.sword, 20, 680, 64, 64, null);
+//
+//        g.drawImage(Assets.sword, 800, 680, 64, 64, null);
+//        g.drawImage(Assets.sword, 870, 680, 64, 64, null);
+//        g.drawImage(Assets.sword, 940, 680, 64, 64, null);
 
-        g.drawImage(Assets.sword, 800, 680, 64, 64, null);
-        g.drawImage(Assets.sword, 870, 680, 64, 64, null);
-        g.drawImage(Assets.sword, 940, 680, 64, 64, null);
+        // Help
+        Text.drawString(g, "Press H for hints", 15,handler.getHeight() - 30, false, Color.WHITE, Assets.fontHud);
     }
 
 }
