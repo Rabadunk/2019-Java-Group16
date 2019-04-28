@@ -64,7 +64,6 @@ public class Ogre extends Enemy {
         animationRight = new Animation(64, Assets.ogre_right);
     }
 
-
     @Override
     public void tick() {
         //Animations
@@ -76,12 +75,16 @@ public class Ogre extends Enemy {
         //Movement
         basicEnemyMoveTick();
 
-        if(moveToPlayerSound) {
+//        if(moveToPlayerSound) {
+//            ogre2.play();
+//            moveToPlayerSound = false;
+//        } else if (autoMoveSound) {
+//            ogre3.play();
+//            autoMoveSound = false;
+//        }
+
+        if(attacking){
             ogre2.play();
-            moveToPlayerSound = false;
-        } else if (autoMoveSound) {
-            ogre3.play();
-            autoMoveSound = false;
         }
     }
 

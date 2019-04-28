@@ -11,7 +11,7 @@ public class Assets {
 
     private static final int width = 32, height = 32;
 
-    public static Font font28, fontTitle, fontHud, fontTitleBig;
+    public static Font font28, fontTitle, fontHud, fontTitleBig, fontChen, fontChenSmaller;
 
     //public static BufferedImage computer, bed, wall, roof, floor, damagedFloor, door;
 
@@ -82,6 +82,8 @@ public class Assets {
         fontTitle = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 76);
         fontTitleBig = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 96);
         fontHud = FontLoader.loadFont("res/fonts/ArmWrestler/ArmWrestler.ttf", 28);
+        fontChen = FontLoader.loadFont("res/fonts/akaChen/akaChen.ttf", 46);
+        fontChenSmaller = FontLoader.loadFont("res/fonts/akaChen/akaChen.ttf", 32);
 
         SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));

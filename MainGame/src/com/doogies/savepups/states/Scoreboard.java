@@ -33,11 +33,11 @@ public class Scoreboard extends State{
 
         for(int i = 0; i < 10; i++){
             Text.drawString(g, handler.getHighScoreManager().getHighScores().get(i).getName(),
-                    230, 240 + i * 40, false, Color.WHITE, Assets.font28);
+                    230, 240 + i * 40, false, Color.WHITE, Assets.fontChenSmaller);
         }
         for(int i = 0; i < 10; i++){
             Text.drawString(g, Integer.toString(handler.getHighScoreManager().getHighScores().get(i).getScore()),
-                    600, 240 + i * 40, false, Color.WHITE, Assets.font28);
+                    600, 240 + i * 40, false, Color.WHITE, Assets.fontChenSmaller);
         }
 
         Text.drawString(g,"Press ENTER to exit", 500, 680, true, Color.WHITE, Assets.font28);

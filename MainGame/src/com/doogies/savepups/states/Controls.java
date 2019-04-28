@@ -29,12 +29,12 @@ public class Controls extends State{
 
         Text.drawString(g,"Controls", 500, 100, true, Color.WHITE, Assets.fontTitle);
 
-        Text.drawString(g,"W or ArrowKey Up = Walk up", 500, 250, true, Color.WHITE, Assets.font28);
-        Text.drawString(g,"S or ArrowKey Down = Walk Down", 500, 280, true, Color.WHITE, Assets.font28);
-        Text.drawString(g,"A or ArrowKey Left = Walk Left", 500, 310, true, Color.WHITE, Assets.font28);
-        Text.drawString(g,"D or ArrowKey Right = Walk Right", 500, 340, true, Color.WHITE, Assets.font28);
+        Text.drawString(g,"W or ArrowKey Up = Walk up", 500, 280, true, Color.WHITE, Assets.fontChenSmaller);
+        Text.drawString(g,"S or ArrowKey Down = Walk Down", 500, 320, true, Color.WHITE, Assets.fontChenSmaller);
+        Text.drawString(g,"A or ArrowKey Left = Walk Left", 500, 360, true, Color.WHITE, Assets.fontChenSmaller);
+        Text.drawString(g,"D or ArrowKey Right = Walk Right", 500, 400, true, Color.WHITE, Assets.fontChenSmaller);
 
-        Text.drawString(g,"J = attack", 500, 450, true, Color.WHITE, Assets.font28);
+        Text.drawString(g,"J = attack", 500, 470, true, Color.WHITE, Assets.fontChenSmaller);
 
         Text.drawString(g,"Press ENTER to exit", 500, 680, true, Color.WHITE, Assets.font28);
 

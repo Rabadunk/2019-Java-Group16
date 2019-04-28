@@ -32,6 +32,7 @@ public class Cupboard extends Entity {
     public void die() {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y + Tile.TILEHEIGHT));
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH, (int) y + Tile.TILEHEIGHT));
+        goldCoinDrop.play();
     }
 
     @Override

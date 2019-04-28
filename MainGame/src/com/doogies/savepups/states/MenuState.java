@@ -45,8 +45,8 @@ public class MenuState extends State{
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
-
-        uiManager.addObject( new UIImageButton(100, 200, 300, 100, Assets.playButton, () -> {
+        // Play button
+        uiManager.addObject( new UIImageButton(100, 200, 300, 100, Assets.blankButton, () -> {
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 handler.newPlayer();
                 handler.getGame().gameState = new GameState(handler);
@@ -60,7 +60,20 @@ public class MenuState extends State{
 
         }));
 
-        uiManager.addObject( new UIImageButton(100, 310, 300, 100, Assets.scoreButton, () -> {
+        // Demo button
+        uiManager.addObject( new UIImageButton(100, 310, 300, 100, Assets.blankButton, () -> {
+            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                stopMusic();
+                State.setState(handler.getGame().demo);
+            }
+        }, () -> {
+            handler.getMouseManager().setUiManager(null);
+            stopMusic();
+            State.setState(handler.getGame().demo);
+        }));
+
+        // Scoreboard button
+        uiManager.addObject( new UIImageButton(100, 420, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
                 State.setState(handler.getGame().scoreboard);
@@ -72,7 +85,7 @@ public class MenuState extends State{
         }));
 
         // Controls button
-        uiManager.addObject( new UIImageButton(100, 420, 300, 100, Assets.blankButton, () -> {
+        uiManager.addObject( new UIImageButton(100, 530, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
                 State.setState(handler.getGame().controls);
@@ -83,7 +96,8 @@ public class MenuState extends State{
             State.setState(handler.getGame().controls);
         }));
 
-        uiManager.addObject( new UIImageButton(100, 530, 300, 100, Assets.quitButton, () -> {
+        // Quit button
+        uiManager.addObject( new UIImageButton(100, 640, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 closeGame();
             }
@@ -120,7 +134,11 @@ public class MenuState extends State{
         Text.drawString(g, "Save the Puppies!", 550, 100, true, Color.WHITE, Assets.fontTitleBig);
 
         // Button texts
-        Text.drawString(g, "Controls", 100 + 150, 420 + 50,true, Color.WHITE, Assets.font28);
+        Text.drawString(g, "Play", 100 + 150, 200 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Demo", 100 + 150, 310 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Scoreboard", 100 + 150, 420 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Controls", 100 + 150, 530 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Quit", 100 + 150, 640 + 50,true, Color.WHITE, Assets.fontChen);
 
         // Draw doogie
         g.drawImage(Assets.doogie,500, 250, 400, 400, null);

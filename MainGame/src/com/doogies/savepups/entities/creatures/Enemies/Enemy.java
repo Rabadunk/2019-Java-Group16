@@ -33,10 +33,9 @@ public abstract class Enemy extends Creature {
     protected int timeTakenMinutes, timeTakenSeconds = 0;
     protected long initalTime;
     protected boolean playerActive = false;
+    protected boolean attacking = false;
 
     protected boolean attackUp, attackDown, attackLeft, attackRight;
-
-    public static AudioPlayer goldCoinDrop;
 
     public Enemy(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
@@ -44,9 +43,6 @@ public abstract class Enemy extends Creature {
         diameter = 200;
         moveTo = new AStarNode((int) x, (int) y, Tile.tiles[0].getTexture(), false, handler);
 
-        // Audio
-        goldCoinDrop = new AudioPlayer();
-        goldCoinDrop.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     protected void setupAttack() {
@@ -180,6 +176,7 @@ public abstract class Enemy extends Creature {
         lastAttackTimer = System.currentTimeMillis();
 
         if (attackTimer < attackCooldown) {
+            attacking = false;
             return;
         }
 
@@ -193,6 +190,8 @@ public abstract class Enemy extends Creature {
         } else {
             return;
         }
+
+        attacking = true;
 
         attackTimer = 0;
 
