@@ -29,7 +29,6 @@ public class Vampire extends Enemy {
 
     private void checkChangeToHuman() {
         if (isBat) {
-            System.out.println("Changing to human");
             turnIntoHuman();
         }
     }
@@ -68,7 +67,6 @@ public class Vampire extends Enemy {
 
     private void checkChangeToBat() {
         if(!isBat) {
-            System.out.println("Changing to bat");
             loadBatSprites();
             spawnOrphans();
         }

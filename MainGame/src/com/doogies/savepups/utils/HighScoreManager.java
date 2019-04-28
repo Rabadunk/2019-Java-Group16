@@ -110,6 +110,12 @@ public class HighScoreManager {
                 highScores.add(arrayListScores.get(i));
                 //System.out.println(highScores.size());
             }
+        } else {
+            for (i = 0; i < 10; i++) {
+                //System.out.println(arrayListScores.get(i).getName() + " : " + arrayListScores.get(i).getScore());
+                highScores.add(arrayListScores.get(i));
+                //System.out.println(highScores.size());
+            }
         }
         Collections.sort(highScores, scoreComparator);
     }
@@ -133,8 +139,8 @@ public class HighScoreManager {
     }
 
 
-    public void addScore(String name, int score){
-        arrayListScores.add(new Score(name, score));
+    public void addScore(int score){
+        arrayListScores.add(new Score("New Score!", score));
         scoreAdded = true;
         //System.out.println("Score added");
         sortScores();
@@ -150,10 +156,10 @@ public class HighScoreManager {
         try {
             fileWriter = new FileWriter(savedFile);
             //fileWriter.write("data 1");
-            for(i = 0; i < highScores.size(); i++){
-                fileWriter.write(handler.highScoreManager.getHighScores().get(i).getName());
+            for(i = 1; i < highScores.size() + 1; i++){
+                fileWriter.write(i + ".");
                 fileWriter.write(" ");
-                fileWriter.write(Integer.toString(handler.highScoreManager.getHighScores().get(i).getScore()));
+                fileWriter.write(Integer.toString(handler.highScoreManager.getHighScores().get(i - 1).getScore()));
                 fileWriter.write("\n");
             }
             fileWriter.close();

@@ -29,7 +29,7 @@ public class GameEndState extends State {
     @Override
     public void tick() {
         if(handler.getPlayer().getScore() > handler.getHighScoreManager().getLowestScore() && !scoreSet){
-            handler.getHighScoreManager().addScore("New_player", handler.getPlayer().getScore());
+            handler.getHighScoreManager().addScore(handler.getPlayer().getScore());
             scoreSet = true;
             handler.getHighScoreManager().printScoresOnce();
         }

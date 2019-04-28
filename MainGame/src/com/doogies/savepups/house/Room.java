@@ -196,7 +196,6 @@ public class Room {
             enemyId = Utils.parseInt(tokens[i]);
             enemyX = Utils.parseInt(tokens[i + 1]) * Tile.TILEWIDTH;
             enemyY = Utils.parseInt(tokens[i + 2]) * Tile.TILEHEIGHT;
-
             enemies.insertEnemies(entityManager, enemyId, enemyX, enemyY);
         }
     }

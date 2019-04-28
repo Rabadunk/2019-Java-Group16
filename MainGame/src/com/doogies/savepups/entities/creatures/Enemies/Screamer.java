@@ -4,10 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
-import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.assets.EnemyAssets;
-import com.doogies.savepups.items.Item;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

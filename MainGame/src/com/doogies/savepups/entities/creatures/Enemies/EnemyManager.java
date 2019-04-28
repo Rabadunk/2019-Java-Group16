@@ -27,8 +27,10 @@ public class EnemyManager {
                 break;
             case 4:
                 insertVampire(entityManager, x, y);
+                break;
             case 5:
                 insertWitch(entityManager, x, y);
+                break;
         }
     }
 

@@ -113,53 +113,5 @@ public class Orc extends Enemy{
         return Assets.enemyIdleDown;
     }
 
-
-    public boolean isAttackUp() {
-        return attackUp;
-    }
-
-    public void setAttackUp(boolean attackUp) {
-        this.attackUp = attackUp;
-    }
-
-    public boolean isAttackDown() {
-        return attackDown;
-    }
-
-    public void setAttackDown(boolean attackDown) {
-        this.attackDown = attackDown;
-    }
-
-    public boolean isAttackLeft() {
-        return attackLeft;
-    }
-
-    public void setAttackLeft(boolean attackLeft) {
-        this.attackLeft = attackLeft;
-    }
-
-    public boolean isAttackRight() {
-        return attackRight;
-    }
-
-    public void setAttackRight(boolean attackRight) {
-        this.attackRight = attackRight;
-    }
-
-    public long getAttackCooldown() {
-        return attackCooldown;
-    }
-
-    public void setAttackCooldown(long attackCooldown) {
-        this.attackCooldown = attackCooldown;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
 }
 

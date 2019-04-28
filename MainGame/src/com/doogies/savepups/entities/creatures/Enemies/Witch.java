@@ -34,7 +34,7 @@ public class Witch extends  Enemy{
         setupAttack();
         loadSprites();
 
-        setSpeed(4);
+        setSpeed(5);
         setHealth(2);
     }
 
