@@ -46,7 +46,7 @@ public abstract class Enemy extends Creature {
 
         // Audio
         goldCoinDrop = new AudioPlayer();
-        goldCoinDrop.setFile("/soundEffects/rpgSounds/inventory/coin2_16");
+        goldCoinDrop.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     protected void setupAttack() {

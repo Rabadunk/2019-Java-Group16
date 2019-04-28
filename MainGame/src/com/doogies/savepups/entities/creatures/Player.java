@@ -76,7 +76,7 @@ public class Player extends Creature {
 
         // Audio
         swordSwing = new AudioPlayer();
-        swordSwing.setFile("/soundEffects/rpgSounds/battle/swing2_16");
+        swordSwing.setFile("/soundEffects/rpgSounds/battle/swing2");
     }
 
     public void setupAttack() {
