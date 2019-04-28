@@ -19,6 +19,9 @@ public class EnemyAssets {
     public static BufferedImage[] screamer_right, screamer_left;
     public static BufferedImage screamerIdleRight, screamerIdleLeft;
 
+    public static BufferedImage[] witch_right, witch_left;
+    public static BufferedImage witchIdleRight, witchIdleLeft;
+
     public static BufferedImage[] vampire_down, vampire_up, vampire_left, vampire_right;
     public static BufferedImage  vampireIdleUp, vampireIdleDown, vampireIdleLeft, vampireIdleRight;
 
@@ -33,6 +36,32 @@ public class EnemyAssets {
         SpriteSheet orcSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orc.png"));
         SpriteSheet orphanSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orphan.png"));
         SpriteSheet vampireSprites = new SpriteSheet(ImageLoader.loadImage("/textures/vampire.png"));
+        SpriteSheet witchSprites = new SpriteSheet(ImageLoader.loadImage("/textures/witch.png"));
+
+        // witch animation
+        witch_right = new BufferedImage[8];
+        witch_right[0] = witchSprites.crop(0, 0, width/2, height);
+        witch_right[1] = witchSprites.crop(width/2, 0, width/2, height);
+        witch_right[2] = witchSprites.crop(width/2 * 2, 0, width/2, height);
+        witch_right[3] = witchSprites.crop(width/2 * 3, 0, width/2, height);
+        witch_right[4] = witchSprites.crop(width/2 * 4, 0, width/2, height);
+        witch_right[5] = witchSprites.crop(width/2 * 5, 0, width/2, height);
+        witch_right[6] = witchSprites.crop(width/2 * 6, 0, width/2, height);
+        witch_right[7] = witchSprites.crop(width/2 * 7, 0, width/2, height);
+
+
+        witch_left = new BufferedImage[8];
+        witch_left[0] = witchSprites.crop(0, height, width/2, height);
+        witch_left[1] = witchSprites.crop(width/2, height, width/2, height);
+        witch_left[2] = witchSprites.crop(width/2 * 2, height, width/2, height);
+        witch_left[3] = witchSprites.crop(width/2 * 3, height, width/2, height);
+        witch_left[4] = witchSprites.crop(width/2 * 4, height, width/2, height);
+        witch_left[5] = witchSprites.crop(width/2 * 5, height, width/2, height);
+        witch_left[6] = witchSprites.crop(width/2 * 6, height, width/2, height);
+        witch_left[7] = witchSprites.crop(width/2 * 7, height, width/2, height);
+
+        witchIdleLeft = witch_left[6];
+        witchIdleRight = witch_right[1];
 
         // Ogre animation
         ogre_right = new BufferedImage[8];
