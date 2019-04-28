@@ -251,6 +251,7 @@ public abstract class Enemy extends Creature {
     protected void basicEnemyDeath() {
         if(getEnemyEntities() == 1) {
             handler.getRoom().getItemManager().addItem(Item.dog.createNew((int) x, (int) y));
+            AudioManager.barking1.play();
         } else {
 
             int spawnDecider = new Random().nextInt(1);

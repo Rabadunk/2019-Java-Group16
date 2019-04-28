@@ -85,12 +85,10 @@ public class Assets {
         fontChen = FontLoader.loadFont("res/fonts/akaChen/akaChen.ttf", 46);
         fontChenSmaller = FontLoader.loadFont("res/fonts/akaChen/akaChen.ttf", 32);
 
-        SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));
 
         SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
         SpriteSheet playerAttackedsheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/characterAttacked.png"));
-        SpriteSheet enemysheet = new SpriteSheet(ImageLoader.loadImage("/textures/enemy.png"));
 
         SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
@@ -229,28 +227,6 @@ public class Assets {
 
 
         attack = attackSprites.crop(30, 690, 200, 130);
-
-        // Ogre Animations
-        enemy_down = new BufferedImage[2];
-        enemy_down[0] = enemysheet.crop(0,0, width, height);
-        enemy_down[1] = enemysheet.crop(64,0, width, height);
-
-        enemy_up = new BufferedImage[2];
-        enemy_up[0] = enemysheet.crop(0,96, width, height);
-        enemy_up[1] = enemysheet.crop(64,96, width, height);
-
-        enemy_right = new BufferedImage[2];
-        enemy_right[0] = enemysheet.crop(0,32, width, height);
-        enemy_right[1] = enemysheet.crop(64,32, width, height);
-
-        enemy_left = new BufferedImage[2];
-        enemy_left[0] = enemysheet.crop(0,64, width, height);
-        enemy_left[1] = enemysheet.crop(64,64, width, height);
-
-        enemyIdleDown = enemysheet.crop(32, 0, width, height);
-        enemyIdleUp = enemysheet.crop(32, 96, width, height);
-        enemyIdleRight = enemysheet.crop(32, 32, width, height);
-        enemyIdleLeft = enemysheet.crop(32, 64, width, height);
 
         // Ogre animation
         ogre_right = new BufferedImage[8];
@@ -400,17 +376,6 @@ public class Assets {
         batIdleRight = bat_right[1];
 
         // UI
-        playButton = new BufferedImage[2];
-        playButton[0] = button.crop(0, 0, 300, 150); // Not selected
-        playButton[1] = button.crop(300, 0, 300, 150);
-
-        quitButton = new BufferedImage[2];
-        quitButton[0] = button.crop(0, 150, 300, 150); // Not selected
-        quitButton[1] = button.crop(300, 150, 300, 150);
-
-        scoreButton = new BufferedImage[2];
-        scoreButton[0] = button.crop(0, 300, 300, 150); // Not selected
-        scoreButton[1] = button.crop(300, 300, 300, 150);
 
         blankButton = new BufferedImage[2];
         blankButton[0] = blankbutton.crop(0, 300, 300, 150); // Not selected
