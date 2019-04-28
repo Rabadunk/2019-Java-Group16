@@ -9,6 +9,7 @@ import com.doogies.savepups.items.Item;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Ogre extends Enemy {
 
@@ -90,11 +91,8 @@ public class Ogre extends Enemy {
 
     @Override
     public void die(){
-        System.out.println("Ogre has been slain");
-        handler.getRoom().getItemManager().addItem(Item.dog.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        goldCoinDrop.play();
-        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x, (int) y));
+
+        basicEnemyDeath();
 
     }
 

@@ -58,9 +58,7 @@ public class Orphan extends Enemy {
 
     @Override
     public void die(){
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x + 20, (int) y));
-        goldCoinDrop.play();
+        basicEnemyDeath();
     }
 
     @Override

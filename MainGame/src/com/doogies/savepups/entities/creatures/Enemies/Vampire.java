@@ -22,7 +22,7 @@ public class Vampire extends Enemy {
 
         turnIntoHuman();
         setupAttack();
-        setHealth(20);
+        setHealth(14);
     }
 
     private void checkChangeToHuman() {
@@ -139,7 +139,7 @@ public class Vampire extends Enemy {
 
         move();
 
-        if(health < 20 &&
+        if(health < 15 &&
             health % 5 == 0) {
             health = health - 1;
             checkChangeToBat();

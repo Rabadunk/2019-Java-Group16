@@ -7,9 +7,11 @@ import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.house.AStarNode;
+import com.doogies.savepups.items.Item;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Enemy extends Creature {
@@ -244,4 +246,32 @@ public abstract class Enemy extends Creature {
 
         return (float) Math.sqrt(this.dx*this.dx + this.dy * this.dy);
     }
+
+    protected void basicEnemyDeath() {
+        if(getEnemyEntities() == 1) {
+            handler.getRoom().getItemManager().addItem(Item.dog.createNew((int) x, (int) y));
+        } else {
+
+            int spawnDecider = new Random().nextInt(1);
+
+            if(spawnDecider == 0) {
+                handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
+                goldCoinDrop.play();
+            }
+        }
+        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x + 20, (int) y));
+    }
+
+    protected int getEnemyEntities() {
+        int count = 0;
+
+        for(Entity e: handler.getRoom().getEntityManager().getEntities()) {
+            if(e instanceof Enemy) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
 }

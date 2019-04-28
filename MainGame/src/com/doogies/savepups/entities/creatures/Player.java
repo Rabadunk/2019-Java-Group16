@@ -344,12 +344,6 @@ public class Player extends Creature {
                     (int) (y - handler.getGameCamera().getyOffset()),
                     width, height, null);
         }
-
-        g.setColor(Color.red);
-        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
-                attackRectangle.width,
-                attackRectangle.height);
     }
 
     public void postRender(Graphics g){
