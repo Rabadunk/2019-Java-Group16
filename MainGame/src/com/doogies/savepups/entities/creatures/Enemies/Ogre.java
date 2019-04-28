@@ -5,7 +5,6 @@ import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -37,6 +36,7 @@ public class Ogre extends Enemy {
         bounds.y = 20;
         bounds.width = 32;
         bounds.height = 43;
+        setupAttack();
 
         // Audio
         ogre1 = new AudioPlayer();
@@ -74,21 +74,14 @@ public class Ogre extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
-            count = 51;
-            diameter = 250;
-            moveToPlayer();
-            move();
-            ogre2.play();
-        } else {
-            count ++;
-            if(count > 50) {
-                autoMoveDecider();
-                ogre3.play();
-            }
-            move();
+        basicEnemyMoveTick();
 
-            diameter = 200;
+        if(moveToPlayerSound) {
+            ogre2.play();
+            moveToPlayerSound = false;
+        } else if (autoMoveSound) {
+            ogre3.play();
+            autoMoveSound = false;
         }
     }
 
@@ -109,54 +102,6 @@ public class Ogre extends Enemy {
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        //DOesnt work
-        // Red rectangle to represent players collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
-        // Oval around enemy
-        g.setColor(Color.blue);
-        g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
-                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
-        
-
-    }
-
-
-    public void postRender(Graphics g){
-
-        //Attack animations
-
-        if(attackUp) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleDown;
-        }
-        else if(attackDown) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleUp;
-        }
-        else if(attackLeft) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleLeft;
-        }
-        else if(attackRight) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleRight;
-        }
     }
 
     // Getters and setters
@@ -174,70 +119,21 @@ public class Ogre extends Enemy {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
-        else{
-            // 0 = down, 1 = up, 2 = left, 3 = right
-            if(direction == 0) {
-                return Assets.ogreIdleLeft;
-            }
-            else if(direction == 1) {
-                return Assets.ogreIdleRight;
-            }
-            else if(direction == 2) {
-                return Assets.ogreIdleRight;
-            }
-            else if(direction == 3) {
-                return Assets.ogreIdleLeft;
-            }
-        }
-        return Assets.enemyIdleDown;
-    }
-
-
-    public boolean isAttackUp() {
-        return attackUp;
-    }
-
-    public void setAttackUp(boolean attackUp) {
-        this.attackUp = attackUp;
-    }
-
-    public boolean isAttackDown() {
-        return attackDown;
-    }
-
-    public void setAttackDown(boolean attackDown) {
-        this.attackDown = attackDown;
-    }
-
-    public boolean isAttackLeft() {
-        return attackLeft;
-    }
-
-    public void setAttackLeft(boolean attackLeft) {
-        this.attackLeft = attackLeft;
-    }
-
-    public boolean isAttackRight() {
-        return attackRight;
-    }
-
-    public void setAttackRight(boolean attackRight) {
-        this.attackRight = attackRight;
-    }
-
-    public long getAttackCooldown() {
-        return attackCooldown;
-    }
-
-    public void setAttackCooldown(long attackCooldown) {
-        this.attackCooldown = attackCooldown;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
+//        else{
+//            // 0 = down, 1 = up, 2 = left, 3 = right
+//            if(direction == 0) {
+//                return Assets.ogreIdleLeft;
+//            }
+//            else if(direction == 1) {
+//                return Assets.ogreIdleRight;
+//            }
+//            else if(direction == 2) {
+//                return Assets.ogreIdleRight;
+//            }
+//            else if(direction == 3) {
+//                return Assets.ogreIdleLeft;
+//            }
+//        }
+        return Assets.ogreIdleLeft;
     }
 }

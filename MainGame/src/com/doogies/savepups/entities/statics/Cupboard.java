@@ -9,12 +9,12 @@ import com.doogies.savepups.tiles.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Computer extends Entity {
+public class Cupboard extends Entity {
 
-    private BufferedImage computerTexture = FurnitureAssets.computer;
+    private BufferedImage cupboardTexture = FurnitureAssets.cupboard;
 
-    public Computer(Handler handler, float x, float y) {
-        super(handler, x, y, Tile.TILEWIDTH*2, Tile.TILEHEIGHT);
+    public Cupboard(Handler handler, float x, float y) {
+        super(handler, x, y, Tile.TILEWIDTH*2, Tile.TILEHEIGHT*2);
 
         bounds.x = 10;
         bounds.y = height/2 + 10;
@@ -30,13 +30,13 @@ public class Computer extends Entity {
 
     @Override
     public void die() {
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH, (int) y));
+        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y + Tile.TILEHEIGHT));
+        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH, (int) y + Tile.TILEHEIGHT));
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(computerTexture,
+        g.drawImage(cupboardTexture,
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);

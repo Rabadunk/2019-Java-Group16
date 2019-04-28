@@ -5,6 +5,7 @@ import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.entities.creatures.Player;
+import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.tiles.Tile;
 
@@ -16,6 +17,7 @@ public abstract class Enemy extends Creature {
     int diameter;
     float dx, dy;
     int count;
+    protected boolean moveToPlayerSound, autoMoveSound = false;
 
     Player player;
     protected int direction = 0;
@@ -31,7 +33,6 @@ public abstract class Enemy extends Creature {
     protected int timeTakenMinutes, timeTakenSeconds = 0;
     protected long initalTime;
     protected boolean playerActive = false;
-
 
     protected boolean attackUp, attackDown, attackLeft, attackRight;
 
@@ -49,13 +50,45 @@ public abstract class Enemy extends Creature {
     }
 
     protected void setupAttack() {
-        attackUp = attackDown = attackLeft = attackRight = false;
         attackRectangle = new Rectangle();
         attackRectangle.width = bounds.width;
         attackRectangle.height = bounds.height;
     }
 
+    protected  void basicEnemyMoveTick() {
+
+        glitchCollisionRespawn();
+
+        if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
+            diameter = 600;
+            moveToPlayer();
+            move();
+            checkAttacks();
+        } else {
+            count++;
+            if(count > 30) {
+                autoMoveDecider();
+            }
+            move();
+            diameter = 200;
+        }
+        timeTracker();
+    }
+
+    protected void glitchCollisionRespawn() {
+        if(collisionWithTile((int) (x + bounds.x)/Tile.TILEHEIGHT,
+                             (int) (y + bounds.y)/Tile.TILEHEIGHT) ||
+                checkEntityCollision(0, 0)) {
+
+            x = (new Random().nextInt(handler.getRoom().getWidth() - 2) + 1) * Tile.TILEWIDTH;
+            y = (new Random().nextInt(handler.getRoom().getHeight() - 2) + 1) * Tile.TILEHEIGHT;
+        }
+    }
+
     protected void moveToPlayer() {
+
+        moveToPlayerSound = true;
+        autoMoveSound = false;
 
         AStarNode goalNode = handler.getRoom().getPathFinder().getNode(
                 (int) ((handler.getPlayer().getX() + handler.getPlayer().getBounds().x) / Tile.TILEWIDTH),
@@ -95,6 +128,10 @@ public abstract class Enemy extends Creature {
     }
 
     protected void autoMoveDecider() {
+
+        moveToPlayerSound = false;
+        autoMoveSound = true;
+
         count = 0;
 
         if(new Random().nextInt(5) == 0){
@@ -147,38 +184,11 @@ public abstract class Enemy extends Creature {
         }
 
         Rectangle enemyBounds = getCollisionBounds(0, 0);
+        Rectangle playerBounds = player.getCollisionBounds(0, 0);
         Boolean shouldAttack = getDistanceToPlayer() < Tile.TILEWIDTH;
 
-        attackUp = attackDown = attackLeft = attackRight = false;
-
-        // 0 = down, 1 = up, 2 = left, 3 = right
-
-        // Up
-        if (shouldAttack && direction == 1) {
-            attackRectangle.x = enemyBounds.x;
-            attackRectangle.y = enemyBounds.y - enemyBounds.height;
-            attackUp = true;
-            playerActive = true;
-        }
-        // Down
-        else if (shouldAttack && direction == 0) {
-            attackRectangle.x = enemyBounds.x;
-            attackRectangle.y = enemyBounds.y + enemyBounds.height;
-            attackDown = true;
-            playerActive = true;
-        }
-        // Left
-        else if (shouldAttack && direction == 2) {
-            attackRectangle.x = enemyBounds.x - enemyBounds.width;
-            attackRectangle.y = enemyBounds.y;
-            attackLeft = true;
-            playerActive = true;
-        }
-        // Right
-        else if (shouldAttack && direction == 3) {
-            attackRectangle.x = enemyBounds.x + enemyBounds.width;
-            attackRectangle.y = enemyBounds.y;
-            attackRight = true;
+        if (shouldAttack) {
+            setupAttackRectangle(enemyBounds, playerBounds);
             playerActive = true;
         } else {
             return;
@@ -187,9 +197,28 @@ public abstract class Enemy extends Creature {
         attackTimer = 0;
 
         for (Entity e : handler.getRoom().getEntityManager().getEntities()) {
-            if (e.equals(handler.getPlayer()) && e.getCollisionBounds(0,0).intersects(attackRectangle)) {
+            if (!(e instanceof  Enemy) && e.getCollisionBounds(0,0).intersects(attackRectangle)) {
                 e.damage(1);
             }
+        }
+    }
+
+    protected void setupAttackRectangle(Rectangle enemyBounds, Rectangle playerBounds) {
+
+        if(enemyBounds.x > playerBounds.x) {
+            attackRectangle.x = enemyBounds.x - enemyBounds.width;
+        } else if (enemyBounds.x < playerBounds.x){
+            attackRectangle.x = enemyBounds.x + enemyBounds.width;
+        } else {
+            attackRectangle.x = playerBounds.x;
+        }
+
+        if(enemyBounds.y > playerBounds.y) {
+            attackRectangle.y = enemyBounds.y - enemyBounds.height;
+        } else if(enemyBounds.y < playerBounds.y){
+            attackRectangle.y = enemyBounds.y + enemyBounds.height;
+        } else {
+            attackRectangle.y = playerBounds.y;
         }
     }
 

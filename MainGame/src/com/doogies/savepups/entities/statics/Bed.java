@@ -22,7 +22,7 @@ public class Bed extends Entity {
         bounds.width = width + 5;
         bounds.height = (int) (height - height / 2.0f);
 
-        setHealth(1);
+        setHealth(2);
     }
 
     @Override

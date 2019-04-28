@@ -4,7 +4,6 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -33,7 +32,7 @@ public class Orc extends Enemy{
         bounds.y = 20;
         bounds.width = 32;
         bounds.height = 43;
-
+        setupAttack();
         loadSprites();
         setSpeed(1f);
         setHealth(2);
@@ -57,19 +56,7 @@ public class Orc extends Enemy{
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
-            diameter = 600;
-            moveToPlayer();
-            move();
-        } else {
-            count ++;
-            if(count > 30) {
-                autoMoveDecider();
-            }
-            move();
-
-            diameter = 200;
-        }
+        basicEnemyMoveTick();
     }
 
     @Override
@@ -77,6 +64,7 @@ public class Orc extends Enemy{
         System.out.println("Ogre has been slain");
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
         handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x, (int) y));
+        goldCoinDrop.play();
     }
 
     @Override
@@ -86,53 +74,6 @@ public class Orc extends Enemy{
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        //DOesnt work
-        // Red rectangle to represent players collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
-        // Oval around enemy
-        g.setColor(Color.blue);
-        g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
-                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
-
-    }
-
-
-    public void postRender(Graphics g){
-
-        //Attack animations
-
-        if(attackUp) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() - (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleDown;
-        }
-        else if(attackDown) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset()),
-                    (int) (y - handler.getGameCamera().getyOffset() + (height / 2 + 20)),
-                    width, height, null);
-            //return Assets.playerIdleUp;
-        }
-        else if(attackLeft) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() - (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleLeft;
-        }
-        else if(attackRight) {
-            g.drawImage(Assets.attack,
-                    (int) (x - handler.getGameCamera().getxOffset() + (width / 2 + 20)),
-                    (int) (y - handler.getGameCamera().getyOffset()),
-                    width, height, null);
-            //return Assets.playerIdleRight;
-        }
     }
 
     // Getters and setters

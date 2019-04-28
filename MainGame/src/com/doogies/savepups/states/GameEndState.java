@@ -79,7 +79,7 @@ public class GameEndState extends State {
 
     @Override
     public void startMusic() {
-        if(handler.getPlayer().isIsGameWon()){
+        if(handler.getPlayer().isGameWon){
             victoryMusic.play();
         }
         else{

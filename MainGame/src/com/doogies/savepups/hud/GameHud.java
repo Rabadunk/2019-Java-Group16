@@ -23,7 +23,7 @@ public class GameHud {
         // Health and beds which later will be dooogies
         Text.drawString(g, "Health:  " + handler.getPlayer().getHealth(), 15,30, false, Color.WHITE, Assets.fontHud);
         g.drawImage(Assets.dog, handler.getWidth() - 120 ,13, 24,24, null);
-        Text.drawString(g, ": "+handler.getPlayer().getInventory().getItem("CoinGold"), handler.getWidth() - 90,30, false, Color.WHITE, Assets.fontHud);
+        Text.drawString(g, ": "+handler.getPlayer().getInventory().getItem("Dog"), handler.getWidth() - 90,30, false, Color.WHITE, Assets.fontHud);
 
         // Score and time
         if(handler.getPlayer().getTimeTakenSeconds() < 10){

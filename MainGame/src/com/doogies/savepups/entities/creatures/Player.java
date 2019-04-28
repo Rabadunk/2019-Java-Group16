@@ -296,7 +296,7 @@ public class Player extends Creature {
             if(!this.inventory.hasItem("Bed")) {
                 inventory.addItem(Item.bedItem);
             }
-            setHealth(10);
+            setHealth(100);
             handler.setRoom(HouseGraph.bossRoom, 10 * Tile.TILEWIDTH, 2 * Tile.TILEHEIGHT);
         }
 
@@ -413,7 +413,7 @@ public class Player extends Creature {
             }
             else{
                 // Dunno aye
-                return Assets.bed;
+                return FurnitureAssets.bed;
             }
         }
     }
@@ -453,7 +453,7 @@ public class Player extends Creature {
             return Assets.playerAttacked_down[animationDown.getCurrentIndex()];
         }
         else if(bed){
-            return Assets.bed;
+            return FurnitureAssets.bed;
         }
 
         // Idle animations
@@ -473,7 +473,7 @@ public class Player extends Creature {
             }
             else{
                 // Dunno aye
-                return Assets.bed;
+                return FurnitureAssets.bed;
             }
         }
     }

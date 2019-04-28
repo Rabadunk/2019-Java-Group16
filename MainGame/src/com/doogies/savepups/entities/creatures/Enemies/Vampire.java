@@ -16,12 +16,6 @@ public class Vampire extends Enemy {
     private BufferedImage idleDown, idleUp, idleLeft, idleRight;
 
     private boolean isBat = false;
-    private int switchCount = 0;
-
-
-    // Direction
-    // 0 = down, 1 = up, 2 = left, 3 = right
-
 
     public Vampire(Handler handler, float x, float y) {
         super(handler, x, y, 80, 80);
@@ -29,6 +23,13 @@ public class Vampire extends Enemy {
         turnIntoHuman();
         setupAttack();
         setHealth(20);
+    }
+
+    private void checkChangeToHuman() {
+        if (isBat) {
+            System.out.println("Changing to human");
+            turnIntoHuman();
+        }
     }
 
     private void turnIntoHuman() {
@@ -63,6 +64,14 @@ public class Vampire extends Enemy {
         isBat = false;
     }
 
+    private void checkChangeToBat() {
+        if(!isBat) {
+            System.out.println("Changing to bat");
+            loadBatSprites();
+            spawnOrphans();
+        }
+    }
+
     private void loadBatSprites() {
         //Animations
         animationDown = new Animation(64, Assets.bat_down);
@@ -89,21 +98,6 @@ public class Vampire extends Enemy {
         bounds.height = 16;
     }
 
-    private void changeToBat() {
-        if(!isBat) {
-            System.out.println("Changing to bat");
-            loadBatSprites();
-            spawnOrphans();
-        }
-    }
-
-    private void changeToHuman() {
-        if (isBat) {
-            System.out.println("Changing to human");
-            turnIntoHuman();
-        }
-    }
-
     private void spawnOrphans() {
         Orphan orphanOne = new Orphan(handler, 4 * Tile.TILEWIDTH, 4 * Tile.TILEHEIGHT);
         Orphan orphanTwo = new Orphan(handler, 16 * Tile.TILEWIDTH, 4 * Tile.TILEHEIGHT);
@@ -115,7 +109,6 @@ public class Vampire extends Enemy {
         handler.getRoom().getEntityManager().addEntity(orphanTwo);
         handler.getRoom().getEntityManager().addEntity(orphanThree);
         handler.getRoom().getEntityManager().addEntity(orphanFour);
-
     }
 
 
@@ -129,13 +122,7 @@ public class Vampire extends Enemy {
         animationLeft.tick();
         animationRight.tick();
 
-        if(collisionWithTile((int) (x + bounds.x)/Tile.TILEHEIGHT,
-                (int) (y + bounds.y)/Tile.TILEHEIGHT) ||
-                getDistanceToPlayer() < 1) {
-            System.out.println(getDistanceToPlayer());
-            x = 8 * Tile.TILEHEIGHT;
-            y = 8 * Tile.TILEHEIGHT;
-        }
+        glitchCollisionRespawn();
 
         //Movement
         if(!isBat) {
@@ -155,9 +142,9 @@ public class Vampire extends Enemy {
         if(health < 20 &&
             health % 5 == 0) {
             health = health - 1;
-            changeToBat();
+            checkChangeToBat();
         } else if(handler.getRoom().getEntityManager().getEntities().size() < 3) {
-            changeToHuman();
+            checkChangeToHuman();
         }
 
 
@@ -165,7 +152,7 @@ public class Vampire extends Enemy {
 
     @Override
     public void die(){
-        handler.getPlayer().setIsGameWon(true);
+        player.isGameWon = true;
         State.setState(handler.getGame().gameEndState);
         System.out.println("Vampire has been slain");
     }
@@ -177,24 +164,10 @@ public class Vampire extends Enemy {
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        // Red rectangle to represent collision box
-        g.setColor(Color.red);
-        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
-
-        g.setColor(Color.red);
-        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
-                attackRectangle.width,
-                attackRectangle.height);
-
     }
 
 
     // Getters and setters
-
     private BufferedImage getCurrentAnimationFrame(){
         if(xMove <0){
             return animationLeft.getCurrentFrame();
@@ -223,7 +196,7 @@ public class Vampire extends Enemy {
                 return idleRight;
             }
         }
-        return Assets.enemyIdleDown;
+        return idleDown;
     }
 
     public void damage(int amount) {

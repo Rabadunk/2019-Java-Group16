@@ -9,19 +9,19 @@ import com.doogies.savepups.tiles.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Computer extends Entity {
+public class Stool extends Entity {
 
-    private BufferedImage computerTexture = FurnitureAssets.computer;
+    private BufferedImage stool = FurnitureAssets.stool;
 
-    public Computer(Handler handler, float x, float y) {
-        super(handler, x, y, Tile.TILEWIDTH*2, Tile.TILEHEIGHT);
+    public Stool (Handler handler, float x, float y){
+        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
 
-        bounds.x = 10;
-        bounds.y = height/2 + 10;
-        bounds.width = width - 24;
+        bounds.x = 12;
+        bounds.y = Tile.TILEHEIGHT - 25;
+        bounds.width = width - bounds.x*2;
         bounds.height = height/8;
 
-        setHealth(3);
+        setHealth(1);
     }
 
     @Override
@@ -31,12 +31,11 @@ public class Computer extends Entity {
     @Override
     public void die() {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH, (int) y));
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(computerTexture,
+        g.drawImage(stool,
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);

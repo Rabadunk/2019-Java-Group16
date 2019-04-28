@@ -1,11 +1,9 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
-import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -19,10 +17,6 @@ public class Orphan extends Enemy {
 
     // Attack timer
     private long attackCooldown = 3000;
-
-    // Player Direction
-    // 0 = down, 1 = up, 2 = left, 3 = right
-
 
     public Orphan(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH / 2, Creature.DEFAULT_CREATURE_HEIGHT / 2);
@@ -59,29 +53,14 @@ public class Orphan extends Enemy {
         animationRight.tick();
 
         //Movement
-        if(colCircleBox(handler.getPlayer())&& !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
-            diameter = 600;
-            moveToPlayer();
-            move();
-            System.out.println("moving to player");
-            checkAttacks();
-        } else {
-            count ++;
-            if(count > 30) {
-                autoMoveDecider();
-            }
-            move();
-
-            diameter = 200;
-        }
-        timeTracker();
+        basicEnemyMoveTick();
     }
 
     @Override
     public void die(){
-        System.out.println("Ogre has been slain");
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x, (int) y));
+        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x + 20, (int) y));
+        goldCoinDrop.play();
     }
 
     @Override
@@ -91,25 +70,6 @@ public class Orphan extends Enemy {
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        //DOesnt work
-        // Red rectangle to represent players collision box
-//        g.setColor(Color.red);
-//        g.fillRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-//                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-//                bounds.width, bounds.height);
-        // Oval around enemy
-
-        g.setColor(Color.blue);
-        g.drawOval((int)(x + width/2 - handler.getGameCamera().getxOffset() - diameter / 2),
-                (int)(y + height/2 - handler.getGameCamera().getyOffset() - diameter / 2), diameter, diameter);
-
-        g.setColor(Color.red);
-        g.drawRect((int) (attackRectangle.x - handler.getGameCamera().getxOffset()),
-                (int) (attackRectangle.y - handler.getGameCamera().getyOffset()),
-                attackRectangle.width,
-                attackRectangle.height);
-
     }
 
 
