@@ -7,28 +7,25 @@ import com.doogies.savepups.graphics.Text;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class Controls extends State{
+public class ControlsPauseState extends State {
 
-
-    public Controls(Handler handler){
+    public ControlsPauseState(Handler handler) {
         super(handler);
     }
 
     @Override
     public void tick() {
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)){
-            State.setState(handler.getGame().menuState);
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
+            State.setState(handler.getGame().pause);
         }
-
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.black);
-        g.fillRect(0,0, handler.getWidth(), handler.getHeight());
+        handler.getRoom().render(g);
+        g.drawImage(Assets.tint, 0,0, null);
 
         renderControls(g);
-
     }
 
     public void renderControls(Graphics g){
@@ -42,7 +39,7 @@ public class Controls extends State{
         Text.drawString(g,"J = attack", 500, 470, true, Color.WHITE, Assets.fontChenSmaller);
         Text.drawString(g,"G = Turn into bed", 500, 510, true, Color.WHITE, Assets.fontChenSmaller);
 
-        Text.drawString(g,"Press ENTER to exit", 500, 680, true, Color.WHITE, Assets.font28);
+        Text.drawString(g,"Press ESC to exit", 500, 680, true, Color.WHITE, Assets.font28);
     }
 
     @Override

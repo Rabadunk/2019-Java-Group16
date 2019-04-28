@@ -25,7 +25,7 @@ public class PauseState extends State {
         handler.getMouseManager().setUiManager(uiManager);
 
         // Resume button
-        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 310, 300, 100, Assets.blankButton, () -> {
+        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 250, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
                 State.setState(handler.getGame().gameState);
@@ -36,8 +36,20 @@ public class PauseState extends State {
             State.setState(handler.getGame().gameState);
         }));
 
+        // Controls button
+        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 360, 300, 100, Assets.blankButton, () -> {
+            if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+                stopMusic();
+                State.setState(handler.getGame().pauseControls);
+            }
+        }, () -> {
+            handler.getMouseManager().setUiManager(null);
+            stopMusic();
+            State.setState(handler.getGame().pauseControls);
+        }));
+
         // Main menu button
-        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 420, 300, 100, Assets.blankButton, () -> {
+        uiManager.addObject( new UIImageButton(handler.getWidth()/2 - 150, 470, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
                 State.setState(handler.getGame().menuState);
@@ -81,8 +93,9 @@ public class PauseState extends State {
         Text.drawString(g, "Paused", handler.getWidth()/2, 100, true, Color.WHITE, Assets.fontTitle);
 
         // Button texts
-        Text.drawString(g, "Resume", handler.getWidth()/2, 310 + 50,true, Color.WHITE, Assets.fontChen);
-        Text.drawString(g, "Main menu", handler.getWidth()/2, 420 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Resume", handler.getWidth()/2, 250 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Controls", handler.getWidth()/2, 360 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Main menu", handler.getWidth()/2, 470 + 50,true, Color.WHITE, Assets.fontChen);
 
     }
 
