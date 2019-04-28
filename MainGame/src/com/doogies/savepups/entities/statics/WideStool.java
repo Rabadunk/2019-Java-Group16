@@ -9,16 +9,16 @@ import com.doogies.savepups.tiles.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Stool extends Entity {
+public class WideStool extends Entity {
 
-    private BufferedImage stool = FurnitureAssets.stool;
+    private BufferedImage wideStool = FurnitureAssets.wideStool;
 
-    public Stool (Handler handler, float x, float y){
-        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public WideStool (Handler handler, float x, float y){
+        super(handler, x + Tile.TILEHEIGHT/2, y - Tile.TILEHEIGHT/2, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT);
 
-        bounds.x = 12;
-        bounds.y = Tile.TILEHEIGHT - 25;
-        bounds.width = width - bounds.x*2;
+        bounds.x = 0;
+        bounds.y = Tile.TILEHEIGHT - 30;
+        bounds.width = width/2;
         bounds.height = height/8;
 
         setHealth(1);
@@ -35,7 +35,7 @@ public class Stool extends Entity {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(stool,
+        g.drawImage(wideStool,
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
@@ -46,4 +46,5 @@ public class Stool extends Entity {
                 (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
                 bounds.width, bounds.height);
     }
+
 }

@@ -41,6 +41,12 @@ public class StaticsManager {
             case 8:
                 insertStool(entityManager, x, y);
                 break;
+            case 9:
+                insertWideStool(entityManager, x, y);
+                break;
+            case 10:
+                insertRadio(entityManager, x, y);
+                break;
         }
     }
 
@@ -87,5 +93,15 @@ public class StaticsManager {
     public void insertStool(EntityManager entityManager, int spawnX, int spawnY) {
         Stool stool = new Stool(handler, spawnX, spawnY);
         entityManager.addEntity(stool);
+    }
+
+    public void insertWideStool(EntityManager entityManager, int spawnX, int spawnY) {
+        WideStool wideStool = new WideStool(handler, spawnX, spawnY);
+        entityManager.addEntity(wideStool);
+    }
+
+    public void insertRadio(EntityManager entityManager, int spawnX, int spawnY) {
+        Radio radio = new Radio(handler, spawnX, spawnY);
+        entityManager.addEntity(radio);
     }
 }
