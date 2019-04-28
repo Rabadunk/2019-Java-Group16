@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -37,10 +38,10 @@ public class Orphan extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.orphan_left);
-        animationUp = new Animation(64, Assets.orphan_right);
-        animationLeft = new Animation(64, Assets.orphan_left);
-        animationRight = new Animation(64, Assets.orphan_right);
+        animationDown = new Animation(64, EnemyAssets.orphan_left);
+        animationUp = new Animation(64, EnemyAssets.orphan_right);
+        animationLeft = new Animation(64, EnemyAssets.orphan_left);
+        animationRight = new Animation(64, EnemyAssets.orphan_right);
     }
 
 
@@ -89,16 +90,16 @@ public class Orphan extends Enemy {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.orphanIdleLeft;
+                return EnemyAssets.orphanIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.orphanIdleRight;
+                return EnemyAssets.orphanIdleRight;
             }
             else if(direction == 2) {
-                return Assets.orphanIdleRight;
+                return EnemyAssets.orphanIdleRight;
             }
             else if(direction == 3) {
-                return Assets.orphanIdleLeft;
+                return EnemyAssets.orphanIdleLeft;
             }
         }
         return Assets.enemyIdleDown;

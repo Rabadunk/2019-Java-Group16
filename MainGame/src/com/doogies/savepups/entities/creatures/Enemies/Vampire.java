@@ -3,6 +3,7 @@ package com.doogies.savepups.entities.creatures.Enemies;
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.states.State;
 import com.doogies.savepups.tiles.Tile;
 
@@ -40,14 +41,14 @@ public class Vampire extends Enemy {
 
     private void loadHumanSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.vampire_down);
-        animationUp = new Animation(64, Assets.vampire_up);
-        animationLeft = new Animation(64, Assets.vampire_left);
-        animationRight = new Animation(64, Assets.vampire_right);
-        idleDown = Assets.vampireIdleDown;
-        idleUp = Assets.vampireIdleUp;
-        idleLeft = Assets.vampireIdleLeft;
-        idleRight = Assets.vampireIdleRight;
+        animationDown = new Animation(64, EnemyAssets.vampire_down);
+        animationUp = new Animation(64, EnemyAssets.vampire_up);
+        animationLeft = new Animation(64, EnemyAssets.vampire_left);
+        animationRight = new Animation(64, EnemyAssets.vampire_right);
+        idleDown = EnemyAssets.vampireIdleDown;
+        idleUp = EnemyAssets.vampireIdleUp;
+        idleLeft = EnemyAssets.vampireIdleLeft;
+        idleRight = EnemyAssets.vampireIdleRight;
     }
 
     private void loadHumanBounds() {
@@ -74,14 +75,14 @@ public class Vampire extends Enemy {
 
     private void loadBatSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.bat_down);
-        animationUp = new Animation(64, Assets.bat_up);
-        animationLeft = new Animation(64, Assets.bat_left);
-        animationRight = new Animation(64, Assets.bat_right);
-        idleDown = Assets.batIdleDown;
-        idleUp = Assets.batIdleUp;
-        idleLeft = Assets.batIdleLeft;
-        idleRight = Assets.batIdleRight;
+        animationDown = new Animation(64, EnemyAssets.bat_down);
+        animationUp = new Animation(64, EnemyAssets.bat_up);
+        animationLeft = new Animation(64, EnemyAssets.bat_left);
+        animationRight = new Animation(64, EnemyAssets.bat_right);
+        idleDown = EnemyAssets.batIdleDown;
+        idleUp = EnemyAssets.batIdleUp;
+        idleLeft = EnemyAssets.batIdleLeft;
+        idleRight = EnemyAssets.batIdleRight;
 
         loadBatBounds();
 

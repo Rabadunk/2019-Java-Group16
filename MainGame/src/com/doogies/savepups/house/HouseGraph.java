@@ -1,11 +1,9 @@
 package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.TileAssets;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class HouseGraph {
 
@@ -33,7 +31,7 @@ public class HouseGraph {
         for(int i = 0; i < numOfRooms + 1; i++) {
             house.add(new ArrayList<AStarNode>());
             for(int j = 0; j < numOfRooms + 1; j++) {
-                house.get(i).add(new AStarNode(1, 1, Assets.damagedFloor, false, handler));
+                house.get(i).add(new AStarNode(1, 1, TileAssets.damagedFloor, false, handler));
             }
         }
 

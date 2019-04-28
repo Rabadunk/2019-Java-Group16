@@ -64,6 +64,7 @@ public class MenuState extends State{
         uiManager.addObject( new UIImageButton(100, 310, 300, 100, Assets.blankButton, () -> {
             if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 stopMusic();
+                handler.getGame().demo = new PathfindingDemoState(handler);
                 State.setState(handler.getGame().demo);
             }
         }, () -> {

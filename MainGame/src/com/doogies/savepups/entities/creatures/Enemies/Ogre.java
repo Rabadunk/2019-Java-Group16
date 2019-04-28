@@ -6,6 +6,7 @@ import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -41,10 +42,10 @@ public class Ogre extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.ogre_left);
-        animationUp = new Animation(64, Assets.ogre_right);
-        animationLeft = new Animation(64, Assets.ogre_left);
-        animationRight = new Animation(64, Assets.ogre_right);
+        animationDown = new Animation(64, EnemyAssets.ogre_left);
+        animationUp = new Animation(64, EnemyAssets.ogre_right);
+        animationLeft = new Animation(64, EnemyAssets.ogre_left);
+        animationRight = new Animation(64, EnemyAssets.ogre_right);
     }
 
     @Override
@@ -117,6 +118,6 @@ public class Ogre extends Enemy {
 //                return Assets.ogreIdleLeft;
 //            }
 //        }
-        return Assets.ogreIdleLeft;
+        return EnemyAssets.ogreIdleLeft;
     }
 }

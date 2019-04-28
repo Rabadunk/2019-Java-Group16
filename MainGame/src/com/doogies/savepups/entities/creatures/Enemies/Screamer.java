@@ -4,6 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -32,10 +33,10 @@ public class Screamer extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.screamer_left);
-        animationUp = new Animation(64, Assets.screamer_right);
-        animationLeft = new Animation(64, Assets.screamer_left);
-        animationRight = new Animation(64, Assets.screamer_right);
+        animationDown = new Animation(64, EnemyAssets.screamer_left);
+        animationUp = new Animation(64, EnemyAssets.screamer_right);
+        animationLeft = new Animation(64, EnemyAssets.screamer_left);
+        animationRight = new Animation(64, EnemyAssets.screamer_right);
     }
 
 
@@ -78,6 +79,6 @@ public class Screamer extends Enemy {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
-        return Assets.screamerIdleLeft;
+        return EnemyAssets.screamerIdleLeft;
     }
 }

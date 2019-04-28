@@ -20,9 +20,9 @@ public class GameHud {
     }
 
     public void render(Graphics g){
-        // Health and beds which later will be dooogies
+        // Health and dooogies
         Text.drawString(g, "Health:  " + handler.getPlayer().getHealth(), 15,30, false, Color.WHITE, Assets.fontHud);
-        g.drawImage(Assets.dog, handler.getWidth() - 120 ,13, 24,24, null);
+        g.drawImage(Assets.dog, handler.getWidth() - 120 ,10, 24,24, null);
         Text.drawString(g, ": "+handler.getPlayer().getInventory().getItem("Dog"), handler.getWidth() - 90,30, false, Color.WHITE, Assets.fontHud);
 
         // Score and time
@@ -36,12 +36,6 @@ public class GameHud {
         }
         Text.drawString(g, "Score:  " + handler.getPlayer().getScore(), handler.getWidth() / 2, 730, true, Color.WHITE, Assets.fontHud);
 
-        // Equiped items
-        g.drawImage(Assets.sword, 20, 680, 64, 64, null);
-
-        g.drawImage(Assets.sword, 800, 680, 64, 64, null);
-        g.drawImage(Assets.sword, 870, 680, 64, 64, null);
-        g.drawImage(Assets.sword, 940, 680, 64, 64, null);
     }
 
 }
