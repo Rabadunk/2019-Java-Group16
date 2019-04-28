@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="768.4706040181231" y="2323.0">com.doogies.savepups.states.MenuState</node>
+    <node x="793.0372706847897" y="2058.0">com.doogies.savepups.states.GameState</node>
+    <node x="1010.4638888888892" y="3614.0">com.doogies.savepups.entities.Entity</node>
+    <node x="988.4638888888892" y="3239.0">com.doogies.savepups.Handler</node>
+    <node x="364.3638888888893" y="2345.0">com.doogies.savepups.input.KeyManager</node>
+    <node x="423.21729797979833" y="4220.0">com.doogies.savepups.entities.statics.Bed</node>
+    <node x="1396.3560606060614" y="951.0">com.doogies.savepups.entities.creatures.Player</node>
+    <node x="918.9969696969704" y="1193.0">com.doogies.savepups.ui.UIObject</node>
+    <node x="1034.0372706847897" y="2014.0">com.doogies.savepups.ui.UIManager</node>
+    <node x="525.1025484625673" y="287.0">com.doogies.savepups.graphics.Assets</node>
+    <node x="134.86363636363717" y="2345.0">com.doogies.savepups.display.Display</node>
+    <node x="1148.586639371658" y="0.0">com.doogies.savepups.tiles.Tile</node>
+    <node x="1321.0372706847897" y="2620.0">com.doogies.savepups.utils.HighScoreManager</node>
+    <node x="178.5305555555559" y="3371.0">com.doogies.savepups.Launcher</node>
+    <node x="49.21706866458703" y="2818.0">com.doogies.savepups.audio.AudioManager</node>
+    <node x="1228.0979797979803" y="4506.0">com.doogies.savepups.entities.creatures.Enemies.Enemy</node>
+    <node x="206.99168987670828" y="2576.0">com.doogies.savepups.Game</node>
+    <node x="415.16388888888923" y="388.0">com.doogies.savepups.items.Item</node>
+    <node x="1331.5979797979803" y="4099.0">com.doogies.savepups.entities.creatures.Creature</node>
+    <node x="1351.5372706847897" y="2378.0">com.doogies.savepups.utils.Utils</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.doogies.savepups.states.GameState" target="com.doogies.savepups.entities.creatures.Player">
+      <point x="55.25" y="-80.5" />
+      <point x="958.7872706847897" y="1984.0" />
+      <point x="1411.4560606060613" y="1984.0" />
+      <point x="-135.9000000000001" y="476.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.entities.creatures.Player">
+      <point x="109.66666666666674" y="-168.5" />
+      <point x="1502.264646464647" y="4476.0" />
+      <point x="1771.9299242424242" y="4476.0" />
+      <point x="1771.9299242424242" y="1924.0" />
+      <point x="1683.2560606060613" y="1924.0" />
+      <point x="135.89999999999986" y="476.5" />
+    </edge>
+    <edge source="com.doogies.savepups.items.Item" target="com.doogies.savepups.Handler">
+      <point x="60.39999999999998" y="256.5" />
+      <point x="626.5638888888892" y="931.0" />
+      <point x="638.113636363637" y="931.0" />
+      <point x="638.113636363637" y="3129.0" />
+      <point x="1112.8729797979802" y="3129.0" />
+      <point x="-36.59090909090901" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.MenuState" target="com.doogies.savepups.ui.UIObject">
+      <point x="-36.59999999999991" y="-91.5" />
+      <point x="823.3706040181232" y="2283.0" />
+      <point x="765.2472222222227" y="2283.0" />
+      <point x="765.2472222222227" y="1974.0" />
+      <point x="961.6636363636371" y="1974.0" />
+      <point x="-85.33333333333326" y="234.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Handler" target="com.doogies.savepups.input.KeyManager">
+      <point x="-65.86363636363626" y="-157.5" />
+      <point x="1083.600252525253" y="3149.0" />
+      <point x="517.4916898767083" y="3149.0" />
+      <point x="517.4916898767083" y="2546.0" />
+      <point x="553.3638888888893" y="2546.0" />
+      <point x="81.0" y="69.5" />
+    </edge>
+    <edge source="com.doogies.savepups.items.Item" target="com.doogies.savepups.graphics.Assets">
+      <point x="0.0" y="-256.5" />
+      <point x="566.1638888888892" y="363.0" />
+      <point x="584.6025484625673" y="363.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Handler" target="com.doogies.savepups.entities.creatures.Player">
+      <point x="153.68181818181824" y="-157.5" />
+      <point x="1303.1457070707074" y="3219.0" />
+      <point x="1642.5372706847897" y="3219.0" />
+      <point x="1642.5372706847897" y="1974.0" />
+      <point x="1532.2560606060615" y="1974.0" />
+      <point x="-15.099999999999909" y="476.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Player" target="com.doogies.savepups.Handler">
+      <point x="-75.5" y="476.5" />
+      <point x="1471.8560606060614" y="1994.0" />
+      <point x="1620.5372706847897" y="1994.0" />
+      <point x="1620.5372706847897" y="3199.0" />
+      <point x="1273.8729797979802" y="3199.0" />
+      <point x="124.40909090909099" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.GameState" target="com.doogies.savepups.Handler">
+      <point x="73.66666666666674" y="80.5" />
+      <point x="977.2039373514565" y="2283.0" />
+      <point x="1042.5775484625672" y="2283.0" />
+      <point x="1042.5775484625672" y="3109.0" />
+      <point x="1142.1457070707074" y="3109.0" />
+      <point x="-7.318181818181756" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Game" target="com.doogies.savepups.input.KeyManager">
+      <point x="30.444444444444343" y="-256.5" />
+      <point x="374.4361343211526" y="2556.0" />
+      <point x="391.3638888888893" y="2556.0" />
+      <point x="-81.0" y="69.5" />
+    </edge>
+    <edge source="com.doogies.savepups.graphics.Assets" target="com.doogies.savepups.tiles.Tile">
+      <point x="0.0" y="-25.5" />
+      <point x="584.6025484625673" y="257.0" />
+      <point x="1203.836639371658" y="257.0" />
+      <point x="-55.25" y="113.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Launcher" target="com.doogies.savepups.Game">
+      <point x="-42.0" y="-25.5" />
+      <point x="220.5305555555559" y="3219.0" />
+      <point x="229.82502321004154" y="3219.0" />
+      <point x="-114.16666666666674" y="256.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Creature" target="com.doogies.savepups.entities.Entity">
+      <point x="-61.000000000000114" y="-168.5" />
+      <point x="1392.59797979798" y="4069.0" />
+      <point x="1270.5638888888893" y="4069.0" />
+      <point x="115.60000000000014" y="212.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Handler" target="com.doogies.savepups.utils.HighScoreManager">
+      <point x="80.5" y="-157.5" />
+      <point x="1229.9638888888892" y="3169.0" />
+      <point x="1465.5372706847897" y="3169.0" />
+      <point x="0.0" y="212.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Handler" target="com.doogies.savepups.audio.AudioManager">
+      <point x="-139.0454545454545" y="-157.5" />
+      <point x="1010.4184343434347" y="3199.0" />
+      <point x="160.34206866458703" y="3199.0" />
+      <point x="47.625" y="14.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Creature" target="com.doogies.savepups.tiles.Tile">
+      <point x="101.66666666666657" y="-168.5" />
+      <point x="1555.2646464646468" y="4079.0" />
+      <point x="1744.9222222222227" y="4079.0" />
+      <point x="1744.9222222222227" y="257.0" />
+      <point x="1314.336639371658" y="257.0" />
+      <point x="55.25" y="113.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.Entity" target="com.doogies.savepups.Handler">
+      <point x="0.0" y="-212.5" />
+      <point x="1154.9638888888892" y="3594.0" />
+      <point x="1213.8638888888893" y="3594.0" />
+      <point x="64.40000000000009" y="157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.MenuState" target="com.doogies.savepups.graphics.Assets">
+      <point x="-73.20000000000005" y="-91.5" />
+      <point x="786.7706040181231" y="2293.0" />
+      <point x="727.6638888888892" y="2293.0" />
+      <point x="727.6638888888892" y="363.0" />
+      <point x="624.2692151292338" y="363.0" />
+      <point x="39.66666666666663" y="25.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.Handler">
+      <point x="-73.11111111111109" y="-168.5" />
+      <point x="1319.4868686868692" y="4466.0" />
+      <point x="999.9638888888892" y="4466.0" />
+      <point x="999.9638888888892" y="3584.0" />
+      <point x="1085.063888888889" y="3584.0" />
+      <point x="-64.40000000000009" y="157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.ui.UIManager" target="com.doogies.savepups.Handler">
+      <point x="99.75" y="124.5" />
+      <point x="1266.7872706847897" y="2303.0" />
+      <point x="1239.0372706847897" y="2303.0" />
+      <point x="1239.0372706847897" y="3129.0" />
+      <point x="1171.4184343434347" y="3129.0" />
+      <point x="21.954545454545496" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.MenuState" target="com.doogies.savepups.states.GameState">
+      <point x="0.0" y="-91.5" />
+      <point x="859.9706040181231" y="2283.0" />
+      <point x="903.5372706847897" y="2283.0" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Game" target="com.doogies.savepups.display.Display">
+      <point x="-91.33333333333348" y="-256.5" />
+      <point x="252.6583565433748" y="2546.0" />
+      <point x="164.0303030303039" y="2546.0" />
+      <point x="-58.33333333333326" y="69.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.GameState" target="com.doogies.savepups.tiles.Tile">
+      <point x="-55.25" y="-80.5" />
+      <point x="848.2872706847897" y="1964.0" />
+      <point x="771.5388888888892" y="1964.0" />
+      <point x="771.5388888888892" y="267.0" />
+      <point x="1240.6699727049913" y="267.0" />
+      <point x="-18.416666666666686" y="113.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.entities.Entity">
+      <point x="-36.55555555555554" y="-168.5" />
+      <point x="1356.0424242424247" y="4456.0" />
+      <point x="1154.9638888888892" y="4456.0" />
+      <point x="0.0" y="212.5" />
+    </edge>
+    <edge source="com.doogies.savepups.utils.HighScoreManager" target="com.doogies.savepups.utils.Utils">
+      <point x="0.0" y="-212.5" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Creature" target="com.doogies.savepups.Handler">
+      <point x="-20.333333333333485" y="-168.5" />
+      <point x="1433.2646464646468" y="4059.0" />
+      <point x="1309.9638888888892" y="4059.0" />
+      <point x="1309.9638888888892" y="3584.0" />
+      <point x="1278.2638888888891" y="3584.0" />
+      <point x="128.79999999999995" y="157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.statics.Bed" target="com.doogies.savepups.items.Item">
+      <point x="-45.75" y="-47.5" />
+      <point x="468.96729797979833" y="4069.0" />
+      <point x="35.40456866458703" y="4069.0" />
+      <point x="35.40456866458703" y="931.0" />
+      <point x="505.76388888888926" y="931.0" />
+      <point x="-60.39999999999998" y="256.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.statics.Bed" target="com.doogies.savepups.Handler">
+      <point x="15.25" y="-47.5" />
+      <point x="529.9672979797983" y="4059.0" />
+      <point x="951.0888888888892" y="4059.0" />
+      <point x="951.0888888888892" y="3574.0" />
+      <point x="1020.6638888888892" y="3574.0" />
+      <point x="-128.79999999999995" y="157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.MenuState" target="com.doogies.savepups.Handler">
+      <point x="45.75" y="91.5" />
+      <point x="905.7206040181231" y="3119.0" />
+      <point x="1127.5093434343437" y="3119.0" />
+      <point x="-21.954545454545496" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.items.Item">
+      <point x="-146.22222222222217" y="-168.5" />
+      <point x="1246.3757575757581" y="4486.0" />
+      <point x="0.0" y="4486.0" />
+      <point x="0.0" y="921.0" />
+      <point x="445.3638888888893" y="921.0" />
+      <point x="-120.79999999999995" y="256.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.tiles.Tile">
+      <point x="146.22222222222217" y="-168.5" />
+      <point x="1538.8202020202025" y="4486.0" />
+      <point x="1782.9299242424242" y="4486.0" />
+      <point x="1782.9299242424242" y="247.0" />
+      <point x="1351.1699727049916" y="247.0" />
+      <point x="92.08333333333337" y="113.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.entities.creatures.Creature">
+      <point x="36.55555555555554" y="-168.5" />
+      <point x="1429.1535353535357" y="4456.0" />
+      <point x="1514.59797979798" y="4456.0" />
+      <point x="60.999999999999886" y="168.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Player" target="com.doogies.savepups.entities.Entity">
+      <point x="15.099999999999909" y="476.5" />
+      <point x="1562.4560606060613" y="1964.0" />
+      <point x="1653.5372706847897" y="1964.0" />
+      <point x="1653.5372706847897" y="3594.0" />
+      <point x="1251.2972222222224" y="3594.0" />
+      <point x="96.33333333333326" y="-212.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Player" target="com.doogies.savepups.entities.creatures.Creature">
+      <point x="75.5" y="476.5" />
+      <point x="1622.8560606060614" y="1944.0" />
+      <point x="1710.211639371658" y="1944.0" />
+      <point x="1710.211639371658" y="4069.0" />
+      <point x="1514.59797979798" y="4069.0" />
+      <point x="60.999999999999886" y="-168.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Player" target="com.doogies.savepups.items.Item">
+      <point x="-75.5" y="-476.5" />
+      <point x="1471.8560606060614" y="931.0" />
+      <point x="686.9638888888893" y="931.0" />
+      <point x="120.80000000000007" y="256.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.statics.Bed" target="com.doogies.savepups.audio.AudioManager">
+      <point x="-15.25" y="-47.5" />
+      <point x="499.46729797979833" y="4059.0" />
+      <point x="96.84206866458703" y="4059.0" />
+      <point x="-15.875" y="14.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Handler" target="com.doogies.savepups.Game">
+      <point x="-124.40909090909076" y="-157.5" />
+      <point x="1025.0547979797984" y="3189.0" />
+      <point x="321.158356543375" y="3189.0" />
+      <point x="-22.833333333333258" y="256.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Game" target="com.doogies.savepups.states.GameState">
+      <point x="0.0" y="-256.5" />
+      <point x="343.9916898767083" y="2556.0" />
+      <point x="353.8638888888893" y="2556.0" />
+      <point x="353.8638888888893" y="2303.0" />
+      <point x="829.870604018123" y="2303.0" />
+      <point x="-73.66666666666674" y="80.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Game" target="com.doogies.savepups.Handler">
+      <point x="114.16666666666652" y="256.5" />
+      <point x="458.1583565433748" y="3159.0" />
+      <point x="1068.9638888888892" y="3159.0" />
+      <point x="-80.5" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.statics.Bed" target="com.doogies.savepups.entities.Entity">
+      <point x="76.25" y="-47.5" />
+      <point x="590.9672979797983" y="4079.0" />
+      <point x="1097.1638888888892" y="4079.0" />
+      <point x="-57.799999999999955" y="212.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Game" target="com.doogies.savepups.graphics.Assets">
+      <point x="-121.77777777777783" y="-256.5" />
+      <point x="222.21391209893045" y="2556.0" />
+      <point x="124.36363636363717" y="2556.0" />
+      <point x="124.36363636363717" y="363.0" />
+      <point x="544.9358817959005" y="363.0" />
+      <point x="-39.666666666666686" y="25.5" />
+    </edge>
+    <edge source="com.doogies.savepups.states.MenuState" target="com.doogies.savepups.ui.UIManager">
+      <point x="36.59999999999991" y="-91.5" />
+      <point x="896.570604018123" y="2293.0" />
+      <point x="1067.2872706847897" y="2293.0" />
+      <point x="-99.75" y="124.5" />
+    </edge>
+    <edge source="com.doogies.savepups.Game" target="com.doogies.savepups.states.MenuState">
+      <point x="121.77777777777783" y="-256.5" />
+      <point x="465.7694676544861" y="2556.0" />
+      <point x="814.2206040181231" y="2556.0" />
+      <point x="-45.75" y="91.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Player" target="com.doogies.savepups.tiles.Tile">
+      <point x="75.5" y="-476.5" />
+      <point x="1622.8560606060614" y="267.0" />
+      <point x="1277.5033060383248" y="267.0" />
+      <point x="18.41666666666663" y="113.5" />
+    </edge>
+    <edge source="com.doogies.savepups.utils.HighScoreManager" target="com.doogies.savepups.Handler">
+      <point x="57.799999999999955" y="212.5" />
+      <point x="1523.3372706847897" y="3179.0" />
+      <point x="1244.600252525253" y="3179.0" />
+      <point x="95.13636363636374" y="-157.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.creatures.Enemies.Enemy" target="com.doogies.savepups.audio.AudioManager">
+      <point x="-109.66666666666663" y="-168.5" />
+      <point x="1282.9313131313136" y="4476.0" />
+      <point x="11.0" y="4476.0" />
+      <point x="11.0" y="3219.0" />
+      <point x="65.09206866458703" y="3219.0" />
+      <point x="-47.625" y="14.5" />
+    </edge>
+    <edge source="com.doogies.savepups.ui.UIManager" target="com.doogies.savepups.ui.UIObject">
+      <point x="66.5" y="-124.5" />
+      <point x="1233.5372706847897" y="1974.0" />
+      <point x="1132.3303030303036" y="1974.0" />
+      <point x="85.33333333333326" y="234.5" />
+    </edge>
+    <edge source="com.doogies.savepups.entities.statics.Bed" target="com.doogies.savepups.tiles.Tile">
+      <point x="-76.25" y="-47.5" />
+      <point x="438.46729797979833" y="4079.0" />
+      <point x="24.404568664587032" y="4079.0" />
+      <point x="24.404568664587032" y="247.0" />
+      <point x="1167.0033060383248" y="247.0" />
+      <point x="-92.08333333333337" y="113.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="793.4999999999999" y="525.8333333333333" />
+  <SelectedNodes>
+    <node>com.doogies.savepups.graphics.Assets</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
