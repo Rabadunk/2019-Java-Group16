@@ -31,6 +31,7 @@ public class Stool extends Entity {
     @Override
     public void die() {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
+        goldCoinDrop.play();
     }
 
     @Override

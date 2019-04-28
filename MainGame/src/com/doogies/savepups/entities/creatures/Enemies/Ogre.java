@@ -64,7 +64,6 @@ public class Ogre extends Enemy {
         animationRight = new Animation(64, Assets.ogre_right);
     }
 
-
     @Override
     public void tick() {
         //Animations

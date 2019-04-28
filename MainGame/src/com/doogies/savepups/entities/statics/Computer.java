@@ -32,6 +32,7 @@ public class Computer extends Entity {
     public void die() {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH, (int) y));
+        goldCoinDrop.play();
     }
 
     @Override

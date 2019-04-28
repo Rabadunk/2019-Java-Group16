@@ -36,17 +36,12 @@ public abstract class Enemy extends Creature {
 
     protected boolean attackUp, attackDown, attackLeft, attackRight;
 
-    public static AudioPlayer goldCoinDrop;
-
     public Enemy(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y, width, height);
         player = handler.getPlayer();
         diameter = 200;
         moveTo = new AStarNode((int) x, (int) y, Tile.tiles[0].getTexture(), false, handler);
 
-        // Audio
-        goldCoinDrop = new AudioPlayer();
-        goldCoinDrop.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     protected void setupAttack() {
