@@ -18,6 +18,8 @@ public class FurnitureAssets {
     public static BufferedImage stool;
     public static BufferedImage wideStool;
     public static BufferedImage radio;
+    public static BufferedImage tv;
+
 
     public static void init() {
         furnitureSheet = new SpriteSheet(ImageLoader.loadImage("/textures/furnitureSpritesheet.png"));
@@ -29,8 +31,9 @@ public class FurnitureAssets {
         drawers = furnitureSheet.crop(tileWidth*4 + tileWidth/2, 0, tileWidth/2, tileHeight);
         cupboard = furnitureSheet.crop(tileWidth, tileHeight, tileWidth*2, tileHeight*2);
         stool = furnitureSheet.crop(tileWidth*3, tileHeight*2, tileWidth, tileHeight);
-        wideStool = furnitureSheet.crop(tileWidth * 3, tileHeight, tileWidth + tileWidth*2, tileHeight);
-        radio = furnitureSheet.crop(0, 2 * Tile.TILEHEIGHT, tileWidth/2, tileHeight/2);
+        wideStool = furnitureSheet.crop(tileWidth * 3, tileHeight, tileWidth + tileWidth/2, tileHeight);
+        radio = furnitureSheet.crop(0, 2 * tileHeight, tileWidth/2, tileHeight/2);
+        tv = furnitureSheet.crop(5 * tileWidth, 0, tileWidth * 2, tileHeight + tileHeight/2);
     }
 
 }
