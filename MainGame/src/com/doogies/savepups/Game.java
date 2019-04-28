@@ -36,6 +36,7 @@ public class Game implements Runnable {
     public State controls;
     public State pause;
     public State demo;
+    public State story;
 
     // Input
     private KeyManager keyManager;
@@ -93,6 +94,7 @@ public class Game implements Runnable {
         controls = new Controls(handler);
         pause = new PauseState(handler);
         demo = new PathfindingDemoState(handler);
+        story = new StoryState(handler);
         State.setState(menuState);
     }
 

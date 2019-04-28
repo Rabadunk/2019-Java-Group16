@@ -50,13 +50,13 @@ public class MenuState extends State{
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
                 handler.newPlayer();
                 handler.getGame().gameState = new GameState(handler);
-                State.setState(handler.getGame().gameState);
+                State.setState(handler.getGame().story);
             }
         }, () -> {
             handler.getMouseManager().setUiManager(null);
             handler.newPlayer();
             handler.getGame().gameState = new GameState(handler);
-            State.setState(handler.getGame().gameState);
+            State.setState(handler.getGame().story);
 
         }));
 
