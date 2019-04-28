@@ -4,7 +4,7 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
-import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -38,10 +38,10 @@ public class Ogre extends Enemy {
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.ogre_left);
-        animationUp = new Animation(64, Assets.ogre_right);
-        animationLeft = new Animation(64, Assets.ogre_left);
-        animationRight = new Animation(64, Assets.ogre_right);
+        animationDown = new Animation(64, EnemyAssets.ogre_left);
+        animationUp = new Animation(64, EnemyAssets.ogre_right);
+        animationLeft = new Animation(64, EnemyAssets.ogre_left);
+        animationRight = new Animation(64, EnemyAssets.ogre_right);
     }
 
     @Override
@@ -89,21 +89,7 @@ public class Ogre extends Enemy {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
-//        else{
-//            // 0 = down, 1 = up, 2 = left, 3 = right
-//            if(direction == 0) {
-//                return Assets.ogreIdleLeft;
-//            }
-//            else if(direction == 1) {
-//                return Assets.ogreIdleRight;
-//            }
-//            else if(direction == 2) {
-//                return Assets.ogreIdleRight;
-//            }
-//            else if(direction == 3) {
-//                return Assets.ogreIdleLeft;
-//            }
-//        }
-        return Assets.ogreIdleLeft;
+
+        return EnemyAssets.ogreIdleLeft;
     }
 }

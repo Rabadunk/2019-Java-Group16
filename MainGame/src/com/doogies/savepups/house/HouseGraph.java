@@ -1,11 +1,9 @@
 package com.doogies.savepups.house;
 
 import com.doogies.savepups.Handler;
-import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.TileAssets;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class HouseGraph {
 
@@ -14,6 +12,7 @@ public class HouseGraph {
     public static Room testRoom;
     public static Room lounge;
     public static Room bossRoom;
+    public static Room mazeRoom;
     public static Handler handler;
 
     public static ArrayList<ArrayList> house;
@@ -23,7 +22,7 @@ public class HouseGraph {
         this.handler = handler;
         rooms = new ArrayList<>();
         house = new ArrayList<>();
-        constructGraph(5);
+        constructGraph(6);
         generateRooms(handler);
     }
 
@@ -33,7 +32,7 @@ public class HouseGraph {
         for(int i = 0; i < numOfRooms + 1; i++) {
             house.add(new ArrayList<AStarNode>());
             for(int j = 0; j < numOfRooms + 1; j++) {
-                house.get(i).add(new AStarNode(1, 1, Assets.damagedFloor, false, handler));
+                house.get(i).add(new AStarNode(1, 1, TileAssets.damagedFloor, false, handler));
             }
         }
 
@@ -41,11 +40,12 @@ public class HouseGraph {
 
     private void generateRooms(Handler handler) {
         // Load rooms
-        testRoom = new Room(handler, "MazeRoom.txt", 0);
+        testRoom = new Room(handler, "shortestPathTestRoom.txt", 0);
         bedRoom = new Room(handler, "bedroom.txt", 1);
         hallwayRoom = new Room(handler, "hallway.txt", 2);
         lounge = new Room(handler, "lounge.txt", 3);
         bossRoom = new Room(handler, "bossRoom.txt", 4);
+        mazeRoom = new Room(handler, "mazeRoom.txt", 5);
 
          // Store rooms
         rooms.add(testRoom);
@@ -53,6 +53,7 @@ public class HouseGraph {
         rooms.add(hallwayRoom);
         rooms.add(lounge);
         rooms.add(bossRoom);
+        rooms.add(mazeRoom);
     }
 
     public static void addRoomEntrance(int thisRoomID, int otherRoomId, AStarNode node) {

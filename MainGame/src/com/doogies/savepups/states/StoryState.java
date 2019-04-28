@@ -25,9 +25,9 @@ public class StoryState extends State {
         g.setColor(Color.black);
         g.fillRect(0,0, handler.getWidth(), handler.getHeight());
 
-        Text.drawString(g, "Your step mother is evil! She has taken away everyone's puppies",
+        Text.drawString(g, "Monsters have broken into your home!",
                 100, 500, false, Color.WHITE, Assets.fontChenSmaller);
-        Text.drawString(g, "Go and save them",
+        Text.drawString(g, "Save your puppies before they eat them.",
                 100, 540, false, Color.WHITE, Assets.fontChenSmaller);
 
 

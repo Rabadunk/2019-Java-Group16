@@ -1,12 +1,15 @@
 package com.doogies.savepups.states;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.house.HouseGraph;
+import com.doogies.savepups.house.Room;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class PathfindingDemoState extends State{
 
@@ -24,8 +27,24 @@ public class PathfindingDemoState extends State{
             State.setState(handler.getGame().pause);
         }
 
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
+            State.setState(handler.getGame().help);
+        }
+
+        checkForRoomChange();
+
         handler.getRoom().tick();
 
+    }
+
+    private void checkForRoomChange() {
+        Player player = handler.getPlayer();
+        Room room = house.getRoom(player.getTileWorldID());
+        if(player.inEntry()) {
+            ArrayList<AStarNode> houseGraph = HouseGraph.house.get(room.ID);
+            AStarNode entrance = houseGraph.get(handler.getRoom().ID);
+            handler.setRoom(room, entrance.roomSpawnX, entrance.roomSpawnY);
+        }
     }
 
     @Override

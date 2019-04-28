@@ -59,7 +59,7 @@ public abstract class Enemy extends Creature {
 
         if(colCircleBox(handler.getPlayer()) && !(player.getCurrentAnimationFrame() == FurnitureAssets.bed)) {
             diameter = 600;
-            moveToPlayer();
+            moveToPlayer(Tile.TILEHEIGHT/2);
             move();
             checkAttacks();
         } else {
@@ -83,7 +83,7 @@ public abstract class Enemy extends Creature {
         }
     }
 
-    protected void moveToPlayer() {
+    protected void moveToPlayer(int range) {
 
         AStarNode goalNode = handler.getRoom().getPathFinder().getNode(
                 (int) ((handler.getPlayer().getX() + handler.getPlayer().getBounds().x) / Tile.TILEWIDTH),
@@ -117,7 +117,7 @@ public abstract class Enemy extends Creature {
             direction = 3;
         }
 
-        if(getDistanceToPlayer() <  Tile.TILEWIDTH/2) {
+        if(getDistanceToPlayer() <  range) {
             dontMove();
         }
     }

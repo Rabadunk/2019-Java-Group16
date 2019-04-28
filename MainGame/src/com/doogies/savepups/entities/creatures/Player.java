@@ -4,8 +4,8 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.Animation;
-import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
+import com.doogies.savepups.graphics.assets.PlayerAssets;
 import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.hud.GameHud;
 import com.doogies.savepups.inventory.Inventory;
@@ -66,6 +66,8 @@ public class Player extends Creature {
     // Audio
     public static AudioPlayer swordSwing;
 
+    public boolean centerOnPlayer = true;
+
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
@@ -95,15 +97,15 @@ public class Player extends Creature {
 
     public void loadSprites() {
         //Animations
-        animationDown = new Animation(90, Assets.player_down);
-        animationUp = new Animation(90, Assets.player_up);
-        animationLeft = new Animation(80, Assets.player_left);
-        animationRight = new Animation(80, Assets.player_right);
+        animationDown = new Animation(90, PlayerAssets.player_down);
+        animationUp = new Animation(90, PlayerAssets.player_up);
+        animationLeft = new Animation(80, PlayerAssets.player_left);
+        animationRight = new Animation(80, PlayerAssets.player_right);
 
-        animationAttackDown = new Animation(160, Assets.playerAttackDown);
-        animationAttackUp = new Animation(160, Assets.playerAttackUp);
-        animationAttackLeft = new Animation(160, Assets.playerAttackLeft);
-        animationAttackRight = new Animation(160, Assets.playerAttackRight);
+        animationAttackDown = new Animation(160, PlayerAssets.playerAttackDown);
+        animationAttackUp = new Animation(160, PlayerAssets.playerAttackUp);
+        animationAttackLeft = new Animation(160, PlayerAssets.playerAttackLeft);
+        animationAttackRight = new Animation(160, PlayerAssets.playerAttackRight);
     }
 
     public void loadGameUtils() {
@@ -130,7 +132,10 @@ public class Player extends Creature {
         //Movement
         getInput();
         move();
-        handler.getGameCamera().centerOnEntity(this);
+
+        if(centerOnPlayer) {
+            handler.getGameCamera().centerOnEntity(this);
+        }
 
         //Attack
         checkAttacks();
@@ -394,16 +399,16 @@ public class Player extends Creature {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.playerIdleDown;
+                return PlayerAssets.playerIdleDown;
             }
             else if(direction == 1) {
-                return Assets.playerIdleUp;
+                return PlayerAssets.playerIdleUp;
             }
             else if(direction == 2) {
-                return Assets.playerIdleLeft;
+                return PlayerAssets.playerIdleLeft;
             }
             else if(direction == 3) {
-                return Assets.playerIdleRight;
+                return PlayerAssets.playerIdleRight;
             }
             else{
                 // Dunno aye
@@ -421,30 +426,30 @@ public class Player extends Creature {
         }
 
         if(attackUp){
-            return Assets.playerAttackedAttackUp[animationAttackUp.getCurrentIndex()];
+            return PlayerAssets.playerAttackedAttackUp[animationAttackUp.getCurrentIndex()];
         }
         else if(attackDown){
-            return Assets.playerAttackedAttackDown[animationAttackDown.getCurrentIndex()];
+            return PlayerAssets.playerAttackedAttackDown[animationAttackDown.getCurrentIndex()];
         }
         else if(attackLeft){
-            return Assets.playerAttackedAttackLeft[animationAttackLeft.getCurrentIndex()];
+            return PlayerAssets.playerAttackedAttackLeft[animationAttackLeft.getCurrentIndex()];
         }
         else if(attackRight){
-            return Assets.playerAttackedAttackRight[animationAttackRight.getCurrentIndex()];
+            return PlayerAssets.playerAttackedAttackRight[animationAttackRight.getCurrentIndex()];
         }
 
         // Walking animations
         if(xMove <0){
-            return Assets.playerAttacked_left[animationLeft.getCurrentIndex()];
+            return PlayerAssets.playerAttacked_left[animationLeft.getCurrentIndex()];
         }
         else if(xMove > 0){
-            return Assets.playerAttacked_right[animationRight.getCurrentIndex()];
+            return PlayerAssets.playerAttacked_right[animationRight.getCurrentIndex()];
         }
         else if(yMove < 0) {
-            return Assets.playerAttacked_up[animationUp.getCurrentIndex()];
+            return PlayerAssets.playerAttacked_up[animationUp.getCurrentIndex()];
         }
         else if(yMove > 0){
-            return Assets.playerAttacked_down[animationDown.getCurrentIndex()];
+            return PlayerAssets.playerAttacked_down[animationDown.getCurrentIndex()];
         }
         else if(bed){
             return FurnitureAssets.bed;
@@ -454,16 +459,16 @@ public class Player extends Creature {
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.playerAttackedIdleDown;
+                return PlayerAssets.playerAttackedIdleDown;
             }
             else if(direction == 1) {
-                return Assets.playerAttackedIdleUp;
+                return PlayerAssets.playerAttackedIdleUp;
             }
             else if(direction == 2) {
-                return Assets.playerAttackedIdleLeft;
+                return PlayerAssets.playerAttackedIdleLeft;
             }
             else if(direction == 3) {
-                return Assets.playerAttackedIdleRight;
+                return PlayerAssets.playerAttackedIdleRight;
             }
             else{
                 // Dunno aye

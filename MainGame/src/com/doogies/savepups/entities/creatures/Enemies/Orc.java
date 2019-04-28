@@ -6,6 +6,7 @@ import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.items.Item;
 
 import java.awt.*;
@@ -42,10 +43,10 @@ public class Orc extends Enemy{
 
     private void loadSprites() {
         //Animations
-        animationDown = new Animation(64, Assets.orc_left);
-        animationUp = new Animation(64, Assets.orc_right);
-        animationLeft = new Animation(64, Assets.orc_left);
-        animationRight = new Animation(64, Assets.orc_right);
+        animationDown = new Animation(64, EnemyAssets.orc_left);
+        animationUp = new Animation(64, EnemyAssets.orc_right);
+        animationLeft = new Animation(64, EnemyAssets.orc_left);
+        animationRight = new Animation(64, EnemyAssets.orc_right);
     }
 
 
@@ -97,16 +98,16 @@ public class Orc extends Enemy{
         else{
             // 0 = down, 1 = up, 2 = left, 3 = right
             if(direction == 0) {
-                return Assets.orcIdleLeft;
+                return EnemyAssets.orcIdleLeft;
             }
             else if(direction == 1) {
-                return Assets.orcIdleRight;
+                return EnemyAssets.orcIdleRight;
             }
             else if(direction == 2) {
-                return Assets.orcIdleRight;
+                return EnemyAssets.orcIdleRight;
             }
             else if(direction == 3) {
-                return Assets.orcIdleLeft;
+                return EnemyAssets.orcIdleLeft;
             }
         }
         return Assets.enemyIdleDown;

@@ -3,7 +3,9 @@ package com.doogies.savepups.graphics;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
+import com.doogies.savepups.graphics.assets.PlayerAssets;
 import com.doogies.savepups.graphics.assets.TileAssets;
 import com.doogies.savepups.tiles.Tile;
 
@@ -19,40 +21,10 @@ public class Assets {
 
     public static BufferedImage barrel1, barrel2;
 
-    public static BufferedImage[] player_down, player_up, player_left, player_right;
-    public static BufferedImage  playerIdleUp, playerIdleDown, playerIdleLeft, playerIdleRight;
-
-    public static BufferedImage[] playerAttackDown, playerAttackUp, playerAttackLeft, playerAttackRight;
-
-    public static BufferedImage[] playerAttacked_down, playerAttacked_up, playerAttacked_left, playerAttacked_right;
-    public static BufferedImage  playerAttackedIdleUp, playerAttackedIdleDown, playerAttackedIdleLeft, playerAttackedIdleRight;
-
-    public static BufferedImage[] playerAttackedAttackDown, playerAttackedAttackUp, playerAttackedAttackLeft, playerAttackedAttackRight;
-
     public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right;
     public static BufferedImage enemyIdleDown, enemyIdleUp, enemyIdleLeft, enemyIdleRight;
 
-    public static BufferedImage[] ogre_right, ogre_left;
-    public static BufferedImage ogreIdleRight, ogreIdleLeft;
-
-    public static BufferedImage[] orc_right, orc_left;
-    public static BufferedImage orcIdleRight, orcIdleLeft;
-
-    public static BufferedImage[] orphan_right, orphan_left;
-    public static BufferedImage orphanIdleRight, orphanIdleLeft;
-
-    public static BufferedImage[] screamer_right, screamer_left;
-    public static BufferedImage screamerIdleRight, screamerIdleLeft;
-
-    public static BufferedImage[] vampire_down, vampire_up, vampire_left, vampire_right;
-    public static BufferedImage  vampireIdleUp, vampireIdleDown, vampireIdleLeft, vampireIdleRight;
-
-    public static BufferedImage[] bat_down, bat_up, bat_left, bat_right;
-    public static BufferedImage  batIdleUp, batIdleDown, batIdleLeft, batIdleRight;
-
     public static BufferedImage attack;
-
-    public static BufferedImage pinkFloor, brickWall, doorwayWall, damagedFloor;
 
     public static BufferedImage sword;
 
@@ -77,6 +49,8 @@ public class Assets {
 
         TileAssets.init();
         FurnitureAssets.init();
+        PlayerAssets.init();
+        EnemyAssets.init();
 
         font28 = FontLoader.loadFont("res/fonts/slkscr/slkscr.ttf", 28);
         fontTitle = FontLoader.loadFont("res/fonts/Pacifico/Pacifico.ttf", 76);
@@ -87,18 +61,7 @@ public class Assets {
 
         SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));
 
-        SpriteSheet playersheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/character.png"));
-        SpriteSheet playerAttackedsheet = new SpriteSheet(ImageLoader.loadImage("/textures/gfx/characterAttacked.png"));
-
-        SpriteSheet attackSprites = new SpriteSheet(ImageLoader.loadImage("/textures/attack.png"));
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
-
-        SpriteSheet ogreSprites = new SpriteSheet(ImageLoader.loadImage("/textures/ogre.png"));
-        SpriteSheet screamerSprites = new SpriteSheet(ImageLoader.loadImage("/textures/screamer.png"));
-        SpriteSheet orcSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orc.png"));
-        SpriteSheet orphanSprites = new SpriteSheet(ImageLoader.loadImage("/textures/orphan.png"));
-        SpriteSheet vampireSprites = new SpriteSheet(ImageLoader.loadImage("/textures/vampire.png"));
-
 
         SpriteSheet barrelSprites = new SpriteSheet(ImageLoader.loadImage("/textures/barrels/barrels.png"));
         SpriteSheet coinGoldSprites = new SpriteSheet(ImageLoader.loadImage("/textures/coins/coin_gold.png"));
@@ -112,268 +75,8 @@ public class Assets {
         inventoryScreen = ImageLoader.loadImage("/textures/inventoryScreen.png");
         tint = ImageLoader.loadImage("/ui/tint.png");
 
-        // Player
-        player_up = new BufferedImage[4];
-        player_up[0] = playersheet.crop(0,64, width/2, height);
-        player_up[1] = playersheet.crop(width/2,64, width/2, height);
-        player_up[2] = playersheet.crop(width,64, width/2, height);
-        player_up[3] = playersheet.crop(width + width/2,64, width/2, height);
-
-        player_down = new BufferedImage[4];
-        player_down[0] = playersheet.crop(0,0,width/2, height);
-        player_down[1] = playersheet.crop(width/2,0, width/2, height);
-        player_down[2] = playersheet.crop(width,0, width/2, height);
-        player_down[3] = playersheet.crop(3*(width/2),0, width/2, height);
-
-        player_left = new BufferedImage[4];
-        player_left[0] = playersheet.crop(0,3*height, width/2, height);
-        player_left[1] = playersheet.crop(width/2,3*height, width/2, height);
-        player_left[2] = playersheet.crop(width,3*height, width/2, height);
-        player_left[3] = playersheet.crop(3*(width/2),3*height, width/2, height);
-
-        player_right = new BufferedImage[4];
-        player_right[0] = playersheet.crop(0, height, width/2, height);
-        player_right[1] = playersheet.crop(width/2, height, width/2, height);
-        player_right[2] = playersheet.crop(width, height, width/2, height);
-        player_right[3] = playersheet.crop(3*(width/2), height, width/2, height);
-
-
-        playerIdleUp = player_up[0];
-        playerIdleDown = player_down[0];
-        playerIdleLeft = player_left[0];
-        playerIdleRight = player_right[0];
-
-        playerAttackUp = new BufferedImage[4];
-        playerAttackUp[0] = playersheet.crop(0 + 8,16 * 10, width/2, height);
-        playerAttackUp[1] = playersheet.crop( 32 + 8,16 * 10, width/2, height);
-        playerAttackUp[2] = playersheet.crop(2* 32 + 8,16 * 10, width/2, height);
-        playerAttackUp[3] = playersheet.crop(3* 32 + 8,16 * 10, width/2, height);
-
-        playerAttackDown = new BufferedImage[4];
-        playerAttackDown[0] = playersheet.crop(0 + 8,16 * 8, width/2, height);
-        playerAttackDown[1] = playersheet.crop( 32 + 8,16 * 8, width/2, height);
-        playerAttackDown[2] = playersheet.crop(2* 32 + 8,16 * 8, width/2, height);
-        playerAttackDown[3] = playersheet.crop(3* 32 + 8,16 * 8, width/2, height);
-
-        playerAttackLeft = new BufferedImage[4];
-        playerAttackLeft[0] = playersheet.crop(0 + 8, 16 * 14, width/2, height);
-        playerAttackLeft[1] = playersheet.crop( 32 + 8, 16 * 14, width/2, height);
-        playerAttackLeft[2] = playersheet.crop(2* 32 + 8, 16 * 14, width/2, height);
-        playerAttackLeft[3] = playersheet.crop(3* 32 + 8, 16 * 14, width/2, height);
-
-        playerAttackRight = new BufferedImage[4];
-        playerAttackRight[0] = playersheet.crop(0 + 8, 16 * 12, width/2, height);
-        playerAttackRight[1] = playersheet.crop( 32 + 8, 16 * 12, width/2, height);
-        playerAttackRight[2] = playersheet.crop(2* 32 + 8, 16 * 12, width/2, height);
-        playerAttackRight[3] = playersheet.crop(3* 32 + 8, 16 * 12, width/2, height);
-
-        // Player taken damage
-
-        playerAttacked_up = new BufferedImage[4];
-        playerAttacked_up[0] = playerAttackedsheet.crop(0,64, width/2, height);
-        playerAttacked_up[1] = playerAttackedsheet.crop(width/2,64, width/2, height);
-        playerAttacked_up[2] = playerAttackedsheet.crop(width,64, width/2, height);
-        playerAttacked_up[3] = playerAttackedsheet.crop(width + width/2,64, width/2, height);
-
-        playerAttacked_down = new BufferedImage[4];
-        playerAttacked_down[0] = playerAttackedsheet.crop(0,0,width/2, height);
-        playerAttacked_down[1] = playerAttackedsheet.crop(width/2,0, width/2, height);
-        playerAttacked_down[2] = playerAttackedsheet.crop(width,0, width/2, height);
-        playerAttacked_down[3] = playerAttackedsheet.crop(3*(width/2),0, width/2, height);
-
-        playerAttacked_left = new BufferedImage[4];
-        playerAttacked_left[0] = playerAttackedsheet.crop(0,3*height, width/2, height);
-        playerAttacked_left[1] = playerAttackedsheet.crop(width/2,3*height, width/2, height);
-        playerAttacked_left[2] = playerAttackedsheet.crop(width,3*height, width/2, height);
-        playerAttacked_left[3] = playerAttackedsheet.crop(3*(width/2),3*height, width/2, height);
-
-        playerAttacked_right = new BufferedImage[4];
-        playerAttacked_right[0] = playerAttackedsheet.crop(0, height, width/2, height);
-        playerAttacked_right[1] = playerAttackedsheet.crop(width/2, height, width/2, height);
-        playerAttacked_right[2] = playerAttackedsheet.crop(width, height, width/2, height);
-        playerAttacked_right[3] = playerAttackedsheet.crop(3*(width/2), height, width/2, height);
-
-
-        playerAttackedIdleUp = playerAttacked_up[0];
-        playerAttackedIdleDown = playerAttacked_down[0];
-        playerAttackedIdleLeft = playerAttacked_left[0];
-        playerAttackedIdleRight = playerAttacked_right[0];
-
-        playerAttackedAttackUp = new BufferedImage[4];
-        playerAttackedAttackUp[0] = playerAttackedsheet.crop(0 + 8,16 * 10, width/2, height);
-        playerAttackedAttackUp[1] = playerAttackedsheet.crop( 32 + 8,16 * 10, width/2, height);
-        playerAttackedAttackUp[2] = playerAttackedsheet.crop(2* 32 + 8,16 * 10, width/2, height);
-        playerAttackedAttackUp[3] = playerAttackedsheet.crop(3* 32 + 8,16 * 10, width/2, height);
-
-        playerAttackedAttackDown = new BufferedImage[4];
-        playerAttackedAttackDown[0] = playerAttackedsheet.crop(0 + 8,16 * 8, width/2, height);
-        playerAttackedAttackDown[1] = playerAttackedsheet.crop( 32 + 8,16 * 8, width/2, height);
-        playerAttackedAttackDown[2] = playerAttackedsheet.crop(2* 32 + 8,16 * 8, width/2, height);
-        playerAttackedAttackDown[3] = playerAttackedsheet.crop(3* 32 + 8,16 * 8, width/2, height);
-
-        playerAttackedAttackLeft = new BufferedImage[4];
-        playerAttackedAttackLeft[0] = playerAttackedsheet.crop(0 + 8, 16 * 14, width/2, height);
-        playerAttackedAttackLeft[1] = playerAttackedsheet.crop( 32 + 8, 16 * 14, width/2, height);
-        playerAttackedAttackLeft[2] = playerAttackedsheet.crop(2* 32 + 8, 16 * 14, width/2, height);
-        playerAttackedAttackLeft[3] = playerAttackedsheet.crop(3* 32 + 8, 16 * 14, width/2, height);
-
-        playerAttackedAttackRight = new BufferedImage[4];
-        playerAttackedAttackRight[0] = playerAttackedsheet.crop(0 + 8, 16 * 12, width/2, height);
-        playerAttackedAttackRight[1] = playerAttackedsheet.crop( 32 + 8, 16 * 12, width/2, height);
-        playerAttackedAttackRight[2] = playerAttackedsheet.crop(2* 32 + 8, 16 * 12, width/2, height);
-        playerAttackedAttackRight[3] = playerAttackedsheet.crop(3* 32 + 8, 16 * 12, width/2, height);
 
         doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
-
-
-        attack = attackSprites.crop(30, 690, 200, 130);
-
-        // Ogre animation
-        ogre_right = new BufferedImage[8];
-        ogre_right[0] = ogreSprites.crop(0, 0, width, height);
-        ogre_right[1] = ogreSprites.crop(width, 0, width, height);
-        ogre_right[2] = ogreSprites.crop(width * 2, 0, width, height);
-        ogre_right[3] = ogreSprites.crop(width * 3, 0, width, height);
-        ogre_right[4] = ogreSprites.crop(width * 4, 0, width, height);
-        ogre_right[5] = ogreSprites.crop(width * 5, 0, width, height);
-        ogre_right[6] = ogreSprites.crop(width * 6, 0, width, height);
-        ogre_right[7] = ogreSprites.crop(width * 7, 0, width, height);
-
-
-        ogre_left = new BufferedImage[8];
-        ogre_left[0] = ogreSprites.crop(0, height, width, height);
-        ogre_left[1] = ogreSprites.crop(width, height, width, height);
-        ogre_left[2] = ogreSprites.crop(width * 2, height, width, height);
-        ogre_left[3] = ogreSprites.crop(width * 3, height, width, height);
-        ogre_left[4] = ogreSprites.crop(width * 4, height, width, height);
-        ogre_left[5] = ogreSprites.crop(width * 5, height, width, height);
-        ogre_left[6] = ogreSprites.crop(width * 6, height, width, height);
-        ogre_left[7] = ogreSprites.crop(width * 7, height, width, height);
-
-        ogreIdleLeft = ogreSprites.crop(0, 0, width, height);
-        ogreIdleRight = ogreSprites.crop(width * 7, height, width, height);
-
-        // Screamer animation
-        screamer_right = new BufferedImage[8];
-        screamer_right[0] = screamerSprites.crop(0, 0, width, height);
-        screamer_right[1] = screamerSprites.crop(width, 0, width, height);
-        screamer_right[2] = screamerSprites.crop(width * 2, 0, width, height);
-        screamer_right[3] = screamerSprites.crop(width * 3, 0, width, height);
-        screamer_right[4] = screamerSprites.crop(width * 4, 0, width, height);
-        screamer_right[5] = screamerSprites.crop(width * 5, 0, width, height);
-        screamer_right[6] = screamerSprites.crop(width * 6, 0, width, height);
-        screamer_right[7] = screamerSprites.crop(width * 7, 0, width, height);
-
-
-        screamer_left = new BufferedImage[8];
-        screamer_left[0] = screamerSprites.crop(0, height, width, height);
-        screamer_left[1] = screamerSprites.crop(width, height, width, height);
-        screamer_left[2] = screamerSprites.crop(width * 2, height, width, height);
-        screamer_left[3] = screamerSprites.crop(width * 3, height, width, height);
-        screamer_left[4] = screamerSprites.crop(width * 4, height, width, height);
-        screamer_left[5] = screamerSprites.crop(width * 5, height, width, height);
-        screamer_left[6] = screamerSprites.crop(width * 6, height, width, height);
-        screamer_left[7] = screamerSprites.crop(width * 7, height, width, height);
-
-        screamerIdleLeft = screamerSprites.crop(0, 0, width, height);
-        screamerIdleRight = screamerSprites.crop(width * 7, height, width, height);
-
-        // Orc animation
-        orc_right = new BufferedImage[8];
-        orc_right[0] = orcSprites.crop(0, 0, width, height);
-        orc_right[1] = orcSprites.crop(width, 0, width, height);
-        orc_right[2] = orcSprites.crop(width * 2, 0, width, height);
-        orc_right[3] = orcSprites.crop(width * 3, 0, width, height);
-        orc_right[4] = orcSprites.crop(width * 4, 0, width, height);
-        orc_right[5] = orcSprites.crop(width * 5, 0, width, height);
-        orc_right[6] = orcSprites.crop(width * 6, 0, width, height);
-        orc_right[7] = orcSprites.crop(width * 7, 0, width, height);
-
-
-        orc_left = new BufferedImage[8];
-        orc_left[0] = orcSprites.crop(0, height, width, height);
-        orc_left[1] = orcSprites.crop(width, height, width, height);
-        orc_left[2] = orcSprites.crop(width * 2, height, width, height);
-        orc_left[3] = orcSprites.crop(width * 3, height, width, height);
-        orc_left[4] = orcSprites.crop(width * 4, height, width, height);
-        orc_left[5] = orcSprites.crop(width * 5, height, width, height);
-        orc_left[6] = orcSprites.crop(width * 6, height, width, height);
-        orc_left[7] = orcSprites.crop(width * 7, height, width, height);
-
-        orcIdleLeft = orcSprites.crop(0, 0, width, height);
-        orcIdleRight = orcSprites.crop(width * 7, height, width, height);
-
-        // orphan
-        orphan_right = new BufferedImage[4];
-        orphan_right[0] = orphanSprites.crop(0, 0, width/2, height/2);
-        orphan_right[1] = orphanSprites.crop(16, 0, width/2, height/2);
-        orphan_right[2] = orphanSprites.crop(32, 0, width/2, height/2);
-        orphan_right[3] = orphanSprites.crop(48, 0, width/2, height/2);
-
-        orphan_left = new BufferedImage[4];
-        orphan_left[0] = orphanSprites.crop(0, 16, width/2, height/2);
-        orphan_left[1] = orphanSprites.crop(16, 16, width/2, height/2);
-        orphan_left[2] = orphanSprites.crop(32, 16, width/2, height/2);
-        orphan_left[3] = orphanSprites.crop(48, 16, width/2, height/2);
-
-
-        orphanIdleLeft = orphan_left[3];
-        orphanIdleRight = orphan_right[0];
-
-        // Vampire
-        vampire_up = new BufferedImage[3];
-        vampire_up[0] = vampireSprites.crop(0,height*3, width/2, height);
-        vampire_up[1] = vampireSprites.crop(width/2,height*3, width/2, height);
-        vampire_up[2] = vampireSprites.crop(width,height*3, width/2, height);
-
-        vampire_down = new BufferedImage[3];
-        vampire_down[0] = vampireSprites.crop(0,0, width/2, height);
-        vampire_down[1] = vampireSprites.crop(width/2,0, width/2, height);
-        vampire_down[2] = vampireSprites.crop(width,0, width/2, height);
-
-        vampire_left = new BufferedImage[3];
-        vampire_left[0] = vampireSprites.crop(0, height, width/2, height);
-        vampire_left[1] = vampireSprites.crop(width/2, height, width/2, height);
-        vampire_left[2] = vampireSprites.crop(width, height, width/2, height);
-
-        vampire_right = new BufferedImage[3];
-        vampire_right[0] = vampireSprites.crop(0, height*2, width/2, height);
-        vampire_right[1] = vampireSprites.crop(width/2, height*2, width/2, height);
-        vampire_right[2] = vampireSprites.crop(width, height*2, width/2, height);
-
-
-
-        vampireIdleUp = vampire_up[1];
-        vampireIdleDown = vampire_down[1];
-        vampireIdleLeft = vampire_left[1];
-        vampireIdleRight = vampire_right[1];
-
-        // Bat
-        bat_up = new BufferedImage[3];
-        bat_up[0] = vampireSprites.crop(80,height*3, width, height);
-        bat_up[1] = vampireSprites.crop(80 + width,height*3, width, height);
-        bat_up[2] = vampireSprites.crop(80 + 2*width,height*3, width, height);
-
-        bat_down = new BufferedImage[3];
-        bat_down[0] = vampireSprites.crop(80,0, width, height);
-        bat_down[1] = vampireSprites.crop(80 + width,0, width, height);
-        bat_down[2] = vampireSprites.crop(80 + 2*width,0, width, height);
-
-        bat_left = new BufferedImage[3];
-        bat_left[0] = vampireSprites.crop(80, height, width, height);
-        bat_left[1] = vampireSprites.crop(80 + width, height, width, height);
-        bat_left[2] = vampireSprites.crop(80 + 2*width, height, width, height);
-
-        bat_right = new BufferedImage[3];
-        bat_right[0] = vampireSprites.crop(80, height*2, width, height);
-        bat_right[1] = vampireSprites.crop(80 + width, height*2, width, height);
-        bat_right[2] = vampireSprites.crop(80 + 2*width, height*2, width, height);
-
-
-        batIdleUp = bat_up[1];
-        batIdleDown = bat_down[1];
-        batIdleLeft = bat_left[1];
-        batIdleRight = bat_right[1];
 
         // UI
 
