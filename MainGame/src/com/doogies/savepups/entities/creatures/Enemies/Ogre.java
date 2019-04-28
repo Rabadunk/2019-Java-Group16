@@ -2,16 +2,12 @@ package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioManager;
-import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
-import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.graphics.assets.EnemyAssets;
-import com.doogies.savepups.items.Item;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class Ogre extends Enemy {
 
@@ -59,24 +55,14 @@ public class Ogre extends Enemy {
         //Movement
         basicEnemyMoveTick();
 
-//        if(moveToPlayerSound) {
-//            ogre2.play();
-//            moveToPlayerSound = false;
-//        } else if (autoMoveSound) {
-//            ogre3.play();
-//            autoMoveSound = false;
-//        }
-
         if(attacking){
-            AudioManager.ogre2.play();
+            AudioManager.ogreAttack.play();
         }
     }
 
     @Override
     public void die(){
-
         basicEnemyDeath();
-
     }
 
     @Override

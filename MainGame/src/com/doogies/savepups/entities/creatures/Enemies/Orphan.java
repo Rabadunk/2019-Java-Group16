@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
@@ -55,6 +56,10 @@ public class Orphan extends Enemy {
 
         //Movement
         basicEnemyMoveTick();
+
+        if(attacking){
+            AudioManager.slime.play();
+        }
     }
 
     @Override

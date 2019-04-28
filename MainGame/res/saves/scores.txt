@@ -6,6 +6,6 @@ New_player 5950
 New_player 4350
 hehe 2891
 New_player 2760
+New_player 2530
 Hi 2002
 New_player 1530
-New_player 1360

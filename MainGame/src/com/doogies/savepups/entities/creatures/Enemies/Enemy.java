@@ -20,7 +20,6 @@ public abstract class Enemy extends Creature {
     int diameter;
     float dx, dy;
     int count;
-    protected boolean moveToPlayerSound, autoMoveSound = false;
 
     Player player;
     protected int direction = 0;
@@ -86,9 +85,6 @@ public abstract class Enemy extends Creature {
 
     protected void moveToPlayer() {
 
-        moveToPlayerSound = true;
-        autoMoveSound = false;
-
         AStarNode goalNode = handler.getRoom().getPathFinder().getNode(
                 (int) ((handler.getPlayer().getX() + handler.getPlayer().getBounds().x) / Tile.TILEWIDTH),
                 (int) ((handler.getPlayer().getY() + handler.getPlayer().getBounds().y) / Tile.TILEHEIGHT)
@@ -127,9 +123,6 @@ public abstract class Enemy extends Creature {
     }
 
     protected void autoMoveDecider() {
-
-        moveToPlayerSound = false;
-        autoMoveSound = true;
 
         count = 0;
 
@@ -251,6 +244,7 @@ public abstract class Enemy extends Creature {
     protected void basicEnemyDeath() {
         if(getEnemyEntities() == 1) {
             handler.getRoom().getItemManager().addItem(Item.dog.createNew((int) x, (int) y));
+            AudioManager.barking1.play();
         } else {
 
             int spawnDecider = new Random().nextInt(1);

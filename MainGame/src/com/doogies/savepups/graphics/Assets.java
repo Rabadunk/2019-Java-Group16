@@ -3,7 +3,6 @@ package com.doogies.savepups.graphics;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import com.doogies.savepups.entities.creatures.Enemies.Enemy;
 import com.doogies.savepups.graphics.assets.EnemyAssets;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.graphics.assets.PlayerAssets;
@@ -60,7 +59,6 @@ public class Assets {
         fontChen = FontLoader.loadFont("res/fonts/akaChen/akaChen.ttf", 46);
         fontChenSmaller = FontLoader.loadFont("res/fonts/akaChen/akaChen.ttf", 32);
 
-        SpriteSheet button = new SpriteSheet(ImageLoader.loadImage("/ui/buttons.png"));
         SpriteSheet blankbutton = new SpriteSheet(ImageLoader.loadImage("/ui/blankButtons.png"));
 
         SpriteSheet itemSprites = new SpriteSheet(ImageLoader.loadImage("/textures/items.png"));
@@ -80,19 +78,7 @@ public class Assets {
 
         doogie = ImageLoader.loadImage("/textures/doogies/doogie.png");
 
-
         // UI
-        playButton = new BufferedImage[2];
-        playButton[0] = button.crop(0, 0, 300, 150); // Not selected
-        playButton[1] = button.crop(300, 0, 300, 150);
-
-        quitButton = new BufferedImage[2];
-        quitButton[0] = button.crop(0, 150, 300, 150); // Not selected
-        quitButton[1] = button.crop(300, 150, 300, 150);
-
-        scoreButton = new BufferedImage[2];
-        scoreButton[0] = button.crop(0, 300, 300, 150); // Not selected
-        scoreButton[1] = button.crop(300, 300, 300, 150);
 
         blankButton = new BufferedImage[2];
         blankButton[0] = blankbutton.crop(0, 300, 300, 150); // Not selected
