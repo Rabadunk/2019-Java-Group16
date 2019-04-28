@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
@@ -23,11 +24,6 @@ public class Ogre extends Enemy {
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
 
-    // Audio
-    public static AudioPlayer ogre2;
-
-
-
     public Ogre(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
@@ -38,12 +34,6 @@ public class Ogre extends Enemy {
         bounds.width = 32;
         bounds.height = 43;
         setupAttack();
-
-        // Audio
-        ogre2 = new AudioPlayer();
-
-        ogre2.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre2");
-
         loadSprites();
         setSpeed(1f);
         setHealth(2);
@@ -77,7 +67,7 @@ public class Ogre extends Enemy {
 //        }
 
         if(attacking){
-            ogre2.play();
+            AudioManager.ogre2.play();
         }
     }
 

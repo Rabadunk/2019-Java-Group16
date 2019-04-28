@@ -1,5 +1,6 @@
 package com.doogies.savepups;
 
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.GameCamera;
 import com.doogies.savepups.house.Room;
@@ -12,11 +13,13 @@ public class Handler {
     private Game game;
     private Room room;
     public Player player;
+    public AudioManager audioManager;
 
     public HighScoreManager highScoreManager;
 
     public Handler(Game game) {
         this.game = game;
+        audioManager = new AudioManager();
         player = new Player(this, 64, 64);
         highScoreManager = new HighScoreManager(this);
     }

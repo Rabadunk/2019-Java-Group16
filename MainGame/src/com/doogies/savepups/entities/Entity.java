@@ -18,10 +18,6 @@ public abstract class Entity {
     protected Rectangle bounds;
     protected boolean takenDamage = false;
 
-    // Audio
-    public static AudioPlayer goldCoinDrop;
-
-
     public Entity(Handler handler, float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -31,10 +27,6 @@ public abstract class Entity {
         health = DEFAULT_HEALTH;
 
         bounds = new Rectangle(0, 0, width, height);
-
-        // Audio
-        goldCoinDrop = new AudioPlayer();
-        goldCoinDrop.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     public abstract void tick();

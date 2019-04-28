@@ -24,9 +24,6 @@ public class GameState extends State {
         super(handler);
         house = new HouseGraph(handler);
         handler.setRoom(house.getRoom(1), 5 * Tile.TILEWIDTH, 5*Tile.TILEHEIGHT);
-
-
-        //goldCoinSound.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     @Override
@@ -44,8 +41,6 @@ public class GameState extends State {
         Room room = house.getRoom(player.getTileWorldID());
         boolean canSwitch = player.getInventory().getItem("Dog") == handler.getRoom().getID() - 1 ||
                 room.hasBeenVisited;
-
-        System.out.println(canSwitch);
 
         if(player.inEntry() &&  canSwitch) {
             ArrayList<AStarNode> houseGraph = HouseGraph.house.get(room.ID);

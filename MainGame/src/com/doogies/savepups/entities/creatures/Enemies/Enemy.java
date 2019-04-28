@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.entities.creatures.Creature;
@@ -256,7 +257,7 @@ public abstract class Enemy extends Creature {
 
             if(spawnDecider == 0) {
                 handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-                goldCoinDrop.play();
+                AudioManager.goldCoinDrop.play();
             }
         }
         handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x + 20, (int) y));
