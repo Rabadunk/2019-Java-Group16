@@ -66,6 +66,8 @@ public class Player extends Creature {
     // Audio
     public static AudioPlayer swordSwing;
 
+    public boolean centerOnPlayer = true;
+
 
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, 32, 64);
@@ -130,7 +132,10 @@ public class Player extends Creature {
         //Movement
         getInput();
         move();
-        handler.getGameCamera().centerOnEntity(this);
+
+        if(centerOnPlayer) {
+            handler.getGameCamera().centerOnEntity(this);
+        }
 
         //Attack
         checkAttacks();

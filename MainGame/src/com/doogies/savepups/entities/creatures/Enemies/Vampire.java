@@ -132,7 +132,7 @@ public class Vampire extends Enemy {
 
         //Movement
         if(!isBat) {
-            moveToPlayer();
+            moveToPlayer(Tile.TILEHEIGHT/2);
             checkAttacks();
             timeTracker();
         } else {

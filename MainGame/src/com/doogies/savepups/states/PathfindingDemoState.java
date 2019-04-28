@@ -27,6 +27,10 @@ public class PathfindingDemoState extends State{
             State.setState(handler.getGame().pause);
         }
 
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
+            State.setState(handler.getGame().help);
+        }
+
         checkForRoomChange();
 
         handler.getRoom().tick();

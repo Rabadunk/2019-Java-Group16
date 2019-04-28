@@ -2,6 +2,7 @@ package com.doogies.savepups.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class KeyManager implements KeyListener {
 
@@ -10,6 +11,7 @@ public class KeyManager implements KeyListener {
     public boolean pgDown;
     public boolean space;
     public boolean attack;
+    public boolean center;
     public boolean boop, aww;
 
     public KeyManager() {
@@ -49,6 +51,7 @@ public class KeyManager implements KeyListener {
         right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
         pgDown = keys[KeyEvent.VK_PAGE_DOWN];
         space = keys[KeyEvent.VK_SPACE];
+        center = keys[KeyEvent.VK_C];
 
         attack = keys[KeyEvent.VK_J];
 

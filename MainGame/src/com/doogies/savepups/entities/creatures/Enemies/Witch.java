@@ -5,7 +5,9 @@ import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.assets.EnemyAssets;
+import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.input.KeyManager;
+import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,7 +17,7 @@ public class Witch extends  Enemy{
     // Animations
     private Animation animationDown, animationUp, animationLeft, animationRight;
 
-    private boolean shouldMove = false;
+    private boolean shouldMove = false, shouldCenter = false;
 
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
@@ -58,10 +60,21 @@ public class Witch extends  Enemy{
             shouldMove = !shouldMove;
         }
 
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)) {
+            player.centerOnPlayer = !player.centerOnPlayer;
+            shouldCenter = !shouldCenter;
+        }
+
         if(shouldMove) {
             //Movement
-            moveToPlayer();
+            moveToPlayer(Tile.TILEHEIGHT);
             move();
+        }
+
+        if(shouldCenter) {
+            handler.getGameCamera().centerOnEntity(this);
+        } else {
+            handler.getGameCamera().centerOnEntity(player);
         }
     }
 
@@ -72,6 +85,20 @@ public class Witch extends  Enemy{
 
     @Override
     public void render(Graphics g) {
+
+        if(shouldMove) {
+            AStarNode goalNode = handler.getRoom().getPathFinder().getNode(
+                    (int) ((handler.getPlayer().getX() + handler.getPlayer().getBounds().x) / Tile.TILEWIDTH),
+                    (int) ((handler.getPlayer().getY() + handler.getPlayer().getBounds().y) / Tile.TILEHEIGHT)
+            );
+
+            AStarNode startNode = handler.getRoom().getPathFinder().getNode(
+                    (int) ((x + bounds.x) / Tile.TILEWIDTH),
+                    (int) ((y + bounds.y) / Tile.TILEHEIGHT)
+            );
+
+            handler.getRoom().getPathFinder().renderPathFind(g, startNode, goalNode);
+        }
 
         g.drawImage(getCurrentAnimationFrame(),
                 (int) (x - handler.getGameCamera().getxOffset()),

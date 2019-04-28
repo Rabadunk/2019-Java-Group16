@@ -31,6 +31,9 @@ public class GameState extends State {
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)){
             State.setState(handler.getGame().pause);
         }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_H)){
+            State.setState(handler.getGame().help);
+        }
         checkForRoomChange();
         handler.getRoom().tick();
         //handler.highScoreManager.tick();
