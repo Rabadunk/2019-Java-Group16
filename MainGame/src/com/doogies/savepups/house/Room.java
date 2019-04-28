@@ -64,6 +64,10 @@ public class Room {
 
     public void tick() {
         itemManager.tick();
+        if(ID != 5) {
+            handler.getGameCamera().centerOnEntity(handler.getPlayer());
+        }
+
         entityManager.tick();
     }
 

@@ -148,9 +148,9 @@ public class HelpState extends State {
     public void mazeRender(Graphics g){
         Text.drawString(g, "Press spacebar to summon the witch or to stop it.",
                 handler.getWidth()/2, 300, true, Color.WHITE, Assets.fontChenSmaller);
-        Text.drawString(g, "The witch uses the A* algorithm to find you.",
+        Text.drawString(g, "Press C to center on the witch or on the player",
                 handler.getWidth()/2, 350, true, Color.WHITE, Assets.fontChenSmaller);
-        Text.drawString(g, "Play hide and seek with it.",
+        Text.drawString(g, "The witch will find you. Play hide and seek with it.",
                 handler.getWidth()/2, 400, true, Color.WHITE, Assets.fontChenSmaller);
     }
 
