@@ -33,6 +33,7 @@ public abstract class Enemy extends Creature {
     protected int timeTakenMinutes, timeTakenSeconds = 0;
     protected long initalTime;
     protected boolean playerActive = false;
+    protected boolean attacking = false;
 
     protected boolean attackUp, attackDown, attackLeft, attackRight;
 
@@ -175,6 +176,7 @@ public abstract class Enemy extends Creature {
         lastAttackTimer = System.currentTimeMillis();
 
         if (attackTimer < attackCooldown) {
+            attacking = false;
             return;
         }
 
@@ -188,6 +190,8 @@ public abstract class Enemy extends Creature {
         } else {
             return;
         }
+
+        attacking = true;
 
         attackTimer = 0;
 

@@ -75,12 +75,16 @@ public class Ogre extends Enemy {
         //Movement
         basicEnemyMoveTick();
 
-        if(moveToPlayerSound) {
+//        if(moveToPlayerSound) {
+//            ogre2.play();
+//            moveToPlayerSound = false;
+//        } else if (autoMoveSound) {
+//            ogre3.play();
+//            autoMoveSound = false;
+//        }
+
+        if(attacking){
             ogre2.play();
-            moveToPlayerSound = false;
-        } else if (autoMoveSound) {
-            ogre3.play();
-            autoMoveSound = false;
         }
     }
 
