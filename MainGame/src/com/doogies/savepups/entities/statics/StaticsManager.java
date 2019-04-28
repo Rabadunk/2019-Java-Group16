@@ -47,6 +47,9 @@ public class StaticsManager {
             case 10:
                 insertRadio(entityManager, x, y);
                 break;
+            case 11:
+                insertTv(entityManager, x, y);
+                break;
         }
     }
 
@@ -103,5 +106,10 @@ public class StaticsManager {
     public void insertRadio(EntityManager entityManager, int spawnX, int spawnY) {
         Radio radio = new Radio(handler, spawnX, spawnY);
         entityManager.addEntity(radio);
+    }
+
+    public void insertTv(EntityManager entityManager, int spawnX, int spawnY) {
+        Tv tv = new Tv(handler, spawnX, spawnY);
+        entityManager.addEntity(tv);
     }
 }
