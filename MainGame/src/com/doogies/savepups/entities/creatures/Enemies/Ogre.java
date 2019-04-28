@@ -45,11 +45,11 @@ public class Ogre extends Enemy {
         ogre4 = new AudioPlayer();
         ogre5 = new AudioPlayer();
 
-        ogre1.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre1_16");
-        ogre2.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre2_16");
-        ogre3.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre3_16");
-        ogre4.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre4_16");
-        ogre5.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre5_16");
+        ogre1.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre1");
+        ogre2.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre2");
+        ogre3.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre3");
+        ogre4.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre4");
+        ogre5.setFile("/soundEffects/rpgSounds/NPC/ogre/ogre5");
 
         loadSprites();
         setSpeed(1f);
