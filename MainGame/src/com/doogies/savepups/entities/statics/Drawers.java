@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.statics;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
@@ -31,7 +32,7 @@ public class Drawers extends Entity {
     @Override
     public void die() {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        goldCoinDrop.play();
+        AudioManager.goldCoinDrop.play();
     }
 
     @Override
@@ -41,10 +42,5 @@ public class Drawers extends Entity {
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
 
-        // Red rectangle to represent players collision box
-        g.setColor(Color.red);
-        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
     }
 }

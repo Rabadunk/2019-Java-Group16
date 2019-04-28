@@ -6,6 +6,7 @@ import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.house.AStarNode;
 import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
+import com.doogies.savepups.items.Item;
 import com.doogies.savepups.tiles.Tile;
 
 import java.awt.*;
@@ -19,15 +20,10 @@ public class GameState extends State {
 
     private boolean worldChanged = false;
 
-    public AudioPlayer goldCoinSound;
-
     public GameState(Handler handler){
         super(handler);
         house = new HouseGraph(handler);
         handler.setRoom(house.getRoom(1), 5 * Tile.TILEWIDTH, 5*Tile.TILEHEIGHT);
-
-
-        //goldCoinSound.setFile("/soundEffects/rpgSounds/inventory/coin2");
     }
 
     @Override
@@ -42,8 +38,11 @@ public class GameState extends State {
 
     private void checkForRoomChange() {
         Player player = handler.getPlayer();
-        if(player.inEntry()) {
-            Room room = house.getRoom(player.getTileWorldID());
+        Room room = house.getRoom(player.getTileWorldID());
+        boolean canSwitch = player.getInventory().getItem("Dog") == handler.getRoom().getID() - 1 ||
+                room.hasBeenVisited;
+
+        if(player.inEntry() &&  canSwitch) {
             ArrayList<AStarNode> houseGraph = HouseGraph.house.get(room.ID);
             AStarNode entrance = houseGraph.get(handler.getRoom().ID);
             handler.setRoom(room, entrance.roomSpawnX, entrance.roomSpawnY);

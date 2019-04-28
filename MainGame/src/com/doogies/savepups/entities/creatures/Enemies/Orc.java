@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.audio.AudioPlayer;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
@@ -23,9 +24,6 @@ public class Orc extends Enemy{
     // Player Direction
     // 0 = down, 1 = up, 2 = left, 3 = right
 
-    // Audio
-    public static AudioPlayer orcAttack;
-
 
     public Orc(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
@@ -40,9 +38,6 @@ public class Orc extends Enemy{
         loadSprites();
         setSpeed(1f);
         setHealth(2);
-
-        orcAttack = new AudioPlayer();
-        orcAttack.setFile("/soundEffects/rpgSounds/NPC/gutteral beast/mnstr11");
     }
 
     private void loadSprites() {
@@ -66,16 +61,13 @@ public class Orc extends Enemy{
         basicEnemyMoveTick();
 
         if(attacking){
-            orcAttack.play();
+            AudioManager.orcAttack.play();
         }
     }
 
     @Override
     public void die(){
-        System.out.println("Ogre has been slain");
-        handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y));
-        handler.getRoom().getItemManager().addItem(Item.life.createNew((int) x, (int) y));
-        goldCoinDrop.play();
+        basicEnemyDeath();
     }
 
     @Override

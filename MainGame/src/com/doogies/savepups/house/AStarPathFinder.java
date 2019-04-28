@@ -19,6 +19,89 @@ public class AStarPathFinder {
         grid = new AStarNode[width][height];
     }
 
+    public void renderPathFind(Graphics g, AStarNode startNode, AStarNode endNode) {
+        ArrayList<AStarNode> openSet = new ArrayList();
+        ArrayList<AStarNode> closedSet = new ArrayList();
+        AStarNode temp;
+        openSet.add(startNode);
+
+        if(startNode == endNode) {
+            return;
+        }
+
+        while(!openSet.isEmpty()) {
+
+            int lowestFScoreIndex = 0;
+
+            for(int i = 0; i < openSet.size(); i++) {
+                if(openSet.get(i).f < openSet.get(i).f) {
+                    lowestFScoreIndex = i;
+                }
+            }
+
+            AStarNode current = openSet.get(lowestFScoreIndex);
+
+            if(current == endNode) {
+
+                temp = current;
+
+                while(temp.previous != null) {
+                    temp.renderAStarNode(g, (int) (temp.x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
+                            (int) (temp.y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()), Color.blue);
+                    temp = temp.previous;
+                }
+
+                clearData();
+
+                break;
+            }
+
+            openSet.remove(current);
+            closedSet.add(current);
+
+            //System.out.println(current.getNeighbours().size());
+            for(AStarNode neighbourNode : current.getNeighbours()) {
+                if(!closedSet.contains(neighbourNode) && !neighbourNode.isSolid) {
+
+                    boolean newPath = false;
+                    float tempG = current.g + 1;
+                    if(openSet.contains(neighbourNode)) {
+
+                        if(tempG < neighbourNode.g) {
+                            neighbourNode.g = tempG;
+                            newPath = true;
+                        }
+
+                    } else {
+                        neighbourNode.g = tempG;
+                        openSet.add(neighbourNode);
+                        newPath = true;
+                    }
+
+                    if(newPath) {
+                        neighbourNode.h = heuristic(startNode, endNode);
+                        neighbourNode.f = neighbourNode.h + neighbourNode.g;
+                        neighbourNode.previous = current;
+                    }
+                }
+            }
+
+
+            for(AStarNode node : openSet) {
+                node.renderAStarNode(g, (int) (node.x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
+                        (int) (node.y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()),
+                        Color.green);
+            }
+
+            for(AStarNode node : closedSet) {
+                node.renderAStarNode(g, (int) (node.x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
+                        (int) (node.y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()),
+                        Color.red);
+            }
+
+        }
+    }
+
     public AStarNode pathFind(AStarNode startNode, AStarNode endNode) {
         ArrayList<AStarNode> openSet = new ArrayList();
         ArrayList<AStarNode> closedSet = new ArrayList();

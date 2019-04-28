@@ -1,26 +1,25 @@
 package com.doogies.savepups;
 
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.creatures.Player;
 import com.doogies.savepups.graphics.GameCamera;
-import com.doogies.savepups.house.AStarNode;
-import com.doogies.savepups.house.HouseGraph;
 import com.doogies.savepups.house.Room;
 import com.doogies.savepups.input.KeyManager;
 import com.doogies.savepups.input.MouseManager;
 import com.doogies.savepups.utils.HighScoreManager;
-
-import java.util.ArrayList;
 
 public class Handler {
 
     private Game game;
     private Room room;
     public Player player;
+    public AudioManager audioManager;
 
     public HighScoreManager highScoreManager;
 
     public Handler(Game game) {
         this.game = game;
+        audioManager = new AudioManager();
         player = new Player(this, 64, 64);
         highScoreManager = new HighScoreManager(this);
     }
@@ -57,6 +56,7 @@ public class Handler {
 
     public void setRoom(Room room, int x, int y) {
         this.room = room;
+        this.room.hasBeenVisited = true;
         player.setX(x);
         player.setY(y);
     }

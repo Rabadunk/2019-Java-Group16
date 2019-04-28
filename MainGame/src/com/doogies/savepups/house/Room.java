@@ -4,9 +4,12 @@ import com.doogies.savepups.Handler;
 import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Enemies.EnemyManager;
 import com.doogies.savepups.hud.GameHud;
+import com.doogies.savepups.items.Item;
 import com.doogies.savepups.items.ItemManager;
 
 import com.doogies.savepups.entities.statics.StaticsManager;
+import com.doogies.savepups.states.PathfindingDemoState;
+import com.doogies.savepups.states.State;
 import com.doogies.savepups.tiles.Tile;
 import com.doogies.savepups.utils.Utils;
 import java.awt.*;
@@ -17,6 +20,7 @@ public class Room {
     private int width, height;
     private int spawnX, spawnY;
     public int ID;
+    public boolean hasBeenVisited = false;
 
     private int furnitureId;
     private int furnX;
@@ -85,6 +89,17 @@ public class Room {
         }
         // Item
         itemManager.render(g);
+
+        if(State.getState() instanceof PathfindingDemoState) {
+            AStarNode goalNode = handler.getRoom().getPathFinder().getNode(
+                    (int) ((handler.getPlayer().getX() + handler.getPlayer().getBounds().x) / Tile.TILEWIDTH),
+                    (int) ((handler.getPlayer().getY() + handler.getPlayer().getBounds().y) / Tile.TILEHEIGHT)
+            );
+
+            AStarNode startNode = handler.getRoom().getPathFinder().getNode(1, 1);
+
+            pathFinder.renderPathFind(g, startNode, goalNode);
+        }
 
         // Entities
         entityManager.render(g);
@@ -185,6 +200,7 @@ public class Room {
 
 
     // Getters and setters
+
     public Handler getHandler() {
         return handler;
     }
@@ -221,6 +237,10 @@ public class Room {
 
     public int getSpawnY() {
         return spawnY;
+    }
+
+    public int getID() {
+        return  ID;
     }
 
 

@@ -41,7 +41,7 @@ public class HouseGraph {
 
     private void generateRooms(Handler handler) {
         // Load rooms
-        testRoom = new Room(handler, "testWorld.txt", 0);
+        testRoom = new Room(handler, "MazeRoom.txt", 0);
         bedRoom = new Room(handler, "bedroom.txt", 1);
         hallwayRoom = new Room(handler, "hallway.txt", 2);
         lounge = new Room(handler, "lounge.txt", 3);

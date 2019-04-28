@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.statics;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.entities.Entity;
 import com.doogies.savepups.graphics.assets.FurnitureAssets;
 import com.doogies.savepups.items.Item;
@@ -33,6 +34,7 @@ public class Tv extends Entity {
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x, (int) y + Tile.TILEHEIGHT));
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH, (int) y + Tile.TILEHEIGHT));
         handler.getRoom().getItemManager().addItem(Item.coinGold.createNew((int) x + Tile.TILEWIDTH*2, (int) y + Tile.TILEHEIGHT));
+        AudioManager.goldCoinDrop.play();
     }
 
     @Override
@@ -41,12 +43,6 @@ public class Tv extends Entity {
                 (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()),
                 width, height, null);
-
-        // Red rectangle to represent players collision box
-        g.setColor(Color.red);
-        g.drawRect((int)(x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int)(y + bounds.y - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
     }
 
 
