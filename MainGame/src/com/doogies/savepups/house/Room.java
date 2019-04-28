@@ -90,7 +90,7 @@ public class Room {
         // Item
         itemManager.render(g);
 
-        if(State.getState() instanceof PathfindingDemoState) {
+        if(ID == 0) {
             AStarNode goalNode = handler.getRoom().getPathFinder().getNode(
                     (int) ((handler.getPlayer().getX() + handler.getPlayer().getBounds().x) / Tile.TILEWIDTH),
                     (int) ((handler.getPlayer().getY() + handler.getPlayer().getBounds().y) / Tile.TILEHEIGHT)

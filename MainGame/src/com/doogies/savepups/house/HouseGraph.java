@@ -12,6 +12,7 @@ public class HouseGraph {
     public static Room testRoom;
     public static Room lounge;
     public static Room bossRoom;
+    public static Room mazeRoom;
     public static Handler handler;
 
     public static ArrayList<ArrayList> house;
@@ -21,7 +22,7 @@ public class HouseGraph {
         this.handler = handler;
         rooms = new ArrayList<>();
         house = new ArrayList<>();
-        constructGraph(5);
+        constructGraph(6);
         generateRooms(handler);
     }
 
@@ -39,11 +40,12 @@ public class HouseGraph {
 
     private void generateRooms(Handler handler) {
         // Load rooms
-        testRoom = new Room(handler, "MazeRoom.txt", 0);
+        testRoom = new Room(handler, "shortestPathTestRoom.txt", 0);
         bedRoom = new Room(handler, "bedroom.txt", 1);
         hallwayRoom = new Room(handler, "hallway.txt", 2);
         lounge = new Room(handler, "lounge.txt", 3);
         bossRoom = new Room(handler, "bossRoom.txt", 4);
+        mazeRoom = new Room(handler, "mazeRoom.txt", 5);
 
          // Store rooms
         rooms.add(testRoom);
@@ -51,6 +53,7 @@ public class HouseGraph {
         rooms.add(hallwayRoom);
         rooms.add(lounge);
         rooms.add(bossRoom);
+        rooms.add(mazeRoom);
     }
 
     public static void addRoomEntrance(int thisRoomID, int otherRoomId, AStarNode node) {

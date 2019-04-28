@@ -8,6 +8,7 @@ public class KeyManager implements KeyListener {
     private boolean[] keys, justPressed, cantPress;
     public boolean up, down, left, right;
     public boolean pgDown;
+    public boolean space;
     public boolean attack;
     public boolean boop, aww;
 
@@ -47,6 +48,7 @@ public class KeyManager implements KeyListener {
         left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
         pgDown = keys[KeyEvent.VK_PAGE_DOWN];
+        space = keys[KeyEvent.VK_SPACE];
 
         attack = keys[KeyEvent.VK_J];
 

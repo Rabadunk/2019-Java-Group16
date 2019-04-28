@@ -89,21 +89,7 @@ public class Ogre extends Enemy {
         else if(yMove > 0){
             return animationDown.getCurrentFrame();
         }
-//        else{
-//            // 0 = down, 1 = up, 2 = left, 3 = right
-//            if(direction == 0) {
-//                return Assets.ogreIdleLeft;
-//            }
-//            else if(direction == 1) {
-//                return Assets.ogreIdleRight;
-//            }
-//            else if(direction == 2) {
-//                return Assets.ogreIdleRight;
-//            }
-//            else if(direction == 3) {
-//                return Assets.ogreIdleLeft;
-//            }
-//        }
+
         return EnemyAssets.ogreIdleLeft;
     }
 }
