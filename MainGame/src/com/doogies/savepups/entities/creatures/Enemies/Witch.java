@@ -2,6 +2,7 @@ package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
 import com.doogies.savepups.audio.AudioManager;
+import com.doogies.savepups.entities.EntityManager;
 import com.doogies.savepups.entities.creatures.Creature;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.assets.EnemyAssets;
@@ -67,7 +68,7 @@ public class Witch extends  Enemy{
 
         if(shouldMove) {
             //Movement
-            moveToPlayer(Tile.TILEHEIGHT);
+            moveToPlayer(Tile.TILEHEIGHT/2);
             move();
         }
 
@@ -81,6 +82,8 @@ public class Witch extends  Enemy{
     @Override
     public void die(){
         basicEnemyDeath();
+        handler.getRoom().newEntityManager();
+        handler.getRoom().getEntityManager().addEntity(new Witch(handler, 1, 1));
     }
 
     @Override
