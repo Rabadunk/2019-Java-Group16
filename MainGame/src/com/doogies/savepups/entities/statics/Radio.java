@@ -14,12 +14,12 @@ public class Radio extends Entity {
     private BufferedImage radio = FurnitureAssets.radio;
 
     public Radio(Handler handler, float x, float y) {
-        super(handler, x + Tile.TILEWIDTH/4, y, Tile.TILEWIDTH/2, Tile.TILEHEIGHT);
+        super(handler, x + Tile.TILEWIDTH/4, y, Tile.TILEWIDTH/2, Tile.TILEHEIGHT/2);
 
         bounds.x = 0;
-        bounds.y = Tile.TILEHEIGHT/2;
+        bounds.y = Tile.TILEHEIGHT/4;
         bounds.width = width;
-        bounds.height = height/4;
+        bounds.height = 3;
 
         setHealth(1);
     }

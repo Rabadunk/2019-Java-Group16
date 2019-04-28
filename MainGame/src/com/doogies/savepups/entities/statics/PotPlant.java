@@ -15,7 +15,7 @@ public class PotPlant extends Entity {
     private BufferedImage potPlantTexture = FurnitureAssets.potPlant;
 
     public PotPlant(Handler handler, float x, float y) {
-        super(handler, x, y, Tile.TILEWIDTH/2, Tile.TILEHEIGHT/2);
+        super(handler, x + Tile.TILEWIDTH/4, y + Tile.TILEHEIGHT/4, Tile.TILEWIDTH/2, Tile.TILEHEIGHT/2);
 
         bounds.x = 0;
         bounds.y = height/2;
