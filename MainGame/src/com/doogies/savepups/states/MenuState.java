@@ -120,10 +120,10 @@ public class MenuState extends State{
         Text.drawString(g, "Save the Puppies!", 550, 100, true, Color.WHITE, Assets.fontTitleBig);
 
         // Button texts
-        Text.drawString(g, "Play", 100 + 150, 200 + 50,true, Color.WHITE, Assets.font28);
-        Text.drawString(g, "Scoreboard", 100 + 150, 310 + 50,true, Color.WHITE, Assets.font28);
-        Text.drawString(g, "Controls", 100 + 150, 420 + 50,true, Color.WHITE, Assets.font28);
-        Text.drawString(g, "Quit", 100 + 150, 530 + 50,true, Color.WHITE, Assets.font28);
+        Text.drawString(g, "Play", 100 + 150, 200 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Scoreboard", 100 + 150, 310 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Controls", 100 + 150, 420 + 50,true, Color.WHITE, Assets.fontChen);
+        Text.drawString(g, "Quit", 100 + 150, 530 + 50,true, Color.WHITE, Assets.fontChen);
 
         // Draw doogie
         g.drawImage(Assets.doogie,500, 250, 400, 400, null);
