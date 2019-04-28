@@ -1,6 +1,7 @@
 package com.doogies.savepups.entities.creatures.Enemies;
 
 import com.doogies.savepups.Handler;
+import com.doogies.savepups.audio.AudioManager;
 import com.doogies.savepups.graphics.Animation;
 import com.doogies.savepups.graphics.Assets;
 import com.doogies.savepups.states.State;
@@ -116,6 +117,10 @@ public class Vampire extends Enemy {
 
     @Override
     public void tick() {
+
+        if(attacking){
+            AudioManager.bite.play();
+        }
         //Animations
         animationDown.tick();
         animationUp.tick();

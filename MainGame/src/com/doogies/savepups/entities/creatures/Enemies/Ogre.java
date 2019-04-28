@@ -55,14 +55,6 @@ public class Ogre extends Enemy {
         //Movement
         basicEnemyMoveTick();
 
-//        if(moveToPlayerSound) {
-//            ogreAttack.play();
-//            moveToPlayerSound = false;
-//        } else if (autoMoveSound) {
-//            ogre3.play();
-//            autoMoveSound = false;
-//        }
-
         if(attacking){
             AudioManager.ogreAttack.play();
         }
@@ -70,9 +62,7 @@ public class Ogre extends Enemy {
 
     @Override
     public void die(){
-
         basicEnemyDeath();
-
     }
 
     @Override
